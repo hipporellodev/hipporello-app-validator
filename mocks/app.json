@@ -1,0 +1,2490 @@
+{
+  "id": "uuid-app-id",
+  "accessRight": {
+    "rules": [
+      {
+        "type": "allow",
+        "roles": [
+          "uuid-hr-manager-role",
+          "uuid-candidate-role"
+        ]
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "publishedAppId": "uuid-from-published-app-table",
+  "name": "Job Application",
+  "slug": "job-application",
+  "sourceAppTemplateId": "uuid-application-template-id",
+  "homeViewId": "uuid-page-id",
+  "roles": [
+    {
+      "id": "uuid-hr-manager-role",
+      "name": "HR Manager",
+      "members": [
+        {
+          "type": "email",
+          "value": "xyz@gmail.com"
+        },
+        {
+          "type": "email",
+          "value": "abc@gmail.com"
+        },
+        {
+          "type": "emaildomain",
+          "value": "@iamthemanager.com"
+        }
+      ]
+    },
+    {
+      "id": "uuid-candidate-role",
+      "name": "Candidate",
+      "members": [
+        {
+          "type": "authenticated"
+        },
+        {
+          "type": "anonymous"
+        }
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "hippoBoardId": "uuid-hippo-board-1",
+      "trelloBoardId": "trelloBoardId",
+      "provider": "trello"
+    }
+  ],
+  "integrations": {
+    "incoming": [
+      {
+        "id": "b77a4b6d9c5b475aa795b71b0e08ebbb",
+        "type": "form",
+        "accessRight": {
+          "rules": [
+            {
+              "type": "allow",
+              "roles": [
+                "uuid-hr-manager-role"
+              ]
+            }
+          ]
+        },
+        "anonymous": 0,
+        "body": {
+          "lang": "en",
+          "name": "App Test Form",
+          "description": "",
+          "icon": "plus",
+          "readOnly": false,
+          "tags": [],
+          "rows": [
+            {
+              "id": "row-14",
+              "columns": [
+                {
+                  "id": "col-15",
+                  "element": {
+                    "id": "elem-16",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Short Text 1",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Short Text",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "EditText"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-10",
+              "columns": [
+                {
+                  "id": "col-11",
+                  "element": {
+                    "id": "elem-12",
+                    "props": {
+                      "value": "Submit",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Label",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Button",
+                      "actions": [
+                        {
+                          "type": "create-card",
+                          "variables": {
+                            "name": "A new {{{form.name}}} by {{{user.name}}}",
+                            "description": "{{{form.summary}}}",
+                            "list": "de44d60d110b4fab9635e33fbbc250fa"
+                          }
+                        }
+                      ]
+                    },
+                    "input": "Button"
+                  }
+                }
+              ]
+            }
+          ],
+          "formAutoIncrementId": 19
+        },
+        "tags": [
+        ],
+        "details": {
+          "name": "New Job Advertisement",
+          "aliases": [
+            {
+              "id": "69d349c618a6426bbceda41a230487c1",
+              "enabled": false
+            }
+          ],
+          "icon": "plus",
+          "postSubmissionView": {
+            "type": "internal",
+            "target": {
+              "type": "_self"
+            },
+            "viewId": "uuid-snippet1-NewJobAdvThankYou-viewId"
+          }
+        }
+      },
+      {
+        "id": "c67a4b6d9c5b475aa795b71b0e08yehw",
+        "type": "form",
+        "accessRight": {
+          "rules": [
+            {
+              "type": "allow",
+              "roles": [
+                "uuid-candidate-role"
+              ]
+            }
+          ]
+        },
+        "anonymous": 0,
+        "body": {
+          "lang": "en",
+          "name": "App Test Form",
+          "description": "",
+          "icon": "plus",
+          "readOnly": false,
+          "tags": [],
+          "rows": [
+            {
+              "id": "row-14",
+              "columns": [
+                {
+                  "id": "col-15",
+                  "element": {
+                    "id": "elem-16",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Short Text 1",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Short Text",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "EditText"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-10",
+              "columns": [
+                {
+                  "id": "col-11",
+                  "element": {
+                    "id": "elem-12",
+                    "props": {
+                      "value": "Submit",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Label",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Button",
+                      "actions": [
+                        {
+                          "type": "create-card",
+                          "variables": {
+                            "name": "A new {{{form.name}}} by {{{user.name}}}",
+                            "description": "{{{form.summary}}}",
+                            "list": "de44d60d110b4fab9635e33fbbc250fa"
+                          }
+                        }
+                      ]
+                    },
+                    "input": "Button"
+                  }
+                }
+              ]
+            }
+          ],
+          "formAutoIncrementId": 19
+        },
+        "tags": [
+        ],
+        "details": {
+          "name": "Application Form",
+          "aliases": [
+            {
+              "id": "69d349c618a6426bbceda41a230487c1",
+              "enabled": true
+            }
+          ],
+          "icon": "plus",
+          "postSubmissionView": {
+            "type": "internal",
+            "target": {
+              "type": "_self"
+            },
+            "viewId": "uuid-snippet1-ApplicationFormThankYou-viewId"
+          }
+        }
+      },
+      {
+        "id": "28f1360ee1f04d62bf45e392562b3347",
+        "type": "email",
+        "details": {
+          "email": "jobs",
+          "addAttachmentsToCard": true
+        },
+        "accessRight": {
+          "rules": [
+            {
+              "type": "allow",
+              "roles": [
+                "uuid-candidate-role"
+              ]
+            }
+          ]
+        },
+        "body": {
+          "name": "support",
+          "icon": "email",
+          "readOnly": false,
+          "rows": [
+            {
+              "id": "row-30",
+              "columns": [
+                {
+                  "id": "col-31",
+                  "element": {
+                    "id": "from",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "From",
+                      "validationRules": {
+                        "required": true
+                      },
+                      "settings": {},
+                      "name": "Email",
+                      "schema": {
+                        "type": "string",
+                        "format": "email"
+                      }
+                    },
+                    "input": "Email"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-66",
+              "columns": [
+                {
+                  "id": "col-67",
+                  "element": {
+                    "id": "name",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Name",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Short Text",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "ShortText"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-17",
+              "columns": [
+                {
+                  "id": "col-18",
+                  "element": {
+                    "id": "subject",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Subject",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Short Text",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "EditText"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-23",
+              "columns": [
+                {
+                  "id": "col-24",
+                  "element": {
+                    "id": "message",
+                    "props": {
+                      "value": "",
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Message",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Long Text",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "LongText"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-1",
+              "columns": [
+                {
+                  "id": "col-2",
+                  "element": {
+                    "id": "email-submit",
+                    "props": {
+                      "value": "email-submit",
+                      "placeholder": "Submit",
+                      "label": "Label",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Button",
+                      "actions": [
+                        {
+                          "type": "create-card",
+                          "variables": {
+                            "list": "006e2382cf824248836eeb496c81e698",
+                            "name": "{{{form.data.subject}}} by {{{form.name}}}",
+                            "description": "{{{form.summary}}}"
+                          }
+                        }
+                      ]
+                    },
+                    "input": "Button",
+                    "colIndex": "col-2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "row-4",
+              "columns": [
+                {
+                  "id": "col-5",
+                  "element": {
+                    "id": "hippo-attachments",
+                    "props": {
+                      "placeholder": null,
+                      "description": null,
+                      "label": "Attachments",
+                      "validationRules": {},
+                      "settings": {},
+                      "name": "Attachment",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    "input": "Attachment"
+                  }
+                }
+              ]
+            }
+          ],
+          "formAutoIncrementId": 90
+        },
+        "tags": [
+        ]
+      }
+    ],
+    "outgoing": [
+      {
+        "id": "uuid-email1",
+        "type": "email",
+        "details": {
+          "protocol": "smtp",
+          "host": "smtp.sampleaddress.com",
+          "port": 1222,
+          "ssl": true,
+          "username": "username",
+          "password": "password"
+        }
+      }
+    ]
+  },
+  "subscription-channels": [
+    {
+      "id": "uuid-new-positions-notification",
+      "name": "New Positions Notification Channel",
+      "type": "email",
+      "outgoingIntegrationId": "uuid-email1"
+    }
+  ],
+  "automations": [
+    {
+      "id": "uuid-automation1",
+      "trigger": {
+        "type": "card-created",
+        "matching": {
+          "type": "basic",
+          "conditions": [
+            [
+              {
+                "field": "formId",
+                "operator": "equals",
+                "value": "c67a4b6d9c5b475aa795b71b0e08yehw"
+              }
+            ]
+          ]
+        },
+        "inList": {
+          "id": "trelloListId-NewApplications",
+          "boardId": "trello-board-id"
+        }
+      },
+      "action": {
+        "type": "send-email",
+        "details": {
+          "outgoingIntegrationId": "uuid-email1",
+          "subject": "Your job application",
+          "message": "Thank you for applying.\nWe have received your application and its application id is {{{case.id}}} in our records.\nSincerely,",
+          "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
+        }
+      }
+    },
+    {
+      "id": "uuid-automation2",
+      "trigger": {
+        "type": "card-moved",
+        "matching": {
+          "type": "basic",
+          "conditions": [
+            [
+              {
+                "field": "formId",
+                "operator": "equals",
+                "value": "b77a4b6d9c5b475aa795b71b0e08ebbb"
+              }
+            ]
+          ]
+        },
+        "fromList": {
+          "id": "trelloListId-DraftJobAdvertisements",
+          "boardId": "trelloBoardId"
+        },
+        "toList": {
+          "id": "trelloListId-PublishedJobAdvertisements",
+          "boardId": "trelloBoardId"
+        }
+      },
+      "action": {
+        "type": "notify-channel",
+        "delay": {
+          "duration": 1,
+          "durationUnit": "h",
+          "matching": {
+            "type": "basic",
+            "conditions": [
+              [
+                {
+                  "field": "idList",
+                  "operator": "equals",
+                  "value": "trelloListId-PublishedJobAdvertisements"
+                },
+                {
+                  "field": "idBoard",
+                  "operator": "equals",
+                  "value": "trelloBoardId"
+                }
+              ]
+            ]
+          }
+        },
+        "details": {
+          "channelId": "uuid-new-positions-notification",
+          "subject": "New Position Available!",
+          "message": "A new position is available on our Open Positions page. Check it out!",
+          "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
+        }
+      }
+    }
+  ],
+  "uiActionGroups": [
+    {
+      "id": "uuid-publish-job-advertisement",
+      "title": "Publish",
+      "name": "Publish Job Advertisement Actions",
+      "actions": [
+        {
+          "id": "uuid-move-card-id",
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-published-job-advertisements",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [{
+            "type": "refresh-card-share-component-data",
+            "id": "uuid-open-positions-card-share"
+          }],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-candidate-to-disqualified",
+      "name": "Disqualify Candidate Actions",
+      "title": "Disqualify Candidate",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-disqualified",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-applicant-to-shortlist",
+      "name": "Move to Shortlist Actions",
+      "title": "Move to Shortlist",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-shortlist",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-applicant-to-interview",
+      "name": "Move to Interview Actions",
+      "title": "To be Interviewed",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-interview",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-applicant-to-evaluation",
+      "name": "Move to Evaluation Actions",
+      "title": "Evaluate Candidate",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-evaluation",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-applicant-to-offer",
+      "name": "Move to Offer Actions",
+      "title": "Offer",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-offer",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-move-applicant-to-hired",
+      "name": "Move to Hired Actions",
+      "title": "Hire",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-hired",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-unpublish-job-advertisement",
+      "name": "Unpublish Job Advertisement Actions",
+      "title": "Publish",
+      "actions": [
+        {
+          "type": "move-card",
+          "toList": {
+            "id": "trello-list-id-draft-job-advertisements",
+            "boardId": "trello-board-id"
+          },
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-edit-card",
+      "name": "Edit Card Actions",
+      "title": "Edit",
+      "actions": [
+        {
+          "type": "edit-card"
+        }
+      ]
+    },
+    {
+      "id": "uuid-archive-card",
+      "name": "Archive Card Actions",
+      "title": "Delete",
+      "actions": [
+        {
+          "type": "archive-card",
+          "onSuccess": [],
+          "onFail": []
+        }
+      ]
+    },
+    {
+      "id": "uuid-navigate-to-job-advertisements-page",
+      "name": "Navigate to Job Advertisements Actions",
+      "title": "Job Advertisements Page",
+      "actions": [
+        {
+          "type": "open-page",
+          "props": {
+            "viewId": "uuid-job-advertisements-manager-page",
+            "type": "internal",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "uuid-open-new-job-advertisement-form",
+      "name": "Open New Job Advertisement Actions",
+      "title": "New Job Advertisement",
+      "actions": [
+        {
+          "type": "open-form",
+          "props": {
+            "formId": "b77a4b6d9c5b475aa795b71b0e08ebbb",
+            "target": {
+              "type": "_modal",
+              "size": "large",
+              "title": "New Job Advertisement"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "uuid-open-job-application-form",
+      "name": "Open Job Application Actions",
+      "title": "Apply",
+      "actions": [
+        {
+          "type": "open-form",
+          "props": {
+            "formId": "b77a4b6d9c5b475aa795b71b0e08ebbb",
+            "target": {
+              "type": "_self",
+              "title": "{{{card.name}}}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "uuid-open-contact-us-form",
+      "name": "Open Contact Us Form",
+      "title": "Contact Us",
+      "actions": [
+        {
+          "type": "open-form",
+          "props": {
+            "formId": "uuid-contact-us-form-id",
+            "target": {
+              "type": "_self",
+              "title": "{{{card.name}}}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "uuid-open-job-advertisement-card-detail-page",
+      "name": "Open Job Advertisement Card Detail Page",
+      "title": "Open Job Advertisement Card Detail Page",
+      "actions": [
+        {
+          "type": "open-page",
+          "props": {
+            "viewId": "uuid-job-advertisement-card-detail-page",
+            "type": "card-detail-page",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "uuid-job-application-card-detail-page",
+      "name": "Open Job Application Card Detail Page",
+      "title": "Open Job Application Card Detail Page",
+      "actions": [
+        {
+          "type": "open-page",
+          "props": {
+            "viewId": "uuid-job-application-card-detail-page",
+            "type": "card-detail-page",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "style": {
+    "fontFamily": "font-family-name",
+    "palette": {
+      "bannerColor": "this could be a simpler pallette definition where we map each palette color to buttons, links, headers etc.",
+      "bodyColor": "",
+      "fontColor": "",
+      "buttonBackgroundColor": "",
+      "buttonFontColor": "",
+      "linkFontColor": "",
+      "tableHeaderCellBackgroundColor": "",
+      "tableHeaderCellFontColor": ""
+    }
+  },
+  "views": [
+    {
+      "id": "uuid-snippet1-NewJobAdvThankYou-viewId",
+      "type": "snippet",
+      "viewProps": {
+        "name": "New Job Advertisement Thank You message",
+        "gap": 5,
+        "align": "center",
+        "children": [
+          {
+            "id": "uuid-iconid",
+            "type": "icon",
+            "viewProps": {
+              "type": "check-in-circle-green"
+            }
+          },
+          {
+            "id": "uuid-subtitleid",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Your job advertisement has been created"
+            }
+          },
+          {
+            "id": "uuid-labelid",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "You can publish it from the Job Advertisements page"
+            }
+          },
+          {
+            "id": "uuid-hyperlink-id",
+            "type": "hyperlink",
+            "viewProps": {
+              "text": "Job Advertisements Page",
+              "events": {
+                "onClick": "uuid-navigate-to-job-advertisements-page"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-open-positions-snippet",
+      "type": "snippet",
+      "viewProps": {
+        "name": "open positions list",
+        "html": "<div class=\"ui items\">\n    <div class=\"item\">\n        <div class=\"image\">\n            <Replace id=\"image-el\"/>\n        </div>\n        <div class=\"content\">\n            <a class=\"header\"><Replace id=\"header-el\"/></a>\n            <div class=\"description\">\n                <Replace id=\"description-el\"/>\n            </div>\n            <div class=\"extra\">\n                <Replace id=\"tags-el\"/>\n            </div>\n        </div>\n    </div>\n</div>",
+        "children": [
+          {
+            "id": "image-el",
+            "type": "Image",
+            "viewProps": {
+              "src": "{{{card.cover.big}}}"
+            }
+          },
+          {
+            "id": "header-el",
+            "type": "Header",
+            "viewProps": {
+              "text": "{{{card.name}}}"
+            }
+          },
+          {
+            "id": "description-el",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.desc}}}"
+            }
+          },
+          {
+            "id": "tags-el",
+            "type": "label",
+            "viewProps": {
+              "text": "A along description"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-snippet1-ApplicationFormThankYou-viewId",
+      "type": "snippet",
+      "viewProps": {
+        "name": "Job Application Thank You message",
+        "gap": 5,
+        "align": "center",
+        "children": [
+          {
+            "id": "uuid-iconid",
+            "type": "icon",
+            "viewProps": {
+              "type": "check-in-circle-green"
+            }
+          },
+          {
+            "id": "uuid-subtitleid",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Your application has been received"
+            }
+          },
+          {
+            "id": "uuid-labelid",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "You can follow the process with the link we sent to your e-mail address."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-job-advertisements-manager-page",
+      "type": "page",
+      "accessRight": {
+        "rules": [
+          {
+            "type": "allow",
+            "roles": [
+              "uuid-hr-manager-role"
+            ]
+          }
+        ]
+      },
+      "viewProps": {
+        "name": "Job Advertisements List Manager Page",
+        "title": "Job Advertisements",
+        "slug": "job-advertisements-manager",
+        "gap": 5,
+        "children": [
+          {
+            "id": "uuid-titleid1",
+            "type": "header",
+            "viewProps": {
+              "heading": "h1",
+              "text": "Job Advertisements"
+            }
+          },
+          {
+            "id": "uuid-hrid",
+            "type": "horizontalline"
+          },
+          {
+            "id": "uuid-buttonid",
+            "type": "button",
+            "viewProps": {
+              "text": "New Job Advertisement",
+              "events": {
+                "onClick": "uuid-open-new-job-advertisement-form"
+              }
+            }
+          },
+          {
+            "id": "uuid-card-share-draft-job-ads",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "id-for-draftJobAdvertisementsList"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Draft Job Advertisements",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Position",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "id-for-draftJobAdvertisementsList"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Publish",
+                                "events": {
+                                  "onClick": "uuid-publish-job-advertisement"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Edit",
+                                "events": {
+                                  "onClick": "uuid-edit-card"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Delete",
+                                "events": {
+                                  "onClick": "uuid-archive-card"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-card-published-job-ads",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "id-for-publishedJobAdvertisementsList"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Published Job Advertisements",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Position",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "id-for-publishedJobAdvertisementsList"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Unpublish",
+                                "events": {
+                                  "onClick": "uuid-unpublish-job-advertisement"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Edit",
+                                "events": {
+                                  "onClick": "uuid-edit-card"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Delete",
+                                "events": {
+                                  "onClick": "uuid-archive-card"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-open-positions-public-page",
+      "type": "page",
+      "accessRight": {
+        "rules": [
+          {
+            "type": "allow",
+            "roles": [
+              "uuid-candidate-role"
+            ]
+          }
+        ]
+      },
+      "viewProps": {
+        "name": "Open Positions Public Page",
+        "title": "Open Positions",
+        "slug": "open-positions",
+        "gap": 5,
+        "children": [
+          {
+            "id": "uuid-titleid2",
+            "type": "header",
+            "viewProps": {
+              "heading": "h1",
+              "text": "Open Positions"
+            }
+          },
+          {
+            "id": "uuid-paragraph-id",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "You can view the details of our open positions and apply for the position you are interested in"
+            }
+          },
+          {
+            "id": "uuid-hrid",
+            "type": "horizontalline"
+          },
+          {
+            "id": "uuid-open-positions-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "id-for-publishedJobAdvertisementsList"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "view": {
+                "type": "list",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                  },
+                  "snippet": "uuid-open-positions-snippet"
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-need-help-id",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Need Help?"
+            }
+          },
+          {
+            "id": "uuid-contact-us-row-id",
+            "type": "row",
+            "children": [
+              {
+                "id": "uuid-contact-us-column1",
+                "type": "column",
+                "viewProps": {
+                  "width": 1
+                },
+                "children": [
+                  {
+                    "id": "uuid-envelope-button",
+                    "type": "button",
+                    "viewProps": {
+                      "icon": "envelope",
+                      "text": "",
+                      "events": {
+                        "onClick": "uuid-open-contact-us-form"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "uuid-contact-us-column2",
+                "type": "column",
+                "viewProps": {
+                  "width": 11
+                },
+                "children": [
+                  {
+                    "id": "uuid-contact-us-id",
+                    "type": "header",
+                    "viewProps": {
+                      "heading": "h3",
+                      "text": "Contact us"
+                    }
+                  },
+                  {
+                    "id": "uuid-contact-us-desc-id",
+                    "type": "paragraph",
+                    "viewProps": {
+                      "text": "Contact us if there is a question about the application"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-job-applications-manager-page",
+      "type": "page",
+      "accessRight": {
+        "rules": [
+          {
+            "type": "allow",
+            "roles": [
+              "uuid-hr-manager-role"
+            ]
+          }
+        ]
+      },
+      "viewProps": {
+        "name": "Job Applications Manager Page",
+        "title": "Job Applications",
+        "slug": "manage-applications",
+        "gap": 5,
+        "children": [
+          {
+            "id": "uuid-titleid3",
+            "type": "header",
+            "viewProps": {
+              "heading": "h1",
+              "text": "Job Applications"
+            }
+          },
+          {
+            "id": "uuid-hrid",
+            "type": "horizontalline"
+          },
+          {
+            "id": "uuid-applied-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-applied"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Applied",
+              "view": {
+                "type": "table",
+                "id": "uuid-applied-card-share-table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "trello-list-id-applied"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Move to Shortlist",
+                                "events": {
+                                  "onClick": "uuid-move-applicant-to-shortlist"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Disqualify Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-shortlist-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-shortlist"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Shortlist",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "trello-list-id-shortlist"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "To be Interviewed",
+                                "events": {
+                                  "onClick": "uuid-move-applicant-to-interview"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Disqualify Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-interview-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-interview"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Interview",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "trello-list-id-interview"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Evaluate Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-applicant-to-evaluation"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Disqualify Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-evaluation-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-evaluation"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Evaluation",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "trello-list-id-evaluation"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Offer",
+                                "events": {
+                                  "onClick": "uuid-move-applicant-to-offer"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Disqualify Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-offer-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-offer"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Offer",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idList",
+                                        "operator": "equals",
+                                        "value": "trello-list-id-offer"
+                                      },
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Hire",
+                                "events": {
+                                  "onClick": "uuid-move-applicant-to-hired"
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "matching": {
+                                  "type": "basic",
+                                  "conditions": [
+                                    [
+                                      {
+                                        "field": "idBoard",
+                                        "operator": "equals",
+                                        "value": "trelloBoardId"
+                                      }
+                                    ]
+                                  ]
+                                },
+                                "text": "Disqualify Candidate",
+                                "events": {
+                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-hired-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-hired"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Hired",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Delete",
+                                "events": {
+                                  "onClick": "uuid-archive-card"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "uuid-disqualified-card-share",
+            "type": "TrelloCardSharing",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-disqualified"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "header": "Disqualified",
+              "view": {
+                "type": "table",
+                "viewProps": {
+                  "events": {
+                    "onClick": "uuid-job-application-card-detail-page"
+                  },
+                  "columns": [
+                    {
+                      "header": "Applicant",
+                      "view": {
+                        "type": "label",
+                        "viewProps": {
+                          "text": "{{{card.name}}} {{{card.surname}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "Date",
+                      "view": {
+                        "type": "date",
+                        "viewProps": {
+                          "format": "DD MMM YYYY",
+                          "text": "{{{card.creationDate}}}"
+                        }
+                      }
+                    },
+                    {
+                      "header": "",
+                      "view": {
+                        "type": "dropdown",
+                        "viewProps": {
+                          "title": "Actions",
+                          "children": [
+                            {
+                              "type": "button",
+                              "viewProps": {
+                                "text": "Delete",
+                                "events": {
+                                  "onClick": "uuid-archive-card"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-job-advertisement-card-detail-page",
+      "type": "CardDetailPage",
+      "viewProps": {
+        "name": "Job Advertisement Card Detail Page",
+        "title": "{{{card.title}}}",
+        "gap": 5,
+        "children": [
+          {
+            "id": "uuid-titleid4",
+            "type": "header",
+            "viewProps": {
+              "heading": "h1",
+              "text": "{{{card.positionName}}}"
+            }
+          },
+          {
+            "id": "uuid-hrid",
+            "type": "horizontalline"
+          },
+          {
+            "id": "uuid-title-compInf",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Company Info"
+            }
+          },
+          {
+            "id": "uuid-paragraph-compInf",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.companyInfo}}}"
+            }
+          },
+          {
+            "id": "uuid-title-jobDesc",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Job Description"
+            }
+          },
+          {
+            "id": "uuid-paragraph-jobDesc",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.jobDescription}}}"
+            }
+          },
+          {
+            "id": "uuid-title-resp",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Responsibilities"
+            }
+          },
+          {
+            "id": "uuid-paragraph-resp",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.responsibilities}}}"
+            }
+          },
+          {
+            "id": "uuid-title-skills",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Skills & Qualifications"
+            }
+          },
+          {
+            "id": "uuid-paragraph-skills",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.skills}}}"
+            }
+          },
+          {
+            "id": "uuid-publish-button-id",
+            "type": "button",
+            "accessRight": {
+              "rules": [
+                {
+                  "type": "allow",
+                  "roles": [
+                    "uuid-hr-manager-role"
+                  ]
+                }
+              ]
+            },
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "id-for-draftJobAdvertisementsList"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Publish",
+              "events": {
+                "onClick": "uuid-publish-job-advertisement"
+              }
+            }
+          },
+          {
+            "id": "uuid-unpublish-button-id",
+            "type": "button",
+            "accessRight": {
+              "rules": [
+                {
+                  "type": "allow",
+                  "roles": [
+                    "uuid-hr-manager-role"
+                  ]
+                }
+              ]
+            },
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "id-for-publishedJobAdvertisementsList"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Unpublish",
+              "events": {
+                "onClick": "uuid-unpublish-job-advertisement"
+              }
+            }
+          },
+          {
+            "id": "uuid-edit-button-id",
+            "type": "button",
+            "accessRight": {
+              "rules": [
+                {
+                  "type": "allow",
+                  "roles": [
+                    "uuid-hr-manager-role"
+                  ]
+                }
+              ]
+            },
+            "viewProps": {
+              "text": "Edit",
+              "events": {
+                "onClick": "uuid-edit-card"
+              }
+            }
+          },
+          {
+            "id": "uuid-delete-button-id",
+            "type": "button",
+            "accessRight": {
+              "rules": [
+                {
+                  "type": "allow",
+                  "roles": [
+                    "uuid-hr-manager-role"
+                  ]
+                }
+              ]
+            },
+            "viewProps": {
+              "text": "Delete",
+              "events": {
+                "onClick": "uuid-archive-card"
+              }
+            }
+          },
+          {
+            "id": "uuid-apply-button-id",
+            "type": "button",
+            "viewProps": {
+              "text": "Apply",
+              "events": {
+                "onClick": "uuid-open-job-application-form"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "uuid-job-application-card-detail-page",
+      "type": "CardDetailPage",
+      "accessRight": {
+        "rules": [
+          {
+            "type": "allow",
+            "roles": [
+              "uuid-hr-manager-role"
+            ]
+          }
+        ]
+      },
+      "viewProps": {
+        "name": "Job Applicant Card Detail Page",
+        "title": "{{{card.title}}}",
+        "gap": 5,
+        "children": [
+          {
+            "id": "uuid-titleid-applicant-name",
+            "type": "header",
+            "viewProps": {
+              "heading": "h1",
+              "text": "{{{card.name}}} {{{card.surname}}} ({{{card.email}}})"
+            }
+          },
+          {
+            "id": "uuid-hrid",
+            "type": "horizontalline"
+          },
+          {
+            "id": "uuid-title-coverLetter",
+            "type": "header",
+            "viewProps": {
+              "heading": "h2",
+              "text": "Cover Letter"
+            }
+          },
+          {
+            "id": "uuid-paragraph-coverLetter",
+            "type": "paragraph",
+            "viewProps": {
+              "text": "{{{card.coverLetter}}}"
+            }
+          },
+          {
+            "id": "uuid-link-cv",
+            "type": "hyperlink",
+            "viewProps": {
+              "text": "CV for {{{card.name}}} {{{card.surname}}}",
+              "url": "{{{card.cvAttachment}}}"
+            }
+          },
+          {
+            "id": "uuid-move-to-shortlist-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-applied"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Move to Shortlist",
+              "events": {
+                "onClick": "uuid-move-applicant-to-shortlist"
+              }
+            }
+          },
+          {
+            "id": "uuid-move-to-interview-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-shortlist"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "To be Interviewed",
+              "events": {
+                "onClick": "uuid-move-applicant-to-interview"
+              }
+            }
+          },
+          {
+            "id": "uuid-move-to-evaluation-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-interview"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Evaluate Candidate",
+              "events": {
+                "onClick": "uuid-move-applicant-to-evaluation"
+              }
+            }
+          },
+          {
+            "id": "uuid-move-to-offer-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-evaluation"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Offer",
+              "events": {
+                "onClick": "uuid-move-applicant-to-offer"
+              }
+            }
+          },
+          {
+            "id": "uuid-move-to-hired-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trello-list-id-offer"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Hire",
+              "events": {
+                "onClick": "uuid-move-applicant-to-hired"
+              }
+            }
+          },
+          {
+            "id": "uuid-move-to-disqualified-button",
+            "type": "button",
+            "viewProps": {
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              },
+              "text": "Disqualify Candidate",
+              "events": {
+                "onClick": "uuid-move-candidate-to-disqualified"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
