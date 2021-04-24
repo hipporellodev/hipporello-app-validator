@@ -356,7 +356,7 @@ export default class HippoValidator {
 
     getViewScheme = (data) => {
         const viewScheme =  yup.object().shape({
-            id: yup.string().required(),
+            id: yup.string(),
             type: yup.mixed().oneOf([
                 'snippet',
                 'page',
@@ -376,7 +376,8 @@ export default class HippoValidator {
                 'row',
                 'Image',
                 'Header',
-                'horizontalline'
+                'horizontalline',
+                "dropdownItem"
             ]),
             accessRight: this.getAccessRightScheme(data),
             viewProps: yup.object().shape({
@@ -384,8 +385,11 @@ export default class HippoValidator {
                 gap: yup.number(),
                 align: yup.mixed().oneOf(['left', 'right', 'center']),
                 children: yup.array().of(yup.lazy(() => viewScheme)),
-                events: yup.object().shape({
-                    onClick: yup.mixed().oneOf(this.getActions()),
+                events: yup.object().default(null).nullable().shape({
+                    onClick: yup.object().shape({
+                        id: yup.string().required(),
+                        action: yup.mixed().oneOf(this.getActions())
+                    }),
                 })
             }).concat(yup.object().when('type', (type) => {
                 switch (type) {
@@ -402,6 +406,17 @@ export default class HippoValidator {
                         return yup.object().shape({
                             text: yup.string().required(),
                             url: yup.string(),
+                        });
+                    case "TrelloCardSharing":
+                        return yup.object().shape({
+                            view: yup.lazy(() => viewScheme)
+                        });
+                    case "table":
+                        return yup.object().shape({
+                            columns: yup.array().of(yup.object().shape({
+                                header: yup.string().required(),
+                                view: yup.lazy(() => viewScheme)
+                            }))
                         })
                 }
             }))

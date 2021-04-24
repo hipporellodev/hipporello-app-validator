@@ -140,22 +140,20 @@
         },
         "tags": [
         ],
-        "details": {
-          "name": "New Job Advertisement",
-          "aliases": [
-            {
-              "id": "69d349c618a6426bbceda41a230487c1",
-              "enabled": false
-            }
-          ],
-          "icon": "plus",
-          "postSubmissionView": {
-            "type": "internal",
-            "target": {
-              "type": "_self"
-            },
-            "viewId": "uuid-snippet1-NewJobAdvThankYou-viewId"
+        "name": "New Job Advertisement",
+        "aliases": [
+          {
+            "id": "69d349c618a6426bbceda41a230487c1",
+            "enabled": false
           }
+        ],
+        "icon": "plus",
+        "postSubmissionView": {
+          "type": "internal",
+          "target": {
+            "type": "_self"
+          },
+          "viewId": "uuid-snippet1-NewJobAdvThankYou-viewId"
         }
       },
       {
@@ -240,31 +238,27 @@
         },
         "tags": [
         ],
-        "details": {
-          "name": "Application Form",
-          "aliases": [
-            {
-              "id": "69d349c618a6426bbceda41a230487c1",
-              "enabled": true
-            }
-          ],
-          "icon": "plus",
-          "postSubmissionView": {
-            "type": "internal",
-            "target": {
-              "type": "_self"
-            },
-            "viewId": "uuid-snippet1-ApplicationFormThankYou-viewId"
+        "name": "Application Form",
+        "aliases": [
+          {
+            "id": "69d349c618a6426bbceda41a230487c1",
+            "enabled": true
           }
+        ],
+        "icon": "plus",
+        "postSubmissionView": {
+          "type": "internal",
+          "target": {
+            "type": "_self"
+          },
+          "viewId": "uuid-snippet1-ApplicationFormThankYou-viewId"
         }
       },
       {
         "id": "28f1360ee1f04d62bf45e392562b3347",
         "type": "email",
-        "details": {
-          "email": "jobs",
-          "addAttachmentsToCard": true
-        },
+        "email": "jobs",
+        "emailAttachment": true,
         "accessRight": {
           "rules": [
             {
@@ -466,90 +460,98 @@
   "automations": [
     {
       "id": "uuid-automation1",
-      "trigger": {
-        "type": "card-created",
-        "matching": {
-          "type": "basic",
-          "conditions": [
-            [
-              {
-                "field": "formId",
-                "operator": "equals",
-                "value": "c67a4b6d9c5b475aa795b71b0e08yehw"
-              }
-            ]
+      "matching": {
+        "type": "basic",
+        "conditions": [
+          [
+            {
+              "field": "formId",
+              "operator": "equals",
+              "value": "c67a4b6d9c5b475aa795b71b0e08yehw"
+            }
           ]
-        },
-        "inList": {
-          "id": "trelloListId-NewApplications",
-          "boardId": "trello-board-id"
-        }
+        ]
       },
-      "action": {
-        "type": "send-email",
-        "details": {
-          "outgoingIntegrationId": "uuid-email1",
-          "subject": "Your job application",
-          "message": "Thank you for applying.\nWe have received your application and its application id is {{{case.id}}} in our records.\nSincerely,",
-          "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
+      "actions": [
+        {
+          "trigger": {
+            "type": "card-created",
+            "inList": {
+              "id": "trelloListId-NewApplications",
+              "boardId": "trello-board-id"
+            }
+          },
+          "action": {
+            "type": "send-email",
+            "details": {
+              "outgoingIntegrationId": "uuid-email1",
+              "subject": "Your job application",
+              "message": "Thank you for applying.\nWe have received your application and its application id is {{{case.id}}} in our records.\nSincerely,",
+              "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
+            }
+          }
         }
-      }
+      ]
     },
     {
       "id": "uuid-automation2",
-      "trigger": {
-        "type": "card-moved",
-        "matching": {
-          "type": "basic",
-          "conditions": [
-            [
-              {
-                "field": "formId",
-                "operator": "equals",
-                "value": "b77a4b6d9c5b475aa795b71b0e08ebbb"
-              }
-            ]
+      "matching": {
+        "type": "basic",
+        "conditions": [
+          [
+            {
+              "field": "formId",
+              "operator": "equals",
+              "value": "b77a4b6d9c5b475aa795b71b0e08ebbb"
+            }
           ]
-        },
-        "fromList": {
-          "id": "trelloListId-DraftJobAdvertisements",
-          "boardId": "trelloBoardId"
-        },
-        "toList": {
-          "id": "trelloListId-PublishedJobAdvertisements",
-          "boardId": "trelloBoardId"
-        }
+        ]
       },
-      "action": {
-        "type": "notify-channel",
-        "delay": {
-          "duration": 1,
-          "durationUnit": "h",
-          "matching": {
-            "type": "basic",
-            "conditions": [
-              [
-                {
-                  "field": "idList",
-                  "operator": "equals",
-                  "value": "trelloListId-PublishedJobAdvertisements"
-                },
-                {
-                  "field": "idBoard",
-                  "operator": "equals",
-                  "value": "trelloBoardId"
-                }
-              ]
-            ]
+      "actions": [
+        {
+          "trigger": {
+            "type": "card-moved",
+            "fromList": {
+              "id": "trelloListId-DraftJobAdvertisements",
+              "boardId": "trelloBoardId"
+            },
+            "toList": {
+              "id": "trelloListId-PublishedJobAdvertisements",
+              "boardId": "trelloBoardId"
+            }
+          },
+          "action": {
+            "type": "notify-channel",
+            "delay": {
+              "duration": 1,
+              "durationUnit": "h",
+              "matching": {
+                "type": "basic",
+                "conditions": [
+                  [
+                    {
+                      "field": "idList",
+                      "operator": "equals",
+                      "value": "trelloListId-PublishedJobAdvertisements"
+                    },
+                    {
+                      "field": "idBoard",
+                      "operator": "equals",
+                      "value": "trelloBoardId"
+                    }
+                  ]
+                ]
+              }
+            },
+            "details": {
+              "channelId": "uuid-new-positions-notification",
+              "subject": "New Position Available!",
+              "message": "A new position is available on our Open Positions page. Check it out!",
+              "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
+            }
           }
-        },
-        "details": {
-          "channelId": "uuid-new-positions-notification",
-          "subject": "New Position Available!",
-          "message": "A new position is available on our Open Positions page. Check it out!",
-          "footerId": "3c68705b613042e1a48fb0a6bbfde23d"
         }
-      }
+      ]
     }
   ],
   "uiActionGroups": [
@@ -824,6 +826,31 @@
       "tableHeaderCellFontColor": ""
     }
   },
+  "header": {
+    "menu": [
+      {
+        "type": "menuItem",
+        "viewProps": {
+          "page": "uuid-job-advertisements-manager-page",
+          "text": "Job Advertisements"
+        }
+      },
+      {
+        "type": "menuItem",
+        "viewProps": {
+          "page": "uuid-open-positions-public-page",
+          "text": "Open Positions"
+        }
+      },
+      {
+        "type": "menuItem",
+        "viewProps": {
+          "page": "uuid-job-applications-manager-page",
+          "text": "Job Applications"
+        }
+      }
+    ]
+  },
   "views": [
     {
       "id": "uuid-snippet1-NewJobAdvThankYou-viewId",
@@ -861,7 +888,10 @@
             "viewProps": {
               "text": "Job Advertisements Page",
               "events": {
-                "onClick": "uuid-navigate-to-job-advertisements-page"
+                "onClick": {
+                  "id": "smoqNc",
+                  "action": "uuid-navigate-to-job-advertisements-page"
+                }
               }
             }
           }
@@ -975,8 +1005,12 @@
             "type": "button",
             "viewProps": {
               "text": "New Job Advertisement",
+              "icon": "add",
               "events": {
-                "onClick": "uuid-open-new-job-advertisement-form"
+                "onClick": {
+                  "id": "Ji47Ht",
+                  "action": "uuid-open-new-job-advertisement-form"
+                }
               }
             }
           },
@@ -1006,11 +1040,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                    "onClick": {
+                      "id": "MsBxYs",
+                      "action": "uuid-open-job-advertisement-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Position",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1020,23 +1059,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-publish-job-advertisement-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1057,25 +1100,36 @@
                                 },
                                 "text": "Publish",
                                 "events": {
-                                  "onClick": "uuid-publish-job-advertisement"
+                                  "onClick": {
+                                    "id": "WXUC6q",
+                                    "action": "uuid-publish-job-advertisement"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-edit-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Edit",
                                 "events": {
-                                  "onClick": "uuid-edit-card"
+                                  "onClick": {
+                                    "id": "L8hFAg",
+                                    "action": "uuid-edit-card"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-archive-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Delete",
                                 "events": {
-                                  "onClick": "uuid-archive-card"
+                                  "onClick": {
+                                    "id": "6Ml5h5",
+                                    "action": "uuid-archive-card"
+                                  }
                                 }
                               }
                             }
@@ -1114,11 +1168,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                    "onClick": {
+                      "id": "4IiMvc",
+                      "action": "uuid-open-job-advertisement-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Position",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1128,23 +1187,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-unpublish-job-advertisement-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1165,25 +1228,36 @@
                                 },
                                 "text": "Unpublish",
                                 "events": {
-                                  "onClick": "uuid-unpublish-job-advertisement"
+                                  "onClick": {
+                                    "id": "a824yH",
+                                    "action": "uuid-unpublish-job-advertisement"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-edit-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Edit",
                                 "events": {
-                                  "onClick": "uuid-edit-card"
+                                  "onClick": {
+                                    "id": "dyvWkL",
+                                    "action": "uuid-edit-card"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-archive-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Delete",
                                 "events": {
-                                  "onClick": "uuid-archive-card"
+                                  "onClick": {
+                                    "id": "yP3R9s",
+                                    "action": "uuid-archive-card"
+                                  }
                                 }
                               }
                             }
@@ -1262,7 +1336,10 @@
                 "type": "list",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-open-job-advertisement-card-detail-page"
+                    "onClick": {
+                      "id": "eMzHS9",
+                      "action": "uuid-open-job-advertisement-card-detail-page"
+                    }
                   },
                   "snippet": "uuid-open-positions-snippet"
                 }
@@ -1295,7 +1372,10 @@
                       "icon": "envelope",
                       "text": "",
                       "events": {
-                        "onClick": "uuid-open-contact-us-form"
+                        "onClick": {
+                          "id": "31uYTs",
+                          "action": "uuid-open-contact-us-form"
+                        }
                       }
                     }
                   }
@@ -1388,11 +1468,16 @@
                 "id": "uuid-applied-card-share-table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "yEVlhn",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1402,23 +1487,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-move-applicant-to-shortlist-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1439,12 +1528,16 @@
                                 },
                                 "text": "Move to Shortlist",
                                 "events": {
-                                  "onClick": "uuid-move-applicant-to-shortlist"
+                                  "onClick": {
+                                    "id": "kJEfq8",
+                                    "action": "uuid-move-applicant-to-shortlist"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-move-candidate-to-disqualified-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1460,7 +1553,10 @@
                                 },
                                 "text": "Disqualify Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                  "onClick": {
+                                    "id": "tA4KB6",
+                                    "action": "uuid-move-candidate-to-disqualified"
+                                  }
                                 }
                               }
                             }
@@ -1499,11 +1595,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "zsGpaf",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1513,23 +1614,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id": "uuid-move-to-be-interview-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1550,12 +1655,16 @@
                                 },
                                 "text": "To be Interviewed",
                                 "events": {
-                                  "onClick": "uuid-move-applicant-to-interview"
+                                  "onClick": {
+                                    "id": "ynA9Ii",
+                                    "action": "uuid-move-applicant-to-interview"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id": "uuid-move-candidate-to-disqualified-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1571,7 +1680,10 @@
                                 },
                                 "text": "Disqualify Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                  "onClick": {
+                                    "id": "vskinQ",
+                                    "action": "uuid-move-candidate-to-disqualified"
+                                  }
                                 }
                               }
                             }
@@ -1610,11 +1722,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "BLrx7G",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1624,23 +1741,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-move-applicant-to-evaluation-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1661,12 +1782,16 @@
                                 },
                                 "text": "Evaluate Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-applicant-to-evaluation"
+                                  "onClick": {
+                                    "id": "PRtdEp",
+                                    "action": "uuid-move-applicant-to-evaluation"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-move-candidate-to-disqualified-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1682,7 +1807,10 @@
                                 },
                                 "text": "Disqualify Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                  "onClick": {
+                                    "id": "YfRiZf",
+                                    "action": "uuid-move-candidate-to-disqualified"
+                                  }
                                 }
                               }
                             }
@@ -1721,11 +1849,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "biXxTP",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1735,23 +1868,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-move-applicant-to-offer-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1772,12 +1909,16 @@
                                 },
                                 "text": "Offer",
                                 "events": {
-                                  "onClick": "uuid-move-applicant-to-offer"
+                                  "onClick": {
+                                    "id": "TY5Yrw",
+                                    "action": "uuid-move-applicant-to-offer"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-move-candidate-to-disqualified-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1793,7 +1934,10 @@
                                 },
                                 "text": "Disqualify Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                  "onClick": {
+                                    "id": "2oSpI3",
+                                    "action": "uuid-move-candidate-to-disqualified"
+                                  }
                                 }
                               }
                             }
@@ -1832,11 +1976,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "vnSVLB",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1846,23 +1995,27 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-move-applicant-to-hired-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1883,12 +2036,16 @@
                                 },
                                 "text": "Hire",
                                 "events": {
-                                  "onClick": "uuid-move-applicant-to-hired"
+                                  "onClick": {
+                                    "id": "S7Q5AT",
+                                    "action": "uuid-move-applicant-to-hired"
+                                  }
                                 }
                               }
                             },
                             {
-                              "type": "button",
+                              "id":"uuid-move-candidate-to-disqualified-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "matching": {
                                   "type": "basic",
@@ -1904,7 +2061,10 @@
                                 },
                                 "text": "Disqualify Candidate",
                                 "events": {
-                                  "onClick": "uuid-move-candidate-to-disqualified"
+                                  "onClick": {
+                                    "id": "ZpRYum",
+                                    "action": "uuid-move-candidate-to-disqualified"
+                                  }
                                 }
                               }
                             }
@@ -1943,11 +2103,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "KyCkzX",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -1957,27 +2122,34 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-archive-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Delete",
                                 "events": {
-                                  "onClick": "uuid-archive-card"
+                                  "onClick": {
+                                    "id": "KAdtX0",
+                                    "action": "uuid-archive-card"
+                                  }
                                 }
                               }
                             }
@@ -2016,11 +2188,16 @@
                 "type": "table",
                 "viewProps": {
                   "events": {
-                    "onClick": "uuid-job-application-card-detail-page"
+                    "onClick": {
+                      "id": "TLF5kM",
+                      "action": "uuid-job-application-card-detail-page"
+                    }
                   },
                   "columns": [
                     {
                       "header": "Applicant",
+                      "sortable": true,
+                      "field": "card.name",
                       "view": {
                         "type": "label",
                         "viewProps": {
@@ -2030,27 +2207,34 @@
                     },
                     {
                       "header": "Date",
+                      "sortable": true,
+                      "field": "card.dateLastActivity",
                       "view": {
                         "type": "date",
                         "viewProps": {
                           "format": "DD MMM YYYY",
-                          "text": "{{{card.creationDate}}}"
+                          "text": "{{{card.dateLastActivity}}}"
                         }
                       }
                     },
                     {
                       "header": "",
+                      "align": "right",
                       "view": {
                         "type": "dropdown",
                         "viewProps": {
                           "title": "Actions",
                           "children": [
                             {
-                              "type": "button",
+                              "id":"uuid-archive-card-dropdownItem",
+                              "type": "dropdownItem",
                               "viewProps": {
                                 "text": "Delete",
                                 "events": {
-                                  "onClick": "uuid-archive-card"
+                                  "onClick": {
+                                    "id": "RbZ77s",
+                                    "action": "uuid-archive-card"
+                                  }
                                 }
                               }
                             }
@@ -2071,7 +2255,7 @@
       "type": "CardDetailPage",
       "viewProps": {
         "name": "Job Advertisement Card Detail Page",
-        "title": "{{{card.title}}}",
+        "title": "{{{card.name}}}",
         "gap": 5,
         "children": [
           {
@@ -2179,7 +2363,10 @@
               },
               "text": "Publish",
               "events": {
-                "onClick": "uuid-publish-job-advertisement"
+                "onClick": {
+                  "id": "bCey07",
+                  "action": "uuid-publish-job-advertisement"
+                }
               }
             }
           },
@@ -2216,7 +2403,10 @@
               },
               "text": "Unpublish",
               "events": {
-                "onClick": "uuid-unpublish-job-advertisement"
+                "onClick": {
+                  "id": "sWPwce",
+                  "action": "uuid-unpublish-job-advertisement"
+                }
               }
             }
           },
@@ -2236,7 +2426,10 @@
             "viewProps": {
               "text": "Edit",
               "events": {
-                "onClick": "uuid-edit-card"
+                "onClick": {
+                  "id": "hvOfvP",
+                  "action": "uuid-edit-card"
+                }
               }
             }
           },
@@ -2256,7 +2449,10 @@
             "viewProps": {
               "text": "Delete",
               "events": {
-                "onClick": "uuid-archive-card"
+                "onClick": {
+                  "id": "LyhHXQ",
+                  "action": "uuid-archive-card"
+                }
               }
             }
           },
@@ -2266,7 +2462,10 @@
             "viewProps": {
               "text": "Apply",
               "events": {
-                "onClick": "uuid-open-job-application-form"
+                "onClick": {
+                  "id": "Ww1JkX",
+                  "action": "uuid-open-job-application-form"
+                }
               }
             }
           }
@@ -2288,7 +2487,7 @@
       },
       "viewProps": {
         "name": "Job Applicant Card Detail Page",
-        "title": "{{{card.title}}}",
+        "title": "{{{card.name}}}",
         "gap": 5,
         "children": [
           {
@@ -2349,7 +2548,10 @@
               },
               "text": "Move to Shortlist",
               "events": {
-                "onClick": "uuid-move-applicant-to-shortlist"
+                "onClick": {
+                  "id": "p3vLJF",
+                  "action": "uuid-move-applicant-to-shortlist"
+                }
               }
             }
           },
@@ -2376,7 +2578,10 @@
               },
               "text": "To be Interviewed",
               "events": {
-                "onClick": "uuid-move-applicant-to-interview"
+                "onClick": {
+                  "id": "BgS9JR",
+                  "action": "uuid-move-applicant-to-interview"
+                }
               }
             }
           },
@@ -2403,7 +2608,10 @@
               },
               "text": "Evaluate Candidate",
               "events": {
-                "onClick": "uuid-move-applicant-to-evaluation"
+                "onClick": {
+                  "id": "KJkSFu",
+                  "action": "uuid-move-applicant-to-evaluation"
+                }
               }
             }
           },
@@ -2430,7 +2638,10 @@
               },
               "text": "Offer",
               "events": {
-                "onClick": "uuid-move-applicant-to-offer"
+                "onClick": {
+                  "id": "I86LPC",
+                  "action": "uuid-move-applicant-to-offer"
+                }
               }
             }
           },
@@ -2457,7 +2668,10 @@
               },
               "text": "Hire",
               "events": {
-                "onClick": "uuid-move-applicant-to-hired"
+                "onClick": {
+                  "id": "fVKolF",
+                  "action": "uuid-move-applicant-to-hired"
+                }
               }
             }
           },
@@ -2479,7 +2693,10 @@
               },
               "text": "Disqualify Candidate",
               "events": {
-                "onClick": "uuid-move-candidate-to-disqualified"
+                "onClick": {
+                  "id": "G7GwqY",
+                  "action": "uuid-move-candidate-to-disqualified"
+                }
               }
             }
           }
