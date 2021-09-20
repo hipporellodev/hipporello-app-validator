@@ -306,8 +306,20 @@ describe("Hippo Validator Test", () => {
                 expect(newJson.unnecessary).toBe("Unremoved");
             })
         });
+
+        test('aa', () => {
+            let a = "he isa a very is tall boy";
+            let limit = 5;
+            let b = a.substr(0,limit).split(" ");
+            let c = b.filter((it, index) => a.includes(it)).join(" ");
+            console.log(c);
+        })
     })
 });
+
+const shuffle = input => input.toString().split('').reduce((acc, item, index, data) =>
+    acc.concat((index % 2 ? data.slice().reverse() : data)[Math.floor(index / 2)]), []
+).join('');
 const cloneJson = (json) => {
     return Object.assign({}, json);
 }

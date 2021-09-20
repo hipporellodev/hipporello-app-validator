@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "lodash": "^4.17.21",
     "yup": "^0.32.9"
   }
 }
