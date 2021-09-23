@@ -87,7 +87,7 @@ export default class HippoValidator {
 
     getComponentActionScheme = () => {
         return yup.object().shape({
-            cardType: mixed().oneOf(this.getCardTypes()),
+            cardType: mixed().oneOf(this.getCardTypes()).label('Action group card type'),
             props: object().shape({
                 params: object().shape({
                     context: mixed().oneOf(["cardId", "parentCardId"]).nullable().default(null)
@@ -113,7 +113,7 @@ export default class HippoValidator {
                         })
                     case "open-form":
                         return object().shape({
-                            formId: mixed().oneOf(this.getFormIds().concat(["edit-job-advertisement-form-id"])).required(), /* @todo Form id doğru mudur ? */
+                            formId: mixed().oneOf(this.getFormIds()).required(),
                             target: this.getTargetScheme()
                         });
 
@@ -237,8 +237,6 @@ export default class HippoValidator {
     }
 
     createScheme = (data) => {
-        //let accessRightScheme = this.getAccessRightScheme(data);
-        //let formScheme = this.getFormScheme(data);
         let scheme = yup.object().shape({
             id: yup.string().required(),
             name: yup.string().required(),
@@ -259,166 +257,7 @@ export default class HippoValidator {
             views: this.getViewsScheme(),
             environments: this.getEnvironmentScheme(),
             automations: this.getAutomationsScheme(),
-            /* accessRight: accessRightScheme.required(),
-             publishedAppId: yup.string(),
-             sourceAppTemplateId: yup.string(),
-             homeViewId: yup.string().required(),
-             roles: yup.array().of(yup.object().shape({
-                 id: yup.string().required(),
-                 name: yup.string().required(),
-                 members: yup.array().of(yup.object().shape({
-                     type: yup.mixed().oneOf(['email', 'domain', 'emaildomain', "authenticated", "anonymous"]).required(),
-                     value: yup.string().when("type", (type, schema) => {
-                         switch (type) {
-                             case "email":
-                                 return yup.string().email().required()
-                             case "domain":
-                                 return yup.string().domain().required()
-                             case "emaildomain":
-                                 return yup.string().emaildomain().required()
-                         }
-                     }),
 
-                 }))
-             })).required(),
-             boards: yup.array().of(yup.object().shape({
-                 hippoBoardId: yup.string().required(),
-                 trelloBoardId: yup.string(),
-                 provider: yup.mixed().oneOf(["trello"]).required(),
-             })).required(),
-             integrations: yup.object().shape({
-                 incoming: yup.array().of(yup.object().shape({
-                     id: yup.string().required(),
-                     type: yup.mixed().oneOf(['form', 'email']).required(),
-                     //accessRight: yup.ref("accessRight"),
-                     anonymous: yup.mixed().oneOf([0, 1]),
-                     tags: yup.array().of(yup.string()),
-                     body: yup.object().when("type", (type => {
-                         if (type === "form") {
-                             return formScheme;
-                         }
-                         return yup.mixed().nullable()
-                     })),
-                     details: yup.object().when("type", (type => {
-                         if (type === "form") {
-                             return yup.object().shape({
-                                 name: yup.string().required(),
-                                 aliases: yup.array().of(yup.object().shape({
-                                     id: yup.string().required(),
-                                     enabled: yup.boolean().required()
-                                 })),
-                                 icon: yup.string().required(),
-                                 postSubmissionView: yup.object().shape({
-                                     type: yup.mixed().oneOf(["internal", "external"]),
-                                     target: yup.object().shape({
-                                         type: yup.string().required(),
-                                     }),
-                                     viewId: yup.mixed().oneOf(this.getViewIds()).required()
-                                 })
-                             })
-                         } else if (type === "email") {
-                             return yup.object().shape({
-                                 email: yup.string(),
-                                 addAttachmentsToCard: yup.boolean()
-                             })
-                         }
-                     }))
-                 })).required(),
-                 outgoing: yup.array().of(yup.object().shape({
-                     id: yup.string().required(),
-                     type: yup.mixed().oneOf(['email']).required(),
-                     details: yup.object().shape({
-                         protocol: yup.string().required(),
-                         host: yup.string().domain().required(),
-                         port: yup.number().required(),
-                         ssl: yup.boolean(),
-                         username: yup.string().required(),
-                         password: yup.string().required()
-                     })
-                 })).required()
-             }).required(),
-             "subscription-channels": yup.array().of(yup.object().shape({
-                 id: yup.string().required(),
-                 name: yup.string().required(),
-                 type: yup.mixed().oneOf(["email"]).required(),
-                 outgoingIntegrationId: yup.mixed().oneOf((data.integrations?.outgoing || []).map(it => it.id)).required()
-             })),
-             automations: yup.array().of(yup.object().shape({
-                 id: yup.string().required(),
-                 trigger: yup.object().shape({
-                     type: yup.mixed().oneOf(["card-created", "card-moved"]),
-                     matching: yup.object().shape({
-                         type: yup.mixed().oneOf(["basic"]),
-                         conditions: this.getActionConditionsScheme(data)
-                     }),
-                     inList: yup.mixed().when("type", (type) => {
-                         switch (type) {
-                             case "card-created":
-                                 return yup.object().shape({
-                                     id: yup.string().required(),
-                                     boardId: yup.string().required()
-                                 }).required()
-                             default:
-                                 return yup.mixed().nullable()
-                         }
-                     }),
-                     fromList: yup.mixed().when("type", (type) => {
-                         switch (type) {
-                             case "card-moved":
-                                 return this.getFromListToListScheme();
-                             default:
-                                 return yup.mixed().nullable()
-                         }
-                     }),
-                     toList: yup.mixed().when("type", (type) => {
-                         switch (type) {
-                             case "card-moved":
-                                 return this.getFromListToListScheme();
-                             default:
-                                 return yup.mixed().nullable()
-                         }
-                     }),
-                 }),
-                 action: yup.object().shape({
-                     type: yup.mixed().oneOf(["send-email", "notify-channel"]).required(),
-                     details: yup.mixed().when("type", (type) => {
-                         switch (type) {
-                             case "send-email":
-                                 return yup.object().shape({
-                                     outgoingIntegrationId: yup.mixed().oneOf((data.integrations.outgoing || []).map(it => it.id)).required(),
-                                     subject: yup.string().required(),
-                                     message: yup.string().required(),
-                                     footerId: yup.string().required()
-                                 })
-                             case "notify-channel":
-                                 return yup.object().shape({
-                                     "channelId": yup.mixed().oneOf((data?.["subscription-channels"] || []).map(it => it.id)),
-                                     "subject": yup.string().required(),
-                                     "message": yup.string().required(),
-                                     "footerId": yup.string().required()
-                                 })
-                             default:
-                                 return yup.mixed().nullable()
-                         }
-                     }),
-                     delay: yup.object().default(null).nullable().shape({
-                         duration: yup.number().required(),
-                         durationUnit: yup.mixed().oneOf(["m", "h", "s", "D", "M", "Y"]).required(),
-                         matching: yup.object().shape({
-                             type: yup.mixed().oneOf(["basic"]),
-                             conditions: this.getActionConditionsScheme(data)
-                         })
-                     }).notRequired()
-                 }).required()
-             })),
-             uiActionGroups: yup.array().of(yup.object().shape({
-                 id: yup.string().required(),
-                 title: yup.string().required(),
-                 name: yup.string().required(),
-                 actions: yup.array().of(this.getActionScheme(this.data)).required()
-             })),
-             style: this.getStyleScheme(this.data),
-             views: yup.array().of(this.getViewScheme(data))*/
         });
         return scheme;
     }
@@ -532,12 +371,12 @@ export default class HippoValidator {
             roleRules: array().of(object().shape({
                 roles: array().of(mixed().oneOf(["hpadm", "hpauth"].concat(this.getRoles())).required()),
                 type: mixed().oneOf(["allow", "disallow"]).required()
-            })),
+            })).nullable().default(null),
             dataRule: object().shape({
                 conditions: this.getActionConditionsScheme(),
                 type: mixed().oneOf(["basic"])
-            }),
-            cardTypes: array().of(mixed().oneOf(this.getCardTypes()))
+            }).nullable().default(null),
+            cardTypes: array().of(mixed().oneOf(this.getCardTypes())).nullable().default(null)
         })
     }
 
@@ -556,57 +395,6 @@ export default class HippoValidator {
             valueType: mixed().oneOf(["variable", "value"])
         })));
     }
-
-    /*getActionScheme = (data) => {
-        return yup.object().shape({
-            id: yup.string(),
-            type: yup.mixed().oneOf(["move-card", "edit-card", "archive-card", "open-page", "open-form"]).required(),
-            toList: yup.mixed().when("type", (type) => {
-                if (["move-card"].includes(type)) {
-                    return this.getFromListToListScheme(data);
-                }
-                return yup.mixed().nullable().default(null);
-            }),
-            onSuccess: yup.array().of(yup.object().shape({
-                type: yup.string(),
-                id: yup.string()
-            })),
-            onFail: yup.array().of(yup.object().shape({
-                type: yup.string(),
-                id: yup.string()
-            })),
-            props: yup.mixed().when("type", (type) => {
-                if (type === "open-page") {
-                    return yup.object().shape({
-                        viewId: yup.mixed().oneOf(this.getViewIds()),
-                        type: yup.mixed().oneOf(["internal", "external", "card-detail-page"]),
-                        target: yup.object().shape({
-                            type: yup.mixed().oneOf(["_self"])
-                        })
-                    })
-                } else if (type === "open-form") {
-                    return yup.object().shape({
-                        formId: yup.string().required(),
-                        target: yup.object().shape({
-                            type: yup.mixed().oneOf(["_self", "_modal"]).required(),
-                            size: yup.mixed().when("type", (type) => {
-                                if (type === "_modal") {
-                                    return yup.mixed().oneOf(["small", "medium", "large"])
-                                }
-                                return yup.mixed().nullable().default(null);
-                            }),
-                            title: yup.string().required(),
-
-                        })
-                    })
-                }
-                return yup.mixed().nullable().default(null);
-            }),
-
-
-        })
-    }*/
-
     getViewSettingsScheme = () => {
         return object().shape({
             css: object().shape({
@@ -710,7 +498,7 @@ export default class HippoValidator {
                         });
                     case "TrelloCardSharing":
                         return yup.object().shape({
-                            "pageSize": number(),
+                            "pageSize": number().nullable().default(null),
                             "query": object().shape({
                                 "conditions": this.getActionConditionsScheme().nullable().default(null),
                                 "type": mixed().oneOf(["basic"])
@@ -787,7 +575,7 @@ export default class HippoValidator {
         const viewScheme = yup.object().shape({
             id: yup.string(),
             type: yup.mixed().oneOf([
-                "appHeader", "page", "inline-page"
+                "appHeader", "page"
             ]),
             accessRight: this.getAccessRightScheme().nullable().default(null),
             viewProps: yup.object().shape({
@@ -801,7 +589,7 @@ export default class HippoValidator {
                     logo: boolean(),
                     menu: boolean()
                 }),
-                environments: array().of(mixed().oneOf(this.getEnvironments())),
+                environments: array().of(mixed().oneOf(this.getEnvironments())).nullable().default(null),
             })
         });
         return viewScheme;
