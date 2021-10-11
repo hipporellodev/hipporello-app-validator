@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import _, {mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
+import {getTriggerTextByType} from "@/Source/viewer/actions/actionsUtils";
 
 export default class HippoValidator {
     constructor(appJson) {
@@ -119,7 +120,7 @@ export default class HippoValidator {
 
                 }
             })).nullable().default(null),
-            type: yup.mixed().oneOf(["move-card", "edit-card", "archive-card", "open-page", "open-form", "move-to", "archive", "send-message", "update-card-usercase"]).required(),
+            type: yup.mixed().oneOf(["move-card", "edit-card", "archive-card", "open-page", "open-form", "move-to", "archive", "send-message", "update-card-usercase", "assign-label", "assign-member"]).required(),
             cardUpdateFields: mixed().when("type", type => {
                 if (type === "update-card-usercase") {
                     return lazy(cardField => object(
@@ -134,7 +135,17 @@ export default class HippoValidator {
             }),
             list: mixed().when("type", type => {
                 if (type === "move-to") {
-                    return string().required() /* @todo list id required yeterli midir ?  */
+                    return string().required()
+                }
+            }),
+            labels: mixed().when("type", type => {
+                if (type === "assign-label") {
+                    return array().required()
+                }
+            }),
+            members: mixed().when("type", type => {
+                if (type === "assign-member") {
+                    return array().required()
                 }
             }),
             message: mixed().when("type", type => {
@@ -159,7 +170,7 @@ export default class HippoValidator {
         return lazy(obj => yup.object(
             mapValues(obj, () => yup.object({
                 id: yup.string().required(),
-                name: yup.string().required(),
+                name: yup.string().when("shared", (shared, schema) => shared ? schema.required() : schema),
                 shared: yup.boolean(),
                 title: yup.string(),
                 actions: lazy(actionObj => yup.object(
@@ -174,14 +185,14 @@ export default class HippoValidator {
             mapValues(obj, () => this.getComponentScheme())
         ))
     }
-    getFieldDefinitionsScheme = () => {
+    getDefinitionShape = () => {
         return lazy(obj => yup.object(
             mapValues(obj, () => {
                 return object().shape({
                     id: string().required(),
                     label: string().required(),
-                    multiple: boolean(),
-                    type: mixed().oneOf(["string", "integer", "number", "list", "attachment"])
+                    multiple: boolean().required(),
+                    type: mixed().oneOf(["string", "double", "long", "boolean", "attachment", "date"])
                 })
             })
         ))
@@ -222,7 +233,12 @@ export default class HippoValidator {
                         trigger: object().shape({
                             type: mixed().oneOf([
                                 "card-created",
-                                "card-updated"
+                                "card-updated",
+                                'moved',
+                                'commented',
+                                'more-info',
+                                'user-reply',
+                                'archived',
                             ])
                         })
                     })
@@ -249,7 +265,10 @@ export default class HippoValidator {
             cardTypes: this.getCardTypesScheme(),
             actionGroups: this.getActionGroupsScheme(),
             components: this.getComponentsScheme(),
-            fieldDefinitions: this.getFieldDefinitionsScheme(),
+            fieldDefinitions: object().shape({
+                hippoFields: this.getDefinitionShape(),
+                appVariableFields: this.getDefinitionShape()
+            }),
             integrations: object().shape({
                 incoming: this.getIncomingScheme()
             }),
@@ -300,14 +319,9 @@ export default class HippoValidator {
             return yup.object().shape({
                 aliases: array().of(string()),
                 anonymous: boolean(),
-                boardId: string().required(),
+                boardId: string(),
                 body: object().shape({
                     formAutoIncrementId: number().required(),
-                    hippoFieldMapping: lazy(obj => yup.object(
-                        mapValues(obj, () => {
-                            return mixed().oneOf(this.getFieldDefinitions()).required()
-                        })
-                    )),
                     readOnly: boolean(),
                     rows: yup.array().of(
                         yup.object().shape({
@@ -353,13 +367,23 @@ export default class HippoValidator {
                             }))
                         })
                     )
-                }),
+                }).concat(object().when("type", type => {
+                    if (["updateform", "form"].includes(type)) {
+                        return object().shape({
+                            hippoFieldMapping: lazy(obj => yup.object(
+                                mapValues(obj, () => {
+                                    return mixed().oneOf(this.getFieldDefinitions()).required()
+                                })
+                            ))
+                        })
+                    }
+                }),),
                 "enabled": boolean(),
                 "formatVersion": number().required(),
                 "icon": string(),
                 "id": string().required(),
                 "name": string().required(),
-                "type": mixed().oneOf(["form", "updateform"]),
+                "type": mixed().oneOf(["form", "updateform", "email"]),
                 "usesParent": boolean()
 
             })
@@ -369,7 +393,7 @@ export default class HippoValidator {
     getAccessRightScheme = () => {
         return object().shape({
             roleRules: array().of(object().shape({
-                roles: array().of(mixed().oneOf(["hpadm", "hpauth"].concat(this.getRoles())).required()),
+                roles: array().of(mixed().oneOf(["hpadm", "hpnauth", "hpauth", "hpusr"].concat(this.getRoles())).required()),
                 type: mixed().oneOf(["allow", "disallow"]).required()
             })).nullable().default(null),
             dataRule: object().shape({
@@ -397,18 +421,21 @@ export default class HippoValidator {
     }
     getViewSettingsScheme = () => {
         return object().shape({
-            css: object().shape({
-                simple: object().shape({
-                    "body-text-color": string().required(),
-                    "font-family": string().required(),
-                    "primary-color": string().required()
+            portalViewSettingOverrides: object().shape({
+                css: object().shape({
+                    simple: object().shape({
+                        "body-text-color": string().required(),
+                        "font-family": string().required(),
+                        "primary-color": string().required()
+                    })
+                }),
+                "images": object().shape({
+                    "banner": string(),
+                    "logo": string(),
+                    "socialShareImage": string()
                 })
-            }),
-            "images": object().shape({
-                "banner": string(),
-                "logo": string(),
-                "socialShareImage": string()
             })
+
         });
     }
 
@@ -453,7 +480,9 @@ export default class HippoValidator {
                 "tableColumn",
                 "menu",
                 "HippoFields",
-                "Conversation"
+                "Conversation",
+                "column",
+                "columns"
             ]),
             accessRight: this.getAccessRightScheme().nullable().default(null),
             viewProps: yup.object().shape({
@@ -541,8 +570,8 @@ export default class HippoValidator {
                         });
                     case "tableColumn":
                         return object().shape({
-                            "field": string().required(),
-                            "header": string().required(),
+                            "field": string().when("sortable", (sortable, schema) => sortable ? schema.required() : schema),
+                            "header": string(),
                             "sortable": boolean()
                         })
                     case "snippet":
@@ -564,7 +593,7 @@ export default class HippoValidator {
                         })
                     case "button":
                         return object().shape({
-                            text: string().required()
+
                         })
                 }
             }))
@@ -575,7 +604,7 @@ export default class HippoValidator {
         const viewScheme = yup.object().shape({
             id: yup.string(),
             type: yup.mixed().oneOf([
-                "appHeader", "page"
+                "appHeader", "page", "thankspage"
             ]),
             accessRight: this.getAccessRightScheme().nullable().default(null),
             viewProps: yup.object().shape({
@@ -623,7 +652,7 @@ export default class HippoValidator {
     }
 
     getFieldDefinitions = () => {
-        return Object.keys(this?.data?.fieldDefinitions || {});
+        return Object.keys(this?.data?.fieldDefinitions?.hippoFields || {});
     }
 
     getEnvironments = () => {
