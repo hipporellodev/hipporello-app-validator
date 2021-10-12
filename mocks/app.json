@@ -121,7 +121,7 @@
         "id": "b77a4b6d9c5b475aa795b71b0e08ebbb",
         "boardId": "60cb2eb6f94c063c2780f3af",
         "enabled": true,
-        "type": "form",
+        "type": "email",
         "accessRight": {
           "cardTypes": null,
           "roleRules": [
@@ -341,7 +341,7 @@
           ],
           "formAutoIncrementId": 33,
           "hippoFieldMapping": {
-            "elem-29": "hf_companyInfo",
+            "elem-29": "mansdkjagsd",
             "elem-16": "hf_positionName",
             "elem-32": "hf_positionType",
             "elem-19": "hf_jobDescription",
