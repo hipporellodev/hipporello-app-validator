@@ -393,7 +393,7 @@ export default class HippoValidator {
     getAccessRightScheme = () => {
         return object().shape({
             roleRules: array().of(object().shape({
-                roles: array().of(mixed().oneOf(["hpadm", "hpnauth", "hpauth", "hpusr"].concat(this.getRoles())).required()),
+                roles: array().of(mixed().oneOf(["hpadm", "hpnauth", "hpauth", "hpusr", "hptbrdadm", "hptbrdnrm", "hptbrdobs"].concat(this.getRoles())).required()),
                 type: mixed().oneOf(["allow", "disallow"]).required()
             })).nullable().default(null),
             dataRule: object().shape({
