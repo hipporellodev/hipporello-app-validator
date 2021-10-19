@@ -65,16 +65,16 @@ export default class HippoValidator {
 
     getEnvironmentScheme = () => {
         return object().shape({
-            "trelloCardBack" : object().shape({
-                "appHeader" : mixed().oneOf(this.getViewIds()),
-                "id" : string().required(),
-                "type" : mixed().oneOf(["trelloCardBack", "webView"])
+            "trelloCardBack": object().shape({
+                "appHeader": mixed().oneOf(this.getViewIds()),
+                "id": string().required(),
+                "type": mixed().oneOf(["trelloCardBack", "webView"])
             }),
-            "webView" : object().shape({
-                "appHeader" : mixed().oneOf(this.getViewIds()),
+            "webView": object().shape({
+                "appHeader": mixed().oneOf(this.getViewIds()),
                 "home": mixed().oneOf(this.getViewIds()),
-                "id" : string().required(),
-                "type" : mixed().oneOf(["trelloCardBack", "webView"])
+                "id": string().required(),
+                "type": mixed().oneOf(["trelloCardBack", "webView"])
             })
         })
     }
@@ -218,14 +218,14 @@ export default class HippoValidator {
             }),
             name: string().required(),
             order: number().required(),
-            rules:  lazy(rules => yup.object(
+            rules: lazy(rules => yup.object(
                 mapValues(rules, (it) => {
                     return object().shape({
                         events: object().shape({
-                          onTrigger: object().shape({
-                              action: mixed().oneOf(this.getActions()),
-                              id: string().required()
-                          })
+                            onTrigger: object().shape({
+                                action: mixed().oneOf(this.getActions()),
+                                id: string().required()
+                            })
                         }),
                         id: string().required(),
                         order: number().required(),
@@ -367,17 +367,18 @@ export default class HippoValidator {
                             }))
                         })
                     )
-                }).concat(object().when("type", type => {
-                    if (["updateform", "form"].includes(type)) {
-                        return object().shape({
-                            hippoFieldMapping: lazy(obj => yup.object(
-                                mapValues(obj, () => {
-                                    return mixed().oneOf(this.getFieldDefinitions()).required()
-                                })
-                            ))
-                        })
-                    }
-                }),),
+                })
+                    .concat(object().when("type", type => {
+                        if (["updateform", "form"].includes(type)) {
+                            return object().shape({
+                                hippoFieldMapping: lazy(obj => yup.object(
+                                    mapValues(obj, () => {
+                                        return mixed().oneOf(this.getFieldDefinitions()).required()
+                                    })
+                                ))
+                            })
+                        }
+                    }),),
                 "enabled": boolean(),
                 "formatVersion": number().required(),
                 "icon": string(),
@@ -442,7 +443,7 @@ export default class HippoValidator {
     getChildrenScheme = () => lazy(child => {
         let viewSchem = object().shape({
             id: string().required(),
-            view: lazy(col =>  object().shape({
+            view: lazy(col => object().shape({
                 columns: array().of(viewSchem)
             })),
             children: lazy(it => this.getChildrenScheme()),
