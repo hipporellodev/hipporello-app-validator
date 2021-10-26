@@ -5,6 +5,7 @@
   "description": "You can apply to open positions and keep track of them using this application.",
   "slug": "job-application",
   "sourceAppTemplateId": "4852ab7b28af482aaaeed1adf27039af",
+  "type": "defaultApp",
   "environments": {
     "webView": {
       "id": "webView",
@@ -33,85 +34,96 @@
     }
   },
   "fieldDefinitions": {
-    "hf_companyInfo": {
-      "id": "hf_companyInfo",
-      "label": "Company Info",
-      "type": "string",
-      "multiple": "false"
+    "hippoFields": {
+      "hf_companyInfo": {
+        "id": "hf_companyInfo",
+        "label": "Company Info",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_positionName": {
+        "id": "hf_positionName",
+        "label": "Position Name",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_positionType": {
+        "id": "hf_positionType",
+        "label": "Position Type",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_jobDescription": {
+        "id": "hf_jobDescription",
+        "label": "Job Description",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_responsibilities": {
+        "id": "hf_responsibilities",
+        "label": "Responsibilities",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_skills": {
+        "id": "hf_skills",
+        "label": "Skills & Qualifications",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_firstName": {
+        "id": "hf_firstName",
+        "label": "First Name",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_lastName": {
+        "id": "hf_lastName",
+        "label": "Last Name",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_email": {
+        "id": "hf_email",
+        "label": "E-mail",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_coverLetter": {
+        "id": "hf_coverLetter",
+        "label": "Cover Letter",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_question": {
+        "id": "hf_question",
+        "label": "Question",
+        "type": "string",
+        "multiple": false
+      },
+      "hf_cvAttachments": {
+        "id": "hf_cvAttachments",
+        "label": "CV Attachments",
+        "type": "attachment",
+        "multiple": true
+      }
     },
-    "hf_positionName": {
-      "id": "hf_positionName",
-      "label": "Position Name",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_positionType": {
-      "id": "hf_positionType",
-      "label": "Position Type",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_jobDescription": {
-      "id": "hf_jobDescription",
-      "label": "Job Description",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_responsibilities": {
-      "id": "hf_responsibilities",
-      "label": "Responsibilities",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_skills": {
-      "id": "hf_skills",
-      "label": "Skills & Qualifications",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_firstName": {
-      "id": "hf_firstName",
-      "label": "First Name",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_lastName": {
-      "id": "hf_lastName",
-      "label": "Last Name",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_email": {
-      "id": "hf_email",
-      "label": "E-mail",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_coverLetter": {
-      "id": "hf_coverLetter",
-      "label": "Cover Letter",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_question": {
-      "id": "hf_question",
-      "label": "Question",
-      "type": "string",
-      "multiple": "false"
-    },
-    "hf_cvAttachments": {
-      "id": "hf_cvAttachments",
-      "label": "CV Attachments",
-      "type": "attachment",
-      "multiple": "true"
+    "appVariableFields": {
+      "av_companyInfo": {
+        "id": "av_companyInfo",
+        "label": "Company Info",
+        "type": "string",
+        "multiple": false
+      },
+      "av_createCardSubject": {
+        "id": "av_createCardSubject",
+        "label": "Create Card Subject",
+        "type": "string",
+        "multiple": false
+      }
     }
   },
-  "roles": {
-    "e41f0706fd8c49df83accd1dc4acc9d9": {
-      "id": "e41f0706fd8c49df83accd1dc4acc9d9",
-      "name": "HR Manager"
-    }
-  },
+  "roles": null,
   "boards": [
     "60cb2eb6f94c063c2780f3af"
   ],
@@ -121,15 +133,16 @@
         "id": "b77a4b6d9c5b475aa795b71b0e08ebbb",
         "boardId": "60cb2eb6f94c063c2780f3af",
         "enabled": true,
-        "type": "email",
+        "showInTrello": true,
+        "type": "form",
         "accessRight": {
           "cardTypes": null,
           "roleRules": [
             {
               "type": "allow",
               "roles": [
-                "e41f0706fd8c49df83accd1dc4acc9d9",
-                "hpadm"
+                "hptbrdadm",
+                "hptbrdnrm"
               ]
             }
           ],
@@ -331,7 +344,7 @@
                           "cardType": "b16fb655997e4ab588e6c1f3a9290c17"
                         }
                       },
-                      "optional-actions": null
+                      "optional-actionGroupId": null
                     },
                     "input": "Button"
                   }
@@ -341,7 +354,7 @@
           ],
           "formAutoIncrementId": 33,
           "hippoFieldMapping": {
-            "elem-29": "mansdkjagsd",
+            "elem-29": "hf_companyInfo",
             "elem-16": "hf_positionName",
             "elem-32": "hf_positionType",
             "elem-19": "hf_jobDescription",
@@ -375,6 +388,7 @@
         "id": "c88b5b6d9c5b475aa795b71b0e09eccc",
         "boardId": "60cb2eb6f94c063c2780f3af",
         "enabled": true,
+        "showInTrello": true,
         "type": "updateform",
         "accessRight": {
           "cardTypes": [
@@ -384,8 +398,8 @@
             {
               "type": "allow",
               "roles": [
-                "e41f0706fd8c49df83accd1dc4acc9d9",
-                "hpadm"
+                "hptbrdadm",
+                "hptbrdnrm"
               ]
             }
           ],
@@ -395,9 +409,12 @@
               [
                 {
                   "field": "card.tc_listHippoId",
-                  "operator": "equals",
+                  "operator": "in",
                   "valueType": "value",
-                  "value": "de44d60d110b4fab9635e33fbbc250fa"
+                  "value": [
+                    "de44d60d110b4fab9635e33fbbc250fa",
+                    "trello-list-id-published-job-advertisements"
+                  ]
                 }
               ]
             ]
@@ -591,9 +608,7 @@
                       },
                       "name": "Button",
                       "mandatory-action": null,
-                      "optional-actions": {
-                        "id": "d4mAA1"
-                      }
+                      "optional-actionGroupId": "d4mAA1"
                     },
                     "input": "Button"
                   }
@@ -612,7 +627,7 @@
           },
           "successViews": {
             "elem-12": {
-              "id" : "I3ef9h",
+              "id": "I3ef9h",
               "type": "view",
               "props": {
                 "view": {
@@ -637,6 +652,7 @@
         "id": "c67a4b6d9c5b475aa795b71b0e08yehw",
         "boardId": "60cb2eb6f94c063c2780f3af",
         "enabled": true,
+        "showInTrello": true,
         "usesParent": true,
         "type": "form",
         "anonymous": false,
@@ -814,7 +830,7 @@
                           "cardType": "c71cf68e7a4948e9b83ddb1d9e1e42e4"
                         }
                       },
-                      "optional-actions": null
+                      "optional-actionGroupId": null
                     },
                     "input": "Button"
                   }
@@ -832,7 +848,7 @@
           },
           "successViews": {
             "elem-12": {
-              "id" : "c48fd6",
+              "id": "c48fd6",
               "type": "view",
               "props": {
                 "view": {
@@ -858,6 +874,7 @@
         "id": "28f1360ee1f04d62bf45e392562b3347",
         "boardId": "60cb2eb6f94c063c2780f3af",
         "enabled": true,
+        "showInTrello": true,
         "type": "form",
         "anonymous": false,
         "body": {
@@ -1001,7 +1018,7 @@
                           "cardType": "7cbba984c9be4afbbffdc6f3caa199d3"
                         }
                       },
-                      "optional-actions": null
+                      "optional-actionGroupId": null
                     },
                     "input": "Button"
                   }
@@ -1023,7 +1040,7 @@
               "props": {
                 "view": {
                   "id": "7Yo35z",
-                    "target": {
+                  "target": {
                     "type": "inline"
                   }
                 }
@@ -1045,6 +1062,7 @@
   "automations": {
     "0f19496029574f98a9f3a5068d2311fa": {
       "id": "0f19496029574f98a9f3a5068d2311fa",
+      "enabled": true,
       "order": 0.0,
       "matching": {
         "type": "basic",
@@ -1076,7 +1094,7 @@
           "events": {
             "onTrigger": {
               "id": "HgSWIA",
-              "action": "fRvUxa"
+              "actionGroupId": "fRvUxa"
             }
           }
         }
@@ -1084,6 +1102,7 @@
     },
     "2a0fdb19a9c44e56be7d38e071539892": {
       "id": "2a0fdb19a9c44e56be7d38e071539892",
+      "enabled": true,
       "order": 1.0,
       "matching": {
         "type": "basic",
@@ -1115,7 +1134,7 @@
           "events": {
             "onTrigger": {
               "id": "XGFCfO",
-              "action": "b3mAA0"
+              "actionGroupId": "b3mAA0"
             }
           }
         }
@@ -1123,6 +1142,29 @@
     }
   },
   "actionGroups": {
+    "DdoxJ0": {
+      "id": "DdoxJ0",
+      "title": "Open Trello Card Action Group",
+      "name": "Open Trello Card",
+      "shared": false,
+      "actions": {
+        "LhFnIi": {
+          "id": "LhFnIi",
+          "type": "open-page",
+          "order": 0.0,
+          "props": {
+            "url": "{{{card.tc_url}}}",
+            "type": "external",
+            "target": {
+              "type": "_self"
+            },
+            "params": {
+              "context": "cardId"
+            }
+          }
+        }
+      }
+    },
     "8FGJKC": {
       "id": "8FGJKC",
       "title": "Open Trello Card Action Group",
@@ -1154,10 +1196,18 @@
       "actions": {
         "oZr9t7": {
           "id": "oZr9t7",
-          "type": "send-message",
+          "type": "send-conversation-message",
           "order": 0.0,
-          "subject": "Your {{{parentCard.hf_positionName}}} application (ID: {{{card.uc_shortId}}})",
-          "message": "Thank you for applying.\n\n\n\nWe are reviewing your application.\n\n\n\nSincerely,\n\n"
+          "subject": "{{{appVariables.av_createCardSubject}}}",
+          "message": "Thank you for applying.\n\n\n\nWe are reviewing your application.\n\n\n\nSincerely,\n\n",
+          "subjectType": "plainText",
+          "attachments": [],
+          "conversationMembers": [
+            {
+              "type": "submissionOwner",
+              "isContributor": true
+            }
+          ]
         }
       }
     },
@@ -1169,10 +1219,18 @@
       "actions": {
         "97UCmf": {
           "id": "97UCmf",
-          "type": "send-message",
+          "type": "send-conversation-message",
           "order": 0.0,
           "subject": "Your {{{card.hf_positionName}}} job advertisement (ID: {{{card.uc_shortId}}})",
-          "message": "A new job advertisement has been created as draft.\n\n\n\nIt will be published when moved to published list.\n\n\n\nSincerely,\n\n"
+          "message": "A new job advertisement has been created as draft.\n\n\n\nIt will be published when moved to published list.\n\n\n\nSincerely,\n\n",
+          "subjectType": "plainText",
+          "attachments": [],
+          "conversationMembers": [
+            {
+              "type": "submissionOwner",
+              "isContributor": true
+            }
+          ]
         }
       }
     },
@@ -1184,19 +1242,20 @@
       "actions": {
         "98zCNf": {
           "id": "98zCNf",
-          "type": "update-card-usercase",
+          "type": "update-trello-card",
           "order": 0.0,
           "cardUpdateFields": {
             "tc_name": {
               "type": "replacement",
-              "value": "{{{form.data.elem-16}}}"
+              "value": "{{{form.data.elem-16}}}",
+              "valueType": "value"
             },
             "tc_desc": {
               "type": "replacement",
-              "value": "{{{form.data.elem-19}}}"
+              "value": "{{{form.data.elem-19}}}",
+              "valueType": "value"
             }
-          },
-          "cardType": "b16fb655997e4ab588e6c1f3a9290c17"
+          }
         }
       }
     },
@@ -1235,6 +1294,26 @@
             "target": {
               "type": "_self",
               "title": "Contact us"
+            }
+          }
+        }
+      }
+    },
+    "52wKz9": {
+      "id": "52wKz9",
+      "name": "Open New Job Advertisement Form",
+      "title": "New Job Advertisement",
+      "shared": false,
+      "actions": {
+        "7xn4Oe": {
+          "id": "7xn4Oe",
+          "type": "open-form",
+          "order": 0.0,
+          "props": {
+            "formId": "b77a4b6d9c5b475aa795b71b0e08ebbb",
+            "target": {
+              "type": "_self",
+              "title": "New Job Advertisement"
             }
           }
         }
@@ -1331,16 +1410,27 @@
     }
   },
   "viewSettings": {
-    "images": {
-      "logo": "",
-      "socialShareImage": "",
-      "banner": ""
+    "appViewSettings": {
+      "icon": {
+        "type": "icon",
+        "name": "search",
+        "url": null,
+        "iconSet": "fontAwesome",
+        "background": "#FF7E46"
+      }
     },
-    "css": {
-      "simple": {
-        "primary-color": "#333333",
-        "body-text-color": "#000000",
-        "font-family": "Arial"
+    "portalViewSettingOverrides": {
+      "images": {
+        "logo": "",
+        "socialShareImage": "",
+        "banner": ""
+      },
+      "css": {
+        "simple": {
+          "primary-color": "#333333",
+          "body-text-color": "#000000",
+          "font-family": "Arial"
+        }
       }
     }
   },
@@ -1375,13 +1465,26 @@
               "id": "jMfyL8",
               "children": [
                 {
-                  "id": "B8L1iC",
+                  "id": "GNBDl7",
                   "children": [
                     {
-                      "id": "fsLTFT"
+                      "id": "3a9RQG",
+                      "children": [
+                        {
+                          "id": "aOoGwy"
+                        },
+                        {
+                          "id": "skNHx4"
+                        }
+                      ]
                     },
                     {
-                      "id": "wEOZHc"
+                      "id": "LnVtgB",
+                      "children": [
+                        {
+                          "id": "j8c3By"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1392,16 +1495,26 @@
             "id": "gh7gOP"
           },
           {
-            "id": "Pd0N42",
+            "id": "LMM71P",
             "children": [
               {
-                "id": "Xi3JEW"
+                "id": "LQ2HVC",
+                "children": [
+                  {
+                    "id": "mL2ZhM"
+                  }
+                ]
               },
               {
-                "id": "usnWkf"
-              },
-              {
-                "id": "XCfsGO"
+                "id": "hjxleP",
+                "children": [
+                  {
+                    "id": "CXa9-G"
+                  },
+                  {
+                    "id": "MUBm6P"
+                  }
+                ]
               }
             ]
           }
@@ -1428,12 +1541,6 @@
           },
           {
             "id": "P9COyk"
-          },
-          {
-            "id": "l14XAK"
-          },
-          {
-            "id": "f57qeq"
           }
         ]
       }
@@ -1621,8 +1728,8 @@
           {
             "type": "allow",
             "roles": [
-              "e41f0706fd8c49df83accd1dc4acc9d9",
-              "hpadm"
+              "hptbrdadm",
+              "hptbrdnrm"
             ]
           }
         ],
@@ -1650,15 +1757,13 @@
       "enabled": true,
       "type": "page",
       "accessRight": {
-        "cardTypes": [
-          "c71cf68e7a4948e9b83ddb1d9e1e42e4"
-        ],
+        "cardTypes": null,
         "roleRules": [
           {
             "type": "allow",
             "roles": [
-              "e41f0706fd8c49df83accd1dc4acc9d9",
-              "hpadm"
+              "hptbrdadm",
+              "hptbrdnrm"
             ]
           }
         ],
@@ -1691,8 +1796,8 @@
           {
             "type": "allow",
             "roles": [
-              "e41f0706fd8c49df83accd1dc4acc9d9",
-              "hpadm"
+              "hptbrdadm",
+              "hptbrdnrm"
             ]
           }
         ],
@@ -1850,6 +1955,9 @@
           },
           {
             "id": "m85csd"
+          },
+          {
+            "id": "m95cre"
           }
         ]
       }
@@ -1933,7 +2041,7 @@
         "events": {
           "onClick": {
             "id": "zsGpaf",
-            "action": "PD7NJR"
+            "actionGroupId": "PD7NJR"
           }
         }
       }
@@ -2031,20 +2139,7 @@
         "events": {
           "onClick": {
             "id": "9w3pSr",
-            "action": {
-              "id": "LhFnIi",
-              "type": "open-page",
-              "props": {
-                "url": "{{{card.tc_url}}}",
-                "type": "external",
-                "target": {
-                  "type": "_blank"
-                },
-                "params": {
-                  "context": "cardId"
-                }
-              }
-            }
+            "actionGroupId": "DdoxJ0"
           }
         }
       }
@@ -2086,7 +2181,7 @@
         "events": {
           "onClick": {
             "id": "ZXZmbY",
-            "action": "8FGJKC"
+            "actionGroupId": "8FGJKC"
           }
         }
       }
@@ -2144,20 +2239,65 @@
       "id": "93geLH",
       "type": "Conversation",
       "viewProps": {
-        "showMeta": true,
-        "showMetaDetail": true,
-        "canReply": true,
-        "canUploadAttachment": true,
-        "canUseQuickText": true,
-        "canAddQuickText": true,
-        "canEditQuickText": true,
-        "canDeleteQuickText": true,
+        "threadVisibility": "everyone",
+        "showMeta": false,
+        "allowNewThread": true,
+        "allowDeleteThread": true,
+        "allowReply": true,
+        "allowDeleteMessage": true,
+        "allowQuickText": true,
+        "allowMembersUpdate": true,
+        "showThreadMemberAliasName": true,
+        "allowGetBoardMembers": true,
+        "allowGetContacts": true,
         "events": {
           "onReply": {
             "id": "4voABQ",
             "action": {
               "id": "Ih9TQf",
               "type": "conversation-reply"
+            }
+          },
+          "onNewThread": {
+            "id": "8wCp8J",
+            "action": {
+              "id": "zCf96t",
+              "type": "conversation-new-thread"
+            }
+          },
+          "onDeleteMessage": {
+            "id": "908rCw",
+            "action": {
+              "id": "Q66uwy",
+              "type": "conversation-delete-message"
+            }
+          },
+          "onDeleteThread": {
+            "id": "DOvnek",
+            "action": {
+              "id": "8ZTEVq",
+              "type": "conversation-delete-thread"
+            }
+          },
+          "onMembersUpdate": {
+            "id": "xLpQH5",
+            "action": {
+              "id": "cZNE9c",
+              "type": "conversation-update-members"
+            }
+          },
+          "onGetBoardMembers": {
+            "id": "xsPQ15",
+            "action": {
+              "id": "crMf9D",
+              "type": "conversation-get-board-members"
+            }
+          },
+          "onGetContacts": {
+            "id": "Farv1T",
+            "action": {
+              "id": "PnMh9o",
+              "type": "conversation-get-contacts"
             }
           }
         }
@@ -2183,21 +2323,7 @@
       "id": "P9COyk",
       "type": "paragraph",
       "viewProps": {
-        "text": "Acme Company is a new company that provides expertise in search marketing solutions for businesses worldwide, including website promotion, online advertising, and search engine optimization techniques to improve its clients' positioning in search engines. We cater to the higher education market, including colleges, universities, and professional educational institutions."
-      }
-    },
-    "l14XAK": {
-      "id": "l14XAK",
-      "type": "paragraph",
-      "viewProps": {
-        "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede."
-      }
-    },
-    "f57qeq": {
-      "id": "f57qeq",
-      "type": "paragraph",
-      "viewProps": {
-        "text": "Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis."
+        "text": "{{{appVariables.av_companyInfo}}}"
       }
     },
     "Mmwx7y": {
@@ -2258,7 +2384,7 @@
         "events": {
           "onClick": {
             "id": "AqqeI7",
-            "action": "lr2yIh"
+            "actionGroupId": "lr2yIh"
           }
         }
       }
@@ -2272,7 +2398,21 @@
         "events": {
           "onClick": {
             "id": "Ji47Ht",
-            "action": "ugVG65"
+            "actionGroupId": "ugVG65"
+          }
+        }
+      }
+    },
+    "m95cre": {
+      "id": "m95cre",
+      "type": "button",
+      "viewProps": {
+        "text": "New Job Advertisement",
+        "icon": null,
+        "events": {
+          "onClick": {
+            "id": "Jr49Hz",
+            "actionGroupId": "52wKz9"
           }
         }
       }
@@ -2301,21 +2441,6 @@
         "size": 100
       }
     },
-    "fsLTFT": {
-      "id": "fsLTFT",
-      "type": "Header",
-      "viewProps": {
-        "heading": "h3",
-        "text": "{{{card.hf_positionName}}}"
-      }
-    },
-    "wEOZHc": {
-      "id": "wEOZHc",
-      "type": "label",
-      "viewProps": {
-        "text": "{{{card.hf_positionType}}}"
-      }
-    },
     "tQiO7p": {
       "id": "tQiO7p",
       "type": "header",
@@ -2342,7 +2467,10 @@
         "events": {
           "onClick": {
             "id": "eMzHS9",
-            "action": "qVBrum"
+            "actionGroupId": "qVBrum",
+            "action": {
+              "type": "move-card"
+            }
           }
         }
       }
@@ -2390,10 +2518,6 @@
         "heading": "h2",
         "text": "Need Help?"
       }
-    },
-    "VwvY2I": {
-      "id": "VwvY2I",
-      "type": "row"
     },
     "31G8YE": {
       "id": "31G8YE",
@@ -2475,7 +2599,7 @@
         "events": {
           "onClick": {
             "id": "Ww1JkX",
-            "action": "NXWpyJ"
+            "actionGroupId": "NXWpyJ"
           }
         }
       }
@@ -2685,52 +2809,102 @@
       "type": "menu",
       "viewProps": {}
     },
-    "Pd0N42": {
-      "id": "Pd0N42",
-      "type": "snippet",
+    "aOoGwy": {
+      "id": "aOoGwy",
+      "type": "header",
       "viewProps": {
-        "name": "Contact Us Snippet",
-        "html": "<div class=\"item type-3\"><div class=\"icon\"><Replace id=\"Xi3JEW\"/></div><div class=\"content\"><a class=\"header\"><Replace id=\"usnWkf\"/></a><div class=\"description\"><Replace id=\"XCfsGO\"/></div></div></div>",
-        "css": "",
+        "heading": "h3",
+        "text": "{{{card.hf_positionName}}}",
+        "alignment": "left"
+      }
+    },
+    "skNHx4": {
+      "id": "skNHx4",
+      "type": "paragraph",
+      "viewProps": {
+        "text": "{{{card.hf_positionType}}}",
+        "alignment": "left"
+      }
+    },
+    "3a9RQG": {
+      "id": "3a9RQG",
+      "type": "column"
+    },
+    "j8c3By": {
+      "id": "j8c3By",
+      "type": "button",
+      "viewProps": {
+        "backgroundColor": "#ff7e46",
+        "textAlign": "left",
+        "icon": "angle double right",
+        "iconPosition": "left",
+        "fluid": false,
+        "text": "",
+        "alignment": "right",
+        "textColor": "#fff"
+      }
+    },
+    "LnVtgB": {
+      "id": "LnVtgB",
+      "type": "column"
+    },
+    "GNBDl7": {
+      "id": "GNBDl7",
+      "type": "columns"
+    },
+    "mL2ZhM": {
+      "id": "mL2ZhM",
+      "type": "button",
+      "viewProps": {
+        "backgroundColor": "#ff7e46",
+        "textAlign": "left",
+        "icon": "envelope",
+        "iconPosition": "right",
+        "fluid": false,
+        "text": "",
+        "alignment": "right",
+        "textColor": "#fff",
         "events": {
           "onClick": {
-            "id": "31uYTs",
-            "action": "46wKs9"
+            "id": "gRd1zN",
+            "actionGroupId": "46wKs9"
           }
         }
       }
     },
-    "usnWkf": {
-      "id": "usnWkf",
+    "LQ2HVC": {
+      "id": "LQ2HVC",
+      "type": "column"
+    },
+    "CXa9-G": {
+      "id": "CXa9-G",
       "type": "header",
       "viewProps": {
         "heading": "h3",
-        "text": "Contact us"
+        "text": "Contact Us",
+        "alignment": "left"
       }
     },
-    "XCfsGO": {
-      "id": "XCfsGO",
+    "MUBm6P": {
+      "id": "MUBm6P",
       "type": "paragraph",
       "viewProps": {
-        "text": "Contact us if there is a question about the application"
+        "text": "Contact us f there is a question about the application",
+        "alignment": "left"
       }
     },
-    "Xi3JEW": {
-      "id": "Xi3JEW",
-      "type": "icon",
-      "viewProps": {
-        "family": "material-icons",
-        "name": "email",
-        "size": 40
-      }
+    "hjxleP": {
+      "id": "hjxleP",
+      "type": "column"
     },
-    "B8L1iC": {
-      "id": "B8L1iC",
-      "type": "snippet",
+    "LMM71P": {
+      "id": "LMM71P",
+      "type": "columns",
       "viewProps": {
-        "name": "Open positions list",
-        "html": "<div class=\"item type-2\"><div class=\"content\"><a class=\"header\"><Replace id=\"fsLTFT\"/></a><div class=\"description\"><Replace id=\"wEOZHc\"/></div></div></div>",
-        "css": ""
+        "layout": [
+          11.31687242798354,
+          88.68312757201646
+        ]
       }
     }
   }

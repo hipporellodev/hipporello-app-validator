@@ -35,14 +35,34 @@ export default class HippoValidator {
         })
 
     }
+    /*
+   {
+       "someId":
+           {
+            "id": "someId",
+            "name": "someName"
+           }
+   }
+    */
     getRolesScheme = () => {
         return lazy(obj => yup.object(
             mapValues(obj, () => yup.object({
                 id: yup.string().required(),
                 name: yup.string().required(),
             }))
-        ))
+        ).nullable())
     }
+
+
+    /*
+  {
+       "someId":
+           {
+            "id": "someId",
+            "name": "someName"
+           }
+   }
+    */
     getCardTypesScheme = () => {
         return lazy(obj => yup.object(
             mapValues(obj, () => yup.object({
@@ -51,6 +71,7 @@ export default class HippoValidator {
             }))
         ))
     }
+
 
     getTargetScheme = () => {
         return object().shape({
@@ -120,20 +141,21 @@ export default class HippoValidator {
                 }
             })).nullable().default(null),
             type: yup.mixed().oneOf([
-              "move-card",
-              "edit-card",
-              "archive-card",
-              "open-page",
-              "open-form",
-              "move-to",
-              "archive",
-              "send-conversation-message",
-              "update-card-usercase",
-              "assign-label",
-              "assign-member"
-            ]).required(),
+                "move-card",
+                "edit-card",
+                "archive-card",
+                "open-page",
+                "open-form",
+                "move-to",
+                "archive",
+                "send-conversation-message",
+                "update-hipporello-card",
+                "assign-label",
+                "assign-member",
+                "update-trello-card"
+            ]).required().label("Action Type"),
             cardUpdateFields: mixed().when("type", type => {
-                if (type === "update-card-usercase") {
+                if (["update-hipporello-card", "update-trello-card"].includes(type)) {
                     return lazy(cardField => object(
                         mapValues(cardField, () => {
                             return yup.object({
@@ -234,7 +256,7 @@ export default class HippoValidator {
                     return object().shape({
                         events: object().shape({
                             onTrigger: object().shape({
-                                action: mixed().oneOf(this.getActions()),
+                                actionGroupId: mixed().oneOf(this.getActions()).required(),
                                 id: string().required()
                             })
                         }),
@@ -265,13 +287,13 @@ export default class HippoValidator {
 
     createScheme = (data) => {
         let scheme = yup.object().shape({
-            id: yup.string().required(),
-            name: yup.string().required(),
-            slug: yup.string().required(),
-            boards: yup.array().of(yup.string()),
-            sourceAppTemplateId: yup.string().nullable(),
-            schemaVersion: yup.number().min(1).required(),
-            description: yup.string().nullable(),
+            id: yup.string().required(), // "something"
+            name: yup.string().required(), // "something"
+            slug: yup.string().required(), // "something"
+            boards: yup.array().of(yup.string()),// ["something"]
+            sourceAppTemplateId: yup.string().nullable(), // "something" | null
+            schemaVersion: yup.number().min(1).required(), // 1
+            description: yup.string().nullable(), // "something" | null
             roles: this.getRolesScheme(),
             cardTypes: this.getCardTypesScheme(),
             actionGroups: this.getActionGroupsScheme(),
@@ -331,6 +353,7 @@ export default class HippoValidator {
                 aliases: array().of(string()),
                 anonymous: boolean(),
                 boardId: string(),
+                showInTrello: boolean(),
                 body: object().shape({
                     formAutoIncrementId: number().required(),
                     readOnly: boolean(),
@@ -350,8 +373,11 @@ export default class HippoValidator {
                                                 case "Button":
                                                     return object().shape({
                                                         settings: object().shape({
-                                                            fluid: boolean()
-                                                        })
+                                                            fluid: boolean(),
+                                                            color: string(),
+                                                            backgroundColor: string(),
+                                                        }),
+                                                        "optional-actionGroupId": string().nullable().default(null)
                                                     }).concat(object().when("type", t => {
                                                         if (form.type === "form") {
                                                             return object().shape({
@@ -363,10 +389,7 @@ export default class HippoValidator {
                                                                         list: string().required(),
                                                                         name: string().required()
                                                                     })
-                                                                }),
-                                                                "other-actions": object().shape({
-                                                                    action: mixed().oneOf(this.getActions()).required()
-                                                                }).nullable().default(null)
+                                                                })
                                                             })
                                                         }
                                                         return object().shape({});
@@ -378,18 +401,24 @@ export default class HippoValidator {
                             }))
                         })
                     )
-                })
-                    .concat(object().when("type", type => {
-                        if (["updateform", "form"].includes(type)) {
+                }).concat(object().when("type", type => {
+                        if (["updateform", "form", "email"].includes(type)) {
                             return object().shape({
                                 hippoFieldMapping: lazy(obj => yup.object(
                                     mapValues(obj, () => {
                                         return mixed().oneOf(this.getFieldDefinitions()).required()
                                     })
-                                ))
+                                ).required())
                             })
                         }
-                    }),),
+                    }),
+                ).concat(object().when('type', (type) => {
+                    if (type === "email") {
+                        return object().shape({
+                            email: string().required()
+                        })
+                    }
+                })),
                 "enabled": boolean(),
                 "formatVersion": number().required(),
                 "icon": string(),
@@ -397,7 +426,6 @@ export default class HippoValidator {
                 "name": string().required(),
                 "type": mixed().oneOf(["form", "updateform", "email"]),
                 "usesParent": boolean()
-
             })
         });
     }
@@ -417,14 +445,14 @@ export default class HippoValidator {
     }
 
     getFromListToListScheme = () => {
-        return yup.object().shape({
-            id: yup.string().required(),
-            boardId: yup.string().required()
+        return object().shape({
+            id: string().required(),
+            boardId: string().required()
         }).required()
     }
 
     getActionConditionsScheme = (data) => {
-        return yup.array().of(yup.array().of(yup.object().shape({
+        return array().of(array().of(object().shape({
             field: string().required(),
             operator: mixed().oneOf(["equals", "in", "not_in"]), /* @todo operatorler ve valueTypelar neler olacak */
             value: mixed().required(),
@@ -457,7 +485,7 @@ export default class HippoValidator {
             view: lazy(col => object().shape({
                 columns: array().of(viewSchem)
             })),
-            children: lazy(it => this.getChildrenScheme()),
+            children: array().of(mixed().oneOf(this.getComponents()))
         })
         return array().of(
             viewSchem
@@ -467,9 +495,6 @@ export default class HippoValidator {
         const viewScheme = yup.object().shape({
             id: yup.string(),
             type: yup.mixed().oneOf([
-                'snippet',
-                'page',
-                'CardDetailPage',
                 'header',
                 'paragraph',
                 'list',
@@ -503,7 +528,7 @@ export default class HippoValidator {
                 name: yup.string(),
                 gap: yup.number(),
                 align: yup.mixed().oneOf(['left', 'right', 'center']),
-                children: yup.array().of(yup.lazy(() => viewScheme)),
+                //children: yup.array().of(yup.lazy(() => viewScheme)),
                 events: yup.object().default(null).nullable().shape({
                     onClick: yup.object().shape({
                         id: yup.string().required(),
@@ -522,19 +547,18 @@ export default class HippoValidator {
                         })
                     }).nullable().default(null),
                 }),
-
             }).concat(yup.object().when('type', (type) => {
                 switch (type) {
                     case "appList":
-                      return yup.object().shape({
-                        viewType: yup.string().required(),
-                        type: yup.string().oneOf(["all", "selected"]).required(),
-                        showDescription: yup.boolean(),
-                        selectedApps: yup.array().when("type", (type, scheme) => {
-                          if (type === "selected") return scheme.required()
-                          return scheme.nullable()
-                        }),
-                      })
+                        return yup.object().shape({
+                            viewType: yup.string().required(),
+                            type: yup.string().oneOf(["all", "selected"]).required(),
+                            showDescription: yup.boolean(),
+                            selectedApps: yup.array().when("type", (type, scheme) => {
+                                if (type === "selected") return scheme.required()
+                                return scheme.nullable()
+                            }),
+                        })
                     case "header":
                         return yup.object().shape({
                             text: yup.string().required(),
@@ -616,9 +640,7 @@ export default class HippoValidator {
                             text: string().required()
                         })
                     case "button":
-                        return object().shape({
-
-                        })
+                        return object().shape({})
                 }
             }))
         });
@@ -628,24 +650,42 @@ export default class HippoValidator {
         const viewScheme = yup.object().shape({
             id: yup.string(),
             type: yup.mixed().oneOf([
-                "appHeader", "page", "thankspage"
-            ]),
+                "appHeader", "page"
+            ]).required(),
             accessRight: this.getAccessRightScheme().nullable().default(null),
             viewProps: yup.object().shape({
                 name: yup.string(),
                 gap: yup.number(),
-                children: this.getChildrenScheme(),
+                children: this.getViewChildrenShape(),
                 cardAware: boolean(),
                 viewType: mixed().oneOf(["default", "tabs"]),
-                visibilities: object().shape({
-                    login: boolean(),
-                    logo: boolean(),
-                    menu: boolean()
+                visibilities: object().when("type", (type) => {
+                    if (type === "appHeader") {
+                        return object().shape({
+                            login: boolean(),
+                            logo: boolean(),
+                            menu: boolean()
+                        })
+                    }
+                    return mixed().nullable().default(null);
                 }),
                 environments: array().of(mixed().oneOf(this.getEnvironments())).nullable().default(null),
             })
         });
         return viewScheme;
+    }
+
+    getViewChildrenShape = () => {
+        return array().of(object().shape({
+            id: mixed().oneOf(this.getComponents()),
+            children: lazy(() => this.getViewChildrenShape()),
+            view: lazy(() => {
+                return object().shape({
+                    id: mixed().oneOf(this.getComponents()),
+                    children: lazy(() => this.getViewChildrenShape()),
+                }).nullable().default(null)
+            })
+        })).nullable().default(null);
     }
 
 
@@ -681,6 +721,10 @@ export default class HippoValidator {
 
     getEnvironments = () => {
         return Object.keys(this?.data?.environments);
+    }
+
+    getComponents = () => {
+        return Object.keys(this?.data?.components || {});
     }
 
 }
