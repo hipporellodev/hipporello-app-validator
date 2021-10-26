@@ -120,7 +120,19 @@ export default class HippoValidator {
 
                 }
             })).nullable().default(null),
-            type: yup.mixed().oneOf(["move-card", "edit-card", "archive-card", "open-page", "open-form", "move-to", "archive", "send-message", "update-card-usercase", "assign-label", "assign-member"]).required(),
+            type: yup.mixed().oneOf([
+              "move-card",
+              "edit-card",
+              "archive-card",
+              "open-page",
+              "open-form",
+              "move-to",
+              "archive",
+              "send-conversation-message",
+              "update-card-usercase",
+              "assign-label",
+              "assign-member"
+            ]).required(),
             cardUpdateFields: mixed().when("type", type => {
                 if (type === "update-card-usercase") {
                     return lazy(cardField => object(
@@ -149,12 +161,12 @@ export default class HippoValidator {
                 }
             }),
             message: mixed().when("type", type => {
-                if (type === "send-message") {
+                if (type === "send-conversation-message") {
                     return string().required()
                 }
             }),
             subject: mixed().when("type", type => {
-                if (type === "send-message") {
+                if (type === "send-conversation-message") {
                     return string().required()
                 }
             }),
@@ -463,8 +475,10 @@ export default class HippoValidator {
                 'paragraph',
                 'list',
                 'icon',
+                'appList',
                 'hyperlink',
                 'image',
+                'video',
                 'label',
                 'button',
                 'TrelloCardSharing',
@@ -512,6 +526,16 @@ export default class HippoValidator {
 
             }).concat(yup.object().when('type', (type) => {
                 switch (type) {
+                    case "appList":
+                      return yup.object().shape({
+                        viewType: yup.string().required(),
+                        type: yup.string().oneOf(["all", "selected"]).required(),
+                        showDescription: yup.boolean(),
+                        selectedApps: yup.array().when("type", (type, scheme) => {
+                          if (type === "selected") return scheme.required()
+                          return scheme.nullable()
+                        }),
+                      })
                     case "header":
                         return yup.object().shape({
                             text: yup.string().required(),
