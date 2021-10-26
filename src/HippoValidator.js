@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 import _, {mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
-import {getTriggerTextByType} from "@/Source/viewer/actions/actionsUtils";
 
 export default class HippoValidator {
     constructor(appJson) {

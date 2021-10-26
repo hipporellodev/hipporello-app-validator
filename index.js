@@ -1,2 +1,2 @@
-import HippoValidator from "./src/HippoValidator";
-export default HippoValidator;
+const HippoValidator = require('./src/HippoValidator');
+module.exports = HippoValidator;
