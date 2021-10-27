@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "postinstall": "webpack"
+    "postinstall": "webpack",
+    "install": "webpack"
   },
   "author": "",
   "license": "ISC",
