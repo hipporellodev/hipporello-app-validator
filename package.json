@@ -5,7 +5,8 @@
   "main": "./lib/HippoValidator.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack"
+    "build": "webpack",
+    "postinstall": "webpack"
   },
   "author": "",
   "license": "ISC",
