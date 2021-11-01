@@ -366,34 +366,35 @@ export default class HippoValidator {
                                     return yup.object().shape({
                                         id: yup.string().required(),
                                         props: yup.object().shape({
-                                            /* @todo add other props */
+                                            /* @todo add othe props */
                                             value: yup.mixed(),
                                         }).concat(object().when("type", type => {
                                             switch (element.input) {
                                                 case "Button":
                                                     return object().shape({
+                                                        "optional-actionGroupId": lazy(t => {
+                                                            if (t) {
+                                                                return mixed().oneOf(this.getActions());
+                                                            }
+                                                            return mixed().nullable().default(null);
+                                                        }),
                                                         settings: object().shape({
-                                                            fluid: boolean(),
+                                                            fluid: string(),
                                                             color: string(),
                                                             backgroundColor: string(),
                                                         }),
-                                                        "optional-actionGroupId": string().nullable().default(null)
-                                                    }).concat(object().when("type", t => {
-                                                        if (form.type === "form") {
-                                                            return object().shape({
-                                                                "mandatory-action": object().shape({
-                                                                    "type": string().required(),
-                                                                    variables: object().shape({
-                                                                        cardType: mixed().oneOf(this.getCardTypes()).required(),
-                                                                        description: string().required(),
-                                                                        list: string().required(),
-                                                                        name: string().required()
-                                                                    })
+                                                    }).concat(form.type === "form" ? object().shape({
+                                                            "mandatory-action": object().shape({
+                                                                "type": string().required(),
+                                                                variables: object().shape({
+                                                                    cardType: mixed().oneOf(this.getCardTypes()).required(),
+                                                                    description: string().required(),
+                                                                    list: string().required(),
+                                                                    name: string().required()
                                                                 })
-                                                            })
-                                                        }
-                                                        return object().shape({});
-                                                    }))
+                                                            }),
+                                                        }) : null
+                                                    )
                                             }
                                         })).required()
                                     }).required()
@@ -461,6 +462,14 @@ export default class HippoValidator {
     }
     getViewSettingsScheme = () => {
         return object().shape({
+            appViewSettings : object({
+                "icon" : object({
+                    "background" : string().required(),
+                    "iconSet" : string().oneOf(['fontAwesome']),
+                    "name" :string(),
+                    "type" : string().oneOf(['icon'])
+                })
+            }),
             portalViewSettingOverrides: object().shape({
                 css: object().shape({
                     simple: object().shape({
@@ -533,13 +542,22 @@ export default class HippoValidator {
                     onClick: yup.object().shape({
                         id: yup.string().required(),
                         action: lazy(action => {
+                            if (!action) {
+                                return mixed().nullable().default(null)
+                            }
                             if (typeof action === "string" || action instanceof String) {
-                                return mixed().oneOf(this.getActions())
+                                return mixed().oneOf(this.getActions()).required();
                             } else {
                                 return this.getComponentActionScheme()
                             }
+                        }),
+                        actionGroupId: lazy(groupId => {
+                            if (!groupId) {
+                                return mixed().nullable().default(null)
+                            }
+                            return mixed().oneOf(this.getActions()).required();
                         })
-                    }).nullable().default(null),
+                    }),
                     onReply: object().shape({
                         action: object().shape({
                             id: string().required(),
