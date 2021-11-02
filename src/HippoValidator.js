@@ -412,7 +412,7 @@ export default class HippoValidator {
                                 }),
                             }))
                         })
-                    )
+                    ).min(2, "Form must have at least 1 element")
                 }).concat(object().when("type", type => {
                         if (["updateform", "form", "email"].includes(type)) {
                             return object().shape({
