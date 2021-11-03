@@ -30,7 +30,10 @@ export default class HippoValidator {
                         params: error.params
                     }
                 })
-                reject(errors);
+                reject({
+                    type: "ValidationException",
+                    errors: errors
+                });
             })
         })
 
