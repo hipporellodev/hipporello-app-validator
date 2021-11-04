@@ -22,7 +22,6 @@ export default class HippoValidator {
                 }
                 return resolve(this.data);
             }).catch(err => {
-              console.log(err)
                 let errors = [];
                 errors = err?.inner?.map(error => {
                     return {
@@ -31,7 +30,10 @@ export default class HippoValidator {
                         params: error.params
                     }
                 })
-                reject(errors, err);
+                reject({
+                    type: "ValidationException",
+                    errors: errors
+                });
             })
         })
 
@@ -367,34 +369,35 @@ export default class HippoValidator {
                                     return yup.object().shape({
                                         id: yup.string().required(),
                                         props: yup.object().shape({
-                                            /* @todo add other props */
+                                            /* @todo add othe props */
                                             value: yup.mixed(),
                                         }).concat(object().when("type", type => {
                                             switch (element.input) {
                                                 case "Button":
                                                     return object().shape({
+                                                        "optional-actionGroupId": lazy(t => {
+                                                            if (t) {
+                                                                return mixed().oneOf(this.getActions());
+                                                            }
+                                                            return mixed().nullable().default(null);
+                                                        }),
                                                         settings: object().shape({
-                                                            fluid: boolean(),
+                                                            fluid: string(),
                                                             color: string(),
                                                             backgroundColor: string(),
                                                         }),
-                                                        "optional-actionGroupId": string().nullable().default(null)
-                                                    }).concat(object().when("type", t => {
-                                                        if (form.type === "form") {
-                                                            return object().shape({
-                                                                "mandatory-action": object().shape({
-                                                                    "type": string().required(),
-                                                                    variables: object().shape({
-                                                                        cardType: mixed().oneOf(this.getCardTypes()).required(),
-                                                                        description: string().required(),
-                                                                        list: string().required(),
-                                                                        name: string().required()
-                                                                    })
+                                                    }).concat(form.type === "form" ? object().shape({
+                                                            "mandatory-action": object().shape({
+                                                                "type": string().required(),
+                                                                variables: object().shape({
+                                                                    cardType: mixed().oneOf(this.getCardTypes()).required(),
+                                                                    description: string().required(),
+                                                                    list: string().required(),
+                                                                    name: string().required()
                                                                 })
-                                                            })
-                                                        }
-                                                        return object().shape({});
-                                                    }))
+                                                            }),
+                                                        }) : null
+                                                    )
                                             }
                                         })).required()
                                     }).required()
@@ -462,6 +465,14 @@ export default class HippoValidator {
     }
     getViewSettingsScheme = () => {
         return object().shape({
+            appViewSettings : object({
+                "icon" : object({
+                    "background" : string().required(),
+                    "iconSet" : string().oneOf(['fontAwesome']),
+                    "name" :string(),
+                    "type" : string().oneOf(['icon'])
+                })
+            }),
             portalViewSettingOverrides: object().shape({
                 css: object().shape({
                     simple: object().shape({
@@ -533,17 +544,23 @@ export default class HippoValidator {
                 events: yup.object().default(null).nullable().shape({
                     onClick: yup.object().shape({
                         id: yup.string().required(),
-                        actionGroupId: yup.string().test( (value) => {
-                          const { action } = this?.parent||{};
-                          if (!action) return value != null
-                          return true
+                        action: lazy(action => {
+                            if (!action) {
+                                return mixed().nullable().default(null)
+                            }
+                            if (typeof action === "string" || action instanceof String) {
+                                return mixed().oneOf(this.getActions()).required();
+                            } else {
+                                return this.getComponentActionScheme()
+                            }
                         }),
-                        action: this.getComponentActionScheme().test( (value) => {
-                          const { actionGroupId } = this?.parent||{};
-                          if (!actionGroupId) return value != null
-                          return true
-                        }),
-                    }).nullable().default(null),
+                        actionGroupId: lazy(groupId => {
+                            if (!groupId) {
+                                return mixed().nullable().default(null)
+                            }
+                            return mixed().oneOf(this.getActions()).required();
+                        })
+                    }),
                     onReply: object().shape({
                         action: object().shape({
                             id: string().required(),
