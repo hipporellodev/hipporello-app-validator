@@ -3,6 +3,7 @@ var path = require('path');
 module.exports = {
     mode: 'production',
     entry: './src/HippoValidator.js',
+    watch: true,
     output: {
         path: path.resolve('lib'),
         filename: 'HippoValidator.js',

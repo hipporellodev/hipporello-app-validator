@@ -22,6 +22,7 @@ export default class HippoValidator {
                 }
                 return resolve(this.data);
             }).catch(err => {
+              console.log(err)
                 let errors = [];
                 errors = err?.inner?.map(error => {
                     return {
@@ -30,7 +31,7 @@ export default class HippoValidator {
                         params: error.params
                     }
                 })
-                reject(errors);
+                reject(errors, err);
             })
         })
 
@@ -532,13 +533,16 @@ export default class HippoValidator {
                 events: yup.object().default(null).nullable().shape({
                     onClick: yup.object().shape({
                         id: yup.string().required(),
-                        action: lazy(action => {
-                            if (typeof action === "string" || action instanceof String) {
-                                return mixed().oneOf(this.getActions())
-                            } else {
-                                return this.getComponentActionScheme()
-                            }
-                        })
+                        actionGroupId: yup.string().test( (value) => {
+                          const { action } = this?.parent||{};
+                          if (!action) return value != null
+                          return true
+                        }),
+                        action: this.getComponentActionScheme().test( (value) => {
+                          const { actionGroupId } = this?.parent||{};
+                          if (!actionGroupId) return value != null
+                          return true
+                        }),
                     }).nullable().default(null),
                     onReply: object().shape({
                         action: object().shape({
