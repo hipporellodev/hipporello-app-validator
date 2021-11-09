@@ -476,9 +476,9 @@ export default class HippoValidator {
             portalViewSettingOverrides: object().shape({
                 css: object().shape({
                     simple: object().shape({
-                        "body-text-color": string().required(),
-                        "font-family": string().required(),
-                        "primary-color": string().required()
+                        "body-text-color": string(),
+                        "font-family": string(),
+                        "primary-color": string()
                     })
                 }),
                 "images": object().shape({
