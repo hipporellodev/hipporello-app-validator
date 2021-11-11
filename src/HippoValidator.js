@@ -155,7 +155,8 @@ export default class HippoValidator {
                 "update-hipporello-card",
                 "assign-label",
                 "assign-member",
-                "update-trello-card"
+                "update-trello-card",
+                "send-message"
             ]).required().label("Action Type"),
             cardUpdateFields: mixed().when("type", type => {
                 if (["update-hipporello-card", "update-trello-card"].includes(type)) {
