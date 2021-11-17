@@ -513,6 +513,7 @@ export default class HippoValidator {
                 'list',
                 'icon',
                 'appList',
+                'formList',
                 'hyperlink',
                 'image',
                 'video',
@@ -571,6 +572,7 @@ export default class HippoValidator {
                 }),
             }).concat(yup.object().when('type', (type) => {
                 switch (type) {
+                    case "formList":
                     case "appList":
                         return yup.object().shape({
                             viewType: yup.string().required(),
