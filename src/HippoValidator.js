@@ -573,6 +573,15 @@ export default class HippoValidator {
             }).concat(yup.object().when('type', (type) => {
                 switch (type) {
                     case "formList":
+                        return yup.object().shape({
+                            viewType: yup.string().required(),
+                            type: yup.string().oneOf(["all", "selected"]).required(),
+                            showDescription: yup.boolean(),
+                            selectedForms: yup.array().when("type", (type, scheme) => {
+                                if (type === "selected") return scheme.required()
+                                return scheme.nullable()
+                            }),
+                        })
                     case "appList":
                         return yup.object().shape({
                             viewType: yup.string().required(),
