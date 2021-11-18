@@ -487,7 +487,7 @@ export default class HippoValidator {
                     "logo": string(),
                     "socialShareImage": string()
                 })
-            })
+            }).nullable()
 
         });
     }
