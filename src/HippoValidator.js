@@ -7,6 +7,14 @@ export default class HippoValidator {
         this.data = appJson
     }
 
+    getLabel(path){
+        const regex = new RegExp(/\.?([a-zA-Z0-9]+)$/gm).exec(path || "")
+        const message = regex?.[1] || path || ""
+        return this.camelCaseToNormal(message)
+    }
+    camelCaseToNormal (message) {
+        return message.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })
+    }
     validate = (cast = false) => {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
@@ -24,10 +32,15 @@ export default class HippoValidator {
             }).catch(err => {
                 let errors = [];
                 errors = err?.inner?.map(error => {
+                    let message = error?.message
+                    if(message.includes(error?.path)){
+                        message = message.replace(error?.path, this.getLabel(error?.path))
+                    }
                     return {
-                        message: error.message,
+                        message: message,
                         code: error.type,
-                        params: error.params
+                        params: error.params,
+                        errorTitle: this.camelCaseToNormal(error?.type + "Error")
                     }
                 })
                 reject({
@@ -387,16 +400,16 @@ export default class HippoValidator {
                                                             color: string(),
                                                             backgroundColor: string(),
                                                         }),
-                                                    }).concat(form.type === "form" ? object().shape({
+                                                    }).concat(["form","email"].includes(form?.type) ? object().shape({
                                                             "mandatory-action": object().shape({
                                                                 "type": string().required(),
                                                                 variables: object().shape({
-                                                                    cardType: mixed().oneOf(this.getCardTypes()).required(),
+                                                                    cardType: mixed().oneOf(this.getCardTypes(), this.getOneOfMessage.bind(this, this.getCardTypes(true))).required(),
                                                                     description: string().required(),
                                                                     list: string().required(),
                                                                     name: string().required()
                                                                 })
-                                                            }),
+                                                            }).nullable(),
                                                         }) : null
                                                     )
                                             }
@@ -417,13 +430,14 @@ export default class HippoValidator {
                             })
                         }
                     }),
-                ).concat(object().when('type', (type) => {
+                ).concat(object()),
+                "email": string().when('type', (type, schema) => {
                     if (type === "email") {
-                        return object().shape({
-                            email: string().required()
-                        })
+                        return  schema.required()
                     }
-                })),
+                    else
+                        return schema.nullable()
+                }),
                 "enabled": boolean(),
                 "formatVersion": number().required(),
                 "icon": string(),
@@ -736,8 +750,14 @@ export default class HippoValidator {
         return Object.keys(this.data?.actionGroups || {});
     }
 
-    getCardTypes = () => {
+    getCardTypes = (isValue) => {
+        if(isValue)
+            return Object.values(this.data?.cardTypes || {})?.map( i => i?.name)
         return Object.keys(this.data?.cardTypes || {})
+    }
+
+    getOneOfMessage = (names, e) => {
+        return `${e?.label || e?.path} one of ${names?.join(', ')}`
     }
 
     getFormIds = () => {
