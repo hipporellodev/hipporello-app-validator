@@ -405,7 +405,7 @@ export default class HippoValidator {
                                                                 "type": string().required(),
                                                                 variables: object().shape({
                                                                     cardType: mixed().oneOf(this.getCardTypes(), this.getOneOfMessage.bind(this, this.getCardTypes(true))).required(),
-                                                                    description: string().required(),
+                                                                    description: string().nullable(),
                                                                     list: string().required(),
                                                                     name: string().required()
                                                                 })
