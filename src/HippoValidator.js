@@ -161,6 +161,7 @@ export default class HippoValidator {
                 "edit-card",
                 "archive-card",
                 "open-page",
+                "update-card-labels",
                 "open-form",
                 "move-to",
                 "archive",
@@ -169,7 +170,7 @@ export default class HippoValidator {
                 "assign-label",
                 "assign-member",
                 "update-trello-card",
-                "send-message"
+                "update-card-members",
             ]).required().label("Action Type"),
             cardUpdateFields: mixed().when("type", type => {
                 if (["update-hipporello-card", "update-trello-card"].includes(type)) {
@@ -531,6 +532,7 @@ export default class HippoValidator {
                 'hyperlink',
                 'image',
                 'video',
+                'hippoFields',
                 'label',
                 'button',
                 'TrelloCardSharing',
