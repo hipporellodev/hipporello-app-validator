@@ -39,8 +39,8 @@ export default class HippoValidator {
                     return {
                         message: message,
                         code: error.type,
+                        errorTitle: this.camelCaseToNormal(`${error?.type}Error`),
                         params: error.params,
-                        errorTitle: this.camelCaseToNormal(error?.type + "Error")
                     }
                 })
                 reject({
@@ -66,7 +66,7 @@ export default class HippoValidator {
                 id: yup.string().required(),
                 name: yup.string().required(),
             }))
-        ).nullable())
+        ).nullable().default(null))
     }
 
 
@@ -85,7 +85,7 @@ export default class HippoValidator {
                 id: yup.string().required(),
                 name: yup.string().required(),
             }))
-        ))
+        ).nullable().default(null))
     }
 
 
@@ -228,13 +228,13 @@ export default class HippoValidator {
                     mapValues(actionObj, () => this.getActionScheme())
                 ))
             }))
-        ))
+        ).nullable().default(null))
     }
 
     getComponentsScheme = () => {
         return lazy(obj => yup.object(
             mapValues(obj, () => this.getComponentScheme())
-        ))
+        ).nullable().default(null))
     }
     getDefinitionShape = () => {
         return lazy(obj => yup.object(
@@ -246,7 +246,7 @@ export default class HippoValidator {
                     type: mixed().oneOf(["string", "double", "long", "boolean", "attachment", "date"])
                 })
             })
-        ))
+        ).nullable().default(null))
     }
 
     getIncomingScheme = () => {
@@ -257,7 +257,7 @@ export default class HippoValidator {
     getViewsScheme = () => {
         return lazy(obj => yup.object(
             mapValues(obj, (it) => this.getViewScheme())
-        ))
+        ).nullable().default(null))
     }
 
     getAutomationScheme = () => {
@@ -300,7 +300,7 @@ export default class HippoValidator {
     getAutomationsScheme = () => {
         return lazy(obj => yup.object(
             mapValues(obj, (it) => this.getAutomationScheme())
-        ))
+        ).nullable().default(null))
     }
 
     createScheme = (data) => {
@@ -319,10 +319,10 @@ export default class HippoValidator {
             fieldDefinitions: object().shape({
                 hippoFields: this.getDefinitionShape(),
                 appVariableFields: this.getDefinitionShape()
-            }),
+            }).nullable().default(null),
             integrations: object().shape({
                 incoming: this.getIncomingScheme()
-            }),
+            }).nullable().default(null),
             viewSettings: this.getViewSettingsScheme(),
             views: this.getViewsScheme(),
             environments: this.getEnvironmentScheme(),
