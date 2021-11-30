@@ -157,20 +157,16 @@ export default class HippoValidator {
                 }
             })).nullable().default(null),
             type: yup.mixed().oneOf([
-                "move-card",
-                "edit-card",
-                "archive-card",
-                "open-page",
-                "update-card-labels",
-                "open-form",
-                "move-to",
-                "archive",
-                "send-conversation-message",
-                "update-hipporello-card",
-                "assign-label",
-                "assign-member",
-                "update-trello-card",
-                "update-card-members",
+              "send-conversation-message",
+              "update-hipporello-card",
+              "update-trello-card",
+              "add-comment",
+              "open-form",
+              "open-page",
+              "update-card-members",
+              "update-card-labels",
+              "move-card",
+              "archive-card"
             ]).required().label("Action Type"),
             cardUpdateFields: mixed().when("type", type => {
                 if (["update-hipporello-card", "update-trello-card"].includes(type)) {
@@ -283,13 +279,10 @@ export default class HippoValidator {
                         /* @todo Typlar neler olacak */
                         trigger: object().shape({
                             type: mixed().oneOf([
-                                "card-created",
-                                "card-updated",
-                                'moved',
-                                'commented',
-                                'more-info',
-                                'user-reply',
-                                'archived',
+                              "card-created",
+                              "moved",
+                              "commented",
+                              "archived",
                             ])
                         })
                     })
