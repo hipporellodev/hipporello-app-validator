@@ -267,6 +267,7 @@ export default class HippoValidator {
             order: number().required(),
             rules: lazy(rules => yup.object(
                 mapValues(rules, (it) => {
+                    console.log("rule", it)
                     return object().shape({
                         events: object().shape({
                             onTrigger: object().shape({
@@ -287,12 +288,12 @@ export default class HippoValidator {
                         })
                     })
                 })
-            ))
+            ).required())
         });
     }
     getAutomationsScheme = () => {
         return lazy(obj => yup.object(
-            mapValues(obj, (it) => this.getAutomationScheme())
+            mapValues(obj, (it) => {console.log("automation", it); this.getAutomationScheme()})
         ).nullable().default(null))
     }
 
