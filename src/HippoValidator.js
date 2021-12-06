@@ -265,29 +265,34 @@ export default class HippoValidator {
             }),
             name: string().required(),
             order: number().required(),
-            rules: lazy(rules => yup.object(
-                mapValues(rules, (it) => {
-                    return object().shape({
-                        events: object().shape({
-                            onTrigger: object().shape({
-                                actionGroupId: mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required(),
-                                id: string().required()
-                            })
-                        }),
-                        id: string().required(),
-                        order: number().required(),
-                        /* @todo Typlar neler olacak */
-                        trigger: object().shape({
-                            type: mixed().oneOf([
-                              "card-created",
-                              "moved",
-                              "commented",
-                              "archived",
-                            ])
-                        })
-                    })
-                })
-            ))
+            rules: lazy(rules => yup.object().when("enabled", (value, schema) => {
+                if(!value)
+                    return schema.nullable()
+                else
+                    return yup.object(
+                      mapValues(rules, (it) => {
+                          return object().shape({
+                              events: object().shape({
+                                  onTrigger: object().shape({
+                                      actionGroupId: mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required(),
+                                      id: string().required()
+                                  })
+                              }),
+                              id: string().required(),
+                              order: number().required(),
+                              /* @todo Typlar neler olacak */
+                              trigger: object().shape({
+                                  type: mixed().oneOf([
+                                      "card-created",
+                                      "moved",
+                                      "commented",
+                                      "archived",
+                                  ])
+                              })
+                          })
+                      })
+                    ).required()
+            }))
         });
     }
     getAutomationsScheme = () => {
