@@ -40,7 +40,7 @@ export default class HippoValidator {
                         message: message,
                         code: error.type,
                         errorTitle: this.camelCaseToNormal(`${error?.type}Error`),
-                        params: error.params,
+                        params: error.params
                     }
                 })
                 reject({
@@ -518,6 +518,148 @@ export default class HippoValidator {
         );
     });
     getComponentScheme = () => {
+        const viewPropsScheme = () => {
+            const a =  yup.object().shape({
+                name: yup.string(),
+                gap: yup.number(),
+                align: yup.mixed().oneOf(['left', 'right', 'center']),
+                //children: yup.array().of(yup.lazy(() => viewScheme)),
+                events: yup.object().default(null).nullable().shape({
+                    onClick: yup.object().shape({
+                        id: yup.string().required(),
+                        action: lazy(action => {
+                            if (!action) {
+                                return mixed().nullable().default(null)
+                            }
+                            if (typeof action === "string" || action instanceof String) {
+                                return mixed().oneOf(this.getActions()).required();
+                            } else {
+                                return this.getComponentActionScheme()
+                            }
+                        }),
+                        actionGroupId: lazy(groupId => {
+                            if (!groupId) {
+                                return mixed().nullable().default(null)
+                            }
+                            return mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required();
+                        })
+                    }).nullable().default(null),
+                    onReply: object().shape({
+                        action: object().shape({
+                            id: string().required(),
+                            type: string().required()
+                        })
+                    }).nullable().default(null),
+                }),
+            }).concat(yup.object().when('type', (type, schema) => {
+                switch (type) {
+                    case "formList":
+                        return schema.concat(object().shape({
+                            viewType: yup.string().required(),
+                            type: yup.string().oneOf(["all", "selected"]).required(),
+                            showDescription: yup.boolean(),
+                            selectedForms: yup.array().when("type", (type, scheme) => {
+                                if (type === "selected") return scheme.required()
+                                return scheme.nullable()
+                            }),
+                        }))
+                    case "appList":
+                        return schema.concat(object().shape({
+                            viewType: yup.string().required(),
+                            type: yup.string().oneOf(["all", "selected"]).required(),
+                            showDescription: yup.boolean(),
+                            selectedApps: yup.array().when("type", (type, scheme) => {
+                                if (type === "selected") return scheme.required()
+                                return scheme.nullable()
+                            }),
+                        }))
+                    case "header":
+                        return schema.concat(object().shape({
+                            text: yup.string().required(),
+                            heading: yup.mixed().oneOf(["h1", "h2", "h3", "h4", "h5", "h6"])
+                        }))
+                    case "paragraph":
+                        return schema.concat(object().shape({
+                            text: yup.string().required(),
+                        }))
+                    case "hyperlink":
+                        return schema.concat(object().shape({
+                            text: yup.string().required(),
+                            url: yup.string(),
+                        }));
+                    case "TrelloCardSharing":
+                        return schema.concat(object().shape({
+                            "pageSize": number().nullable().default(null),
+                            "query": object().shape({
+                                "conditions": this.getActionConditionsScheme().nullable().default(null),
+                                "type": mixed().oneOf(["basic"])
+                            }),
+                            "showExport": boolean(),
+                            "showSearch": boolean()
+                        }));
+                    case "table":
+                        return schema.concat(object().shape({
+                            columns: yup.array().of(yup.object().shape({
+                                header: yup.string().required(),
+                                view: yup.lazy(() => viewScheme)
+                            }))
+                        }))
+                    case "date":
+                        return schema.concat(object().shape({
+                            format: string().required(),
+                            text: string()
+                        }))
+                    case "menuItem":
+                        return schema.concat(object().shape({
+                            text: string()
+                        }));
+                    case "icon":
+                        return schema.concat(object().shape({
+                            family: string(),
+                            name: string().required(),
+                            size: number()
+                        }));
+                    case "Conversation":
+                        return schema.concat(object().shape({
+                            "canAddQuickText": boolean(),
+                            "canDeleteQuickText": boolean(),
+                            "canEditQuickText": boolean(),
+                            "canReply": boolean(),
+                            "canUploadAttachment": boolean(),
+                            "canUseQuickText": boolean(),
+                            showMeta: boolean(),
+                            showMetaDetail: boolean()
+                        }));
+                    case "tableColumn":
+                        return schema.concat(object().shape({
+                            "field": string().when("sortable", (sortable, schema) => sortable ? schema.required() : schema),
+                            "header": string(),
+                            "sortable": boolean()
+                        }))
+                    case "snippet":
+                        return schema.concat(object().shape({
+                            "css": string(),
+                            "html": string().required(),
+                            "name": string().required()
+                        }))
+                    case "HippoFields":
+                        return schema.concat(object().shape({
+                            "allFields": boolean(),
+                            "showSearch": boolean(),
+                            "showUpdateWith": boolean(),
+                            "target": this.getTargetScheme()
+                        }))
+                    case "label":
+                        return schema.concat(object().shape({
+                            text: string().required()
+                        }))
+                    case "button":
+                        return schema.concat(object().shape({}))
+
+                }
+            }));
+            return a;
+        }
         const viewScheme = yup.object().shape({
             id: yup.string(),
             type: yup.mixed().oneOf([
@@ -552,144 +694,7 @@ export default class HippoValidator {
                 "columns"
             ]),
             accessRight: this.getAccessRightScheme().nullable().default(null),
-            viewProps: yup.object().shape({
-                name: yup.string(),
-                gap: yup.number(),
-                align: yup.mixed().oneOf(['left', 'right', 'center']),
-                //children: yup.array().of(yup.lazy(() => viewScheme)),
-                events: yup.object().default(null).nullable().shape({
-                    onClick: yup.object().shape({
-                        id: yup.string().required(),
-                        action: lazy(action => {
-                            if (!action) {
-                                return mixed().nullable().default(null)
-                            }
-                            if (typeof action === "string" || action instanceof String) {
-                                return mixed().oneOf(this.getActions()).required();
-                            } else {
-                                return this.getComponentActionScheme()
-                            }
-                        }),
-                        actionGroupId: lazy(groupId => {
-                            if (!groupId) {
-                                return mixed().nullable().default(null)
-                            }
-                            return mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required();
-                        })
-                    }),
-                    onReply: object().shape({
-                        action: object().shape({
-                            id: string().required(),
-                            type: string().required()
-                        })
-                    }).nullable().default(null),
-                }),
-            }).concat(yup.object().when('type', (type) => {
-                switch (type) {
-                    case "formList":
-                        return yup.object().shape({
-                            viewType: yup.string().required(),
-                            type: yup.string().oneOf(["all", "selected"]).required(),
-                            showDescription: yup.boolean(),
-                            selectedForms: yup.array().when("type", (type, scheme) => {
-                                if (type === "selected") return scheme.required()
-                                return scheme.nullable()
-                            }),
-                        })
-                    case "appList":
-                        return yup.object().shape({
-                            viewType: yup.string().required(),
-                            type: yup.string().oneOf(["all", "selected"]).required(),
-                            showDescription: yup.boolean(),
-                            selectedApps: yup.array().when("type", (type, scheme) => {
-                                if (type === "selected") return scheme.required()
-                                return scheme.nullable()
-                            }),
-                        })
-                    case "header":
-                        return yup.object().shape({
-                            text: yup.string().required(),
-                            heading: yup.mixed().oneOf(["h1", "h2", "h3", "h4", "h5", "h6"])
-                        })
-                    case "paragraph":
-                        return yup.object().shape({
-                            text: yup.string().required(),
-                        })
-                    case "hyperlink":
-                        return yup.object().shape({
-                            text: yup.string().required(),
-                            url: yup.string(),
-                        });
-                    case "TrelloCardSharing":
-                        return yup.object().shape({
-                            "pageSize": number().nullable().default(null),
-                            "query": object().shape({
-                                "conditions": this.getActionConditionsScheme().nullable().default(null),
-                                "type": mixed().oneOf(["basic"])
-                            }),
-                            "showExport": boolean(),
-                            "showSearch": boolean()
-                        });
-                    case "table":
-                        return yup.object().shape({
-                            columns: yup.array().of(yup.object().shape({
-                                header: yup.string().required(),
-                                view: yup.lazy(() => viewScheme)
-                            }))
-                        })
-                    case "date":
-                        return object().shape({
-                            format: string().required(),
-                            text: string()
-                        })
-                    case "menuItem":
-                        return object().shape({
-                            text: string()
-                        });
-                    case "icon":
-                        return object().shape({
-                            family: string(),
-                            name: string().required(),
-                            size: number()
-                        });
-                    case "Conversation":
-                        return object().shape({
-                            "canAddQuickText": boolean(),
-                            "canDeleteQuickText": boolean(),
-                            "canEditQuickText": boolean(),
-                            "canReply": boolean(),
-                            "canUploadAttachment": boolean(),
-                            "canUseQuickText": boolean(),
-                            showMeta: boolean(),
-                            showMetaDetail: boolean()
-                        });
-                    case "tableColumn":
-                        return object().shape({
-                            "field": string().when("sortable", (sortable, schema) => sortable ? schema.required() : schema),
-                            "header": string(),
-                            "sortable": boolean()
-                        })
-                    case "snippet":
-                        return object().shape({
-                            "css": string(),
-                            "html": string().required(),
-                            "name": string().required()
-                        })
-                    case "HippoFields":
-                        return object().shape({
-                            "allFields": boolean(),
-                            "showSearch": boolean(),
-                            "showUpdateWith": boolean(),
-                            "target": this.getTargetScheme()
-                        })
-                    case "label":
-                        return object().shape({
-                            text: string().required()
-                        })
-                    case "button":
-                        return object().shape({})
-                }
-            }))
+            viewProps: viewPropsScheme()
         });
         return viewScheme;
     }
