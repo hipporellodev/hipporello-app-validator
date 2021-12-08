@@ -472,7 +472,28 @@ export default class HippoValidator {
     getActionConditionsScheme = (data) => {
         return array().of(array().of(object().shape({
             field: string().required(),
-            operator: mixed().oneOf(["equals", "in", "not_in"]), /* @todo operatorler ve valueTypelar neler olacak */
+            operator: mixed().oneOf([
+              "equals",
+              "notequals",
+              "contains",
+              "notcontains",
+              "startswith",
+              "notstartswith",
+              "endswith",
+              "notendswith",
+              "lessthan",
+              "lessthanequals",
+              "greaterthan",
+              "greaterthanequals",
+              "in",
+              "allin",
+              "anyin",
+              "notin",
+              "empty",
+              "notempty",
+              "has",
+              "doesnthave",
+            ]),
             value: mixed().required(),
             valueType: mixed().oneOf(["variable", "value"])
         })));
