@@ -370,66 +370,69 @@ export default class HippoValidator {
                 anonymous: boolean(),
                 boardId: string(),
                 showInTrello: boolean(),
-                body: object().shape({
+                body: object().when("enabled", (value, schema) => {
+                  if(!value) return schema.nullable();
+                  else return schema.shape({
                     formAutoIncrementId: number().required(),
                     readOnly: boolean(),
                     rows: yup.array().of(
-                        yup.object().shape({
-                            id: yup.string().required(),
-                            columns: yup.array().of(yup.object().shape({
-                                id: yup.string().required(),
-                                element: lazy(element => {
-                                    return yup.object().shape({
-                                        id: yup.string().required(),
-                                        props: yup.object().shape({
-                                            /* @todo add othe props */
-                                            value: yup.mixed(),
-                                        }).concat(object().when("type", type => {
-                                            switch (element.input) {
-                                                case "Button":
-                                                    return object().shape({
-                                                        "optional-actionGroupId": lazy(t => {
-                                                            if (t) {
-                                                                return mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true)));
-                                                            }
-                                                            return mixed().nullable().default(null);
-                                                        }),
-                                                        settings: object().shape({
-                                                            fluid: string(),
-                                                            color: string(),
-                                                            backgroundColor: string(),
-                                                        }),
-                                                    }).concat(["form","email"].includes(form?.type) ? object().shape({
-                                                            "mandatory-action": object().shape({
-                                                                "type": string().required(),
-                                                                variables: object().shape({
-                                                                    cardType: mixed().oneOf(this.getCardTypes(), this.getOneOfMessage.bind(this, this.getCardTypes(true))).required(),
-                                                                    description: string().nullable(),
-                                                                    list: string().required(),
-                                                                    name: string().required()
-                                                                })
-                                                            }).nullable(),
-                                                        }) : null
-                                                    )
-                                            }
-                                        })).required()
-                                    }).required()
-                                }),
-                            }))
-                        })
+                      yup.object().shape({
+                        id: yup.string().required(),
+                        columns: yup.array().of(yup.object().shape({
+                          id: yup.string().required(),
+                          element: lazy(element => {
+                            return yup.object().shape({
+                              id: yup.string().required(),
+                              props: yup.object().shape({
+                                /* @todo add othe props */
+                                value: yup.mixed(),
+                              }).concat(object().when("type", type => {
+                                switch (element.input) {
+                                  case "Button":
+                                    return object().shape({
+                                      "optional-actionGroupId": lazy(t => {
+                                        if (t) {
+                                          return mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true)));
+                                        }
+                                        return mixed().nullable().default(null);
+                                      }),
+                                      settings: object().shape({
+                                        fluid: string(),
+                                        color: string(),
+                                        backgroundColor: string(),
+                                      }),
+                                    }).concat(["form","email"].includes(form?.type) ? object().shape({
+                                        "mandatory-action": object().shape({
+                                          "type": string().required(),
+                                          variables: object().shape({
+                                            cardType: mixed().oneOf(this.getCardTypes(), this.getOneOfMessage.bind(this, this.getCardTypes(true))).required(),
+                                            description: string().nullable(),
+                                            list: string().required(),
+                                            name: string().required()
+                                          })
+                                        }).nullable(),
+                                      }) : null
+                                    )
+                                }
+                              })).required()
+                            }).required()
+                          }),
+                        }))
+                      })
                     ).min(2, "Form must have at least 1 element")
-                }).concat(object().when("type", type => {
-                        if (["updateform", "form", "email"].includes(type)) {
-                            return object().shape({
-                                hippoFieldMapping: lazy(obj => yup.object(
-                                    mapValues(obj, () => {
-                                        return mixed().oneOf(this.getFieldDefinitions(), this.getOneOfMessage.bind(this, this.getFieldDefinitions(true))).required()
-                                    })
-                                ).required())
+                  }).concat(object().when("type", type => {
+                      if (["updateform", "form", "email"].includes(type)) {
+                        return object().shape({
+                          hippoFieldMapping: lazy(obj => yup.object(
+                            mapValues(obj, () => {
+                              return mixed().oneOf(this.getFieldDefinitions(), this.getOneOfMessage.bind(this, this.getFieldDefinitions(true))).required()
                             })
-                        }
+                          ).required())
+                        })
+                      }
                     }),
-                ).concat(object()),
+                  ).concat(object())
+                }),
                 "email": string().when('type', (type, schema) => {
                     if (type === "email") {
                         return  schema.required()
