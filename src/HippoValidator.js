@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import _, {mapValues} from 'lodash';
+import _, {isEmpty, mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
 
 export default class HippoValidator {
@@ -265,34 +265,38 @@ export default class HippoValidator {
             }),
             name: string().required(),
             order: number().required(),
-            rules: lazy(rules => yup.object().when("enabled", (value, schema) => {
+            rules: lazy(rules => {
+              if (isEmpty(rules))
+                return yup.mixed().test("required", "Rules must be at least one item", (value) => !isEmpty(value) )
+              return yup.object().when("enabled", (value, schema) => {
                 if(!value)
-                    return schema.nullable()
+                  return schema.nullable()
                 else
-                    return yup.object(
-                      mapValues(rules, (it) => {
-                          return object().shape({
-                              events: object().shape({
-                                  onTrigger: object().shape({
-                                      actionGroupId: mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required(),
-                                      id: string().required()
-                                  })
-                              }),
-                              id: string().required(),
-                              order: number().required(),
-                              /* @todo Typlar neler olacak */
-                              trigger: object().shape({
-                                  type: mixed().oneOf([
-                                      "card-created",
-                                      "moved",
-                                      "commented",
-                                      "archived",
-                                  ])
-                              })
+                  return yup.object(
+                    mapValues(rules, (it) => {
+                      return object().shape({
+                        events: object().shape({
+                          onTrigger: object().shape({
+                            actionGroupId: mixed().oneOf(this.getActions(), this.getOneOfMessage.bind(this, this.getActions(true))).required(),
+                            id: string().required()
                           })
+                        }),
+                        id: string().required(),
+                        order: number().required(),
+                        /* @todo Typlar neler olacak */
+                        trigger: object().shape({
+                          type: mixed().oneOf([
+                            "card-created",
+                            "moved",
+                            "commented",
+                            "archived",
+                          ])
+                        })
                       })
-                    ).required()
-            }))
+                    })
+                  ).required()
+              })
+            })
         });
     }
     getAutomationsScheme = () => {
@@ -507,8 +511,9 @@ export default class HippoValidator {
                 "icon" : object({
                     "background" : string().required(),
                     "iconSet" : string().oneOf(['fontAwesome']),
-                    "name" :string(),
-                    "type" : string().oneOf(['icon'])
+                    "name" :string().when("type", (type, schema) => type === "icon" ? schema.required() : schema),
+                    "url" :string().when("type", (type, schema) => type === "image" ? schema.required() : schema),
+                    "type" : string().oneOf(['icon','image'])
                 })
             }),
             portalViewSettingOverrides: object().shape({
