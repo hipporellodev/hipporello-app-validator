@@ -239,7 +239,7 @@ export default class HippoValidator {
                     id: string().required(),
                     label: string().required(),
                     multiple: boolean().required(),
-                    type: mixed().oneOf(["string", "double", "long", "boolean", "attachment", "date"])
+                    type: mixed().oneOf(["string", "double", "long", "boolean", "attachment", "date", "time"])
                 })
             })
         ).nullable().default(null))
