@@ -134,7 +134,7 @@ export default class HippoValidator {
                     case "open-page":
                         return object().shape({
                             target: object().shape({
-                                type: mixed().oneOf(["_self", "_blank"])
+                                type: mixed().oneOf(["_self", "_blank", "_modal"])
                             }),
                             type: mixed().oneOf(["internal", "external"]),
                             viewId: mixed().when("type", actionType => {
