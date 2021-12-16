@@ -4,9 +4,32 @@ import {lazy, string, number, mixed, object, array, boolean} from "yup";
 
 export default class HippoValidator {
     constructor(appJson) {
-        this.data = appJson
+        this.data = this.jsonTraverse(appJson)
     }
-
+    isEmpty(val) {
+      if (val === undefined)
+        return true;
+      if (typeof (val) == 'function' || typeof (val) == 'number' || typeof (val) == 'boolean' || Object.prototype.toString.call(val) === '[object Date]')
+        return false;
+      if (val == null || val.length === 0)
+        return true;
+      if (typeof (val) == "object" && Object.keys(val).length === 0) {
+        return true
+      }
+      return false;
+    }
+    jsonTraverse(obj){
+      for(const key in obj) {
+        const value = obj[key];
+        if(this.isEmpty(value)) {
+          delete obj[key];
+        }
+        else if(typeof value === "object") {
+          this.jsonTraverse(value);
+        }
+      }
+      return obj;
+    }
     getLabel(path){
         const regex = new RegExp(/\.?([a-zA-Z0-9]+)$/gm).exec(path || "")
         const message = regex?.[1] || path || ""
