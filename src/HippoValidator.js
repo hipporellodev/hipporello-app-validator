@@ -188,7 +188,7 @@ export default class HippoValidator {
                         mapValues(cardField, () => {
                             return yup.object({
                                 type: mixed().oneOf(["replacement"]).required(),
-                                value: string().required()
+                                value: mixed().required()
                             })
                         })
                     ))
