@@ -127,7 +127,7 @@ export default class HippoValidator {
             cardType: mixed().oneOf(this.getCardTypes()).label('Action group card type'),
             props: object().shape({
                 params: object().shape({
-                    context: mixed().oneOf(["cardId", "parentCardId"]).nullable().default(null)
+                    context: mixed().oneOf(["parent", "self", "children"]).nullable().default(null)
                 }).nullable().default(null)
             }).concat(object().when("type", (type) => {
                 switch (type) {
@@ -146,12 +146,26 @@ export default class HippoValidator {
                                 if (actionType === "external") {
                                     return string().required()
                                 }
-                            })
+                            }),
+                            params: mixed().when("viewId", viewId => {
+                              if(this?.data?.views[viewId]?.viewProps?.cardAware){
+                                return yup.object().shape({
+                                  context: yup.string().oneOf(["parent", "self", "children"]).nullable(),
+                                })
+                              }
+                            }).nullable()
                         })
                     case "open-form":
                         return object().shape({
                             formId: mixed().oneOf(this.getFormIds(), this.getOneOfMessage.bind(this, this.getFormIds(true))).required(),
-                            target: this.getTargetScheme()
+                            target: this.getTargetScheme(),
+                            params: mixed().when("formId", formId => {
+                              if(!['form', 'email'].includes(this?.data?.integrations?.incoming?.[formId]?.type)){
+                                return yup.object().shape({
+                                  context: yup.string().oneOf(["parent", "self", "children"]).nullable(),
+                                })
+                              }
+                            }).nullable()
                         });
 
                 }
