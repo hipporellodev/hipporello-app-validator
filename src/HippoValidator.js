@@ -147,8 +147,49 @@ export default class HippoValidator {
 
     getComponentActionScheme = () => {
         return yup.object().shape({
-            cardType: mixed().oneOf(this.getCardTypes()).label('Action group card type'),
             props: object().shape({
+                cardType: mixed().oneOf(this.getCardTypes()).label('Action group card type'),
+                cardUpdateFields: mixed().when("type", type => {
+                  if (["update-hipporello-card", "update-trello-card"].includes(type)) {
+                    return lazy(cardField => object(
+                      mapValues(cardField, () => {
+                        return yup.object({
+                          type: mixed().oneOf(["replacement"]).required(),
+                          value: mixed().required()
+                        })
+                      })
+                    ))
+                  }
+                }),
+                list: mixed().when("type", type => {
+                  if (type === "move-to") {
+                    return string().required()
+                  }
+                }),
+                labels: mixed().when("type", type => {
+                  if (type === "assign-label") {
+                    return array().required()
+                  }
+                }),
+                members: mixed().when("type", type => {
+                  if (type === "assign-member") {
+                    return array().required()
+                  }
+                }),
+                message: mixed().when("type", type => {
+                  if (type === "send-conversation-message") {
+                    return string().required()
+                  }
+                }),
+                subject: mixed().when("type", type => {
+                  if (type === "send-conversation-message") {
+                    return string().required()
+                  }
+                }),
+                onSuccess: object().shape({
+                  id: string().required(),
+                  type: string().required()
+                }).nullable().default(null),
                 params: object().shape({
                     context: mixed().oneOf(["parent", "self", "children"]).nullable().default(null)
                 }).nullable().default(null)
@@ -190,7 +231,6 @@ export default class HippoValidator {
                               }
                             }).nullable()
                         });
-
                 }
             })).nullable().default(null),
             type: yup.mixed().oneOf([
@@ -205,47 +245,6 @@ export default class HippoValidator {
               "move-card",
               "archive-card"
             ]).required().label("Action Type"),
-            cardUpdateFields: mixed().when("type", type => {
-                if (["update-hipporello-card", "update-trello-card"].includes(type)) {
-                    return lazy(cardField => object(
-                        mapValues(cardField, () => {
-                            return yup.object({
-                                type: mixed().oneOf(["replacement"]).required(),
-                                value: mixed().required()
-                            })
-                        })
-                    ))
-                }
-            }),
-            list: mixed().when("type", type => {
-                if (type === "move-to") {
-                    return string().required()
-                }
-            }),
-            labels: mixed().when("type", type => {
-                if (type === "assign-label") {
-                    return array().required()
-                }
-            }),
-            members: mixed().when("type", type => {
-                if (type === "assign-member") {
-                    return array().required()
-                }
-            }),
-            message: mixed().when("type", type => {
-                if (type === "send-conversation-message") {
-                    return string().required()
-                }
-            }),
-            subject: mixed().when("type", type => {
-                if (type === "send-conversation-message") {
-                    return string().required()
-                }
-            }),
-            onSuccess: object().shape({
-                id: string().required(),
-                type: string().required()
-            }).nullable().default(null)
         })
 
     }
