@@ -1,8 +1,8 @@
 {
   "name": "hipporello-validator",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
-  "main": "./lib/HippoValidator.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "jest",
     "build": "webpack",

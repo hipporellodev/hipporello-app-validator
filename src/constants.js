@@ -1,0 +1,20 @@
+const SUBDOMAIN_BLACKLIST = ["playground", "console", "hipporello", "hippo", "admin"]
+const PAGE_SLUG_BLACKLIST = [
+  "forms",
+  "form",
+  "page",
+  "signin",
+  "signup",
+  "forgot"
+]
+const APP_SLUG_BLACKLIST = [
+  "hippo",
+  "trello",
+  "hipporello",
+  "onboarding"
+]
+export {
+  SUBDOMAIN_BLACKLIST,
+  PAGE_SLUG_BLACKLIST,
+  APP_SLUG_BLACKLIST
+};

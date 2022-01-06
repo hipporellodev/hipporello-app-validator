@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import _, {isEmpty, mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
+import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "./constants";
 
 export default class HippoValidator {
     constructor(appJson) {
@@ -345,7 +346,7 @@ export default class HippoValidator {
         let scheme = yup.object().shape({
             id: yup.string().required(), // "something"
             name: yup.string().required(), // "something"
-            slug: yup.string().required(), // "something"
+            slug: yup.string().matches(/^[A-Za-z0-9]+(?:-[+A-Za-z0-9]+)*$/).notOneOf(APP_SLUG_BLACKLIST).required(), // "something"
             boards: yup.array().of(yup.string()),// ["something"]
             sourceAppTemplateId: yup.string().nullable(), // "something" | null
             schemaVersion: yup.number().min(1).required(), // 1
@@ -770,23 +771,33 @@ export default class HippoValidator {
                 "appHeader", "page"
             ]).required(),
             accessRight: this.getAccessRightScheme().nullable().default(null),
-            viewProps: yup.object().shape({
+            viewProps: yup.object().when('type', (type, schema) => {
+              return yup.object().shape({
                 name: yup.string(),
                 gap: yup.number(),
+                slug: type === "page"
+                  ? yup.string().when("environments", (environments, schema) => {
+                    if(environments?.includes("webView")){
+                      return schema.notOneOf(PAGE_SLUG_BLACKLIST).matches(/^[A-Za-z0-9]+(?:-[+A-Za-z0-9]+)*$/).required()
+                    }
+                    else return schema
+                  })
+                  : yup.string(),
                 children: this.getViewChildrenShape(),
                 cardAware: boolean(),
                 viewType: mixed().oneOf(["default", "tabs"]),
                 visibilities: object().when("type", (type) => {
-                    if (type === "appHeader") {
-                        return object().shape({
-                            login: boolean(),
-                            logo: boolean(),
-                            menu: boolean()
-                        })
-                    }
-                    return mixed().nullable().default(null);
+                  if (type === "appHeader") {
+                    return object().shape({
+                      login: boolean(),
+                      logo: boolean(),
+                      menu: boolean()
+                    })
+                  }
+                  return mixed().nullable().default(null);
                 }),
                 environments: array().of(mixed().oneOf(this.getEnvironments())).nullable().default(null),
+              })
             })
         });
         return viewScheme;

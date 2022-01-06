@@ -2,11 +2,11 @@ var path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/HippoValidator.js',
+    entry: './src/index.js',
     watch: true,
     output: {
         path: path.resolve('lib'),
-        filename: 'HippoValidator.js',
+        filename: 'index.js',
         libraryTarget: 'commonjs2'
     },
     externals: {
