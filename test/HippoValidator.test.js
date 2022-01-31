@@ -1,5 +1,7 @@
 import HippoValidator from "../src/HippoValidator";
 import appJson from "../mocks/app.json";
+import AppNode from "../src/nodes/AppNode";
+import {expect} from "@jest/globals";
 
 describe("Hippo Validator Test", () => {
     let hippoValidator;
@@ -16,11 +18,16 @@ describe("Hippo Validator Test", () => {
         }).toThrow(Error);
     })
     test("Perfectly configured json", async () => {
-        expect.assertions(1);
-        hippoValidator = new HippoValidator(appJson);
-        await hippoValidator.validate().then(() => {
-            expect(1).toEqual(1);
-        })
+        expect.assertions(20);
+        console.time("perfect")
+        for(let i=0; i < 20; i++){
+            hippoValidator = new HippoValidator(appJson);
+            await hippoValidator.validate().then(() => {
+                expect(1).toEqual(1);
+            })
+        }
+        console.timeEnd("perfect")
+
     })
     test("Has no id", async () => {
         expect.assertions(1);
@@ -313,6 +320,19 @@ describe("Hippo Validator Test", () => {
             let b = a.substr(0,limit).split(" ");
             let c = b.filter((it, index) => a.includes(it)).join(" ");
             console.log(c);
+        })
+
+        test('aa1233', () => {
+            console.time("started")
+            let appJsonClone = {app:appJson}
+            for(let i=0; i < 100; i++) {
+                hippoValidator = new AppNode(appJsonClone);
+                hippoValidator.init([])
+                let errors = []
+                hippoValidator.validate(errors)
+            }
+            console.timeEnd("started")
+            expect(1).toBe(1);
         })
     })
 });

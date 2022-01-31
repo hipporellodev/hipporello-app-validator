@@ -7,7 +7,7 @@
           "order" : 0,
           "props" : {
             "target" : {
-              "type" : "_blank"
+              "type" : "_blank1"
             },
             "type" : "external",
             "url" : "{{{card.tc_url}}}",

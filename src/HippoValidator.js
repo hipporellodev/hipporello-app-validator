@@ -64,21 +64,15 @@ export default class HippoValidator {
     }
 
     validate = (cast = false) => {
-        console.time('Validator');
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
-        console.time('extendYup');
         this.extendYup();
-        console.timeEnd('extendYup');
-        console.time('CreateSchema')
         this.yup = this.createScheme(this.data);
-        console.timeEnd('CreateSchema')
         return new Promise((resolve, reject) => {
             this.yup.validate(this.data, {
                 abortEarly: false
             }).then(() => {
-                console.timeEnd('Validator');
                 if (cast) {
                     resolve(this.yup.cast(this.data, {stripUnknown: true}));
                 }
