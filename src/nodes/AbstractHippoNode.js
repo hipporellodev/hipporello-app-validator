@@ -1,4 +1,33 @@
 import JSONUtils from "../JSONUtils";
+import Validator from "fastest-validator";
+const schema = {
+  enabled: 'boolean',
+  viewProps: {
+    type: 'object',
+    props: {
+      name: 'string',
+      cardAware: 'boolean|optional',
+      gap: 'number|optional',
+      gap1: 'number|optional',
+      gap2: 'number|optional',
+      gap3: 'number|optional',
+      gap4: 'number|optional',
+      gap5: 'number|optional',
+      gap6: 'number|optional',
+      gap7: 'number|optional',
+      gap8: 'number|optional',
+      gap9: 'number|optional',
+      gap10: 'number|optional',
+      gap11: 'number|optional',
+      gap12: 'number|optional',
+      gap13: 'number|optional',
+      gap14: 'number|optional',
+      gap15: 'number|optional',
+      gap16: 'number|optional',
+    },
+  }
+}
+const check = new Validator().compile(schema);
 export default class AbstractHippoNode {
   childNodes = [];
   path;
@@ -38,7 +67,7 @@ export default class AbstractHippoNode {
   process(appJson, path, nodeJson){}
 
   getValidatorFunction(){
-    return null;
+    return check;
   }
   validate(errors){
     if(!this.exists){

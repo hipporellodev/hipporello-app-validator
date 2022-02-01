@@ -325,7 +325,7 @@ describe("Hippo Validator Test", () => {
         test('aa1233', () => {
             console.time("started")
             let appJsonClone = {app:appJson}
-            for(let i=0; i < 100; i++) {
+            for(let i=0; i < 1000; i++) {
                 hippoValidator = new AppNode(appJsonClone);
                 hippoValidator.init([])
                 let errors = []
