@@ -15,19 +15,31 @@ import ActionGroupNode from "./ActionGroupNode";
 import JSONUtils from "../JSONUtils";
 const Validator = require("fastest-validator");
 
+const appNodeScheme = {
+  'id': 'string',
+  'name': 'string',
+  'slug': 'string',
+  'description': 'string|optional',
+  'type': {
+    type: 'enum',
+    values: [
+        'defaultApp'
+    ]
+  }
+}
+const appNodeCheck = new Validator().compile(appNodeScheme);
 export default class AppNode extends AbstractHippoNode{
 
   static INSTANCE = null;
   constructor(appJson) {
-    super(appJson, null);
+    super(appJson, 'app');
   }
 
   getValidatorFunction(){
     return (data)=>{
-
+      return appNodeCheck(data);
     };
   }
-
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
     this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloCardBack"));
@@ -69,4 +81,6 @@ export default class AppNode extends AbstractHippoNode{
       })
     }
   }
+
+
 }

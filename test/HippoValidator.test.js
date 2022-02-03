@@ -2,6 +2,7 @@ import HippoValidator from "../src/HippoValidator";
 import appJson from "../mocks/app.json";
 import AppNode from "../src/nodes/AppNode";
 import {expect} from "@jest/globals";
+import AbstractHippoNode from "../src/nodes/AbstractHippoNode";
 
 describe("Hippo Validator Test", () => {
     let hippoValidator;
@@ -325,13 +326,15 @@ describe("Hippo Validator Test", () => {
         test('aa1233', () => {
             console.time("started")
             let appJsonClone = {app:appJson}
+            let errors = []
             for(let i=0; i < 1000; i++) {
                 hippoValidator = new AppNode(appJsonClone);
                 hippoValidator.init([])
-                let errors = []
-                hippoValidator.validate(errors)
+                hippoValidator.validate(errors);
             }
-            console.timeEnd("started")
+            console.timeEnd("started");
+            console.log(errors);
+            console.log(`Counter: ${AbstractHippoNode.counter}`);
             expect(1).toBe(1);
         })
     })

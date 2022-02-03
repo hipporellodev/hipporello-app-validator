@@ -1,6 +1,18 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ComponentNode from "../ComponentNode";
-
+import Validator from "fastest-validator";
+const childSchema = {
+  id: 'string',
+  view: {
+    type: 'object',
+    optional: true,
+    props: {
+      'id': 'string',
+      'children': 'array|optional'
+    }
+  }
+}
+const childCheck = new Validator().compile(childSchema);
 export default class ChildNode extends AbstractHippoNode{
   rootNode;
   index;
@@ -28,5 +40,17 @@ export default class ChildNode extends AbstractHippoNode{
         this.addChildNode(new ChildNode(appJson, path+".columns["+index+"]", this.rootNode, index))
       })
     }
+  }
+  getValidatorFunction() {
+    let errors = [];
+    const childCheckResult = childCheck(this.nodeJson);
+    if (Array.isArray(childCheckResult)) {
+      errors.pushArray(childCheckResult);
+    }
+    const childNodeId = this?.nodeJson?.id;
+    if (!this.appJson?.app?.components?.[childNodeId]) {
+      errors.push(this.createValidationError('oneOf', 'id', this.nodeJson.id));
+    }
+    return errors;
   }
 }

@@ -17,4 +17,11 @@ export default class AppVariableFieldsNode extends AbstractHippoNode{
       })
     }
   }
+  getValidatorFunction() {
+    if (typeof this.nodeJson !== 'object') {
+      return [
+          this.createValidationError('object', null, typeof this.nodeJson)
+      ]
+    }
+  }
 }

@@ -1,59 +1,49 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
 import Validator from "fastest-validator";
-const schema = {
+const pageSchema = {
   enabled: 'boolean',
+  id: 'string',
   viewProps: {
     type: 'object',
     props: {
       name: 'string',
+      align: {
+        type: 'enum',
+        values: ['left', 'center', 'right'],
+        optional: true
+      },
       cardAware: 'boolean|optional',
-      gap: 'number|optional',
-      gap1: 'number|optional',
-      gap2: 'number|optional',
-      gap3: 'number|optional',
-      gap4: 'number|optional',
-      gap5: 'number|optional',
-      gap6: 'number|optional',
-      gap7: 'number|optional',
-      gap8: 'number|optional',
-      gap9: 'number|optional',
-      gap10: 'number|optional',
-      gap11: 'number|optional',
-      gap12: 'number|optional',
-      gap13: 'number|optional',
-      gap14: 'number|optional',
-      gap15: 'number|optional',
-      gap16: 'number|optional',
-    },
+      children: 'array|optional'
+    }
   }
 }
-const slugSchema = {
-  enabled: 'boolean',
+const pageSlugSchema = {
   viewProps: {
     type: 'object',
     props: {
       slug: 'string',
-    },
+    }
   }
 }
-const check = new Validator().compile(schema);
-const slugSchemaCheck = new Validator().compile(slugSchema);
+const pageCheck = new Validator().compile(pageSchema);
+const pageSlugCheck = new Validator().compile(pageSlugSchema);
 export default class PageNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
   }
 
   getValidatorFunction() {
-    return (data)=> {
-      let webViewExists = this.nodeJson.viewProps?.environments?.indexOf("webView") >= 0
       let errors = [];
-      if (webViewExists) {
-        slugSchemaCheck(data)
+      const pageCheckResult = pageCheck(this.nodeJson);
+      if (Array.isArray(pageCheckResult)) {
+        errors.pushArray(pageCheckResult);
       }
-      check(data)
-      return errors;
-    }
+      if (this.nodeJson?.environments?.includes('webview')) {
+        const slugCheckResult = pageSlugCheck(this.nodeJson);
+        errors.pushArray(slugCheckResult);
+      }
+      return () => errors;
   }
 
   process(appJson, path, nodeJson) {

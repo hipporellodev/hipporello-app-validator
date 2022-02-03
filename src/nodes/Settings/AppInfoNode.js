@@ -7,4 +7,5 @@ export default class AppInfoNode extends AbstractHippoNode{
 
   process(appJson, path, nodeJson) {
   }
+
 }

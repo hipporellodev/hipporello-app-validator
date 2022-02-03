@@ -6,7 +6,7 @@ const schema = {
     type: 'string'
   },
   shared: {
-    type: 'boolean', optional:true
+    type: 'boolean'
   },
   title: {
     type: 'string', optional:true
@@ -16,6 +16,10 @@ const schema = {
   }
 }
 const check = new Validator().compile(schema);
+const nameSchema = {
+  name: 'string|min:1'
+}
+const nameCheck = new Validator().compile(nameSchema);
 export default class ActionGroupNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
@@ -31,6 +35,17 @@ export default class ActionGroupNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
-    return check;
+    const errors = [];
+    const checkResult = check(this.nodeJson);
+    if (Array.isArray(checkResult)) {
+      errors.pushArray(checkResult);
+    }
+    if (this.nodeJson.shared) {
+      const result = nameCheck(this.nodeJson);
+      if (Array.isArray(result)) {
+        errors.pushArray(result);
+      }
+    }
+    return errors;
   }
 }

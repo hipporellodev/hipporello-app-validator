@@ -17,4 +17,12 @@ export default class RolesNode extends AbstractHippoNode{
       })
     }
   }
+
+  getValidatorFunction() {
+    if (typeof this.nodeJson !== 'object') {
+      return [
+          this.createValidationError('object', null ,typeof this.nodeJson)
+      ]
+    }
+  }
 }

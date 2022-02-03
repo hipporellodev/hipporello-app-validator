@@ -14,4 +14,7 @@ export default class ButtonActionNode extends AbstractHippoNode{
       })
     }
   }
+  getValidatorFunction() {
+    return super.getValidatorFunction();
+  }
 }

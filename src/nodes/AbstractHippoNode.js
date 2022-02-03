@@ -1,45 +1,29 @@
 import JSONUtils from "../JSONUtils";
-import Validator from "fastest-validator";
-const schema = {
-  enabled: 'boolean',
-  viewProps: {
-    type: 'object',
-    props: {
-      name: 'string',
-      cardAware: 'boolean|optional',
-      gap: 'number|optional',
-      gap1: 'number|optional',
-      gap2: 'number|optional',
-      gap3: 'number|optional',
-      gap4: 'number|optional',
-      gap5: 'number|optional',
-      gap6: 'number|optional',
-      gap7: 'number|optional',
-      gap8: 'number|optional',
-      gap9: 'number|optional',
-      gap10: 'number|optional',
-      gap11: 'number|optional',
-      gap12: 'number|optional',
-      gap13: 'number|optional',
-      gap14: 'number|optional',
-      gap15: 'number|optional',
-      gap16: 'number|optional',
-    },
+Array.prototype.pushArray = function (items) {
+  if (!Array.isArray(items)) {
+    return this;
   }
+  this.splice(this.length, 0, ...items);
+  return this;
 }
-const check = new Validator().compile(schema);
 export default class AbstractHippoNode {
+  static counter;
   childNodes = [];
   path;
   actions;
   id;
   appJson;
   exists;
+  validatorPath;
   constructor(appJson, path) {
     this.appJson = appJson;
     this.path = path;
+    this.validatorPath = path;
     this.exists = true;
     this.jsonPatchPath = path?"/"+(path.replace(/"/g, "").replace(/]/g, "").replace(/\[/g, ".").replace(/\./g, "/")):null
+    if (!AbstractHippoNode.counter) {
+      AbstractHippoNode.counter = 0;
+    }
   }
   init(actions){
     this.actions = actions;
@@ -67,7 +51,9 @@ export default class AbstractHippoNode {
   process(appJson, path, nodeJson){}
 
   getValidatorFunction(){
-    return check;
+    return (data) => {
+
+    }
   }
   validate(errors){
     if(!this.exists){
@@ -75,16 +61,28 @@ export default class AbstractHippoNode {
       return;
     }
     if(this.getValidatorFunction() != null) {
-      let newerrors = this.getValidatorFunction()(this.nodeJson);
+      AbstractHippoNode.counter += 1;
+      const validatorFuncResult = this.getValidatorFunction();
+      let newerrors =  typeof validatorFuncResult === 'function' ? validatorFuncResult(this.nodeJson) : validatorFuncResult ;
       if(newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
         newerrors.forEach(err => {
-          err.path = this.path;
+          err.path = this.validatorPath;
         })
-        errors.splice(errors.length, 0, newerrors);
+        errors.pushArray(newerrors);
       }
     }
     this.childNodes.forEach(childNode=>{
       childNode.validate(errors);
     })
   };
+
+  createValidationError(type, field, actual,expected, message) {
+    return {
+      type,
+      message,
+      field,
+      actual,
+      expected
+    }
+  }
 }

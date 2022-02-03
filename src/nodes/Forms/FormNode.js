@@ -1,7 +1,55 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
 import ActionGroupNode from "../ActionGroupNode";
+import Validator from "fastest-validator";
 
+const formCheck = new Validator().compile({
+  id: 'string|empty:false',
+  anonymous: 'boolean|optional',
+  enabled: 'boolean|optional',
+  formatVersion: 'number',
+  icon: 'string|empty:false',
+  name: 'string|empty:false',
+  type: {
+    type: 'enum',
+    values: ['form', 'updateform']
+  },
+  aliases: 'array|optional',
+  usesParent: 'boolean|optional',
+  boardId: 'string|optional|empty:false',
+  showInTrello : 'boolean|optional',
+  body: {
+    type: 'object',
+    props: {
+      formAutoIncrementId: 'number',
+      readOnly: 'boolean|optional',
+      rows: {
+        type: 'array',
+        items: {
+          type: 'object',
+          props: {
+            id: 'string',
+            columns: {
+              type: 'array',
+              items: {
+                type: 'object',
+                props: {
+                  id: 'string',
+                  element: {
+                    type: 'object',
+                    props: {
+                      id: 'string'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+})
 export default class FormNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
@@ -23,5 +71,9 @@ export default class FormNode extends AbstractHippoNode{
         })
       }
     })
+  }
+
+  getValidatorFunction() {
+    return formCheck;
   }
 }

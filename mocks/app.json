@@ -7,7 +7,7 @@
           "order" : 0,
           "props" : {
             "target" : {
-              "type" : "_blank1"
+              "type" : "_blank"
             },
             "type" : "external",
             "url" : "{{{card.tc_url}}}",
@@ -17,8 +17,8 @@
         }
       },
       "id" : "3G52Wi",
-      "name" : "",
-      "shared" : false
+      "name" : "dede®",
+      "shared" : true
     },
     "641sPx" : {
       "actions" : {

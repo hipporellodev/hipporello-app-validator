@@ -16,4 +16,11 @@ export default class CardTypesNode extends AbstractHippoNode{
       })
     }
   }
+  getValidatorFunction() {
+    if (typeof this.nodeJson !== 'object') {
+      return [
+          this.createValidationError('object', 'cardTypes', typeof this.nodeJson)
+      ]
+    }
+  }
 }
