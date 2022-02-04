@@ -384,7 +384,7 @@ export default class HippoValidator {
             viewSettings: this.viewSettingsScheme.defined(),
             views: this.viewsScheme,
             environments: this.environmentScheme.defined(),
-            automations: this.getAutomationsScheme(),
+            //automations: this.getAutomationsScheme(),
         });
         return scheme;
     }
