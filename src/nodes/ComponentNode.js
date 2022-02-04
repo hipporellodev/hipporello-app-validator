@@ -240,7 +240,6 @@ export default class ComponentNode extends AbstractHippoNode{
       case 'label':
         errors.pushArray(labelCheck(this.nodeJson.viewProps));
         break;
-
     }
     return errors;
   }

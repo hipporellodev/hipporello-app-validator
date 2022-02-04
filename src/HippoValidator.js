@@ -2,11 +2,12 @@ import * as yup from 'yup';
 import _, {isEmpty, mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
 import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "./constants";
+import AppNode from "./nodes/AppNode";
 
 export default class HippoValidator {
     constructor(appJson) {
         this.data = this.jsonTraverse(appJson);
-        this.actionConditionsScheme = this.getActionConditionsScheme();
+        /*this.actionConditionsScheme = this.getActionConditionsScheme();
         this.accessRightScheme = this.getAccessRightScheme();
         this.rolesScheme = this.getRolesScheme();
         this.cardTypesScheme = this.getCardTypesScheme();
@@ -24,6 +25,7 @@ export default class HippoValidator {
         this.viewPropsScheme = this.getViewPropsScheme()
         this.viewComponentScheme = this.getComponentScheme();
         this.formScheme = this.getFormScheme();
+         */
     }
 
     isEmpty(val) {
@@ -67,6 +69,7 @@ export default class HippoValidator {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
+        return this.newValidate();
         this.extendYup();
         this.yup = this.createScheme(this.data);
         return new Promise((resolve, reject) => {
@@ -123,6 +126,24 @@ export default class HippoValidator {
                 name: yup.string().required(),
             }))
         ).nullable().default(null))
+    }
+
+    newValidate = async () => {
+        return new Promise((resolve, reject) => {
+            let errors = [];
+            const node = new AppNode(
+                {
+                    app: this.data
+                });
+            node.init([])
+            node.validate(errors);
+            if (errors.length > 0) {
+                reject(errors)
+            } else {
+                resolve();
+            }
+
+        })
     }
 
 

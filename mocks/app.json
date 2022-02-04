@@ -9,9 +9,9 @@
             "target" : {
               "type" : "_blank"
             },
-            "type" : "external",
+            "type" : "internal",
             "url" : "{{{card.tc_url}}}",
-            "viewId" : ""
+            "viewId" : "asd;kajsd"
           },
           "type" : "open-page"
         }

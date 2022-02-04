@@ -15,7 +15,7 @@ export default class ChildrenNode extends AbstractHippoNode{
   getValidatorFunction() {
     if (!Array.isArray(this.nodeJson)) {
       return [
-          this.createValidationError('array', null, typeof this.nodeJson)
+          this.createValidationError('array', null, typeof this.nodeJson, 'array')
       ]
     }
     return null;

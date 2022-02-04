@@ -32,6 +32,6 @@ export default class RuleNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
-    return ruleCheck
+    return ruleCheck;
   }
 }

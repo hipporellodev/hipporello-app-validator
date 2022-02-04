@@ -15,6 +15,7 @@ export default class AbstractHippoNode {
   appJson;
   exists;
   validatorPath;
+  checkedPaths = {};
   constructor(appJson, path) {
     this.appJson = appJson;
     this.path = path;
@@ -35,8 +36,7 @@ export default class AbstractHippoNode {
       this.childNodes.forEach(childNode=>{
         childNode.init(this.actions);
       })
-    }
-    else{
+    } else{
       this.exists = false;
     }
   }
@@ -56,8 +56,14 @@ export default class AbstractHippoNode {
     }
   }
   validate(errors){
+    if (this.checkedPaths[this.path]) {
+      return;
+    }
+    this.checkedPaths = this.path;
     if(!this.exists){
-      errors.push({path:this.path, code:"not_exists"})
+      if (this.isMandatory()) {
+        errors.push({path:this.path, code:"not_exists"})
+      }
       return;
     }
     if(this.getValidatorFunction() != null) {
@@ -66,7 +72,7 @@ export default class AbstractHippoNode {
       let newerrors =  typeof validatorFuncResult === 'function' ? validatorFuncResult(this.nodeJson) : validatorFuncResult ;
       if(newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
         newerrors.forEach(err => {
-          err.path = this.validatorPath;
+          err.path = `${this.validatorPath}.${err.field}`;
         })
         errors.pushArray(newerrors);
       }
@@ -75,6 +81,10 @@ export default class AbstractHippoNode {
       childNode.validate(errors);
     })
   };
+
+  isMandatory() {
+    return true;
+  }
 
   createValidationError(type, field, actual,expected, message) {
     return {

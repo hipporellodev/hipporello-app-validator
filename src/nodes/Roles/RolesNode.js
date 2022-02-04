@@ -25,4 +25,8 @@ export default class RolesNode extends AbstractHippoNode{
       ]
     }
   }
+
+  isMandatory() {
+    return false;
+  }
 }
