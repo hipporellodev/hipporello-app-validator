@@ -1,6 +1,7 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import ActionGroupNode from "./ActionGroupNode";
 import Validator from "fastest-validator";
+import ActionNode from "./ActionNode";
 
 const eventCheck = new Validator().compile({
   id: 'string'
@@ -17,6 +18,8 @@ export default class EventNode extends AbstractHippoNode{
     else{
       if(typeof nodeJson.action === 'string'){
         this.addChildNode(new ActionGroupNode(appJson, "app.actionGroups."+nodeJson.action));
+      } else {
+        this.addChildNode(new ActionNode(appJson, `${this.path}.action`, true));
       }
     }
   }

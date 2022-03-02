@@ -7,7 +7,16 @@ import AppNode from "./nodes/AppNode";
 export default class HippoValidator {
     constructor(appJson) {
         this.data = this.jsonTraverse(appJson);
-        /*this.actionConditionsScheme = this.getActionConditionsScheme();
+        if (this.data.appJson) {
+            this.data.appJson = {
+                app: this.data.appJson
+            };
+        } else {
+            this.data = {
+                app: this.data
+            }
+        }
+        this.actionConditionsScheme = this.getActionConditionsScheme();
         this.accessRightScheme = this.getAccessRightScheme();
         this.rolesScheme = this.getRolesScheme();
         this.cardTypesScheme = this.getCardTypesScheme();
@@ -25,7 +34,7 @@ export default class HippoValidator {
         this.viewPropsScheme = this.getViewPropsScheme()
         this.viewComponentScheme = this.getComponentScheme();
         this.formScheme = this.getFormScheme();
-         */
+
     }
 
     isEmpty(val) {
@@ -69,7 +78,6 @@ export default class HippoValidator {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
-        return this.newValidate();
         this.extendYup();
         this.yup = this.createScheme(this.data);
         return new Promise((resolve, reject) => {
@@ -131,14 +139,11 @@ export default class HippoValidator {
     newValidate = async () => {
         return new Promise((resolve, reject) => {
             let errors = [];
-            const node = new AppNode(
-                {
-                    app: this.data
-                });
+            const node = new AppNode(this.data);
             node.init([])
             node.validate(errors);
             if (errors.length > 0) {
-                reject(errors)
+                reject(this.convertErrors(errors));
             } else {
                 resolve();
             }
@@ -903,6 +908,11 @@ export default class HippoValidator {
         if (isValue)
             return Object.values(this?.data?.components || {}).map(i => i?.type)
         return Object.keys(this?.data?.components || {});
+    }
+
+    convertErrors = (errors) => {
+        console.log(errors);
+        return errors;
     }
 
 }

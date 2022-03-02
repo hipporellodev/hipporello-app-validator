@@ -21,9 +21,13 @@ describe("Hippo Validator Test", () => {
     test("Perfectly configured json", async () => {
         console.time("perfect")
         for(let i=0; i < 1; i++){
-            hippoValidator = new HippoValidator(appJson);
+            hippoValidator = new HippoValidator({
+                appJson
+            });
             await hippoValidator.validate().then(() => {
-            }).catch(() => {
+                console.log('success');
+            }).catch((err) => {
+                console.log(err);
             })
         }
         console.timeEnd("perfect")
@@ -327,7 +331,17 @@ describe("Hippo Validator Test", () => {
             let appJsonClone = {app:appJson}
             let errors = []
             for(let i=0; i < 1; i++) {
-                hippoValidator = new AppNode(appJsonClone);
+                hippoValidator = new AppNode({
+                    app: appJsonClone,
+                    lists: [
+                        'list1',
+                        'list2'
+                    ],
+                    members: [
+                        'member1',
+                        'member2'
+                    ]
+                });
                 hippoValidator.init([])
                 hippoValidator.validate(errors);
             }

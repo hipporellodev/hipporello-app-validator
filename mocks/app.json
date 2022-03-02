@@ -11,7 +11,7 @@
             },
             "type" : "internal",
             "url" : "{{{card.tc_url}}}",
-            "viewId" : "asd;kajsd"
+            "viewId" : "ecVH47"
           },
           "type" : "open-page"
         }
@@ -918,7 +918,7 @@
       "id" : "B2O2R3",
       "type" : "paragraph",
       "viewProps" : {
-        "alignment" : "left",
+        "alignment" : "cee",
         "text" : "{{{card.hf_5nFgHF}}}"
       }
     },

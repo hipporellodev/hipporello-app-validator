@@ -16,8 +16,16 @@ export default class AbstractHippoNode {
   exists;
   validatorPath;
   checkedPaths = {};
+  lists = [];
+  members = [];
   constructor(appJson, path) {
-    this.appJson = appJson;
+    if (appJson.appJson) {
+      this.appJson = appJson.appJson;
+      this.lists = appJson.lists || [];
+      this.members = appJson.members || [];
+    } else {
+      this.appJson = appJson;
+    }
     this.path = path;
     this.validatorPath = path;
     this.exists = true;
@@ -59,7 +67,7 @@ export default class AbstractHippoNode {
     if (this.checkedPaths[this.path]) {
       return;
     }
-    this.checkedPaths = this.path;
+    this.checkedPaths[this.path] = true;
     if(!this.exists){
       if (this.isMandatory()) {
         errors.push({path:this.path, code:"not_exists"})
@@ -78,20 +86,30 @@ export default class AbstractHippoNode {
       }
     }
     this.childNodes.forEach(childNode=>{
-      childNode.validate(errors);
-    })
+      return childNode.validate(errors);
+    });
   };
 
   isMandatory() {
     return true;
   }
 
-  createValidationError(type, field, actual,expected, message) {
+  getPageNames() {
+    if (!this.viewNames) {
+      this.viewNames = (Object.values(this.appJson?.app?.views) || [])
+          ?.filter(it => it.type === 'page')
+          ?.map(it => it?.viewProps?.name)
+    }
+    return this.viewNames;
+  }
+
+  createValidationError(type, field, actual,expected, expectedMeaningful, message) {
     return {
       type,
       message,
       field,
       actual,
+      expectedMeaningful: expectedMeaningful || expected,
       expected
     }
   }
