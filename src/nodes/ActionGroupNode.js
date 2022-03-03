@@ -13,6 +13,9 @@ const schema = {
   },
   name: {
     type: 'string', optional:true
+  },
+  actions: {
+    type: 'object'
   }
 }
 const check = new Validator().compile(schema);
