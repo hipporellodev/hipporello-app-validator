@@ -17,15 +17,17 @@ const Validator = require("fastest-validator");
 
 const appNodeScheme = {
   'id': 'string',
+  'schemaVersion': 'number',
   'name': 'string',
   'slug': 'string',
   'description': 'string|optional',
   'type': {
     type: 'enum',
     values: [
-        'defaultApp'
+        'defaultApp', 'homeApp'
     ]
-  }
+  },
+  'boards': 'array|optional'
 }
 const appNodeCheck = new Validator().compile(appNodeScheme);
 export default class AppNode extends AbstractHippoNode{
@@ -81,6 +83,4 @@ export default class AppNode extends AbstractHippoNode{
       })
     }
   }
-
-
 }
