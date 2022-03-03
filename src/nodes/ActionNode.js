@@ -133,7 +133,6 @@ const actionWhenOpenForm = new Validator().compile({
     target: {
         type: 'object',
         props: {
-            title: 'string',
             type: {
                 type: 'enum',
                 values: ["_modal", "_blank", "_self"]
@@ -142,6 +141,7 @@ const actionWhenOpenForm = new Validator().compile({
     }
 });
 const actionWhenOpenFormModal = new Validator().compile({
+    title: "string|optional",
     size: {
         type: 'enum',
         values: ["small", "medium", "large"]
