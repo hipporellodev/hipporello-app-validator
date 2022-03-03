@@ -2,11 +2,39 @@ import * as yup from 'yup';
 import _, {isEmpty, mapValues} from 'lodash';
 import {lazy, string, number, mixed, object, array, boolean} from "yup";
 import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "./constants";
+import AppNode from "./nodes/AppNode";
+
+function getDefaultCardType() {
+    return {
+        id: "default",
+        name: "Default"
+    }
+}
+
+function addDefaults(originalApp) {
+    if (!originalApp.cardTypes) {
+        originalApp.cardTypes = {
+            default: getDefaultCardType()
+        }
+    } else {
+        originalApp.cardTypes.default = getDefaultCardType();
+    }
+    return originalApp;
+}
 
 export default class HippoValidator {
     constructor(appJson) {
         this.data = this.jsonTraverse(appJson);
-        this.actionConditionsScheme = this.getActionConditionsScheme();
+        if (this.data.appJson) {
+            this.data.appJson = {
+                app: addDefaults(this.data.appJson)
+            };
+        } else {
+            this.data = {
+                app: addDefaults(this.data)
+            }
+        }
+        /*this.actionConditionsScheme = this.getActionConditionsScheme();
         this.accessRightScheme = this.getAccessRightScheme();
         this.rolesScheme = this.getRolesScheme();
         this.cardTypesScheme = this.getCardTypesScheme();
@@ -23,7 +51,8 @@ export default class HippoValidator {
         this.viewSettingsScheme = this.getViewSettingsScheme();
         this.viewPropsScheme = this.getViewPropsScheme()
         this.viewComponentScheme = this.getComponentScheme();
-        this.formScheme = this.getFormScheme();
+        this.formScheme = this.getFormScheme();*/
+
     }
 
     isEmpty(val) {
@@ -64,21 +93,16 @@ export default class HippoValidator {
     }
 
     validate = (cast = false) => {
-        console.time('Validator');
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
-        console.time('extendYup');
+        return this.newValidate();
         this.extendYup();
-        console.timeEnd('extendYup');
-        console.time('CreateSchema')
         this.yup = this.createScheme(this.data);
-        console.timeEnd('CreateSchema')
         return new Promise((resolve, reject) => {
             this.yup.validate(this.data, {
                 abortEarly: false
             }).then(() => {
-                console.timeEnd('Validator');
                 if (cast) {
                     resolve(this.yup.cast(this.data, {stripUnknown: true}));
                 }
@@ -129,6 +153,24 @@ export default class HippoValidator {
                 name: yup.string().required(),
             }))
         ).nullable().default(null))
+    }
+
+    newValidate = async () => {
+        return new Promise((resolve, reject) => {
+            let errors = [];
+            const node = new AppNode(this.data);
+            node.init([])
+            node.validate(errors);
+            if (errors.length > 0) {
+                reject({
+                    type: 'ValidationException',
+                    errors: this.convertErrors(errors)
+                });
+            } else {
+                resolve();
+            }
+
+        })
     }
 
 
@@ -259,6 +301,7 @@ export default class HippoValidator {
                 "update-trello-card",
                 "add-comment",
                 "open-form",
+                "open-url",
                 "open-page",
                 "update-card-members",
                 "update-card-labels",
@@ -384,7 +427,7 @@ export default class HippoValidator {
             viewSettings: this.viewSettingsScheme.defined(),
             views: this.viewsScheme,
             environments: this.environmentScheme.defined(),
-            //automations: this.getAutomationsScheme(),
+            automations: this.getAutomationsScheme(),
         });
         return scheme;
     }
@@ -890,4 +933,55 @@ export default class HippoValidator {
         return Object.keys(this?.data?.components || {});
     }
 
+    convertErrors = (errors) => {
+        return errors.map(error => {
+            return {
+                code: this.convertErrorCode(error.type),
+                message:  this.convertMessage(error),
+                errorTitle: this.camelCaseToNormal(`${this.convertErrorCode(error.type)}Error`),
+                path: error.path,
+                params: {
+                    value: error?.actual,
+                    originalValue: error?.actual,
+                    label: error.field,
+                    path: error.path,
+                    values: this.convertActualValues(error),
+                    resolved: this.convertActualResolved(error)
+                }
+            }
+        })
+        return errors;
+    }
+    convertErrorCode = (code) => {
+        switch (code) {
+            case 'enumValue':
+                return 'oneOf';
+            default:
+                return code;
+        }
+    }
+    convertActualValues = (error) => {
+        let values = error.expected;
+        if (Array.isArray(values)) {
+            values = values.join(',');
+        }
+        return values;
+    }
+
+    convertActualResolved = (error) => {
+        let values = error.expected;
+        if (!Array.isArray(values)) {
+            values = values.split(',');
+        }
+        return values;
+    }
+    convertMessage = (error) => {
+        switch (error.type) {
+            case 'oneOf':
+            case 'enumValue':
+                return `${error.field} must be on of ${this.convertActualValues(error)}`
+            default:
+                error.message;
+        }
+    }
 }
