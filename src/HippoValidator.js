@@ -4,16 +4,34 @@ import {lazy, string, number, mixed, object, array, boolean} from "yup";
 import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "./constants";
 import AppNode from "./nodes/AppNode";
 
+function getDefaultCardType() {
+    return {
+        id: "default",
+        name: "Default"
+    }
+}
+
+function addDefaults(originalApp) {
+    if (!originalApp.cardTypes) {
+        originalApp.cardTypes = {
+            default: getDefaultCardType()
+        }
+    } else {
+        originalApp.cardTypes.default = getDefaultCardType();
+    }
+    return originalApp;
+}
+
 export default class HippoValidator {
     constructor(appJson) {
         this.data = this.jsonTraverse(appJson);
         if (this.data.appJson) {
             this.data.appJson = {
-                app: this.data.appJson
+                app: addDefaults(this.data.appJson)
             };
         } else {
             this.data = {
-                app: this.data
+                app: addDefaults(this.data)
             }
         }
         /*this.actionConditionsScheme = this.getActionConditionsScheme();

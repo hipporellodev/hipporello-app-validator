@@ -513,7 +513,7 @@
         "conditions" : [ [ {
           "field" : "card.c_cardType",
           "operator" : "equals",
-          "value" : "ca14e9d64f6147879c9c60db54948693",
+          "value" : "default",
           "valueType" : "value"
         }, {
           "field" : "card.tc_listHippoId",

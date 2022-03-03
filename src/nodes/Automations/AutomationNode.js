@@ -80,9 +80,9 @@ export default class AutomationNode extends AbstractHippoNode{
     }
   }
 
-  getValidatorFunction() {
+/*  getValidatorFunction() {
     const errors = [];
     errors.pushArray(automationCheck(this.nodeJson));
     return errors;
-  }
+  }*/
 }

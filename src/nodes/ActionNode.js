@@ -13,6 +13,7 @@ const schema = {
             "add-comment",
             "open-form",
             "open-page",
+            "open-url",
             "update-card-members",
             "update-card-labels",
             "move-card",
