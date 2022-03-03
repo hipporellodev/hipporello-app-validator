@@ -78,6 +78,7 @@ export default class HippoValidator {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
+        return this.newValidate();
         this.extendYup();
         this.yup = this.createScheme(this.data);
         return new Promise((resolve, reject) => {
@@ -143,7 +144,10 @@ export default class HippoValidator {
             node.init([])
             node.validate(errors);
             if (errors.length > 0) {
-                reject(this.convertErrors(errors));
+                reject({
+                    type: 'ValidationException',
+                    errors: this.convertErrors(errors)
+                });
             } else {
                 resolve();
             }
@@ -911,8 +915,54 @@ export default class HippoValidator {
     }
 
     convertErrors = (errors) => {
-        console.log(errors);
+        return errors.map(error => {
+            return {
+                code: this.convertErrorCode(error.type),
+                message:  this.convertMessage(error),
+                errorTitle: this.camelCaseToNormal(`${this.convertErrorCode(error.type)}Error`),
+                path: error.path,
+                params: {
+                    value: error?.actual,
+                    originalValue: error?.actual,
+                    label: error.field,
+                    path: error.path,
+                    values: this.convertActualValues(error),
+                    resolved: this.convertActualResolved(error)
+                }
+            }
+        })
         return errors;
     }
+    convertErrorCode = (code) => {
+        switch (code) {
+            case 'enumValue':
+                return 'oneOf';
+            default:
+                return code;
+        }
+    }
+    convertActualValues = (error) => {
+        let values = error.expected;
+        if (Array.isArray(values)) {
+            values = values.join(',');
+        }
+        return values;
+    }
 
+    convertActualResolved = (error) => {
+        let values = error.expected;
+        if (!Array.isArray(values)) {
+            values = values.split(',');
+        }
+        return values;
+    }
+    convertMessage = (error) => {
+        switch (error.type) {
+            case 'oneOf':
+            case 'enumValue':
+                return `${error.field} must be on of ${this.convertActualValues(error)}`
+            default:
+                error.message;
+        }
+    }
 }

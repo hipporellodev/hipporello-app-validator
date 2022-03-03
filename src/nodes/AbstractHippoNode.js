@@ -82,6 +82,7 @@ export default class AbstractHippoNode {
         newerrors.forEach(err => {
           err.path = `${this.validatorPath}.${err.field}`;
         })
+
         errors.pushArray(newerrors);
       }
     }

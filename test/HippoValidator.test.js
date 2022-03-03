@@ -19,19 +19,11 @@ describe("Hippo Validator Test", () => {
         }).toThrow(Error);
     })
     test("Perfectly configured json", async () => {
-        console.time("perfect")
-        for(let i=0; i < 1; i++){
-            hippoValidator = new HippoValidator({
-                appJson
-            });
-            await hippoValidator.validate().then(() => {
-                console.log('success');
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-        console.timeEnd("perfect")
-
+        expect.assertions(1);
+        hippoValidator = new HippoValidator(appJson);
+        await hippoValidator.validate().then(() => {
+            expect(1).toEqual(1);
+        })
     })
     test("Has no id", async () => {
         expect.assertions(1);
