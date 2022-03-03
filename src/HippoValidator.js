@@ -96,6 +96,7 @@ export default class HippoValidator {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
+        console.log("HippoValidator.validate() called")
         return this.newValidate();
         this.extendYup();
         this.yup = this.createScheme(this.data);
