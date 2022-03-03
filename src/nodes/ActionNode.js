@@ -135,7 +135,7 @@ const actionWhenOpenForm = new Validator().compile({
         props: {
             title: {
                 type:'string',
-                optional: true
+                optional: true, nullable: true
             },
             type: {
                 type: 'enum',
