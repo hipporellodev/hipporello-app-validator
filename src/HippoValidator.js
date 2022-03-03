@@ -16,7 +16,7 @@ export default class HippoValidator {
                 app: this.data
             }
         }
-        this.actionConditionsScheme = this.getActionConditionsScheme();
+        /*this.actionConditionsScheme = this.getActionConditionsScheme();
         this.accessRightScheme = this.getAccessRightScheme();
         this.rolesScheme = this.getRolesScheme();
         this.cardTypesScheme = this.getCardTypesScheme();
@@ -33,7 +33,7 @@ export default class HippoValidator {
         this.viewSettingsScheme = this.getViewSettingsScheme();
         this.viewPropsScheme = this.getViewPropsScheme()
         this.viewComponentScheme = this.getComponentScheme();
-        this.formScheme = this.getFormScheme();
+        this.formScheme = this.getFormScheme();*/
 
     }
 
