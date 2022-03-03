@@ -936,7 +936,7 @@ export default class HippoValidator {
 
     convertErrors = (errors) => {
         return errors.map(error => {
-            return {
+            let convertedError = {
                 code: this.convertErrorCode(error.type),
                 message:  this.convertMessage(error),
                 errorTitle: this.camelCaseToNormal(`${this.convertErrorCode(error.type)}Error`),
@@ -950,6 +950,8 @@ export default class HippoValidator {
                     resolved: this.convertActualResolved(error)
                 }
             }
+            console.log(JSON.stringify(convertedError));
+            return error;
         })
         return errors;
     }
@@ -971,7 +973,7 @@ export default class HippoValidator {
 
     convertActualResolved = (error) => {
         let values = error.expected;
-        if (!Array.isArray(values)) {
+        if (values && !Array.isArray(values)) {
             values = values.split(',');
         }
         return values;
