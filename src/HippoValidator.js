@@ -301,6 +301,7 @@ export default class HippoValidator {
                 "update-trello-card",
                 "add-comment",
                 "open-form",
+                "open-url",
                 "open-page",
                 "update-card-members",
                 "update-card-labels",
@@ -426,7 +427,7 @@ export default class HippoValidator {
             viewSettings: this.viewSettingsScheme.defined(),
             views: this.viewsScheme,
             environments: this.environmentScheme.defined(),
-            //automations: this.getAutomationsScheme(),
+            automations: this.getAutomationsScheme(),
         });
         return scheme;
     }

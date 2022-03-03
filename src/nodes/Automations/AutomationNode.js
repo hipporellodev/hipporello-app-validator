@@ -3,62 +3,21 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import RuleNode from "./RuleNode";
 import Validator from "fastest-validator";
 
-export const actionConditionSchema = {
-  conditions: {
-    type: 'array',
-    items: {
-      type: 'array',
-      items: {
-        type: 'object',
-        props: {
-          field: 'string|empty:false',
-          operator: {
-            type: 'enum',
-            values: [
-              "equals",
-              "notequals",
-              "contains",
-              "notcontains",
-              "startswith",
-              "notstartswith",
-              "endswith",
-              "notendswith",
-              "lessthan",
-              "lessthanequals",
-              "greaterthan",
-              "greaterthanequals",
-              "in",
-              "allin",
-              "anyin",
-              "notin",
-              "empty",
-              "notempty",
-              "has",
-              "doesnthave",
-            ]
-          },
-          value: 'any|empty:false',
-          valueType: {
-            type: 'enum',
-            values: ["variable", "value"]
-          }
-        }
-      }
-    }
+export const triggerSchema = {
+  type: {
+    type: 'enum',
+    values: ['card-created', 'moved', 'commented', 'archived']
   }
 }
+
 const automationCheck = new Validator().compile({
   id: 'string|empty:false',
   name: 'string|empty:false',
   order: 'number',
-  matching: {
+  trigger: {
     type: 'object',
     props: {
-      ...actionConditionSchema,
-      type: {
-        type: 'enum',
-        values: ['basic']
-      }
+      ...triggerSchema
     }
   }
 });
@@ -80,9 +39,9 @@ export default class AutomationNode extends AbstractHippoNode{
     }
   }
 
-/*  getValidatorFunction() {
+  getValidatorFunction() {
     const errors = [];
     errors.pushArray(automationCheck(this.nodeJson));
     return errors;
-  }*/
+  }
 }

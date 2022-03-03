@@ -56,6 +56,7 @@ const schemaExternal = {
             "add-comment",
             "open-form",
             "open-page",
+            "open-url",
             "update-card-members",
             "update-card-labels",
             "move-card",
@@ -185,6 +186,7 @@ export default class ActionNode extends AbstractHippoNode {
                 errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props));
             }
         }
+        // TODO Caner Add open URL checks here
         if (this.nodeJson.type === 'open-form') {
             errors.pushArray(actionWhenOpenForm(this.nodeJson.props))
             if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]) {

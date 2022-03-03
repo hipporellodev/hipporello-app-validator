@@ -1,3364 +1,3783 @@
 {
-  "actionGroups" : {
-    "3G52Wi" : {
-      "actions" : {
-        "mEE6Cf" : {
-          "id" : "mEE6Cf",
-          "order" : 0,
-          "props" : {
-            "target" : {
-              "type" : "_blank"
-            },
-            "type" : "internal",
-            "url" : "{{{card.tc_url}}}",
-            "viewId" : "ecVH47"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "3G52Wi",
-      "name" : "dede®",
-      "shared" : true
-    },
-    "641sPx" : {
-      "actions" : {
-        "OLafvZ" : {
-          "id" : "OLafvZ",
-          "order" : 0,
-          "props" : {
-            "labels" : [ "fd6c220faf004cd3b088c6622ad9f47c", "5fb63ed6838d4574afb619aa50277184" ],
-            "params" : {
-              "context" : "self"
-            },
-            "updateLabelActionType" : "add-labels"
-          },
-          "type" : "update-card-labels"
-        },
-        "TSq20B" : {
-          "id" : "TSq20B",
-          "order" : 1,
-          "props" : {
-            "list" : "5ea31c5a1f404fae843e33b95abc6e1b",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "641sPx",
-      "name" : "",
-      "shared" : false
-    },
-    "6qNaro" : {
-      "actions" : {
-        "Pcvv7y" : {
-          "id" : "Pcvv7y",
-          "order" : 0,
-          "props" : {
-            "target" : {
-              "type" : "_self"
-            },
-            "type" : "external",
-            "url" : "{{{parentCard.tc_url}}}",
-            "viewId" : ""
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "6qNaro",
-      "name" : "",
-      "shared" : false
-    },
-    "81odF3" : {
-      "actions" : {
-        "O9W7kB" : {
-          "id" : "O9W7kB",
-          "order" : 0,
-          "props" : {
-            "conversationMembers" : [ {
-              "id" : "submissionOwner",
-              "isContributor" : true,
-              "type" : "submissionOwner"
-            } ],
-            "message" : "{{{appVariables.av_5xdO5J}}}",
-            "subject" : "{{{appVariables.av_6jqxd8}}}",
-            "subjectType" : "plainText"
-          },
-          "type" : "send-conversation-message"
-        }
-      },
-      "id" : "81odF3",
-      "name" : "",
-      "shared" : false
-    },
-    "827J27" : {
-      "actions" : {
-        "IcIWIo" : {
-          "id" : "IcIWIo",
-          "order" : 1,
-          "props" : {
-            "labels" : [ "8d550130ff9d4e12bf3d0f09fb1234a5" ],
-            "params" : {
-              "context" : "self"
-            },
-            "updateLabelActionType" : "add-labels"
-          },
-          "type" : "update-card-labels"
-        },
-        "ekAey6" : {
-          "id" : "ekAey6",
-          "order" : 0,
-          "props" : {
-            "list" : "5ea31c5a1f404fae843e33b95abc6e1b",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "827J27",
-      "name" : "",
-      "shared" : false
-    },
-    "AkwW3Q" : {
-      "actions" : {
-        "9GytB6" : {
-          "id" : "9GytB6",
-          "order" : 0,
-          "props" : {
-            "conversationMembers" : [ {
-              "id" : "submissionOwner",
-              "isContributor" : true,
-              "type" : "submissionOwner"
-            } ],
-            "message" : "{{{appVariables.av_ZxbLSs}}}",
-            "subject" : "Your application for {{{parentCard.hf_6fEHVP}}} position",
-            "subjectType" : "plainText"
-          },
-          "type" : "send-conversation-message"
-        }
-      },
-      "id" : "AkwW3Q",
-      "name" : "",
-      "shared" : false
-    },
-    "BWT3PY" : {
-      "actions" : {
-        "xPvKbA" : {
-          "id" : "xPvKbA",
-          "order" : 0,
-          "props" : {
-            "formId" : "e108995a4b0f46499a2cb1afa61bb65b",
-            "target" : {
-              "size" : "large",
-              "title" : "Job Application Form",
-              "type" : "_self"
-            }
-          },
-          "type" : "open-form"
-        }
-      },
-      "id" : "BWT3PY",
-      "name" : "",
-      "shared" : false
-    },
-    "IBqu1w" : {
-      "actions" : {
-        "9VWOUc" : {
-          "id" : "9VWOUc",
-          "order" : 0,
-          "props" : {
-            "list" : "0ef117acddb84aafbc042cf4ed7ceb4a",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "IBqu1w",
-      "name" : "",
-      "shared" : false
-    },
-    "Udl0cq" : {
-      "actions" : {
-        "eNQvjO" : {
-          "id" : "eNQvjO",
-          "order" : 0,
-          "props" : {
-            "params" : {
-              "context" : "self"
-            },
-            "target" : {
-              "type" : "_self"
-            },
-            "type" : "internal",
-            "url" : "",
-            "viewId" : "jE7ieG"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "Udl0cq",
-      "name" : "",
-      "shared" : false
-    },
-    "aMiiIg" : {
-      "actions" : {
-        "DPEw1I" : {
-          "id" : "DPEw1I",
-          "order" : 0,
-          "props" : {
-            "params" : {
-              "context" : "self"
-            },
-            "target" : {
-              "type" : "_self"
-            },
-            "type" : "internal",
-            "url" : "",
-            "viewId" : "AJ0K7d"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "aMiiIg",
-      "name" : "",
-      "shared" : false
-    },
-    "bbDCs5" : {
-      "actions" : {
-        "3oiK6d" : {
-          "id" : "3oiK6d",
-          "order" : 1,
-          "props" : {
-            "list" : "5ea31c5a1f404fae843e33b95abc6e1b",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        },
-        "Qdbsqz" : {
-          "id" : "Qdbsqz",
-          "order" : 0,
-          "props" : {
-            "labels" : [ "548962f179774f0b9aad1cc430ba718a" ],
-            "params" : {
-              "context" : "self"
-            },
-            "updateLabelActionType" : "add-labels"
-          },
-          "type" : "update-card-labels"
-        }
-      },
-      "id" : "bbDCs5",
-      "name" : "",
-      "shared" : false
-    },
-    "ewOpOd" : {
-      "actions" : {
-        "TgSHbP" : {
-          "id" : "TgSHbP",
-          "order" : 0,
-          "props" : {
-            "params" : {
-              "context" : "self"
-            },
-            "target" : {
-              "type" : "_self"
-            },
-            "type" : "internal",
-            "viewId" : "R90WKS"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "ewOpOd",
-      "name" : "",
-      "shared" : false
-    },
-    "f7AC3x" : {
-      "actions" : {
-        "hLIj4t" : {
-          "id" : "hLIj4t",
-          "order" : 0,
-          "props" : {
-            "params" : {
-              "context" : "self"
-            },
-            "target" : {
-              "type" : "_self"
-            },
-            "type" : "internal",
-            "url" : "",
-            "viewId" : "jE7ieG"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "f7AC3x",
-      "name" : "",
-      "shared" : false
-    },
-    "fGO4o9" : {
-      "actions" : {
-        "gZXuG2" : {
-          "id" : "gZXuG2",
-          "order" : 0,
-          "props" : {
-            "list" : "7a9d9f4e3c094feba94dbb45eaa40288",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "fGO4o9",
-      "name" : "",
-      "shared" : false
-    },
-    "j8xC9x" : {
-      "actions" : {
-        "lE34o8" : {
-          "id" : "lE34o8",
-          "order" : 0,
-          "props" : {
-            "params" : {
-              "context" : "self"
-            },
-            "target" : {
-              "type" : "_blank"
-            },
-            "type" : "internal",
-            "url" : "",
-            "viewId" : "jE7ieG"
-          },
-          "type" : "open-page"
-        }
-      },
-      "id" : "j8xC9x",
-      "name" : "",
-      "shared" : false
-    },
-    "nIg13p" : {
-      "actions" : {
-        "iuJabW" : {
-          "id" : "iuJabW",
-          "order" : 1,
-          "props" : {
-            "list" : "5ea31c5a1f404fae843e33b95abc6e1b",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        },
-        "pq1Oa8" : {
-          "id" : "pq1Oa8",
-          "order" : 2,
-          "props" : {
-            "labels" : [ "27be81b7b9304eb2b43da99bfe7b754a" ],
-            "params" : {
-              "context" : "self"
-            },
-            "updateLabelActionType" : "add-labels"
-          },
-          "type" : "update-card-labels"
-        }
-      },
-      "id" : "nIg13p",
-      "name" : "",
-      "shared" : false
-    },
-    "pDf7G6" : {
-      "actions" : {
-        "GwCFiY" : {
-          "id" : "GwCFiY",
-          "order" : 0,
-          "props" : {
-            "list" : "857f6601a9154d9fae6346f8acc8c4eb",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "pDf7G6",
-      "name" : "",
-      "shared" : false
-    },
-    "srFAtZ" : {
-      "actions" : {
-        "Dk5FQF" : {
-          "id" : "Dk5FQF",
-          "order" : 0,
-          "props" : {
-            "list" : "bc7e6c5e9bbb4ddf8861b5f2689e123d",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "srFAtZ",
-      "name" : "",
-      "shared" : false
-    },
-    "vdsWA1" : {
-      "actions" : {
-        "ZZ7cuN" : {
-          "id" : "ZZ7cuN",
-          "order" : 0,
-          "props" : {
-            "list" : "91540a61d5d94bc5b911bde88c575a3e",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "vdsWA1",
-      "name" : "",
-      "shared" : false
-    },
-    "w0ZVHt" : {
-      "actions" : {
-        "ZDu3Pk" : {
-          "id" : "ZDu3Pk",
-          "order" : 0,
-          "props" : {
-            "list" : "ec22a545c9a346d5a31587ab44884e6b",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "w0ZVHt",
-      "name" : "",
-      "shared" : false
-    },
-    "x1bLfl" : {
-      "actions" : {
-        "mJwGTz" : {
-          "id" : "mJwGTz",
-          "order" : 0,
-          "props" : {
-            "list" : "080f89f5d78f429d9be57a858d34b9cc",
-            "params" : {
-              "context" : "self"
-            }
-          },
-          "type" : "move-card"
-        }
-      },
-      "id" : "x1bLfl",
-      "name" : "",
-      "shared" : false
-    },
-    "xjoq7y" : {
-      "actions" : {
-        "pnPrOq" : {
-          "id" : "pnPrOq",
-          "order" : 0,
-          "props" : {
-            "formId" : "b2ce1282c9ba4181b393bac7053705f5",
-            "target" : {
-              "size" : "large",
-              "title" : "New Job Advertisement Form",
-              "type" : "_self"
-            }
-          },
-          "type" : "open-form"
-        }
-      },
-      "id" : "xjoq7y",
-      "name" : "",
-      "shared" : false
-    },
-    "yAZgWs" : {
-      "actions" : {
-        "GlUSs6" : {
-          "id" : "GlUSs6",
-          "order" : 0,
-          "props" : {
-            "formId" : "a40973f024344477b5cfe51bb6d66995",
-            "target" : {
-              "size" : "large",
-              "title" : "Update Job Ad Form",
-              "type" : "_modal"
-            }
-          },
-          "type" : "open-form"
-        }
-      },
-      "id" : "yAZgWs",
-      "name" : "",
-      "shared" : false
-    }
-  },
-  "automations" : {
-    "5PwSG7IgY72eaQA5irLnQDWi0Nsb1Fy3" : {
-      "enabled" : true,
-      "id" : "5PwSG7IgY72eaQA5irLnQDWi0Nsb1Fy3",
-      "matching" : {
-        "conditions" : [ [ {
-          "field" : "card.c_cardType",
-          "operator" : "equals",
-          "value" : "default",
-          "valueType" : "value"
-        }, {
-          "field" : "card.tc_listHippoId",
-          "operator" : "equals",
-          "value" : "5ea31c5a1f404fae843e33b95abc6e1b",
-          "valueType" : "value"
-        }, {
-          "field" : "card.tc_labelHippoIds",
-          "operator" : "notin",
-          "value" : [ "5fb63ed6838d4574afb619aa50277184" ],
-          "valueType" : "value"
-        } ] ],
-        "type" : "basic"
-      },
-      "name" : "Application Rejection Message",
-      "order" : 2,
-      "rules" : {
-        "VNnXoG" : {
-          "events" : {
-            "onTrigger" : {
-              "actionGroupId" : "AkwW3Q",
-              "id" : "6SMtj8"
-            }
-          },
-          "id" : "VNnXoG",
-          "order" : 0,
-          "trigger" : {
-            "type" : "archived"
-          }
-        }
-      }
-    },
-    "H0NV0eTgs6QZWhM6gJFJbIDgjFmMQDdO" : {
-      "enabled" : true,
-      "id" : "H0NV0eTgs6QZWhM6gJFJbIDgjFmMQDdO",
-      "matching" : {
-        "conditions" : [ [ {
-          "field" : "card.c_cardType",
-          "operator" : "equals",
-          "value" : "ca14e9d64f6147879c9c60db54948693",
-          "valueType" : "value"
-        } ] ],
-        "type" : "basic"
-      },
-      "name" : "Application Received Message",
-      "order" : 1,
-      "rules" : {
-        "v2u3Py" : {
-          "events" : {
-            "onTrigger" : {
-              "actionGroupId" : "81odF3",
-              "id" : "m8KJyQ"
-            }
-          },
-          "id" : "v2u3Py",
-          "order" : 0,
-          "trigger" : {
-            "type" : "card-created"
-          }
-        }
+  "id": "052cdef69a7146e496e8147358c0e3e2",
+  "schemaVersion": 1,
+  "type": "defaultApp",
+  "name": "Applicant Tracking System",
+  "description": "You can apply to open positions and keep track of them using this application.",
+  "slug": "ats",
+  "boards": [
+    "61928d056672f659d339ef7f"
+  ],
+  "viewSettings": {
+    "appViewSettings": {
+      "icon": {
+        "iconSet": "fontAwesome",
+        "background": "#FF7E46",
+        "name": "user-check",
+        "type": "image",
+        "url": "https://s3-us-west-2.amazonaws.com/public.appsstaging.hipporello.io/public/uploads/other/templates/84a01e68f7f847f2ba8c73047f1362b7/bc_ats.png"
       }
     }
   },
-  "boards" : [ "61ef14a0381ad77743a47a85" ],
-  "cardTypes" : {
-    "66cd0f1b6db141e68d4aa1c1cb12964a" : {
-      "id" : "66cd0f1b6db141e68d4aa1c1cb12964a",
-      "name" : "Job Advertisement"
+  "environments": {
+    "webView": {
+      "appHeader": "05JN1e",
+      "id": "webView",
+      "type": "webView",
+      "home": "Vwt_jm",
+      "enabled": true
     },
-    "ca14e9d64f6147879c9c60db54948693" : {
-      "id" : "ca14e9d64f6147879c9c60db54948693",
-      "name" : "Job Application"
-    },
-    "f4c1b9158ca241e095259beae21792b8" : {
-      "id" : "f4c1b9158ca241e095259beae21792b8",
-      "name" : "Question"
+    "trelloCardBack": {
+      "appHeader": "ecVH47",
+      "id": "trelloCardBack",
+      "type": "trelloCardBack",
+      "enabled": true
     }
   },
-  "components" : {
-    "0KQDPv" : {
-      "id" : "0KQDPv",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Messages"
-      }
+  "cardTypes": {
+    "xe3ClaW5nLpXDjxO4poIfOjiYPBocHKz": {
+      "name": "Question",
+      "id": "xe3ClaW5nLpXDjxO4poIfOjiYPBocHKz"
     },
-    "0QIbwK" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "0ef117acddb84aafbc042cf4ed7ceb4a",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+    "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3": {
+      "name": "Job Application",
+      "id": "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3"
+    },
+    "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF": {
+      "name": "Job Advertisement",
+      "id": "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF"
+    }
+  },
+  "fieldDefinitions": {
+    "appVariableFields": {
+      "av_6jqxd8": {
+        "multiple": false,
+        "id": "av_6jqxd8",
+        "label": "Application Received Auto Message - Subject",
+        "type": "string"
       },
-      "id" : "0QIbwK",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#21ba1e",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "pDf7G6",
-            "id" : "MmGtZn"
-          }
-        },
-        "text" : "Publish"
-      }
-    },
-    "1N2ETS" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "notequals",
-            "value" : "080f89f5d78f429d9be57a858d34b9cc",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "av_ktItTX": {
+        "multiple": false,
+        "id": "av_ktItTX",
+        "label": "Company Info",
+        "type": "string"
       },
-      "id" : "1N2ETS",
-      "type" : "dropdown",
-      "viewProps" : {
-        "alignment" : "left",
-        "backgroundColor" : "#F9FAFC",
-        "fluid" : true,
-        "text" : "Move to Disqualified",
-        "textAlign" : "center",
-        "textColor" : "#d0021b"
-      }
-    },
-    "1kg0TE" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "bc7e6c5e9bbb4ddf8861b5f2689e123d",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "av_ZxbLSs": {
+        "multiple": false,
+        "id": "av_ZxbLSs",
+        "label": "Rejection Email",
+        "type": "string"
       },
-      "id" : "1kg0TE",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#6bc505",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "fGO4o9",
-            "id" : "aZ2eQ5"
-          }
-        },
-        "icon" : "angle-right",
-        "text" : "Move to Offer"
+      "av_5xdO5J": {
+        "multiple": false,
+        "id": "av_5xdO5J",
+        "label": "Application Received Auto Message - Body",
+        "type": "string"
       }
     },
-    "2atu7t" : {
-      "id" : "2atu7t",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h3",
-        "text" : "Open Positions"
-      }
-    },
-    "31W96B" : {
-      "id" : "31W96B",
-      "type" : "column"
-    },
-    "3D1reo" : {
-      "id" : "3D1reo",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "center",
-        "text" : "Your message has been received."
-      }
-    },
-    "49YbjL" : {
-      "id" : "49YbjL",
-      "type" : "TrelloCardSharing",
-      "viewProps" : {
-        "header" : "",
-        "query" : {
-          "conditions" : [ [ {
-            "field" : "card.c_cardType",
-            "operator" : "equals",
-            "value" : "ca14e9d64f6147879c9c60db54948693",
-            "valueType" : "value"
-          }, {
-            "field" : "card.c_parentCardId",
-            "operator" : "equals",
-            "value" : "{{{card.c_id}}}",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        },
-        "viewType" : "table"
-      }
-    },
-    "4N5jdj" : {
-      "id" : "4N5jdj",
-      "type" : "table",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "aMiiIg",
-            "id" : "XwLKnb"
-          }
-        }
-      }
-    },
-    "4ap6nv" : {
-      "id" : "4ap6nv",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{appVariables.av_ktItTX}}}"
-      }
-    },
-    "4b0sXW" : {
-      "id" : "4b0sXW",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "props" : {
-                "params" : {
-                  "context" : "self"
-                },
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "npj93S"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "Menu Item"
-      }
-    },
-    "57YdjM" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "ec22a545c9a346d5a31587ab44884e6b",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+    "hippoFields": {
+      "hf_S9CLku": {
+        "multiple": false,
+        "id": "hf_S9CLku",
+        "label": "First Name",
+        "type": "string"
       },
-      "id" : "57YdjM",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#6bc505",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "srFAtZ",
-            "id" : "0BwHFv"
-          }
-        },
-        "icon" : "angle-right",
-        "text" : "Move to Interview"
-      }
-    },
-    "6uC6Bp" : {
-      "id" : "6uC6Bp",
-      "type" : "tableColumn",
-      "viewProps" : {
-        "header" : "in List"
-      }
-    },
-    "75tSmt" : {
-      "id" : "75tSmt",
-      "type" : "button",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "xjoq7y",
-            "id" : "qgFGP2"
-          }
-        },
-        "text" : "Create New Job Ad"
-      }
-    },
-    "8c9U1z" : {
-      "id" : "8c9U1z",
-      "type" : "columns",
-      "viewProps" : {
-        "layout" : [ 89.79865771812081, 10.201342281879194 ]
-      }
-    },
-    "8kSynl" : {
-      "id" : "8kSynl",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h3",
-        "text" : "{{{card.hf_6fEHVP}}}"
-      }
-    },
-    "9GFB6R" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "080f89f5d78f429d9be57a858d34b9cc",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_KFZcgv": {
+        "multiple": false,
+        "id": "hf_KFZcgv",
+        "label": "Responsibilities",
+        "type": "string"
       },
-      "id" : "9GFB6R",
-      "type" : "button",
-      "viewProps" : {
-        "alignment" : "center",
-        "backgroundColor" : "#edfbd7",
-        "icon" : "handshake",
-        "iconPosition" : "left",
-        "size" : "default",
-        "text" : "The applicant was hired.",
-        "textColor" : "#7ed321"
-      }
-    },
-    "9hJ1sl" : {
-      "id" : "9hJ1sl",
-      "type" : "tableColumn",
-      "viewProps" : {
-        "header" : "Applicant Name"
-      }
-    },
-    "9qP05j" : {
-      "id" : "9qP05j",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "CV Attachments"
-      }
-    },
-    "AvMijH" : {
-      "id" : "AvMijH",
-      "type" : "Conversation",
-      "viewProps" : {
-        "allowDeleteMessage" : false,
-        "allowDeleteThread" : false,
-        "allowGetBoardMembers" : true,
-        "allowGetContacts" : true,
-        "allowGetRoles" : true,
-        "allowMembersUpdate" : false,
-        "allowNewThread" : false,
-        "allowQuickText" : true,
-        "allowReply" : true,
-        "events" : {
-          "onGetBoardMembers" : {
-            "action" : {
-              "id" : "Uxifln",
-              "type" : "conversation-get-board-members"
-            },
-            "id" : "soufXQ"
-          },
-          "onGetContacts" : {
-            "action" : {
-              "id" : "g4RPHb",
-              "type" : "conversation-get-contacts"
-            },
-            "id" : "IMxzhr"
-          },
-          "onGetRoles" : {
-            "action" : {
-              "id" : "SgMTpu",
-              "type" : "conversation-get-roles"
-            },
-            "id" : "ZYIJ31"
-          },
-          "onReply" : {
-            "action" : {
-              "id" : "Pu6Rq0",
-              "type" : "conversation-reply"
-            },
-            "id" : "xj3mhy"
-          }
-        },
-        "showMeta" : false,
-        "showThreadMemberAliasName" : true,
-        "threadVisibility" : "onlyThreadMembers"
-      }
-    },
-    "B2O2R3" : {
-      "id" : "B2O2R3",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_5nFgHF}}}"
-      }
-    },
-    "CCWJxt" : {
-      "id" : "CCWJxt",
-      "type" : "menu"
-    },
-    "COQqmh" : {
-      "id" : "COQqmh",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h3",
-        "text" : "My Applications"
-      }
-    },
-    "CzTWra" : {
-      "id" : "CzTWra",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "center",
-        "heading" : "h2",
-        "text" : "Thank you"
-      }
-    },
-    "DEW3oi" : {
-      "id" : "DEW3oi",
-      "type" : "attachmentList",
-      "viewProps" : {
-        "field" : "card.hf_5MFT0y"
-      }
-    },
-    "DmqSOf" : {
-      "id" : "DmqSOf",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "{{{card.hf_6fEHVP}}}"
-      }
-    },
-    "FOkQb4" : {
-      "id" : "FOkQb4",
-      "type" : "Conversation",
-      "viewProps" : {
-        "allowDeleteMessage" : true,
-        "allowDeleteThread" : true,
-        "allowGetBoardMembers" : true,
-        "allowGetContacts" : true,
-        "allowGetRoles" : true,
-        "allowMembersUpdate" : true,
-        "allowNewThread" : true,
-        "allowQuickText" : true,
-        "allowReply" : true,
-        "events" : {
-          "onDeleteMessage" : {
-            "action" : {
-              "id" : "ptPTK8",
-              "type" : "conversation-delete-message"
-            },
-            "id" : "f2DOQT"
-          },
-          "onDeleteThread" : {
-            "action" : {
-              "id" : "hTeP6M",
-              "type" : "conversation-delete-thread"
-            },
-            "id" : "XHBHte"
-          },
-          "onGetBoardMembers" : {
-            "action" : {
-              "id" : "x1LaNS",
-              "type" : "conversation-get-board-members"
-            },
-            "id" : "U25JS7"
-          },
-          "onGetContacts" : {
-            "action" : {
-              "id" : "vai0Hv",
-              "type" : "conversation-get-contacts"
-            },
-            "id" : "lfykXB"
-          },
-          "onGetRoles" : {
-            "action" : {
-              "id" : "cWHTmu",
-              "type" : "conversation-get-roles"
-            },
-            "id" : "viebp4"
-          },
-          "onMembersUpdate" : {
-            "action" : {
-              "id" : "6TGuJ4",
-              "type" : "conversation-update-members"
-            },
-            "id" : "Qq69JJ"
-          },
-          "onNewThread" : {
-            "action" : {
-              "id" : "uplW7w",
-              "type" : "conversation-new-thread"
-            },
-            "id" : "uYdO5Q"
-          },
-          "onReply" : {
-            "action" : {
-              "id" : "JhKilt",
-              "type" : "conversation-reply"
-            },
-            "id" : "55d4i3"
-          }
-        },
-        "showMeta" : true,
-        "showThreadMemberAliasName" : true,
-        "threadVisibility" : "everyone"
-      }
-    },
-    "HbfKx2" : {
-      "id" : "HbfKx2",
-      "type" : "attachmentList",
-      "viewProps" : {
-        "field" : "card.hf_5MFT0y"
-      }
-    },
-    "HkgIWt" : {
-      "accessRight" : {
-        "roleRules" : [ {
-          "roles" : [ "hpauth" ],
-          "type" : "allow"
-        } ]
+      "hf_Z0d0rI": {
+        "multiple": false,
+        "id": "hf_Z0d0rI",
+        "label": "Workplace Type",
+        "type": "string"
       },
-      "id" : "HkgIWt",
-      "type" : "paragraph",
-      "viewProps" : {
-        "text" : "You can follow the process on 'My Applications' page."
-      }
-    },
-    "HvQZM6" : {
-      "id" : "HvQZM6",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_RPqVAP}}}"
-      }
-    },
-    "I21nqm" : {
-      "id" : "I21nqm",
-      "type" : "column"
-    },
-    "IC6oRZ" : {
-      "accessRight" : {
-        "roleRules" : [ {
-          "roles" : [ "hpnauth" ],
-          "type" : "allow"
-        } ]
+      "hf_5MFT0y": {
+        "multiple": true,
+        "id": "hf_5MFT0y",
+        "label": "CV Attachments",
+        "type": "attachment"
       },
-      "id" : "IC6oRZ",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "You can follow the process on your email."
-      }
-    },
-    "JK7Eyy" : {
-      "id" : "JK7Eyy",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h3",
-        "text" : "About Company"
-      }
-    },
-    "JXainN" : {
-      "id" : "JXainN",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Application Date"
-      }
-    },
-    "JXuI7K" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "7a9d9f4e3c094feba94dbb45eaa40288",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_ETDdRy": {
+        "multiple": false,
+        "id": "hf_ETDdRy",
+        "label": "Position Description",
+        "type": "string"
       },
-      "id" : "JXuI7K",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#6bc505",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "x1bLfl",
-            "id" : "RhL6ZS"
-          }
-        },
-        "icon" : "handshake",
-        "text" : "Move to Hired"
-      }
-    },
-    "K6LIhG" : {
-      "id" : "K6LIhG",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_ETDdRy}}}"
-      }
-    },
-    "LtdQ08" : {
-      "id" : "LtdQ08",
-      "type" : "column"
-    },
-    "M7m4Ls" : {
-      "id" : "M7m4Ls",
-      "type" : "columns"
-    },
-    "Ml5YVn" : {
-      "id" : "Ml5YVn",
-      "type" : "column"
-    },
-    "PnTHy8" : {
-      "id" : "PnTHy8",
-      "type" : "TrelloCardSharing",
-      "viewProps" : {
-        "gap" : 16,
-        "pageSize" : 4,
-        "perItemRow" : 1,
-        "query" : {
-          "conditions" : [ [ {
-            "field" : "card.c_cardType",
-            "operator" : "equals",
-            "value" : "66cd0f1b6db141e68d4aa1c1cb12964a",
-            "valueType" : "value"
-          }, {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "857f6601a9154d9fae6346f8acc8c4eb",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        },
-        "sort" : "desc",
-        "viewType" : "list"
-      }
-    },
-    "Quhce6" : {
-      "id" : "Quhce6",
-      "type" : "hyperlink",
-      "viewProps" : {
-        "alignment" : "left",
-        "backgroundColor" : "transparent",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "6qNaro",
-            "id" : "33L2Hy"
-          }
-        },
-        "fluid" : true,
-        "icon" : "folder",
-        "iconPosition" : "left",
-        "size" : "default",
-        "text" : "Related Job Advertisement: {{{parentCard.tc_name}}}",
-        "textColor" : "#3366BB"
-      }
-    },
-    "R4wpqd" : {
-      "id" : "R4wpqd",
-      "type" : "TrelloCardSharing",
-      "viewProps" : {
-        "header" : "",
-        "query" : {
-          "conditions" : [ [ {
-            "field" : "card.c_userId",
-            "operator" : "equals",
-            "value" : "{{{user.id}}}",
-            "valueType" : "value"
-          }, {
-            "field" : "card.c_cardType",
-            "operator" : "equals",
-            "value" : "ca14e9d64f6147879c9c60db54948693",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        },
-        "viewType" : "table"
-      }
-    },
-    "STbeDM" : {
-      "id" : "STbeDM",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_KFZcgv}}}"
-      }
-    },
-    "SlAmAt" : {
-      "id" : "SlAmAt",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Cover Letter"
-      }
-    },
-    "TujUS2" : {
-      "id" : "TujUS2",
-      "type" : "table",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "3G52Wi",
-            "id" : "tmIU3h"
-          }
-        }
-      }
-    },
-    "U143wz" : {
-      "id" : "U143wz",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "Skills & Qualifications"
-      }
-    },
-    "U2y66a" : {
-      "id" : "U2y66a",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.c_insertedAt}}}"
-      }
-    },
-    "U6Ju3B" : {
-      "id" : "U6Ju3B",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Position Description"
-      }
-    },
-    "UMEiAw" : {
-      "id" : "UMEiAw",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Cover Letter"
-      }
-    },
-    "VM2Tca" : {
-      "id" : "VM2Tca",
-      "type" : "button",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "BWT3PY",
-            "id" : "XVH69I"
-          }
-        },
-        "size" : "default",
-        "text" : "Apply"
-      }
-    },
-    "VvgFYC" : {
-      "id" : "VvgFYC",
-      "type" : "header",
-      "viewProps" : {
-        "heading" : "h2",
-        "text" : "'{{{card.hf_6fEHVP}}} job ad has been created."
-      }
-    },
-    "WSOYZX" : {
-      "id" : "WSOYZX",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "{{{card.hf_6fEHVP}}}"
-      }
-    },
-    "Whdjw7" : {
-      "id" : "Whdjw7",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "Responsibilities"
-      }
-    },
-    "XCbS30" : {
-      "accessRight" : {
-        "roleRules" : [ {
-          "roles" : [ "hpauth" ],
-          "type" : "allow"
-        } ]
+      "hf_QFzUc7": {
+        "multiple": false,
+        "id": "hf_QFzUc7",
+        "label": "Skills & Qualifications",
+        "type": "string"
       },
-      "id" : "XCbS30",
-      "type" : "button",
-      "viewProps" : {
-        "alignment" : "center",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "ewOpOd",
-            "id" : "obPECv"
-          }
-        },
-        "text" : "Go to My Applications"
-      }
-    },
-    "XUyVDL" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "91540a61d5d94bc5b911bde88c575a3e",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_6fEHVP": {
+        "multiple": false,
+        "id": "hf_6fEHVP",
+        "label": "Position Title",
+        "type": "string"
       },
-      "id" : "XUyVDL",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#6bc505",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "w0ZVHt",
-            "id" : "JbLzkk"
-          }
-        },
-        "icon" : "angle-right",
-        "text" : "Move to Shortlist"
-      }
-    },
-    "XqlVsI" : {
-      "id" : "XqlVsI",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "Applications"
-      }
-    },
-    "_kv_hG" : {
-      "id" : "_kv_hG",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "You can view the details of our open positions and apply for the position you are interested in"
-      }
-    },
-    "aOnEk0" : {
-      "id" : "aOnEk0",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "props" : {
-                "params" : {
-                  "context" : "self"
-                },
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "gv0TUI"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "Menu Item"
-      }
-    },
-    "aWgNXP" : {
-      "id" : "aWgNXP",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "id" : "qTcd7F",
-              "props" : {
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "R90WKS"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "My Applications"
-      }
-    },
-    "aZrviP" : {
-      "id" : "aZrviP",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_QFzUc7}}}"
-      }
-    },
-    "bSCl7B" : {
-      "id" : "bSCl7B",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Responsibilities"
-      }
-    },
-    "bmB7EU" : {
-      "id" : "bmB7EU",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_Z0d0rI}}} - {{{card.hf_WjyM92}}}"
-      }
-    },
-    "dBRz2G" : {
-      "id" : "dBRz2G",
-      "type" : "menu"
-    },
-    "dTfQP6" : {
-      "id" : "dTfQP6",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_QFzUc7}}}"
-      }
-    },
-    "dq7Ved" : {
-      "id" : "dq7Ved",
-      "type" : "tableColumn",
-      "viewProps" : {
-        "header" : "Position"
-      }
-    },
-    "dwvogK" : {
-      "id" : "dwvogK",
-      "type" : "tableColumn",
-      "viewProps" : {
-        "header" : "Application Date"
-      }
-    },
-    "ejdTEh" : {
-      "id" : "ejdTEh",
-      "type" : "dropdownItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "641sPx",
-            "id" : "WIK3Cd"
-          }
-        },
-        "text" : "Offer Declined"
-      }
-    },
-    "fpUCfW" : {
-      "id" : "fpUCfW",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "Position Description"
-      }
-    },
-    "g5LqeY" : {
-      "id" : "g5LqeY",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Skills & Qualifications"
-      }
-    },
-    "gF9DeG" : {
-      "id" : "gF9DeG",
-      "type" : "horizontalline"
-    },
-    "gUEFja" : {
-      "id" : "gUEFja",
-      "type" : "dropdownItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "nIg13p",
-            "id" : "gbf3vD"
-          }
-        },
-        "text" : "Not Responsive"
-      }
-    },
-    "gxMxnu" : {
-      "id" : "gxMxnu",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_RPqVAP}}}"
-      }
-    },
-    "hxWuuk" : {
-      "id" : "hxWuuk",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_KFZcgv}}}"
-      }
-    },
-    "iK4JWe" : {
-      "id" : "iK4JWe",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{appVariables.av_ktItTX}}}"
-      }
-    },
-    "iwPEXR" : {
-      "id" : "iwPEXR",
-      "type" : "horizontalline"
-    },
-    "jJ2XNi" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "5ea31c5a1f404fae843e33b95abc6e1b",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_WjyM92": {
+        "multiple": false,
+        "id": "hf_WjyM92",
+        "label": "Position Location",
+        "type": "string"
       },
-      "id" : "jJ2XNi",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#6bc505",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "vdsWA1",
-            "id" : "6ixpen"
-          }
-        },
-        "icon" : "angle-left",
-        "iconPosition" : "left",
-        "text" : "Move to Applied"
-      }
-    },
-    "kC0SFM" : {
-      "id" : "kC0SFM",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{parentCard.hf_6fEHVP}}}"
-      }
-    },
-    "kPuleZ" : {
-      "id" : "kPuleZ",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.c_insertedAt}}}"
-      }
-    },
-    "kZ4XMK" : {
-      "id" : "kZ4XMK",
-      "type" : "columns"
-    },
-    "le8rhu" : {
-      "id" : "le8rhu",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_ETDdRy}}}"
-      }
-    },
-    "lhcVqm" : {
-      "id" : "lhcVqm",
-      "type" : "dropdownItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "bbDCs5",
-            "id" : "VSfEfJ"
-          }
-        },
-        "text" : "Min. Qualifications not Met"
-      }
-    },
-    "lneHuH" : {
-      "id" : "lneHuH",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "{{{card.tc_name}}}"
-      }
-    },
-    "lqFqEx" : {
-      "id" : "lqFqEx",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.c_insertedAt}}}"
-      }
-    },
-    "mLbszg" : {
-      "id" : "mLbszg",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "id" : "tbg7Tq",
-              "props" : {
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "Hm5W8l"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "About Company"
-      }
-    },
-    "n5VrxU" : {
-      "id" : "n5VrxU",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h4",
-        "text" : "{{{parentCard.hf_6fEHVP}}}"
-      }
-    },
-    "nC70l6" : {
-      "id" : "nC70l6",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h3",
-        "text" : "Your {{{parentCard.hf_6fEHVP}}} application"
-      }
-    },
-    "nCAwPg" : {
-      "id" : "nCAwPg",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.tc_listName}}}"
-      }
-    },
-    "oSLjhY" : {
-      "id" : "oSLjhY",
-      "type" : "dropdownItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "827J27",
-            "id" : "GVd8Q0"
-          }
-        },
-        "text" : "Wrong Skill Set"
-      }
-    },
-    "oaH6pJ" : {
-      "id" : "oaH6pJ",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Applicant Email"
-      }
-    },
-    "ohNgGC" : {
-      "id" : "ohNgGC",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{appVariables.av_ktItTX}}}"
-      }
-    },
-    "qFRT3k" : {
-      "id" : "qFRT3k",
-      "type" : "header",
-      "viewProps" : {
-        "heading" : "h2",
-        "text" : "{{{card.hf_6fEHVP}}} job ad has been updated."
-      }
-    },
-    "qaXhPi" : {
-      "id" : "qaXhPi",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_Z0d0rI}}} {{{card.hf_WjyM92}}}"
-      }
-    },
-    "qrwAfr" : {
-      "id" : "qrwAfr",
-      "type" : "button",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "f7AC3x",
-            "id" : "7vnuzv"
-          }
-        },
-        "icon" : "chevron-right",
-        "size" : "default",
-        "text" : ""
-      }
-    },
-    "qzOhLc" : {
-      "id" : "qzOhLc",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "Applicant Name"
-      }
-    },
-    "sCPH5Q" : {
-      "id" : "sCPH5Q",
-      "type" : "column"
-    },
-    "sWHNsd" : {
-      "id" : "sWHNsd",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_Z0d0rI}}} - {{{card.hf_WjyM92}}}"
-      }
-    },
-    "tMCT0H" : {
-      "id" : "tMCT0H",
-      "type" : "tableColumn",
-      "viewProps" : {
-        "header" : "Applicant Date"
-      }
-    },
-    "u2Uxfu" : {
-      "id" : "u2Uxfu",
-      "type" : "column"
-    },
-    "u5et1a" : {
-      "id" : "u5et1a",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "props" : {
-                "params" : {
-                  "context" : "self"
-                },
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "xhFVrb"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "Menu Item"
-      }
-    },
-    "u7eJrd" : {
-      "id" : "u7eJrd",
-      "type" : "list",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "Udl0cq",
-            "id" : "7lAnVY"
-          }
-        }
-      }
-    },
-    "vu8iYt" : {
-      "id" : "vu8iYt",
-      "type" : "header",
-      "viewProps" : {
-        "heading" : "h2",
-        "text" : "We've received your application!"
-      }
-    },
-    "wAC3yk" : {
-      "id" : "wAC3yk",
-      "type" : "menuItem",
-      "viewProps" : {
-        "events" : {
-          "onClick" : {
-            "action" : {
-              "props" : {
-                "target" : {
-                  "type" : "_self"
-                },
-                "type" : "internal",
-                "viewId" : "Vwt_jm"
-              },
-              "type" : "open-page"
-            },
-            "id" : "4w3j8r"
-          }
-        },
-        "text" : "Open Positions"
-      }
-    },
-    "xyy8dI" : {
-      "id" : "xyy8dI",
-      "type" : "paragraph",
-      "viewProps" : {
-        "alignment" : "left",
-        "text" : "{{{card.hf_S9CLku}}} {{{card.hf_RdIJt9}}}"
-      }
-    },
-    "ygTB6z" : {
-      "id" : "ygTB6z",
-      "type" : "header",
-      "viewProps" : {
-        "alignment" : "left",
-        "heading" : "h5",
-        "text" : "CV Attachment"
-      }
-    },
-    "yjke3y" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "857f6601a9154d9fae6346f8acc8c4eb",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_5nFgHF": {
+        "multiple": false,
+        "id": "hf_5nFgHF",
+        "label": "E-Mail",
+        "type": "string"
       },
-      "id" : "yjke3y",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "transparent",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "j8xC9x",
-            "id" : "vnQ8Xc"
-          }
-        },
-        "text" : "Click to see the job detail page",
-        "textColor" : "#b865ff"
-      }
-    },
-    "zFj8aV" : {
-      "accessRight" : {
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "857f6601a9154d9fae6346f8acc8c4eb",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
-        }
+      "hf_RdIJt9": {
+        "multiple": false,
+        "id": "hf_RdIJt9",
+        "label": "Last Name",
+        "type": "string"
       },
-      "id" : "zFj8aV",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#f5a623",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "IBqu1w",
-            "id" : "hTaexU"
-          }
-        },
-        "text" : "Move to Draft"
-      }
-    },
-    "zN0iwF" : {
-      "id" : "zN0iwF",
-      "type" : "button",
-      "viewProps" : {
-        "backgroundColor" : "#656565",
-        "events" : {
-          "onClick" : {
-            "actionGroupId" : "yAZgWs",
-            "id" : "9WMjzm"
-          }
-        },
-        "icon" : "edit",
-        "iconPosition" : "left",
-        "text" : "Edit Job Ad"
+      "hf_RPqVAP": {
+        "multiple": false,
+        "id": "hf_RPqVAP",
+        "label": "Cover Letter",
+        "type": "string"
+      },
+      "hf_q82Kpy": {
+        "multiple": false,
+        "id": "hf_q82Kpy",
+        "label": "Question",
+        "type": "string"
       }
     }
   },
-  "description" : "You can apply to open positions and keep track of them using this application.",
-  "environments" : {
-    "trelloCardBack" : {
-      "appHeader" : "ecVH47",
-      "enabled" : true,
-      "id" : "trelloCardBack",
-      "type" : "trelloCardBack"
-    },
-    "webView" : {
-      "appHeader" : "05JN1e",
-      "enabled" : true,
-      "home" : "Vwt_jm",
-      "id" : "webView",
-      "type" : "webView"
-    }
-  },
-  "fieldDefinitions" : {
-    "appVariableFields" : {
-      "av_5xdO5J" : {
-        "id" : "av_5xdO5J",
-        "label" : "Application Received Auto Message - Body",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "av_6jqxd8" : {
-        "id" : "av_6jqxd8",
-        "label" : "Application Received Auto Message - Subject",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "av_ZxbLSs" : {
-        "id" : "av_ZxbLSs",
-        "label" : "Rejection Email",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "av_ktItTX" : {
-        "id" : "av_ktItTX",
-        "label" : "Company Info",
-        "multiple" : false,
-        "type" : "string"
+  "actionGroups": {
+    "ewOpOd": {
+      "shared": false,
+      "name": "",
+      "id": "ewOpOd",
+      "actions": {
+        "TgSHbP": {
+          "id": "TgSHbP",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "R90WKS",
+            "params": {
+              "context": "self"
+            },
+            "type": "internal",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
       }
     },
-    "hippoFields" : {
-      "hf_5MFT0y" : {
-        "id" : "hf_5MFT0y",
-        "label" : "CV Attachments",
-        "multiple" : true,
-        "type" : "attachment"
-      },
-      "hf_5nFgHF" : {
-        "id" : "hf_5nFgHF",
-        "label" : "E-Mail",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_6fEHVP" : {
-        "id" : "hf_6fEHVP",
-        "label" : "Position Title",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_ETDdRy" : {
-        "id" : "hf_ETDdRy",
-        "label" : "Position Description",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_KFZcgv" : {
-        "id" : "hf_KFZcgv",
-        "label" : "Responsibilities",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_QFzUc7" : {
-        "id" : "hf_QFzUc7",
-        "label" : "Skills & Qualifications",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_RPqVAP" : {
-        "id" : "hf_RPqVAP",
-        "label" : "Cover Letter",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_RdIJt9" : {
-        "id" : "hf_RdIJt9",
-        "label" : "Last Name",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_S9CLku" : {
-        "id" : "hf_S9CLku",
-        "label" : "First Name",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_WjyM92" : {
-        "id" : "hf_WjyM92",
-        "label" : "Position Location",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_Z0d0rI" : {
-        "id" : "hf_Z0d0rI",
-        "label" : "Workplace Type",
-        "multiple" : false,
-        "type" : "string"
-      },
-      "hf_q82Kpy" : {
-        "id" : "hf_q82Kpy",
-        "label" : "Question",
-        "multiple" : false,
-        "type" : "string"
+    "srFAtZ": {
+      "shared": false,
+      "name": "",
+      "id": "srFAtZ",
+      "actions": {
+        "Dk5FQF": {
+          "id": "Dk5FQF",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "12425cda72e24de98a008c9c33ddc3d0",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
       }
-    }
-  },
-  "id" : "f99c5bbaea1c4b58a5ad69bce6bf7e12",
-  "integrations" : {
-    "incoming" : {
-      "a40973f024344477b5cfe51bb6d66995" : {
-        "accessRight" : {
-          "cardTypes" : [ "66cd0f1b6db141e68d4aa1c1cb12964a" ],
-          "roleRules" : [ {
-            "roles" : [ "hptbrdadm", "hptbrdnrm", "hptbrdobs" ],
-            "type" : "allow"
-          } ]
-        },
-        "anonymous" : false,
-        "body" : {
-          "formAutoIncrementId" : 89,
-          "hippoFieldMapping" : {
-            "elem-27" : "hf_6fEHVP",
-            "elem-40" : "hf_Z0d0rI",
-            "elem-69" : "hf_WjyM92",
-            "elem-75" : "hf_ETDdRy",
-            "elem-84" : "hf_KFZcgv",
-            "elem-89" : "hf_QFzUc7"
-          },
-          "rows" : [ {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-27",
-                "input" : "EditText",
-                "props" : {
-                  "description" : "",
-                  "label" : "Position Title",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-26"
-            } ],
-            "id" : "row-25"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-40",
-                "input" : "SelectBox",
-                "props" : {
-                  "data" : [ {
-                    "label" : "On-Site",
-                    "value" : "On-Site"
-                  }, {
-                    "label" : "Remote",
-                    "value" : "Remote"
-                  }, {
-                    "label" : "Hybrid",
-                    "value" : "Hybrid"
-                  } ],
-                  "label" : "Workplace Type",
-                  "name" : "Select Box",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-39"
-            } ],
-            "id" : "row-38"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-69",
-                "input" : "EditText",
-                "props" : {
-                  "label" : "Location",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : "",
-                  "visibilityRules" : {
-                    "conjunction" : "AND",
-                    "rules" : [ {
-                      "field" : "elem-40",
-                      "operator" : "select_any_in",
-                      "value" : [ "Hybrid", "On-Site" ],
-                      "valueType" : "select"
-                    } ],
-                    "version" : 1
-                  }
-                }
-              },
-              "id" : "col-68"
-            } ],
-            "id" : "row-92"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-75",
-                "input" : "LongText",
-                "props" : {
-                  "label" : "Position Description",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-74"
-            } ],
-            "id" : "row-73"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-84",
-                "input" : "LongText",
-                "props" : {
-                  "description" : "",
-                  "label" : "Responsibilities",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-83"
-            } ],
-            "id" : "row-82"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-89",
-                "input" : "LongText",
-                "props" : {
-                  "label" : "Skills & Qualifications",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-88"
-            } ],
-            "id" : "row-87"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-1",
-                "input" : "Button",
-                "props" : {
-                  "label" : "Button",
-                  "name" : "Button",
-                  "settings" : {
-                    "fluid" : true
-                  },
-                  "value" : "Update"
-                }
-              },
-              "id" : "col-1"
-            } ],
-            "id" : "row-1"
-          } ],
-          "successViews" : {
-            "elem-1" : {
-              "id" : "whGQUa",
-              "props" : {
-                "view" : {
-                  "id" : "GuCy02",
-                  "target" : {
-                    "type" : "inline"
-                  }
-                }
-              },
-              "type" : "view"
+    },
+    "6qNaro": {
+      "shared": false,
+      "name": "",
+      "id": "6qNaro",
+      "actions": {
+        "Pcvv7y": {
+          "id": "Pcvv7y",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "",
+            "type": "external",
+            "url": "{{{parentCard.tc_url}}}",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      }
+    },
+    "yAZgWs": {
+      "shared": false,
+      "name": "",
+      "id": "yAZgWs",
+      "actions": {
+        "GlUSs6": {
+          "id": "GlUSs6",
+          "type": "open-form",
+          "order": 0,
+          "props": {
+            "formId": "bJZcZiD1FcBB07KbboGM7nIKi1neLVxu",
+            "target": {
+              "size": "large",
+              "title": "Update Job Ad Form",
+              "type": "_modal"
+            }
+          }
+        }
+      }
+    },
+    "3G52Wi": {
+      "shared": false,
+      "name": "",
+      "id": "3G52Wi",
+      "actions": {
+        "mEE6Cf": {
+          "id": "mEE6Cf",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "",
+            "type": "external",
+            "url": "{{{card.tc_url}}}",
+            "target": {
+              "type": "_blank"
+            }
+          }
+        }
+      }
+    },
+    "IBqu1w": {
+      "shared": false,
+      "name": "",
+      "id": "IBqu1w",
+      "actions": {
+        "9VWOUc": {
+          "id": "9VWOUc",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "289e2bf5d12c43edac8ebcfa43707b3c",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "f7AC3x": {
+      "shared": false,
+      "name": "",
+      "id": "f7AC3x",
+      "actions": {
+        "hLIj4t": {
+          "id": "hLIj4t",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "jE7ieG",
+            "params": {
+              "context": "self"
+            },
+            "type": "internal",
+            "url": "",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      }
+    },
+    "fGO4o9": {
+      "shared": false,
+      "name": "",
+      "id": "fGO4o9",
+      "actions": {
+        "gZXuG2": {
+          "id": "gZXuG2",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "57adb6f3727445c3b7b26cb9c94172f7",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "nIg13p": {
+      "shared": false,
+      "name": "",
+      "id": "nIg13p",
+      "actions": {
+        "iuJabW": {
+          "id": "iuJabW",
+          "type": "move-card",
+          "order": 1,
+          "props": {
+            "list": "118e2e91c55841a2be9cec8e2feca7e1",
+            "params": {
+              "context": "self"
             }
           }
         },
-        "enabled" : true,
-        "formatVersion" : 2,
-        "icon" : "edit",
-        "id" : "a40973f024344477b5cfe51bb6d66995",
-        "name" : "Update Job Ad Form",
-        "showInTrello" : true,
-        "type" : "updateform"
-      },
-      "b2ce1282c9ba4181b393bac7053705f5" : {
-        "accessRight" : {
-          "roleRules" : [ {
-            "roles" : [ "hptbrdadm", "hptbrdnrm", "hptbrdobs" ],
-            "type" : "allow"
-          } ]
+        "pq1Oa8": {
+          "id": "pq1Oa8",
+          "type": "update-card-labels",
+          "order": 2,
+          "props": {
+            "updateLabelActionType": "add-labels",
+            "params": {
+              "context": "self"
+            },
+            "labels": [
+              "2425adde5aa247d19c44dcec24a003ff"
+            ]
+          }
+        }
+      }
+    },
+    "x1bLfl": {
+      "shared": false,
+      "name": "",
+      "id": "x1bLfl",
+      "actions": {
+        "mJwGTz": {
+          "id": "mJwGTz",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "c93c97efe67943c5b13f795bbfa475c2",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "BWT3PY": {
+      "shared": false,
+      "name": "",
+      "id": "BWT3PY",
+      "actions": {
+        "xPvKbA": {
+          "id": "xPvKbA",
+          "type": "open-form",
+          "order": 0,
+          "props": {
+            "formId": "Uf4xDkMt2T3KMtPSdJxWuEtA75L9MWLf",
+            "target": {
+              "size": "large",
+              "title": "Job Application Form",
+              "type": "_self"
+            }
+          }
+        }
+      }
+    },
+    "81odF3": {
+      "shared": false,
+      "name": "",
+      "id": "81odF3",
+      "actions": {
+        "O9W7kB": {
+          "id": "O9W7kB",
+          "type": "send-conversation-message",
+          "order": 0,
+          "props": {
+            "conversationMembers": [
+              {
+                "id": "submissionOwner",
+                "type": "submissionOwner",
+                "isContributor": true
+              }
+            ],
+            "subject": "{{{appVariables.av_6jqxd8}}}",
+            "message": "{{{appVariables.av_5xdO5J}}}",
+            "subjectType": "plainText"
+          }
+        }
+      }
+    },
+    "AkwW3Q": {
+      "shared": false,
+      "name": "",
+      "id": "AkwW3Q",
+      "actions": {
+        "9GytB6": {
+          "id": "9GytB6",
+          "type": "send-conversation-message",
+          "order": 0,
+          "props": {
+            "conversationMembers": [
+              {
+                "id": "submissionOwner",
+                "type": "submissionOwner",
+                "isContributor": true
+              }
+            ],
+            "subject": "Your application for {{{parentCard.hf_6fEHVP}}} position",
+            "message": "{{{appVariables.av_ZxbLSs}}}",
+            "subjectType": "plainText"
+          }
+        }
+      }
+    },
+    "vdsWA1": {
+      "shared": false,
+      "name": "",
+      "id": "vdsWA1",
+      "actions": {
+        "ZZ7cuN": {
+          "id": "ZZ7cuN",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "83403c026f124f8599247bd238c5725d",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "641sPx": {
+      "shared": false,
+      "name": "",
+      "id": "641sPx",
+      "actions": {
+        "OLafvZ": {
+          "id": "OLafvZ",
+          "type": "update-card-labels",
+          "order": 0,
+          "props": {
+            "updateLabelActionType": "add-labels",
+            "params": {
+              "context": "self"
+            },
+            "labels": [
+              "fd6c220faf004cd3b088c6622ad9f47c",
+              "91f2dda82d5a49dbb1d0961dca9df9e2"
+            ]
+          }
         },
-        "anonymous" : false,
-        "body" : {
-          "formAutoIncrementId" : 89,
-          "hippoFieldMapping" : {
-            "elem-27" : "hf_6fEHVP",
-            "elem-40" : "hf_Z0d0rI",
-            "elem-69" : "hf_WjyM92",
-            "elem-75" : "hf_ETDdRy",
-            "elem-84" : "hf_KFZcgv",
-            "elem-89" : "hf_QFzUc7"
+        "TSq20B": {
+          "id": "TSq20B",
+          "type": "move-card",
+          "order": 1,
+          "props": {
+            "list": "118e2e91c55841a2be9cec8e2feca7e1",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "j8xC9x": {
+      "shared": false,
+      "name": "",
+      "id": "j8xC9x",
+      "actions": {
+        "lE34o8": {
+          "id": "lE34o8",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "jE7ieG",
+            "params": {
+              "context": "self"
+            },
+            "type": "internal",
+            "url": "",
+            "target": {
+              "type": "_blank"
+            }
+          }
+        }
+      }
+    },
+    "827J27": {
+      "shared": false,
+      "name": "",
+      "id": "827J27",
+      "actions": {
+        "IcIWIo": {
+          "id": "IcIWIo",
+          "type": "update-card-labels",
+          "order": 1,
+          "props": {
+            "updateLabelActionType": "add-labels",
+            "params": {
+              "context": "self"
+            },
+            "labels": [
+              "54ec47a9a1854758aced57c6547dbb35"
+            ]
+          }
+        },
+        "ekAey6": {
+          "id": "ekAey6",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "118e2e91c55841a2be9cec8e2feca7e1",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "pDf7G6": {
+      "shared": false,
+      "name": "",
+      "id": "pDf7G6",
+      "actions": {
+        "GwCFiY": {
+          "id": "GwCFiY",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "d09580d14d884154a5dfdddfda5247c0",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "xjoq7y": {
+      "shared": false,
+      "name": "",
+      "id": "xjoq7y",
+      "actions": {
+        "pnPrOq": {
+          "id": "pnPrOq",
+          "type": "open-form",
+          "order": 0,
+          "props": {
+            "formId": "IDQAUpCqa4b9aKr5kLHEczhF4Dp4ENAX",
+            "target": {
+              "size": "large",
+              "title": "New Job Advertisement Form",
+              "type": "_self"
+            }
+          }
+        }
+      }
+    },
+    "aMiiIg": {
+      "shared": false,
+      "name": "",
+      "id": "aMiiIg",
+      "actions": {
+        "DPEw1I": {
+          "id": "DPEw1I",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "AJ0K7d",
+            "params": {
+              "context": "self"
+            },
+            "type": "internal",
+            "url": "",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      }
+    },
+    "bbDCs5": {
+      "shared": false,
+      "name": "",
+      "id": "bbDCs5",
+      "actions": {
+        "Qdbsqz": {
+          "id": "Qdbsqz",
+          "type": "update-card-labels",
+          "order": 0,
+          "props": {
+            "updateLabelActionType": "add-labels",
+            "params": {
+              "context": "self"
+            },
+            "labels": [
+              "f1005847b18d4ffe8c94a450903ad3d3"
+            ]
+          }
+        },
+        "3oiK6d": {
+          "id": "3oiK6d",
+          "type": "move-card",
+          "order": 1,
+          "props": {
+            "list": "118e2e91c55841a2be9cec8e2feca7e1",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "w0ZVHt": {
+      "shared": false,
+      "name": "",
+      "id": "w0ZVHt",
+      "actions": {
+        "ZDu3Pk": {
+          "id": "ZDu3Pk",
+          "type": "move-card",
+          "order": 0,
+          "props": {
+            "list": "9a0a3164f3484b959ce35780dc92d123",
+            "params": {
+              "context": "self"
+            }
+          }
+        }
+      }
+    },
+    "Udl0cq": {
+      "shared": false,
+      "name": "",
+      "id": "Udl0cq",
+      "actions": {
+        "eNQvjO": {
+          "id": "eNQvjO",
+          "type": "open-page",
+          "order": 0,
+          "props": {
+            "viewId": "jE7ieG",
+            "params": {
+              "context": "self"
+            },
+            "type": "internal",
+            "url": "",
+            "target": {
+              "type": "_self"
+            }
+          }
+        }
+      }
+    }
+  },
+  "automations": {
+    "H0NV0eTgs6QZWhM6gJFJbIDgjFmMQDdO": {
+      "id": "H0NV0eTgs6QZWhM6gJFJbIDgjFmMQDdO",
+      "order": 1,
+      "name": "Application Received Message",
+      "enabled": true,
+      "trigger": {
+        "type": "card-created"
+      },
+      "rules": {
+        "v2u3Py": {
+          "id": "v2u3Py",
+          "order": 1,
+          "enabled": true,
+          "filter": {
+            "conditions": [
+              [
+                {
+                  "field": "card.c_cardType",
+                  "valueType": "value",
+                  "value": "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3",
+                  "operator": "equals"
+                }
+              ]
+            ],
+            "type": "basic"
           },
-          "rows" : [ {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-27",
-                "input" : "EditText",
-                "props" : {
-                  "label" : "Position Title",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
+          "events": {
+            "onMatched": {
+              "id": "m8KJyQ",
+              "actionGroupId": "81odF3"
+            }
+          }
+        }
+      }
+    },
+    "5PwSG7IgY72eaQA5irLnQDWi0Nsb1Fy3": {
+      "id": "5PwSG7IgY72eaQA5irLnQDWi0Nsb1Fy3",
+      "order": 2,
+      "name": "Application Rejection Message",
+      "enabled": true,
+      "trigger": {
+        "type": "archived"
+      },
+      "rules": {
+        "VNnXoG": {
+          "id": "VNnXoG",
+          "order": 0,
+          "enabled": true,
+          "filter": {
+            "conditions": [
+              [
+                {
+                  "field": "card.c_cardType",
+                  "valueType": "value",
+                  "value": "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3",
+                  "operator": "equals"
+                },
+                {
+                  "field": "card.tc_listHippoId",
+                  "valueType": "value",
+                  "value": "118e2e91c55841a2be9cec8e2feca7e1",
+                  "operator": "equals"
+                },
+                {
+                  "field": "card.tc_labelHippoIds",
+                  "valueType": "value",
+                  "value": [
+                    "91f2dda82d5a49dbb1d0961dca9df9e2"
+                  ],
+                  "operator": "notin"
+                }
+              ]
+            ],
+            "type": "basic"
+          },
+          "events": {
+            "onMatched": {
+              "id": "6SMtj8",
+              "actionGroupId": "AkwW3Q"
+            }
+          }
+        }
+      }
+    }
+  },
+  "integrations": {
+    "incoming": {
+      "Uf4xDkMt2T3KMtPSdJxWuEtA75L9MWLf": {
+        "showInTrello": false,
+        "icon": "user",
+        "name": "Job Application Form",
+        "anonymous": false,
+        "id": "Uf4xDkMt2T3KMtPSdJxWuEtA75L9MWLf",
+        "body": {
+          "successViews": {
+            "elem1": {
+              "id": "5iaNOr",
+              "type": "view",
+              "props": {
+                "view": {
+                  "id": "OZVmvQ",
+                  "target": {
+                    "type": "inline"
                   }
                 }
-              },
-              "id" : "col-26"
-            } ],
-            "id" : "row-25"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-40",
-                "input" : "SelectBox",
-                "props" : {
-                  "data" : [ {
-                    "label" : "On-Site",
-                    "value" : "On-Site"
-                  }, {
-                    "label" : "Remote",
-                    "value" : "Remote"
-                  }, {
-                    "label" : "Hybrid",
-                    "value" : "Hybrid"
-                  } ],
-                  "label" : "Workplace Type",
-                  "name" : "Select Box",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  }
-                }
-              },
-              "id" : "col-39"
-            } ],
-            "id" : "row-38"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-69",
-                "input" : "EditText",
-                "props" : {
-                  "label" : "Location",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "visibilityRules" : {
-                    "conjunction" : "AND",
-                    "rules" : [ {
-                      "field" : "elem-40",
-                      "operator" : "select_any_in",
-                      "value" : [ "Hybrid", "On-Site" ],
-                      "valueType" : "select"
-                    } ],
-                    "version" : 1
-                  }
-                }
-              },
-              "id" : "col-68"
-            } ],
-            "id" : "row-92"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-75",
-                "input" : "LongText",
-                "props" : {
-                  "description" : "",
-                  "label" : "Position Description",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  }
-                }
-              },
-              "id" : "col-74"
-            } ],
-            "id" : "row-73"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-84",
-                "input" : "LongText",
-                "props" : {
-                  "label" : "Responsibilities",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  }
-                }
-              },
-              "id" : "col-83"
-            } ],
-            "id" : "row-82"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-89",
-                "input" : "LongText",
-                "props" : {
-                  "label" : "Skills & Qualifications",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  }
-                }
-              },
-              "id" : "col-88"
-            } ],
-            "id" : "row-87"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-1",
-                "input" : "Button",
-                "props" : {
-                  "label" : "Button",
-                  "mandatory-action" : {
-                    "type" : "create-card",
-                    "variables" : {
-                      "cardType" : "66cd0f1b6db141e68d4aa1c1cb12964a",
-                      "list" : "0ef117acddb84aafbc042cf4ed7ceb4a",
-                      "name" : "{{{form.data.elem-27}}}"
+              }
+            }
+          },
+          "rows": [
+            {
+              "columns": [
+                {
+                  "id": "col-3",
+                  "element": {
+                    "input": "Title",
+                    "id": "elem4",
+                    "props": {
+                      "settings": {
+                        "heading": "h3",
+                        "defaultValue": "{{{parentCard.hf_6fEHVP}}} Application",
+                        "align": "left"
+                      },
+                      "validationRules": {
+                        "required": false
+                      },
+                      "name": "Title",
+                      "label": "Label",
+                      "value": "Title"
                     }
-                  },
-                  "name" : "Button",
-                  "settings" : {
-                    "fluid" : true
-                  },
-                  "value" : "Create"
-                }
-              },
-              "id" : "col-1"
-            } ],
-            "id" : "row-1"
-          } ],
-          "successViews" : {
-            "elem-1" : {
-              "id" : "NCDEh4",
-              "props" : {
-                "view" : {
-                  "id" : "0p7juD",
-                  "target" : {
-                    "type" : "inline"
                   }
                 }
-              },
-              "type" : "view"
-            }
-          }
-        },
-        "enabled" : true,
-        "formatVersion" : 2,
-        "icon" : "address-card",
-        "id" : "b2ce1282c9ba4181b393bac7053705f5",
-        "name" : "New Job Ad Form",
-        "showInTrello" : true,
-        "type" : "form"
-      },
-      "e108995a4b0f46499a2cb1afa61bb65b" : {
-        "anonymous" : false,
-        "body" : {
-          "formAutoIncrementId" : 56,
-          "hippoFieldMapping" : {
-            "elem-26" : "hf_S9CLku",
-            "elem-32" : "hf_RdIJt9",
-            "elem-38" : "hf_5nFgHF",
-            "elem-51" : "hf_RPqVAP",
-            "elem-56" : "hf_5MFT0y"
-          },
-          "rows" : [ {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-4",
-                "input" : "Title",
-                "props" : {
-                  "label" : "Label",
-                  "name" : "Title",
-                  "settings" : {
-                    "align" : "left",
-                    "defaultValue" : "{{{parentCard.hf_6fEHVP}}} Application",
-                    "heading" : "h3"
-                  },
-                  "validationRules" : {
-                    "required" : false
-                  },
-                  "value" : "Title"
-                }
-              },
-              "id" : "col-3"
-            } ],
-            "id" : "row-5"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-26",
-                "input" : "EditText",
-                "props" : {
-                  "label" : "First Name",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.firstName}}}"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-25"
-            }, {
-              "element" : {
-                "id" : "elem-32",
-                "input" : "EditText",
-                "props" : {
-                  "label" : "Last Name",
-                  "name" : "Short Text",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.lastName}}}"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-31"
-            } ],
-            "id" : "row-24"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-38",
-                "input" : "Email",
-                "props" : {
-                  "description" : "",
-                  "label" : "Email",
-                  "name" : "Email",
-                  "schema" : {
-                    "format" : "email",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.email}}}"
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-37"
-            } ],
-            "id" : "row-36"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-51",
-                "input" : "LongText",
-                "props" : {
-                  "label" : "Cover Letter",
-                  "name" : "Long Text",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : false
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-50"
-            } ],
-            "id" : "row-49"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-56",
-                "input" : "Attachment",
-                "props" : {
-                  "label" : "Your CV",
-                  "name" : "Attachment",
-                  "schema" : {
-                    "type" : "array"
-                  },
-                  "settings" : {
-                    "defaultValue" : ""
-                  },
-                  "validationRules" : {
-                    "required" : false
-                  }
-                }
-              },
-              "id" : "col-55"
-            } ],
-            "id" : "row-54"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-1",
-                "input" : "Button",
-                "props" : {
-                  "label" : "Button",
-                  "mandatory-action" : {
-                    "type" : "create-card",
-                    "variables" : {
-                      "cardType" : "ca14e9d64f6147879c9c60db54948693",
-                      "description" : "",
-                      "list" : "91540a61d5d94bc5b911bde88c575a3e",
-                      "name" : "{{{form.data.elem-26}}} {{{form.data.elem-32}}}"
+              ],
+              "id": "row-5"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-25",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem26",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.firstName}}}"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "label": "First Name",
+                      "value": ""
                     }
-                  },
-                  "name" : "Button",
-                  "settings" : {
-                    "fluid" : true
-                  },
-                  "value" : "Apply"
-                }
-              },
-              "id" : "col-1"
-            } ],
-            "id" : "row-1"
-          } ],
-          "successViews" : {
-            "elem-1" : {
-              "id" : "5iaNOr",
-              "props" : {
-                "view" : {
-                  "id" : "OZVmvQ",
-                  "target" : {
-                    "type" : "inline"
                   }
-                }
-              },
-              "type" : "view"
-            }
-          }
-        },
-        "enabled" : true,
-        "formatVersion" : 2,
-        "icon" : "user",
-        "id" : "e108995a4b0f46499a2cb1afa61bb65b",
-        "name" : "Job Application Form",
-        "showInTrello" : false,
-        "type" : "form"
-      },
-      "e392a142a7c44219aef8db88d6502b00" : {
-        "anonymous" : false,
-        "body" : {
-          "formAutoIncrementId" : 57,
-          "hippoFieldMapping" : {
-            "elem-12" : "hf_q82Kpy",
-            "elem-3" : "hf_S9CLku",
-            "elem-38" : "hf_RdIJt9",
-            "elem-6" : "hf_5nFgHF"
-          },
-          "readOnly" : false,
-          "rows" : [ {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-3",
-                "input" : "EditText",
-                "props" : {
-                  "description" : "Description",
-                  "label" : "First Name",
-                  "name" : "Short Text",
-                  "placeholder" : "Tony",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.firstName}}}",
-                    "inputWidth" : 100
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-2"
-            }, {
-              "element" : {
-                "id" : "elem-38",
-                "input" : "EditText",
-                "props" : {
-                  "description" : "Description",
-                  "label" : "Last Name",
-                  "name" : "Short Text",
-                  "placeholder" : "Leo",
-                  "schema" : {
-                    "format" : "string",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.lastName}}}",
-                    "inputWidth" : 100
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-39"
-            } ],
-            "id" : "row-1"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-6",
-                "input" : "Email",
-                "props" : {
-                  "description" : "Description",
-                  "label" : "E-mail",
-                  "name" : "Email",
-                  "placeholder" : "",
-                  "schema" : {
-                    "format" : "email",
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "defaultValue" : "{{{user.email}}}",
-                    "inputWidth" : 100
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-5"
-            } ],
-            "id" : "row-4"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-12",
-                "input" : "LongText",
-                "props" : {
-                  "description" : "Description",
-                  "label" : "Question",
-                  "name" : "Long Text",
-                  "placeholder" : "",
-                  "schema" : {
-                    "type" : "string"
-                  },
-                  "settings" : {
-                    "inputWidth" : 100
-                  },
-                  "validationRules" : {
-                    "required" : true
-                  },
-                  "value" : ""
-                }
-              },
-              "id" : "col-11"
-            } ],
-            "id" : "row-10"
-          }, {
-            "columns" : [ {
-              "element" : {
-                "id" : "elem-15",
-                "input" : "Button",
-                "props" : {
-                  "description" : "Description",
-                  "label" : "Label",
-                  "mandatory-action" : {
-                    "type" : "create-card",
-                    "variables" : {
-                      "cardType" : "f4c1b9158ca241e095259beae21792b8",
-                      "description" : "{{{form.summary}}}",
-                      "list" : "3db9c2278679474aaf9c6572a22a7be6",
-                      "name" : "Question by {{{user.name}}}"
+                },
+                {
+                  "id": "col-31",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem32",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.lastName}}}"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "label": "Last Name",
+                      "value": ""
                     }
-                  },
-                  "name" : "Button",
-                  "placeholder" : "Submit",
-                  "settings" : {
-                    "fluid" : true
-                  },
-                  "value" : "Submit"
-                }
-              },
-              "id" : "col-14"
-            } ],
-            "id" : "row-13"
-          } ],
-          "successViews" : {
-            "elem-15" : {
-              "id" : "7ULylC",
-              "props" : {
-                "view" : {
-                  "id" : "hP2Tnu",
-                  "target" : {
-                    "type" : "inline"
                   }
                 }
-              },
-              "type" : "view"
+              ],
+              "id": "row-24"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-37",
+                  "element": {
+                    "input": "Email",
+                    "id": "elem38",
+                    "props": {
+                      "schema": {
+                        "format": "email",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.email}}}"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Email",
+                      "description": "",
+                      "label": "Email",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-36"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-50",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem51",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": false
+                      },
+                      "name": "Long Text",
+                      "label": "Cover Letter",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-49"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-55",
+                  "element": {
+                    "input": "Attachment",
+                    "id": "elem56",
+                    "props": {
+                      "schema": {
+                        "type": "array"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": false
+                      },
+                      "name": "Attachment",
+                      "label": "Your CV"
+                    }
+                  }
+                }
+              ],
+              "id": "row-54"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-1",
+                  "element": {
+                    "input": "Button",
+                    "id": "elem1",
+                    "props": {
+                      "settings": {
+                        "fluid": true
+                      },
+                      "mandatory-action": {
+                        "variables": {
+                          "cardType": "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3",
+                          "name": "{{{form.data.elem26}}} {{{form.data.elem32}}}",
+                          "description": "",
+                          "list": "83403c026f124f8599247bd238c5725d"
+                        },
+                        "type": "create-card"
+                      },
+                      "name": "Button",
+                      "label": "Button",
+                      "value": "Apply"
+                    }
+                  }
+                }
+              ],
+              "id": "row-1"
             }
-          }
+          ],
+          "hippoFieldMapping": {
+            "elem26": "hf_S9CLku",
+            "elem38": "hf_5nFgHF",
+            "elem51": "hf_RPqVAP",
+            "elem56": "hf_5MFT0y",
+            "elem32": "hf_RdIJt9"
+          },
+          "formAutoIncrementId": 56
         },
-        "enabled" : true,
-        "formatVersion" : 2,
-        "icon" : "question",
-        "id" : "e392a142a7c44219aef8db88d6502b00",
-        "name" : "Question Form",
-        "showInTrello" : false,
-        "type" : "form"
-      }
-    }
-  },
-  "name" : "Applicant Tracking System",
-  "schemaVersion" : 1,
-  "slug" : "ats",
-  "sourceAppTemplateId" : "84a01e68f7f847f2ba8c73047f1362b7",
-  "tours" : {
-    "tour1" : {
-      "description" : "",
-      "id" : "tour1",
-      "name" : "Welcome to ATS",
-      "steps" : {
-        "randomId1" : {
-          "content" : "<iframe width=\"1590\" height=\"350\" src=\"https://www.youtube.com/embed/4HaLmiUOnK4\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n\nWatch the short video to quickly understand the basic functions of this app.",
-          "continuous" : false,
-          "disableBeacon" : true,
-          "findTarget" : "body",
-          "hideCloseButton" : false,
-          "id" : "randomId1",
-          "order" : 0,
-          "placement" : "center",
-          "showSkipButton" : true,
-          "skipText" : "Close",
-          "target" : "body",
-          "title" : "Welcome to ATS for Trello",
-          "type" : "modal"
-        }
-      }
-    }
-  },
-  "type" : "defaultApp",
-  "viewSettings" : {
-    "appViewSettings" : {
-      "icon" : {
-        "background" : "#FF7E46",
-        "iconSet" : "fontAwesome",
-        "name" : "user-check",
-        "type" : "image",
-        "url" : "https://s3-us-west-2.amazonaws.com/public.appsstaging.hipporello.io/public/uploads/other/templates/84a01e68f7f847f2ba8c73047f1362b7/bc_ats.png"
-      }
-    }
-  },
-  "views" : {
-    "05JN1e" : {
-      "id" : "05JN1e",
-      "type" : "appHeader",
-      "viewProps" : {
-        "children" : [ {
-          "children" : [ {
-            "id" : "wAC3yk"
-          }, {
-            "id" : "mLbszg"
-          }, {
-            "id" : "aWgNXP"
-          } ],
-          "id" : "CCWJxt"
-        } ],
-        "viewType" : "default",
-        "visibilities" : {
-          "login" : true,
-          "logo" : true,
-          "menu" : true
-        }
-      }
-    },
-    "0p7juD" : {
-      "enabled" : true,
-      "id" : "0p7juD",
-      "type" : "page",
-      "viewProps" : {
-        "align" : "center",
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "VvgFYC"
-        }, {
-          "id" : "75tSmt"
-        } ],
-        "name" : "New Job Advertisement Form Thanks Page"
-      }
-    },
-    "AJ0K7d" : {
-      "accessRight" : {
-        "cardTypes" : [ "ca14e9d64f6147879c9c60db54948693" ],
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.c_userId",
-            "operator" : "equals",
-            "value" : "{{{user.id}}}",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
+        "type": "form",
+        "formatVersion": 2,
+        "enabled": true
+      },
+      "IDQAUpCqa4b9aKr5kLHEczhF4Dp4ENAX": {
+        "accessRight": {
+          "roleRules": [
+            {
+              "roles": [
+                "hptbrdadm",
+                "hptbrdnrm",
+                "hptbrdobs"
+              ],
+              "type": "allow"
+            }
+          ]
         },
-        "roleRules" : [ {
-          "roles" : [ "hpauth" ],
-          "type" : "allow"
-        } ]
-      },
-      "enabled" : true,
-      "id" : "AJ0K7d",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "nC70l6"
-        }, {
-          "id" : "JXainN"
-        }, {
-          "id" : "U2y66a"
-        }, {
-          "id" : "UMEiAw"
-        }, {
-          "id" : "HvQZM6"
-        }, {
-          "id" : "9qP05j"
-        }, {
-          "id" : "HbfKx2"
-        }, {
-          "id" : "0KQDPv"
-        }, {
-          "id" : "AvMijH"
-        } ],
-        "environments" : [ "webView" ],
-        "gap" : 5,
-        "name" : "Applicant Submission Details",
-        "slug" : "applicant-submission-details",
-        "title" : "Applicant Submission Details"
-      }
-    },
-    "GuCy02" : {
-      "enabled" : true,
-      "id" : "GuCy02",
-      "type" : "page",
-      "viewProps" : {
-        "align" : "center",
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "qFRT3k"
-        }, {
-          "id" : "yjke3y"
-        } ],
-        "name" : "Update Job Ad Form Thanks Page"
-      }
-    },
-    "Hm5W8l" : {
-      "enabled" : true,
-      "id" : "Hm5W8l",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : false,
-        "children" : [ {
-          "id" : "JK7Eyy"
-        }, {
-          "id" : "iK4JWe"
-        } ],
-        "environments" : [ "webView" ],
-        "gap" : 5,
-        "name" : "About Company",
-        "slug" : "about-company",
-        "title" : "About Company"
-      }
-    },
-    "OZVmvQ" : {
-      "enabled" : true,
-      "id" : "OZVmvQ",
-      "type" : "page",
-      "viewProps" : {
-        "align" : "center",
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "vu8iYt"
-        }, {
-          "id" : "HkgIWt"
-        }, {
-          "id" : "IC6oRZ"
-        }, {
-          "id" : "XCbS30"
-        } ],
-        "name" : "Job Application Form Thanks Page"
-      }
-    },
-    "R90WKS" : {
-      "accessRight" : {
-        "roleRules" : [ {
-          "roles" : [ "hpauth" ],
-          "type" : "allow"
-        } ]
-      },
-      "enabled" : true,
-      "id" : "R90WKS",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : false,
-        "children" : [ {
-          "id" : "COQqmh"
-        }, {
-          "id" : "R4wpqd",
-          "view" : {
-            "columns" : [ {
-              "id" : "dq7Ved",
-              "view" : {
-                "id" : "kC0SFM"
+        "showInTrello": true,
+        "icon": "address-card",
+        "name": "New Job Ad Form",
+        "anonymous": false,
+        "id": "IDQAUpCqa4b9aKr5kLHEczhF4Dp4ENAX",
+        "body": {
+          "successViews": {
+            "elem1": {
+              "id": "NCDEh4",
+              "type": "view",
+              "props": {
+                "view": {
+                  "id": "0p7juD",
+                  "target": {
+                    "type": "inline"
+                  }
+                }
               }
-            }, {
-              "id" : "dwvogK",
-              "view" : {
-                "id" : "lqFqEx"
+            }
+          },
+          "rows": [
+            {
+              "columns": [
+                {
+                  "id": "col-26",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem27",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "label": "Position Title"
+                    }
+                  }
+                }
+              ],
+              "id": "row-25"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-39",
+                  "element": {
+                    "input": "SelectBox",
+                    "id": "elem40",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "data": [
+                        {
+                          "label": "On-Site",
+                          "value": "On-Site"
+                        },
+                        {
+                          "label": "Remote",
+                          "value": "Remote"
+                        },
+                        {
+                          "label": "Hybrid",
+                          "value": "Hybrid"
+                        }
+                      ],
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Select Box",
+                      "label": "Workplace Type"
+                    }
+                  }
+                }
+              ],
+              "id": "row-38"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-68",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem69",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "visibilityRules": {
+                        "conjunction": "AND",
+                        "rules": [
+                          {
+                            "field": "elem40",
+                            "valueType": "select",
+                            "value": [
+                              "Hybrid",
+                              "On-Site"
+                            ],
+                            "operator": "select_any_in"
+                          }
+                        ],
+                        "version": 1
+                      },
+                      "name": "Short Text",
+                      "label": "Location"
+                    }
+                  }
+                }
+              ],
+              "id": "row-92"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-74",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem75",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "description": "",
+                      "label": "Position Description"
+                    }
+                  }
+                }
+              ],
+              "id": "row-73"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-83",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem84",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "label": "Responsibilities"
+                    }
+                  }
+                }
+              ],
+              "id": "row-82"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-88",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem89",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "label": "Skills & Qualifications"
+                    }
+                  }
+                }
+              ],
+              "id": "row-87"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-1",
+                  "element": {
+                    "input": "Button",
+                    "id": "elem1",
+                    "props": {
+                      "settings": {
+                        "fluid": true
+                      },
+                      "mandatory-action": {
+                        "variables": {
+                          "cardType": "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF",
+                          "name": "{{{form.data.elem27}}}",
+                          "list": "289e2bf5d12c43edac8ebcfa43707b3c"
+                        },
+                        "type": "create-card"
+                      },
+                      "name": "Button",
+                      "label": "Button",
+                      "value": "Create"
+                    }
+                  }
+                }
+              ],
+              "id": "row-1"
+            }
+          ],
+          "hippoFieldMapping": {
+            "elem27": "hf_6fEHVP",
+            "elem69": "hf_WjyM92",
+            "elem40": "hf_Z0d0rI",
+            "elem84": "hf_KFZcgv",
+            "elem89": "hf_QFzUc7",
+            "elem75": "hf_ETDdRy"
+          },
+          "formAutoIncrementId": 89
+        },
+        "type": "form",
+        "formatVersion": 2,
+        "enabled": true
+      },
+      "Z5fvW15iL5Dkfn14tUISnMM2NVQGPzrp": {
+        "showInTrello": false,
+        "icon": "question",
+        "name": "Question Form",
+        "anonymous": false,
+        "id": "Z5fvW15iL5Dkfn14tUISnMM2NVQGPzrp",
+        "body": {
+          "successViews": {
+            "elem15": {
+              "id": "7ULylC",
+              "type": "view",
+              "props": {
+                "view": {
+                  "id": "hP2Tnu",
+                  "target": {
+                    "type": "inline"
+                  }
+                }
               }
-            } ],
-            "id" : "4N5jdj"
-          }
-        } ],
-        "environments" : [ "webView" ],
-        "gap" : 5,
-        "name" : "My Applications",
-        "slug" : "my-application",
-        "title" : "My Application"
+            }
+          },
+          "readOnly": false,
+          "rows": [
+            {
+              "columns": [
+                {
+                  "id": "col-2",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem3",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.firstName}}}",
+                        "inputWidth": 100
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "description": "Description",
+                      "label": "First Name",
+                      "placeholder": "Tony",
+                      "value": ""
+                    }
+                  }
+                },
+                {
+                  "id": "col-39",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem38",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.lastName}}}",
+                        "inputWidth": 100
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "description": "Description",
+                      "label": "Last Name",
+                      "placeholder": "Leo",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-1"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-5",
+                  "element": {
+                    "input": "Email",
+                    "id": "elem6",
+                    "props": {
+                      "schema": {
+                        "format": "email",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": "{{{user.email}}}",
+                        "inputWidth": 100
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Email",
+                      "description": "Description",
+                      "label": "E-mail",
+                      "placeholder": "",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-4"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-11",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem12",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "inputWidth": 100
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "description": "Description",
+                      "label": "Question",
+                      "placeholder": "",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-10"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-14",
+                  "element": {
+                    "input": "Button",
+                    "id": "elem15",
+                    "props": {
+                      "settings": {
+                        "fluid": true
+                      },
+                      "mandatory-action": {
+                        "variables": {
+                          "cardType": "xe3ClaW5nLpXDjxO4poIfOjiYPBocHKz",
+                          "name": "Question by {{{user.name}}}",
+                          "description": "{{{form.summary}}}",
+                          "list": "26c71ab451ea4f17b54351db04884ec7"
+                        },
+                        "type": "create-card"
+                      },
+                      "name": "Button",
+                      "description": "Description",
+                      "label": "Label",
+                      "placeholder": "Submit",
+                      "value": "Submit"
+                    }
+                  }
+                }
+              ],
+              "id": "row-13"
+            }
+          ],
+          "hippoFieldMapping": {
+            "elem38": "hf_RdIJt9",
+            "elem6": "hf_5nFgHF",
+            "elem12": "hf_q82Kpy",
+            "elem3": "hf_S9CLku"
+          },
+          "formAutoIncrementId": 57
+        },
+        "type": "form",
+        "formatVersion": 2,
+        "enabled": true
+      },
+      "bJZcZiD1FcBB07KbboGM7nIKi1neLVxu": {
+        "accessRight": {
+          "roleRules": [
+            {
+              "roles": [
+                "hptbrdadm",
+                "hptbrdnrm",
+                "hptbrdobs"
+              ],
+              "type": "allow"
+            }
+          ],
+          "cardTypes": [
+            "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF"
+          ]
+        },
+        "showInTrello": true,
+        "icon": "edit",
+        "name": "Update Job Ad Form",
+        "anonymous": false,
+        "id": "bJZcZiD1FcBB07KbboGM7nIKi1neLVxu",
+        "body": {
+          "successViews": {
+            "elem1": {
+              "id": "whGQUa",
+              "type": "view",
+              "props": {
+                "view": {
+                  "id": "GuCy02",
+                  "target": {
+                    "type": "inline"
+                  }
+                }
+              }
+            }
+          },
+          "rows": [
+            {
+              "columns": [
+                {
+                  "id": "col-26",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem27",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Short Text",
+                      "description": "",
+                      "label": "Position Title",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-25"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-39",
+                  "element": {
+                    "input": "SelectBox",
+                    "id": "elem40",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "data": [
+                        {
+                          "label": "On-Site",
+                          "value": "On-Site"
+                        },
+                        {
+                          "label": "Remote",
+                          "value": "Remote"
+                        },
+                        {
+                          "label": "Hybrid",
+                          "value": "Hybrid"
+                        }
+                      ],
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Select Box",
+                      "label": "Workplace Type",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-38"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-68",
+                  "element": {
+                    "input": "EditText",
+                    "id": "elem69",
+                    "props": {
+                      "schema": {
+                        "format": "string",
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "visibilityRules": {
+                        "conjunction": "AND",
+                        "rules": [
+                          {
+                            "field": "elem40",
+                            "valueType": "select",
+                            "value": [
+                              "Hybrid",
+                              "On-Site"
+                            ],
+                            "operator": "select_any_in"
+                          }
+                        ],
+                        "version": 1
+                      },
+                      "name": "Short Text",
+                      "label": "Location",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-92"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-74",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem75",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "label": "Position Description",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-73"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-83",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem84",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "description": "",
+                      "label": "Responsibilities",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-82"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-88",
+                  "element": {
+                    "input": "LongText",
+                    "id": "elem89",
+                    "props": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "settings": {
+                        "defaultValue": ""
+                      },
+                      "validationRules": {
+                        "required": true
+                      },
+                      "name": "Long Text",
+                      "label": "Skills & Qualifications",
+                      "value": ""
+                    }
+                  }
+                }
+              ],
+              "id": "row-87"
+            },
+            {
+              "columns": [
+                {
+                  "id": "col-1",
+                  "element": {
+                    "input": "Button",
+                    "id": "elem1",
+                    "props": {
+                      "settings": {
+                        "fluid": true
+                      },
+                      "name": "Button",
+                      "label": "Button",
+                      "value": "Update"
+                    }
+                  }
+                }
+              ],
+              "id": "row-1"
+            }
+          ],
+          "hippoFieldMapping": {
+            "elem27": "hf_6fEHVP",
+            "elem69": "hf_WjyM92",
+            "elem40": "hf_Z0d0rI",
+            "elem84": "hf_KFZcgv",
+            "elem89": "hf_QFzUc7",
+            "elem75": "hf_ETDdRy"
+          },
+          "formAutoIncrementId": 89
+        },
+        "type": "updateform",
+        "formatVersion": 2,
+        "enabled": true
       }
-    },
-    "Vwt_jm" : {
-      "enabled" : true,
-      "id" : "Vwt_jm",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : false,
-        "children" : [ {
-          "id" : "2atu7t"
-        }, {
-          "id" : "_kv_hG"
-        }, {
-          "id" : "PnTHy8",
-          "view" : {
-            "children" : [ {
-              "children" : [ {
-                "children" : [ {
-                  "id" : "DmqSOf"
-                }, {
-                  "id" : "sWHNsd"
-                } ],
-                "id" : "sCPH5Q"
-              }, {
-                "children" : [ {
-                  "id" : "qrwAfr"
-                } ],
-                "id" : "LtdQ08"
-              } ],
-              "id" : "8c9U1z"
-            } ],
-            "id" : "u7eJrd"
+    }
+  },
+  "views": {
+    "npj93S": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hptbrdadm",
+              "hptbrdnrm",
+              "hptbrdobs"
+            ],
+            "type": "allow"
           }
-        } ],
-        "environments" : [ "webView" ],
-        "gap" : 5,
-        "name" : "Open Positions",
-        "slug" : "home",
-        "title" : "Open Positions"
-      }
+        ],
+        "cardTypes": [
+          "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3"
+        ]
+      },
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "id": "XUyVDL"
+                  },
+                  {
+                    "id": "57YdjM"
+                  },
+                  {
+                    "id": "1kg0TE"
+                  },
+                  {
+                    "id": "JXuI7K"
+                  },
+                  {
+                    "id": "jJ2XNi"
+                  },
+                  {
+                    "id": "9GFB6R"
+                  }
+                ],
+                "id": "I21nqm"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "id": "lhcVqm"
+                      },
+                      {
+                        "id": "oSLjhY"
+                      },
+                      {
+                        "id": "gUEFja"
+                      },
+                      {
+                        "id": "ejdTEh"
+                      }
+                    ],
+                    "id": "1N2ETS"
+                  }
+                ],
+                "id": "u2Uxfu"
+              }
+            ],
+            "id": "M7m4Ls"
+          },
+          {
+            "id": "n5VrxU"
+          },
+          {
+            "id": "qzOhLc"
+          },
+          {
+            "id": "xyy8dI"
+          },
+          {
+            "id": "oaH6pJ"
+          },
+          {
+            "id": "B2O2R3"
+          },
+          {
+            "id": "SlAmAt"
+          },
+          {
+            "id": "gxMxnu"
+          },
+          {
+            "id": "ygTB6z"
+          },
+          {
+            "id": "DEW3oi"
+          },
+          {
+            "id": "Quhce6"
+          }
+        ],
+        "environments": [
+          "trelloCardBack"
+        ],
+        "gap": 5,
+        "name": "Application Details",
+        "title": "Application Details",
+        "slug": "application-details"
+      },
+      "id": "npj93S",
+      "type": "page",
+      "enabled": true
     },
-    "ecVH47" : {
-      "id" : "ecVH47",
-      "type" : "appHeader",
-      "viewProps" : {
-        "children" : [ {
-          "children" : [ {
-            "id" : "aOnEk0"
-          }, {
-            "id" : "4b0sXW"
-          }, {
-            "id" : "u5et1a"
-          } ],
-          "id" : "dBRz2G"
-        } ],
-        "viewType" : "tabs",
-        "visibilities" : {
-          "login" : false,
-          "logo" : false,
-          "menu" : true
+    "AJ0K7d": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hpauth"
+            ],
+            "type": "allow"
+          }
+        ],
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.c_userId",
+                "valueType": "value",
+                "value": "{{{user.id}}}",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        },
+        "cardTypes": [
+          "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3"
+        ]
+      },
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "nC70l6"
+          },
+          {
+            "id": "JXainN"
+          },
+          {
+            "id": "U2y66a"
+          },
+          {
+            "id": "UMEiAw"
+          },
+          {
+            "id": "HvQZM6"
+          },
+          {
+            "id": "9qP05j"
+          },
+          {
+            "id": "HbfKx2"
+          },
+          {
+            "id": "0KQDPv"
+          },
+          {
+            "id": "AvMijH"
+          }
+        ],
+        "environments": [
+          "webView"
+        ],
+        "gap": 5,
+        "name": "Applicant Submission Details",
+        "title": "Applicant Submission Details",
+        "slug": "applicant-submission-details"
+      },
+      "id": "AJ0K7d",
+      "type": "page",
+      "enabled": true
+    },
+    "hP2Tnu": {
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "CzTWra"
+          },
+          {
+            "id": "3D1reo"
+          }
+        ],
+        "name": "Question Form Thanks Page",
+        "align": "center"
+      },
+      "id": "hP2Tnu",
+      "type": "page",
+      "enabled": true
+    },
+    "ecVH47": {
+      "viewProps": {
+        "children": [
+          {
+            "children": [
+              {
+                "id": "aOnEk0"
+              },
+              {
+                "id": "4b0sXW"
+              },
+              {
+                "id": "u5et1a"
+              }
+            ],
+            "id": "dBRz2G"
+          }
+        ],
+        "viewType": "tabs",
+        "visibilities": {
+          "logo": false,
+          "login": false,
+          "menu": true
         }
-      }
-    },
-    "gv0TUI" : {
-      "accessRight" : {
-        "cardTypes" : [ "66cd0f1b6db141e68d4aa1c1cb12964a" ],
-        "roleRules" : [ {
-          "roles" : [ "hptbrdadm", "hptbrdnrm", "hptbrdobs" ],
-          "type" : "allow"
-        } ]
       },
-      "enabled" : true,
-      "id" : "gv0TUI",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : true,
-        "children" : [ {
-          "children" : [ {
-            "children" : [ {
-              "id" : "0QIbwK"
-            }, {
-              "id" : "zFj8aV"
-            } ],
-            "id" : "Ml5YVn"
-          }, {
-            "children" : [ {
-              "id" : "zN0iwF"
-            } ],
-            "id" : "31W96B"
-          } ],
-          "id" : "kZ4XMK"
-        }, {
-          "id" : "WSOYZX"
-        }, {
-          "id" : "bmB7EU"
-        }, {
-          "id" : "iwPEXR"
-        }, {
-          "id" : "4ap6nv"
-        }, {
-          "id" : "U6Ju3B"
-        }, {
-          "id" : "le8rhu"
-        }, {
-          "id" : "bSCl7B"
-        }, {
-          "id" : "STbeDM"
-        }, {
-          "id" : "g5LqeY"
-        }, {
-          "id" : "dTfQP6"
-        }, {
-          "id" : "XqlVsI"
-        }, {
-          "id" : "49YbjL",
-          "view" : {
-            "columns" : [ {
-              "id" : "9hJ1sl",
-              "view" : {
-                "id" : "lneHuH"
+      "id": "ecVH47",
+      "type": "appHeader"
+    },
+    "jE7ieG": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "d09580d14d884154a5dfdddfda5247c0",
+                "operator": "equals"
               }
-            }, {
-              "id" : "6uC6Bp",
-              "view" : {
-                "id" : "nCAwPg"
-              }
-            }, {
-              "id" : "tMCT0H",
-              "view" : {
-                "id" : "kPuleZ"
-              }
-            } ],
-            "id" : "TujUS2"
+            ]
+          ],
+          "type": "basic"
+        },
+        "cardTypes": [
+          "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF"
+        ]
+      },
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "8kSynl"
+          },
+          {
+            "id": "qaXhPi"
+          },
+          {
+            "id": "gF9DeG"
+          },
+          {
+            "id": "ohNgGC"
+          },
+          {
+            "id": "fpUCfW"
+          },
+          {
+            "id": "K6LIhG"
+          },
+          {
+            "id": "Whdjw7"
+          },
+          {
+            "id": "hxWuuk"
+          },
+          {
+            "id": "U143wz"
+          },
+          {
+            "id": "aZrviP"
+          },
+          {
+            "id": "VM2Tca"
           }
-        } ],
-        "environments" : [ "trelloCardBack" ],
-        "gap" : 5,
-        "name" : "Job Ad Details",
-        "slug" : "job-ad-details",
-        "title" : "Job Ad Details"
-      }
+        ],
+        "environments": [
+          "webView"
+        ],
+        "gap": 5,
+        "name": "Job Ad Detail Page",
+        "title": "Job Ad Detail Page",
+        "slug": "job-ad-detail-page"
+      },
+      "id": "jE7ieG",
+      "type": "page",
+      "enabled": true
     },
-    "hP2Tnu" : {
-      "enabled" : true,
-      "id" : "hP2Tnu",
-      "type" : "page",
-      "viewProps" : {
-        "align" : "center",
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "CzTWra"
-        }, {
-          "id" : "3D1reo"
-        } ],
-        "name" : "Question Form Thanks Page"
-      }
-    },
-    "jE7ieG" : {
-      "accessRight" : {
-        "cardTypes" : [ "66cd0f1b6db141e68d4aa1c1cb12964a" ],
-        "dataRule" : {
-          "conditions" : [ [ {
-            "field" : "card.tc_listHippoId",
-            "operator" : "equals",
-            "value" : "857f6601a9154d9fae6346f8acc8c4eb",
-            "valueType" : "value"
-          } ] ],
-          "type" : "basic"
+    "05JN1e": {
+      "viewProps": {
+        "children": [
+          {
+            "children": [
+              {
+                "id": "wAC3yk"
+              },
+              {
+                "id": "mLbszg"
+              },
+              {
+                "id": "aWgNXP"
+              }
+            ],
+            "id": "CCWJxt"
+          }
+        ],
+        "viewType": "default",
+        "visibilities": {
+          "logo": true,
+          "login": true,
+          "menu": true
         }
       },
-      "enabled" : true,
-      "id" : "jE7ieG",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "8kSynl"
-        }, {
-          "id" : "qaXhPi"
-        }, {
-          "id" : "gF9DeG"
-        }, {
-          "id" : "ohNgGC"
-        }, {
-          "id" : "fpUCfW"
-        }, {
-          "id" : "K6LIhG"
-        }, {
-          "id" : "Whdjw7"
-        }, {
-          "id" : "hxWuuk"
-        }, {
-          "id" : "U143wz"
-        }, {
-          "id" : "aZrviP"
-        }, {
-          "id" : "VM2Tca"
-        } ],
-        "environments" : [ "webView" ],
-        "gap" : 5,
-        "name" : "Job Ad Detail Page",
-        "slug" : "job-ad-detail-page",
-        "title" : "Job Ad Detail Page"
-      }
+      "id": "05JN1e",
+      "type": "appHeader"
     },
-    "npj93S" : {
-      "accessRight" : {
-        "cardTypes" : [ "ca14e9d64f6147879c9c60db54948693" ],
-        "roleRules" : [ {
-          "roles" : [ "hptbrdadm", "hptbrdnrm", "hptbrdobs" ],
-          "type" : "allow"
-        } ]
+    "Vwt_jm": {
+      "viewProps": {
+        "cardAware": false,
+        "children": [
+          {
+            "id": "2atu7t"
+          },
+          {
+            "id": "_kv_hG"
+          },
+          {
+            "view": {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "id": "DmqSOf"
+                        },
+                        {
+                          "id": "sWHNsd"
+                        }
+                      ],
+                      "id": "sCPH5Q"
+                    },
+                    {
+                      "children": [
+                        {
+                          "id": "qrwAfr"
+                        }
+                      ],
+                      "id": "LtdQ08"
+                    }
+                  ],
+                  "id": "8c9U1z"
+                }
+              ],
+              "id": "u7eJrd"
+            },
+            "id": "PnTHy8"
+          }
+        ],
+        "environments": [
+          "webView"
+        ],
+        "gap": 5,
+        "name": "Open Positions",
+        "title": "Open Positions",
+        "slug": "home"
       },
-      "enabled" : true,
-      "id" : "npj93S",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : true,
-        "children" : [ {
-          "children" : [ {
-            "children" : [ {
-              "id" : "XUyVDL"
-            }, {
-              "id" : "57YdjM"
-            }, {
-              "id" : "1kg0TE"
-            }, {
-              "id" : "JXuI7K"
-            }, {
-              "id" : "jJ2XNi"
-            }, {
-              "id" : "9GFB6R"
-            } ],
-            "id" : "I21nqm"
-          }, {
-            "children" : [ {
-              "children" : [ {
-                "id" : "lhcVqm"
-              }, {
-                "id" : "oSLjhY"
-              }, {
-                "id" : "gUEFja"
-              }, {
-                "id" : "ejdTEh"
-              } ],
-              "id" : "1N2ETS"
-            } ],
-            "id" : "u2Uxfu"
-          } ],
-          "id" : "M7m4Ls"
-        }, {
-          "id" : "n5VrxU"
-        }, {
-          "id" : "qzOhLc"
-        }, {
-          "id" : "xyy8dI"
-        }, {
-          "id" : "oaH6pJ"
-        }, {
-          "id" : "B2O2R3"
-        }, {
-          "id" : "SlAmAt"
-        }, {
-          "id" : "gxMxnu"
-        }, {
-          "id" : "ygTB6z"
-        }, {
-          "id" : "DEW3oi"
-        }, {
-          "id" : "Quhce6"
-        } ],
-        "environments" : [ "trelloCardBack" ],
-        "gap" : 5,
-        "name" : "Application Details",
-        "slug" : "application-details",
-        "title" : "Application Details"
-      }
+      "id": "Vwt_jm",
+      "type": "page",
+      "enabled": true
     },
-    "xhFVrb" : {
-      "accessRight" : {
-        "roleRules" : [ {
-          "roles" : [ "hptbrdadm", "hptbrdnrm", "hptbrdobs" ],
-          "type" : "allow"
-        } ]
+    "Hm5W8l": {
+      "viewProps": {
+        "cardAware": false,
+        "children": [
+          {
+            "id": "JK7Eyy"
+          },
+          {
+            "id": "iK4JWe"
+          }
+        ],
+        "environments": [
+          "webView"
+        ],
+        "gap": 5,
+        "name": "About Company",
+        "title": "About Company",
+        "slug": "about-company"
       },
-      "enabled" : true,
-      "id" : "xhFVrb",
-      "type" : "page",
-      "viewProps" : {
-        "cardAware" : true,
-        "children" : [ {
-          "id" : "FOkQb4"
-        } ],
-        "environments" : [ "trelloCardBack" ],
-        "gap" : 5,
-        "name" : "Conversation",
-        "slug" : "conversation",
-        "title" : "Conversation"
+      "id": "Hm5W8l",
+      "type": "page",
+      "enabled": true
+    },
+    "0p7juD": {
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "VvgFYC"
+          },
+          {
+            "id": "75tSmt"
+          }
+        ],
+        "name": "New Job Advertisement Form Thanks Page",
+        "align": "center"
+      },
+      "id": "0p7juD",
+      "type": "page",
+      "enabled": true
+    },
+    "xhFVrb": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hptbrdadm",
+              "hptbrdnrm",
+              "hptbrdobs"
+            ],
+            "type": "allow"
+          }
+        ]
+      },
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "FOkQb4"
+          }
+        ],
+        "environments": [
+          "trelloCardBack"
+        ],
+        "gap": 5,
+        "name": "Conversation",
+        "title": "Conversation",
+        "slug": "conversation"
+      },
+      "id": "xhFVrb",
+      "type": "page",
+      "enabled": true
+    },
+    "R90WKS": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hpauth"
+            ],
+            "type": "allow"
+          }
+        ]
+      },
+      "viewProps": {
+        "cardAware": false,
+        "children": [
+          {
+            "id": "COQqmh"
+          },
+          {
+            "view": {
+              "columns": [
+                {
+                  "view": {
+                    "id": "kC0SFM"
+                  },
+                  "id": "dq7Ved"
+                },
+                {
+                  "view": {
+                    "id": "lqFqEx"
+                  },
+                  "id": "dwvogK"
+                }
+              ],
+              "id": "4N5jdj"
+            },
+            "id": "R4wpqd"
+          }
+        ],
+        "environments": [
+          "webView"
+        ],
+        "gap": 5,
+        "name": "My Applications",
+        "title": "My Application",
+        "slug": "my-application"
+      },
+      "id": "R90WKS",
+      "type": "page",
+      "enabled": true
+    },
+    "OZVmvQ": {
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "vu8iYt"
+          },
+          {
+            "id": "HkgIWt"
+          },
+          {
+            "id": "IC6oRZ"
+          },
+          {
+            "id": "XCbS30"
+          }
+        ],
+        "name": "Job Application Form Thanks Page",
+        "align": "center"
+      },
+      "id": "OZVmvQ",
+      "type": "page",
+      "enabled": true
+    },
+    "gv0TUI": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hptbrdadm",
+              "hptbrdnrm",
+              "hptbrdobs"
+            ],
+            "type": "allow"
+          }
+        ],
+        "cardTypes": [
+          "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF"
+        ]
+      },
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "id": "0QIbwK"
+                  },
+                  {
+                    "id": "zFj8aV"
+                  }
+                ],
+                "id": "Ml5YVn"
+              },
+              {
+                "children": [
+                  {
+                    "id": "zN0iwF"
+                  }
+                ],
+                "id": "31W96B"
+              }
+            ],
+            "id": "kZ4XMK"
+          },
+          {
+            "id": "WSOYZX"
+          },
+          {
+            "id": "bmB7EU"
+          },
+          {
+            "id": "iwPEXR"
+          },
+          {
+            "id": "4ap6nv"
+          },
+          {
+            "id": "U6Ju3B"
+          },
+          {
+            "id": "le8rhu"
+          },
+          {
+            "id": "bSCl7B"
+          },
+          {
+            "id": "STbeDM"
+          },
+          {
+            "id": "g5LqeY"
+          },
+          {
+            "id": "dTfQP6"
+          },
+          {
+            "id": "XqlVsI"
+          },
+          {
+            "view": {
+              "columns": [
+                {
+                  "view": {
+                    "id": "lneHuH"
+                  },
+                  "id": "9hJ1sl"
+                },
+                {
+                  "view": {
+                    "id": "nCAwPg"
+                  },
+                  "id": "6uC6Bp"
+                },
+                {
+                  "view": {
+                    "id": "kPuleZ"
+                  },
+                  "id": "tMCT0H"
+                }
+              ],
+              "id": "TujUS2"
+            },
+            "id": "49YbjL"
+          }
+        ],
+        "environments": [
+          "trelloCardBack"
+        ],
+        "gap": 5,
+        "name": "Job Ad Details",
+        "title": "Job Ad Details",
+        "slug": "job-ad-details"
+      },
+      "id": "gv0TUI",
+      "type": "page",
+      "enabled": true
+    },
+    "GuCy02": {
+      "viewProps": {
+        "cardAware": true,
+        "children": [
+          {
+            "id": "qFRT3k"
+          },
+          {
+            "id": "yjke3y"
+          }
+        ],
+        "name": "Update Job Ad Form Thanks Page",
+        "align": "center"
+      },
+      "id": "GuCy02",
+      "type": "page",
+      "enabled": true
+    }
+  },
+  "components": {
+    "iwPEXR": {
+      "id": "iwPEXR",
+      "type": "horizontalline"
+    },
+    "_kv_hG": {
+      "viewProps": {
+        "text": "You can view the details of our open positions and apply for the position you are interested in",
+        "alignment": "left"
+      },
+      "id": "_kv_hG",
+      "type": "paragraph"
+    },
+    "u7eJrd": {
+      "viewProps": {
+        "events": {
+          "onClick": {
+            "actionGroupId": "Udl0cq",
+            "id": "7lAnVY"
+          }
+        }
+      },
+      "id": "u7eJrd",
+      "type": "list"
+    },
+    "ejdTEh": {
+      "viewProps": {
+        "text": "Offer Declined",
+        "events": {
+          "onClick": {
+            "actionGroupId": "641sPx",
+            "id": "WIK3Cd"
+          }
+        }
+      },
+      "id": "ejdTEh",
+      "type": "dropdownItem"
+    },
+    "kPuleZ": {
+      "viewProps": {
+        "text": "{{{card.c_insertedAt}}}",
+        "alignment": "left"
+      },
+      "id": "kPuleZ",
+      "type": "paragraph"
+    },
+    "4b0sXW": {
+      "viewProps": {
+        "text": "Menu Item",
+        "events": {
+          "onClick": {
+            "action": {
+              "type": "open-page",
+              "props": {
+                "viewId": "npj93S",
+                "params": {
+                  "context": "self"
+                },
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "4b0sXW",
+      "type": "menuItem"
+    },
+    "n5VrxU": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "{{{parentCard.hf_6fEHVP}}}",
+        "alignment": "left"
+      },
+      "id": "n5VrxU",
+      "type": "header"
+    },
+    "bSCl7B": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Responsibilities",
+        "alignment": "left"
+      },
+      "id": "bSCl7B",
+      "type": "header"
+    },
+    "HkgIWt": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hpauth"
+            ],
+            "type": "allow"
+          }
+        ]
+      },
+      "viewProps": {
+        "text": "You can follow the process on 'My Applications' page."
+      },
+      "id": "HkgIWt",
+      "type": "paragraph"
+    },
+    "aOnEk0": {
+      "viewProps": {
+        "text": "Menu Item",
+        "events": {
+          "onClick": {
+            "action": {
+              "type": "open-page",
+              "props": {
+                "viewId": "gv0TUI",
+                "params": {
+                  "context": "self"
+                },
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "aOnEk0",
+      "type": "menuItem"
+    },
+    "hxWuuk": {
+      "viewProps": {
+        "text": "{{{card.hf_KFZcgv}}}",
+        "alignment": "left"
+      },
+      "id": "hxWuuk",
+      "type": "paragraph"
+    },
+    "lhcVqm": {
+      "viewProps": {
+        "text": "Min. Qualifications not Met",
+        "events": {
+          "onClick": {
+            "actionGroupId": "bbDCs5",
+            "id": "VSfEfJ"
+          }
+        }
+      },
+      "id": "lhcVqm",
+      "type": "dropdownItem"
+    },
+    "49YbjL": {
+      "viewProps": {
+        "query": {
+          "conditions": [
+            [
+              {
+                "field": "card.c_cardType",
+                "valueType": "value",
+                "value": "default",
+                "operator": "equals"
+              },
+              {
+                "field": "card.c_parentCardId",
+                "valueType": "value",
+                "value": "{{{card.c_id}}}",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        },
+        "viewType": "table",
+        "header": "",
+        "pagination": false,
+        "pageSize": -1,
+        "page": 1,
+        "sort": [
+          {
+            "sortField": "card.c_insertedAt",
+            "sortOrder": "ASC"
+          }
+        ]
+      },
+      "id": "49YbjL",
+      "type": "TrelloCardSharing"
+    },
+    "qFRT3k": {
+      "viewProps": {
+        "heading": "h2",
+        "text": "{{{card.hf_6fEHVP}}} job ad has been updated."
+      },
+      "id": "qFRT3k",
+      "type": "header"
+    },
+    "dq7Ved": {
+      "viewProps": {
+        "header": "Position"
+      },
+      "id": "dq7Ved",
+      "type": "tableColumn"
+    },
+    "AvMijH": {
+      "viewProps": {
+        "showThreadMemberAliasName": true,
+        "threadVisibility": "onlyThreadMembers",
+        "allowReply": true,
+        "showMeta": false,
+        "allowNewThread": false,
+        "allowDeleteThread": false,
+        "allowGetBoardMembers": true,
+        "allowMembersUpdate": false,
+        "allowDeleteMessage": false,
+        "allowQuickText": true,
+        "allowGetContacts": true,
+        "allowGetRoles": true,
+        "events": {
+          "onReply": {
+            "action": {
+              "id": "Pu6Rq0",
+              "type": "conversation-reply"
+            },
+            "id": "xj3mhy"
+          },
+          "onGetBoardMembers": {
+            "action": {
+              "id": "Uxifln",
+              "type": "conversation-get-board-members"
+            },
+            "id": "soufXQ"
+          },
+          "onGetRoles": {
+            "action": {
+              "id": "SgMTpu",
+              "type": "conversation-get-roles"
+            },
+            "id": "ZYIJ31"
+          },
+          "onGetContacts": {
+            "action": {
+              "id": "g4RPHb",
+              "type": "conversation-get-contacts"
+            },
+            "id": "IMxzhr"
+          }
+        }
+      },
+      "id": "AvMijH",
+      "type": "Conversation"
+    },
+    "HvQZM6": {
+      "viewProps": {
+        "text": "{{{card.hf_RPqVAP}}}",
+        "alignment": "left"
+      },
+      "id": "HvQZM6",
+      "type": "paragraph"
+    },
+    "bmB7EU": {
+      "viewProps": {
+        "text": "{{{card.hf_Z0d0rI}}} - {{{card.hf_WjyM92}}}",
+        "alignment": "left"
+      },
+      "id": "bmB7EU",
+      "type": "paragraph"
+    },
+    "Quhce6": {
+      "viewProps": {
+        "backgroundColor": "transparent",
+        "size": "default",
+        "icon": "folder",
+        "iconPosition": "left",
+        "fluid": true,
+        "text": "Related Job Advertisement: {{{parentCard.tc_name}}}",
+        "alignment": "left",
+        "textColor": "#3366BB",
+        "events": {
+          "onClick": {
+            "actionGroupId": "6qNaro",
+            "id": "33L2Hy"
+          }
+        }
+      },
+      "id": "Quhce6",
+      "type": "hyperlink"
+    },
+    "SlAmAt": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Cover Letter",
+        "alignment": "left"
+      },
+      "id": "SlAmAt",
+      "type": "header"
+    },
+    "XqlVsI": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "Applications",
+        "alignment": "left"
+      },
+      "id": "XqlVsI",
+      "type": "header"
+    },
+    "zN0iwF": {
+      "viewProps": {
+        "backgroundColor": "#656565",
+        "icon": "edit",
+        "iconPosition": "left",
+        "text": "Edit Job Ad",
+        "events": {
+          "onClick": {
+            "actionGroupId": "yAZgWs",
+            "id": "9WMjzm"
+          }
+        }
+      },
+      "id": "zN0iwF",
+      "type": "button"
+    },
+    "lneHuH": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "{{{card.tc_name}}}",
+        "alignment": "left"
+      },
+      "id": "lneHuH",
+      "type": "header"
+    },
+    "TujUS2": {
+      "viewProps": {
+        "events": {
+          "onClick": {
+            "actionGroupId": "3G52Wi",
+            "id": "tmIU3h"
+          }
+        }
+      },
+      "id": "TujUS2",
+      "type": "table"
+    },
+    "dTfQP6": {
+      "viewProps": {
+        "text": "{{{card.hf_QFzUc7}}}",
+        "alignment": "left"
+      },
+      "id": "dTfQP6",
+      "type": "paragraph"
+    },
+    "sWHNsd": {
+      "viewProps": {
+        "text": "{{{card.hf_Z0d0rI}}} - {{{card.hf_WjyM92}}}",
+        "alignment": "left"
+      },
+      "id": "sWHNsd",
+      "type": "paragraph"
+    },
+    "U6Ju3B": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Position Description",
+        "alignment": "left"
+      },
+      "id": "U6Ju3B",
+      "type": "header"
+    },
+    "6uC6Bp": {
+      "viewProps": {
+        "header": "in List"
+      },
+      "id": "6uC6Bp",
+      "type": "tableColumn"
+    },
+    "le8rhu": {
+      "viewProps": {
+        "text": "{{{card.hf_ETDdRy}}}",
+        "alignment": "left"
+      },
+      "id": "le8rhu",
+      "type": "paragraph"
+    },
+    "dwvogK": {
+      "viewProps": {
+        "header": "Application Date"
+      },
+      "id": "dwvogK",
+      "type": "tableColumn"
+    },
+    "CzTWra": {
+      "viewProps": {
+        "heading": "h2",
+        "text": "Thank you",
+        "alignment": "center"
+      },
+      "id": "CzTWra",
+      "type": "header"
+    },
+    "0KQDPv": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Messages",
+        "alignment": "left"
+      },
+      "id": "0KQDPv",
+      "type": "header"
+    },
+    "kC0SFM": {
+      "viewProps": {
+        "text": "{{{parentCard.hf_6fEHVP}}}",
+        "alignment": "left"
+      },
+      "id": "kC0SFM",
+      "type": "paragraph"
+    },
+    "u2Uxfu": {
+      "id": "u2Uxfu",
+      "type": "column"
+    },
+    "CCWJxt": {
+      "id": "CCWJxt",
+      "type": "menu"
+    },
+    "M7m4Ls": {
+      "id": "M7m4Ls",
+      "type": "columns"
+    },
+    "IC6oRZ": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hpnauth"
+            ],
+            "type": "allow"
+          }
+        ]
+      },
+      "viewProps": {
+        "text": "You can follow the process on your email.",
+        "alignment": "left"
+      },
+      "id": "IC6oRZ",
+      "type": "paragraph"
+    },
+    "HbfKx2": {
+      "viewProps": {
+        "field": "card.hf_5MFT0y"
+      },
+      "id": "HbfKx2",
+      "type": "attachmentList"
+    },
+    "Whdjw7": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "Responsibilities",
+        "alignment": "left"
+      },
+      "id": "Whdjw7",
+      "type": "header"
+    },
+    "qzOhLc": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Applicant Name",
+        "alignment": "left"
+      },
+      "id": "qzOhLc",
+      "type": "header"
+    },
+    "aZrviP": {
+      "viewProps": {
+        "text": "{{{card.hf_QFzUc7}}}",
+        "alignment": "left"
+      },
+      "id": "aZrviP",
+      "type": "paragraph"
+    },
+    "8c9U1z": {
+      "viewProps": {
+        "layout": [
+          89.79865771812081,
+          10.201342281879194
+        ]
+      },
+      "id": "8c9U1z",
+      "type": "columns"
+    },
+    "ygTB6z": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "CV Attachment",
+        "alignment": "left"
+      },
+      "id": "ygTB6z",
+      "type": "header"
+    },
+    "JXainN": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Application Date",
+        "alignment": "left"
+      },
+      "id": "JXainN",
+      "type": "header"
+    },
+    "u5et1a": {
+      "viewProps": {
+        "text": "Menu Item",
+        "events": {
+          "onClick": {
+            "action": {
+              "type": "open-page",
+              "props": {
+                "viewId": "xhFVrb",
+                "params": {
+                  "context": "self"
+                },
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "u5et1a",
+      "type": "menuItem"
+    },
+    "iK4JWe": {
+      "viewProps": {
+        "text": "{{{appVariables.av_ktItTX}}}",
+        "alignment": "left"
+      },
+      "id": "iK4JWe",
+      "type": "paragraph"
+    },
+    "mLbszg": {
+      "viewProps": {
+        "text": "About Company",
+        "events": {
+          "onClick": {
+            "action": {
+              "id": "tbg7Tq",
+              "type": "open-page",
+              "props": {
+                "viewId": "Hm5W8l",
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "mLbszg",
+      "type": "menuItem"
+    },
+    "3D1reo": {
+      "viewProps": {
+        "text": "Your message has been received.",
+        "alignment": "center"
+      },
+      "id": "3D1reo",
+      "type": "paragraph"
+    },
+    "VM2Tca": {
+      "viewProps": {
+        "size": "default",
+        "text": "Apply",
+        "events": {
+          "onClick": {
+            "actionGroupId": "BWT3PY",
+            "id": "XVH69I"
+          }
+        }
+      },
+      "id": "VM2Tca",
+      "type": "button"
+    },
+    "DEW3oi": {
+      "viewProps": {
+        "field": "card.hf_5MFT0y"
+      },
+      "id": "DEW3oi",
+      "type": "attachmentList"
+    },
+    "tMCT0H": {
+      "viewProps": {
+        "header": "Applicant Date"
+      },
+      "id": "tMCT0H",
+      "type": "tableColumn"
+    },
+    "qaXhPi": {
+      "viewProps": {
+        "text": "{{{card.hf_Z0d0rI}}} {{{card.hf_WjyM92}}}",
+        "alignment": "left"
+      },
+      "id": "qaXhPi",
+      "type": "paragraph"
+    },
+    "g5LqeY": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Skills & Qualifications",
+        "alignment": "left"
+      },
+      "id": "g5LqeY",
+      "type": "header"
+    },
+    "dBRz2G": {
+      "id": "dBRz2G",
+      "type": "menu"
+    },
+    "4ap6nv": {
+      "viewProps": {
+        "text": "{{{appVariables.av_ktItTX}}}",
+        "alignment": "left"
+      },
+      "id": "4ap6nv",
+      "type": "paragraph"
+    },
+    "U2y66a": {
+      "viewProps": {
+        "text": "{{{card.c_insertedAt}}}",
+        "alignment": "left"
+      },
+      "id": "U2y66a",
+      "type": "paragraph"
+    },
+    "1kg0TE": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "12425cda72e24de98a008c9c33ddc3d0",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#6bc505",
+        "icon": "angle-right",
+        "text": "Move to Offer",
+        "events": {
+          "onClick": {
+            "actionGroupId": "fGO4o9",
+            "id": "aZ2eQ5"
+          }
+        }
+      },
+      "id": "1kg0TE",
+      "type": "button"
+    },
+    "VvgFYC": {
+      "viewProps": {
+        "heading": "h2",
+        "text": "'{{{card.hf_6fEHVP}}} job ad has been created."
+      },
+      "id": "VvgFYC",
+      "type": "header"
+    },
+    "nC70l6": {
+      "viewProps": {
+        "heading": "h3",
+        "text": "Your {{{parentCard.hf_6fEHVP}}} application",
+        "alignment": "left"
+      },
+      "id": "nC70l6",
+      "type": "header"
+    },
+    "nCAwPg": {
+      "viewProps": {
+        "text": "{{{card.tc_listHippoIdObject.name}}}",
+        "alignment": "left"
+      },
+      "id": "nCAwPg",
+      "type": "paragraph"
+    },
+    "ohNgGC": {
+      "viewProps": {
+        "text": "{{{appVariables.av_ktItTX}}}",
+        "alignment": "left"
+      },
+      "id": "ohNgGC",
+      "type": "paragraph"
+    },
+    "9GFB6R": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "c93c97efe67943c5b13f795bbfa475c2",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#edfbd7",
+        "size": "default",
+        "icon": "handshake",
+        "iconPosition": "left",
+        "text": "The applicant was hired.",
+        "alignment": "center",
+        "textColor": "#7ed321"
+      },
+      "id": "9GFB6R",
+      "type": "button"
+    },
+    "vu8iYt": {
+      "viewProps": {
+        "heading": "h2",
+        "text": "We've received your application!"
+      },
+      "id": "vu8iYt",
+      "type": "header"
+    },
+    "31W96B": {
+      "id": "31W96B",
+      "type": "column"
+    },
+    "57YdjM": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "9a0a3164f3484b959ce35780dc92d123",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#6bc505",
+        "icon": "angle-right",
+        "text": "Move to Interview",
+        "events": {
+          "onClick": {
+            "actionGroupId": "srFAtZ",
+            "id": "0BwHFv"
+          }
+        }
+      },
+      "id": "57YdjM",
+      "type": "button"
+    },
+    "2atu7t": {
+      "viewProps": {
+        "heading": "h3",
+        "text": "Open Positions",
+        "alignment": "left"
+      },
+      "id": "2atu7t",
+      "type": "header"
+    },
+    "COQqmh": {
+      "viewProps": {
+        "heading": "h3",
+        "text": "My Applications",
+        "alignment": "left"
+      },
+      "id": "COQqmh",
+      "type": "header"
+    },
+    "yjke3y": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "d09580d14d884154a5dfdddfda5247c0",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "transparent",
+        "text": "Click to see the job detail page",
+        "textColor": "#b865ff",
+        "events": {
+          "onClick": {
+            "actionGroupId": "j8xC9x",
+            "id": "vnQ8Xc"
+          }
+        }
+      },
+      "id": "yjke3y",
+      "type": "button"
+    },
+    "gF9DeG": {
+      "id": "gF9DeG",
+      "type": "horizontalline"
+    },
+    "4N5jdj": {
+      "viewProps": {
+        "events": {
+          "onClick": {
+            "actionGroupId": "aMiiIg",
+            "id": "XwLKnb"
+          }
+        }
+      },
+      "id": "4N5jdj",
+      "type": "table"
+    },
+    "aWgNXP": {
+      "viewProps": {
+        "text": "My Applications",
+        "events": {
+          "onClick": {
+            "action": {
+              "id": "qTcd7F",
+              "type": "open-page",
+              "props": {
+                "viewId": "R90WKS",
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "aWgNXP",
+      "type": "menuItem"
+    },
+    "zFj8aV": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "d09580d14d884154a5dfdddfda5247c0",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#f5a623",
+        "text": "Move to Draft",
+        "events": {
+          "onClick": {
+            "actionGroupId": "IBqu1w",
+            "id": "hTaexU"
+          }
+        }
+      },
+      "id": "zFj8aV",
+      "type": "button"
+    },
+    "DmqSOf": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "{{{card.hf_6fEHVP}}}",
+        "alignment": "left"
+      },
+      "id": "DmqSOf",
+      "type": "header"
+    },
+    "LtdQ08": {
+      "id": "LtdQ08",
+      "type": "column"
+    },
+    "STbeDM": {
+      "viewProps": {
+        "text": "{{{card.hf_KFZcgv}}}",
+        "alignment": "left"
+      },
+      "id": "STbeDM",
+      "type": "paragraph"
+    },
+    "xyy8dI": {
+      "viewProps": {
+        "text": "{{{card.hf_S9CLku}}} {{{card.hf_RdIJt9}}}",
+        "alignment": "left"
+      },
+      "id": "xyy8dI",
+      "type": "paragraph"
+    },
+    "lqFqEx": {
+      "viewProps": {
+        "text": "{{{card.c_insertedAt}}}",
+        "alignment": "left"
+      },
+      "id": "lqFqEx",
+      "type": "paragraph"
+    },
+    "I21nqm": {
+      "id": "I21nqm",
+      "type": "column"
+    },
+    "WSOYZX": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "{{{card.hf_6fEHVP}}}",
+        "alignment": "left"
+      },
+      "id": "WSOYZX",
+      "type": "header"
+    },
+    "Ml5YVn": {
+      "id": "Ml5YVn",
+      "type": "column"
+    },
+    "9qP05j": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "CV Attachments",
+        "alignment": "left"
+      },
+      "id": "9qP05j",
+      "type": "header"
+    },
+    "9hJ1sl": {
+      "viewProps": {
+        "header": "Applicant Name"
+      },
+      "id": "9hJ1sl",
+      "type": "tableColumn"
+    },
+    "XCbS30": {
+      "accessRight": {
+        "roleRules": [
+          {
+            "roles": [
+              "hpauth"
+            ],
+            "type": "allow"
+          }
+        ]
+      },
+      "viewProps": {
+        "text": "Go to My Applications",
+        "alignment": "center",
+        "events": {
+          "onClick": {
+            "actionGroupId": "ewOpOd",
+            "id": "obPECv"
+          }
+        }
+      },
+      "id": "XCbS30",
+      "type": "button"
+    },
+    "kZ4XMK": {
+      "id": "kZ4XMK",
+      "type": "columns"
+    },
+    "gxMxnu": {
+      "viewProps": {
+        "text": "{{{card.hf_RPqVAP}}}",
+        "alignment": "left"
+      },
+      "id": "gxMxnu",
+      "type": "paragraph"
+    },
+    "qrwAfr": {
+      "viewProps": {
+        "size": "default",
+        "icon": "chevron-right",
+        "text": "",
+        "events": {
+          "onClick": {
+            "actionGroupId": "f7AC3x",
+            "id": "7vnuzv"
+          }
+        }
+      },
+      "id": "qrwAfr",
+      "type": "button"
+    },
+    "PnTHy8": {
+      "viewProps": {
+        "gap": 16,
+        "query": {
+          "conditions": [
+            [
+              {
+                "field": "card.c_cardType",
+                "valueType": "value",
+                "value": "GgyQhlw3QEowTvUavuErIyRPtpnUXnvF",
+                "operator": "equals"
+              },
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "d09580d14d884154a5dfdddfda5247c0",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        },
+        "perItemRow": 1,
+        "viewType": "list",
+        "pagination": false,
+        "pageSize": -1,
+        "page": 1,
+        "sort": [
+          {
+            "sortField": "card.c_insertedAt",
+            "sortOrder": "ASC"
+          }
+        ]
+      },
+      "id": "PnTHy8",
+      "type": "TrelloCardSharing"
+    },
+    "U143wz": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "Skills & Qualifications",
+        "alignment": "left"
+      },
+      "id": "U143wz",
+      "type": "header"
+    },
+    "oSLjhY": {
+      "viewProps": {
+        "text": "Wrong Skill Set",
+        "events": {
+          "onClick": {
+            "actionGroupId": "827J27",
+            "id": "GVd8Q0"
+          }
+        }
+      },
+      "id": "oSLjhY",
+      "type": "dropdownItem"
+    },
+    "0QIbwK": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "289e2bf5d12c43edac8ebcfa43707b3c",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#21ba1e",
+        "text": "Publish",
+        "events": {
+          "onClick": {
+            "actionGroupId": "pDf7G6",
+            "id": "MmGtZn"
+          }
+        }
+      },
+      "id": "0QIbwK",
+      "type": "button"
+    },
+    "JK7Eyy": {
+      "viewProps": {
+        "heading": "h3",
+        "text": "About Company",
+        "alignment": "left"
+      },
+      "id": "JK7Eyy",
+      "type": "header"
+    },
+    "1N2ETS": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "c93c97efe67943c5b13f795bbfa475c2",
+                "operator": "notequals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#F9FAFC",
+        "textAlign": "center",
+        "fluid": true,
+        "text": "Move to Disqualified",
+        "alignment": "left",
+        "textColor": "#d0021b"
+      },
+      "id": "1N2ETS",
+      "type": "dropdown"
+    },
+    "R4wpqd": {
+      "viewProps": {
+        "query": {
+          "conditions": [
+            [
+              {
+                "field": "card.c_userId",
+                "valueType": "value",
+                "value": "{{{user.id}}}",
+                "operator": "equals"
+              },
+              {
+                "field": "card.c_cardType",
+                "valueType": "value",
+                "value": "Hc8qnwKhjDDzqdtzNgjqQ2sjDRPozAR3",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        },
+        "viewType": "table",
+        "header": "",
+        "pagination": false,
+        "pageSize": -1,
+        "page": 1,
+        "sort": [
+          {
+            "sortField": "card.c_insertedAt",
+            "sortOrder": "ASC"
+          }
+        ]
+      },
+      "id": "R4wpqd",
+      "type": "TrelloCardSharing"
+    },
+    "wAC3yk": {
+      "viewProps": {
+        "text": "Open Positions",
+        "events": {
+          "onClick": {
+            "action": {
+              "type": "open-page",
+              "props": {
+                "viewId": "Vwt_jm",
+                "type": "internal",
+                "target": {
+                  "type": "_self"
+                }
+              }
+            },
+            "id": "4w3j8r"
+          }
+        }
+      },
+      "id": "wAC3yk",
+      "type": "menuItem"
+    },
+    "B2O2R3": {
+      "viewProps": {
+        "text": "{{{card.hf_5nFgHF}}}",
+        "alignment": "left"
+      },
+      "id": "B2O2R3",
+      "type": "paragraph"
+    },
+    "XUyVDL": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "83403c026f124f8599247bd238c5725d",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#6bc505",
+        "icon": "angle-right",
+        "text": "Move to Shortlist",
+        "events": {
+          "onClick": {
+            "actionGroupId": "w0ZVHt",
+            "id": "JbLzkk"
+          }
+        }
+      },
+      "id": "XUyVDL",
+      "type": "button"
+    },
+    "UMEiAw": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Cover Letter",
+        "alignment": "left"
+      },
+      "id": "UMEiAw",
+      "type": "header"
+    },
+    "75tSmt": {
+      "viewProps": {
+        "text": "Create New Job Ad",
+        "events": {
+          "onClick": {
+            "actionGroupId": "xjoq7y",
+            "id": "qgFGP2"
+          }
+        }
+      },
+      "id": "75tSmt",
+      "type": "button"
+    },
+    "FOkQb4": {
+      "viewProps": {
+        "showThreadMemberAliasName": true,
+        "threadVisibility": "everyone",
+        "allowReply": true,
+        "showMeta": true,
+        "allowNewThread": true,
+        "allowDeleteThread": true,
+        "allowGetBoardMembers": true,
+        "allowMembersUpdate": true,
+        "allowDeleteMessage": true,
+        "allowQuickText": true,
+        "allowGetContacts": true,
+        "allowGetRoles": true,
+        "events": {
+          "onMembersUpdate": {
+            "action": {
+              "id": "6TGuJ4",
+              "type": "conversation-update-members"
+            },
+            "id": "Qq69JJ"
+          },
+          "onReply": {
+            "action": {
+              "id": "JhKilt",
+              "type": "conversation-reply"
+            },
+            "id": "55d4i3"
+          },
+          "onDeleteThread": {
+            "action": {
+              "id": "hTeP6M",
+              "type": "conversation-delete-thread"
+            },
+            "id": "XHBHte"
+          },
+          "onGetBoardMembers": {
+            "action": {
+              "id": "x1LaNS",
+              "type": "conversation-get-board-members"
+            },
+            "id": "U25JS7"
+          },
+          "onGetRoles": {
+            "action": {
+              "id": "cWHTmu",
+              "type": "conversation-get-roles"
+            },
+            "id": "viebp4"
+          },
+          "onDeleteMessage": {
+            "action": {
+              "id": "ptPTK8",
+              "type": "conversation-delete-message"
+            },
+            "id": "f2DOQT"
+          },
+          "onGetContacts": {
+            "action": {
+              "id": "vai0Hv",
+              "type": "conversation-get-contacts"
+            },
+            "id": "lfykXB"
+          },
+          "onNewThread": {
+            "action": {
+              "id": "uplW7w",
+              "type": "conversation-new-thread"
+            },
+            "id": "uYdO5Q"
+          }
+        }
+      },
+      "id": "FOkQb4",
+      "type": "Conversation"
+    },
+    "JXuI7K": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "57adb6f3727445c3b7b26cb9c94172f7",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#6bc505",
+        "icon": "handshake",
+        "text": "Move to Hired",
+        "events": {
+          "onClick": {
+            "actionGroupId": "x1bLfl",
+            "id": "RhL6ZS"
+          }
+        }
+      },
+      "id": "JXuI7K",
+      "type": "button"
+    },
+    "fpUCfW": {
+      "viewProps": {
+        "heading": "h4",
+        "text": "Position Description",
+        "alignment": "left"
+      },
+      "id": "fpUCfW",
+      "type": "header"
+    },
+    "8kSynl": {
+      "viewProps": {
+        "heading": "h3",
+        "text": "{{{card.hf_6fEHVP}}}",
+        "alignment": "left"
+      },
+      "id": "8kSynl",
+      "type": "header"
+    },
+    "jJ2XNi": {
+      "accessRight": {
+        "dataRule": {
+          "conditions": [
+            [
+              {
+                "field": "card.tc_listHippoId",
+                "valueType": "value",
+                "value": "118e2e91c55841a2be9cec8e2feca7e1",
+                "operator": "equals"
+              }
+            ]
+          ],
+          "type": "basic"
+        }
+      },
+      "viewProps": {
+        "backgroundColor": "#6bc505",
+        "icon": "angle-left",
+        "iconPosition": "left",
+        "text": "Move to Applied",
+        "events": {
+          "onClick": {
+            "actionGroupId": "vdsWA1",
+            "id": "6ixpen"
+          }
+        }
+      },
+      "id": "jJ2XNi",
+      "type": "button"
+    },
+    "sCPH5Q": {
+      "id": "sCPH5Q",
+      "type": "column"
+    },
+    "gUEFja": {
+      "viewProps": {
+        "text": "Not Responsive",
+        "events": {
+          "onClick": {
+            "actionGroupId": "nIg13p",
+            "id": "gbf3vD"
+          }
+        }
+      },
+      "id": "gUEFja",
+      "type": "dropdownItem"
+    },
+    "oaH6pJ": {
+      "viewProps": {
+        "heading": "h5",
+        "text": "Applicant Email",
+        "alignment": "left"
+      },
+      "id": "oaH6pJ",
+      "type": "header"
+    },
+    "K6LIhG": {
+      "viewProps": {
+        "text": "{{{card.hf_ETDdRy}}}",
+        "alignment": "left"
+      },
+      "id": "K6LIhG",
+      "type": "paragraph"
+    }
+  },
+  "tours": {
+    "tour1": {
+      "id": "tour1",
+      "name": "Welcome to ATS",
+      "description": "",
+      "steps": {
+        "randomId1": {
+          "order": 0,
+          "id": "randomId1",
+          "target": "body",
+          "findTarget": "body",
+          "title": "Welcome to ATS for Trello",
+          "content": "<iframe width=\"1590\" height=\"350\" src=\"https://www.youtube.com/embed/4HaLmiUOnK4\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n\nWatch the short video to quickly understand the basic functions of this app.",
+          "placement": "center",
+          "disableBeacon": true,
+          "hideCloseButton": false,
+          "type": "modal",
+          "showSkipButton": true,
+          "continuous": false,
+          "skipText": "Close"
+        }
       }
     }
   }
