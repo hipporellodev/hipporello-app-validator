@@ -133,7 +133,10 @@ const actionWhenOpenForm = new Validator().compile({
     target: {
         type: 'object',
         props: {
-            title: 'string',
+            title: {
+                type:'string',
+                optional: true
+            },
             type: {
                 type: 'enum',
                 values: ["_modal", "_blank", "_self"]
