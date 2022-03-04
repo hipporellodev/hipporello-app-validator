@@ -17,8 +17,8 @@ export default class TrelloCardBackViewNode extends ViewNode{
     if (Array.isArray(checkResult)) {
       errors.pushArray(checkResult);
     }
-    if (!this.appJson?.app?.views[this.nodeJson.appHeader]) {
-      errors.push(this.createValidationError('oneOf', 'appHeader', this.nodeJson.appHeader, 'Errore Message'));
+    if (this.nodeJson.appHeader && !this.appJson?.app?.views[this.nodeJson.appHeader]) {
+      errors.push(this.createValidationError('oneOf', 'appHeader', this.nodeJson.appHeader, 'Error Message'));
     }
     return () => errors;
   }

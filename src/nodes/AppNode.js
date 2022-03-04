@@ -48,7 +48,10 @@ export default class AppNode extends AbstractHippoNode{
     this.addChildNode(new  CardTypesNode(appJson, "app.cardTypes"));
     this.addChildNode(new  RolesNode(appJson, "app.roles"));
     this.addChildNode(new  ViewSettingsNode(appJson, "app.viewSettings"));
-    this.addChildNode(new  AppVariableFieldsNode(appJson, "app.fieldDefinitions.appVariableFields"));
+    let appVariables = JSONUtils.query(appJson, "app.fieldDefinitions.appVariableFields");
+    if (appVariables) {
+      this.addChildNode(new  AppVariableFieldsNode(appJson, "app.fieldDefinitions.appVariableFields"));
+    }
     let actionGroups = JSONUtils.query(appJson, "app.actionGroups");
     if(actionGroups){
       actionGroups = Object.values(actionGroups)
