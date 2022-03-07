@@ -6,9 +6,9 @@ const headerScheme = {
   viewProps: {
     type: 'object',
     props: {
-          login: 'boolean|optional',
-          menu: 'boolean|optional',
-          logo: 'boolean|optional',
+        login: 'boolean|optional',
+        menu: 'boolean|optional',
+        logo: 'boolean|optional',
     }
   }
 }
@@ -19,7 +19,9 @@ export default class HeaderNode extends AbstractHippoNode{
   }
 
   process(appJson, path, nodeJson) {
-    this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
+    if(nodeJson?.viewProps?.children?.length){
+      this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
+    }
   }
 
   getValidatorFunction() {

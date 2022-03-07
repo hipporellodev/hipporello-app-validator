@@ -96,38 +96,37 @@ export default class HippoValidator {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
-        console.log("HippoValidator.validate() called")
         return this.newValidate();
-        this.extendYup();
-        this.yup = this.createScheme(this.data);
-        return new Promise((resolve, reject) => {
-            this.yup.validate(this.data, {
-                abortEarly: false
-            }).then(() => {
-                if (cast) {
-                    resolve(this.yup.cast(this.data, {stripUnknown: true}));
-                }
-                return resolve(this.data);
-            }).catch(err => {
-                let errors = [];
-                errors = err?.inner?.map(error => {
-                    let message = error?.message
-                    if (message.includes(error?.path)) {
-                        message = message.replace(error?.path, this.getLabel(error?.path))
-                    }
-                    return {
-                        message: message,
-                        code: error.type,
-                        errorTitle: this.camelCaseToNormal(`${error?.type}Error`),
-                        params: error.params
-                    }
-                })
-                reject({
-                    type: "ValidationException",
-                    errors: errors
-                });
-            })
-        })
+        // this.extendYup();
+        // this.yup = this.createScheme(this.data);
+        // return new Promise((resolve, reject) => {
+        //     this.yup.validate(this.data, {
+        //         abortEarly: false
+        //     }).then(() => {
+        //         if (cast) {
+        //             resolve(this.yup.cast(this.data, {stripUnknown: true}));
+        //         }
+        //         return resolve(this.data);
+        //     }).catch(err => {
+        //         let errors = [];
+        //         errors = err?.inner?.map(error => {
+        //             let message = error?.message
+        //             if (message.includes(error?.path)) {
+        //                 message = message.replace(error?.path, this.getLabel(error?.path))
+        //             }
+        //             return {
+        //                 message: message,
+        //                 code: error.type,
+        //                 errorTitle: this.camelCaseToNormal(`${error?.type}Error`),
+        //                 params: error.params
+        //             }
+        //         })
+        //         reject({
+        //             type: "ValidationException",
+        //             errors: errors
+        //         });
+        //     })
+        // })
 
     }
     /*
@@ -950,8 +949,7 @@ export default class HippoValidator {
                     resolved: this.convertActualResolved(error)
                 }
             }
-            console.log(JSON.stringify(convertedError));
-            return error;
+            return convertedError;
         })
         return errors;
     }
@@ -984,7 +982,7 @@ export default class HippoValidator {
             case 'enumValue':
                 return `${error.field} must be on of ${this.convertActualValues(error)}`
             default:
-                error.message;
+                return error.message;
         }
     }
 }

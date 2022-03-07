@@ -48,6 +48,8 @@ export default class PageNode extends AbstractHippoNode{
 
   process(appJson, path, nodeJson) {
     this.env = nodeJson.viewProps?.environments?.[0] || "webView";
-    this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
+    if(nodeJson?.viewProps?.children?.length){
+      this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
+    }
   }
 }
