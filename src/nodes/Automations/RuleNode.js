@@ -53,6 +53,7 @@ const ruleCheck = new Validator().compile({
   enabled: 'boolean|optional',
   filter: {
     type: 'object',
+    optional: true,
     props: {
       ...ruleConditionSchema
     }
