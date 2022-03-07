@@ -107,6 +107,7 @@ const trelloCSCheck = new Validator().compile({
   pageSize: 'number|optional',
   query: {
     type: 'object',
+    optional: true,
     props: {
       ...actionConditionSchema,
       type: {
