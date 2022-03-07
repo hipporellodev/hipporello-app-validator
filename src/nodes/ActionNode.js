@@ -143,6 +143,7 @@ const actionWhenOpenForm = new Validator().compile({
 const actionWhenOpenFormModal = new Validator().compile({
     title: "string|optional",
     size: {
+        optional: true,
         type: 'enum',
         values: ["small", "medium", "large"]
     }
