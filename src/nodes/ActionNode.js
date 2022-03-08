@@ -22,6 +22,7 @@ const schema = {
     },
     props: {
         type: 'object',
+        optional: true,
         props: {
             onSuccess: {
                 type: 'object',
@@ -126,9 +127,36 @@ const actionWhenOpenPage = new Validator().compile({
         values: ['internal', 'external']
     }
 })
+const actionWhenOpenURL = new Validator().compile({
+  target: {
+    type: 'object',
+    props: {
+      type: {
+        type: 'enum',
+        values: ["_self", "_blank"]
+      }
+    }
+  },
+  url: 'string|empty:false'
+})
 const actionWhenOpenPageExternal = new Validator().compile({
     url: 'string|empty:false'
 });
+
+const actionWhenUpdateHipporelloCard = new Validator().compile({
+  cardUpdateFields: {
+    type: "object"
+  },
+  params: {
+    type: "object",
+    props: {
+      context: {
+        type: 'enum',
+        values: ["parent", "self", "children"]
+      }
+    }
+  }
+})
 const actionWhenOpenForm = new Validator().compile({
     target: {
         type: 'object',
@@ -166,30 +194,36 @@ export default class ActionNode extends AbstractHippoNode {
             errors.pushArray(check(this.nodeJson));
         }
         this.validatorPath = `${this.path}.props`;
-        if (this.nodeJson.type === 'move-to') {
-            errors.pushArray(actionWhenMoveTo(this.nodeJson.props));
+        if (this.nodeJson.type === 'move-card') {
+            errors.pushArray(actionWhenMoveTo(this.nodeJson.props||{}));
         }
-        if (this.nodeJson.type === 'assign-label') {
-            errors.pushArray(actionWhenAssignLabel(this.nodeJson.props));
+        if (this.nodeJson.type === 'update-card-labels') {
+            errors.pushArray(actionWhenAssignLabel(this.nodeJson.props||{}));
         }
-        if (this.nodeJson.type === 'assign-member') {
-            errors.pushArray(actionWhenAssignMember(this.nodeJson.props));
+        if (this.nodeJson.type === 'update-card-members') {
+            errors.pushArray(actionWhenAssignMember(this.nodeJson.props||{}));
         }
         if (this.nodeJson.type === 'send-conversation-message') {
-            errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props));
+            errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props||{}));
+        }
+        if (['update-hipporello-card', 'update-trello-card'].includes(this.nodeJson.type)) {
+          errors.pushArray(actionWhenUpdateHipporelloCard(this.nodeJson.props||{}));
         }
         if (this.nodeJson.type === 'open-page') {
-            errors.pushArray(actionWhenOpenPage(this.nodeJson.props));
+            errors.pushArray(actionWhenOpenPage(this.nodeJson.props||{}));
             if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]) {
                 errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, Object.keys(this.appJson.app.views), this.getPageNames()))
             }
             if (this.nodeJson.props.type === 'external') {
-                errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props));
+                errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props||{}));
             }
+        }
+        if (this.nodeJson.type === 'open-url') {
+          errors.pushArray(actionWhenOpenURL(this.nodeJson.props||{}));
         }
         // TODO Caner Add open URL checks here
         if (this.nodeJson.type === 'open-form') {
-            errors.pushArray(actionWhenOpenForm(this.nodeJson.props))
+            errors.pushArray(actionWhenOpenForm(this.nodeJson.props||{}))
             if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]) {
                 errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, Object.keys(this.appJson?.app?.integrations?.incoming || {})))
             }
