@@ -197,49 +197,49 @@ export default class ComponentNode extends AbstractHippoNode{
     this.validatorPath = `${this.path}.viewProps`
     switch (this.nodeJson.type) {
       case 'formList':
-        errors.pushArray(formListCheck(this.nodeJson.viewProps));
+        errors.pushArray(formListCheck(this.nodeJson.viewProps||{}));
         break;
       case 'appList':
-        errors.pushArray(appListCheck(this.nodeJson.viewProps));
+        errors.pushArray(appListCheck(this.nodeJson.viewProps||{}));
         break;
       case 'header':
-        errors.pushArray(headerCheck(this.nodeJson.viewProps));
+        errors.pushArray(headerCheck(this.nodeJson.viewProps||{}));
         break;
       case 'paragraph':
-        errors.pushArray(paragraphCheck(this.nodeJson.viewProps));
+        errors.pushArray(paragraphCheck(this.nodeJson.viewProps||{}));
         break;
       case 'hyperLink':
-        errors.pushArray(linkCheck(this.nodeJson.viewProps));
+        errors.pushArray(linkCheck(this.nodeJson.viewProps||{}));
         break;
       case 'TrelloCardSharing':
-        errors.pushArray(trelloCSCheck(this.nodeJson.viewProps));
+        errors.pushArray(trelloCSCheck(this.nodeJson.viewProps||{}));
         break;
       case 'table':
-        errors.pushArray(tableCheck(this.nodeJson.viewProps));
+        errors.pushArray(tableCheck(this.nodeJson.viewProps||{}));
         break;
       case 'date':
-        errors.pushArray(dateCheck(this.nodeJson.viewProps));
+        errors.pushArray(dateCheck(this.nodeJson.viewProps||{}));
         break;
       case 'menuItem':
-        errors.pushArray(menuItemCheck(this.nodeJson.viewProps));
+        errors.pushArray(menuItemCheck(this.nodeJson.viewProps||{}));
         break;
       case 'icon':
-        errors.pushArray(iconCheck(this.nodeJson.viewProps));
+        errors.pushArray(iconCheck(this.nodeJson.viewProps||{}));
         break;
       case 'Conversation':
-        errors.pushArray(convCheck(this.nodeJson.viewProps));
+        errors.pushArray(convCheck(this.nodeJson.viewProps||{}));
         break;
       case 'tableColumn':
-        errors.pushArray(tableColumnCheck(this.nodeJson.viewProps));
+        errors.pushArray(tableColumnCheck(this.nodeJson.viewProps||{}));
         break;
       case 'snippet':
-        errors.pushArray(snippetCheck(this.nodeJson.viewProps));
+        errors.pushArray(snippetCheck(this.nodeJson.viewProps||{}));
         break;
       case 'HippoFields':
-        errors.pushArray(hfCheck(this.nodeJson.viewProps));
+        errors.pushArray(hfCheck(this.nodeJson.viewProps||{}));
         break;
       case 'label':
-        errors.pushArray(labelCheck(this.nodeJson.viewProps));
+        errors.pushArray(labelCheck(this.nodeJson.viewProps||{}));
         break;
     }
     return errors;
