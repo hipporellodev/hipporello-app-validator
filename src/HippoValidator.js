@@ -812,6 +812,7 @@ export default class HippoValidator {
                 "dropdownItem",
                 "attachmentList",
                 "menuItem",
+                "dynamicMenuItem",
                 "tableColumn",
                 "menu",
                 "HippoFields",
