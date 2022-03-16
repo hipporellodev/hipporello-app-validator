@@ -33,6 +33,7 @@ const componentScheme = {
       "dropdownItem",
       "attachmentList",
       "menuItem",
+      "dynamicMenuItem",
       "tableColumn",
       "menu",
       "HippoFields",
@@ -142,6 +143,20 @@ const dateCheck = new Validator().compile({
 const menuItemCheck = new Validator().compile({
   text: 'string',
 });
+const dynamicMenuItemCheck = new Validator().compile({
+  text: 'string',
+  query: {
+    type: 'object',
+    optional: true,
+    props: {
+      ...actionConditionSchema,
+      type: {
+        type: 'enum',
+        values: ['basic']
+      }
+    }
+  },
+});
 const iconCheck = new Validator().compile({
   name: 'string|empty:false',
   family: 'string|optional',
@@ -222,6 +237,9 @@ export default class ComponentNode extends AbstractHippoNode{
         break;
       case 'menuItem':
         errors.pushArray(menuItemCheck(this.nodeJson.viewProps||{}));
+        break;
+      case 'dynamicMenuItem':
+        errors.pushArray(dynamicMenuItemCheck(this.nodeJson.viewProps||{}));
         break;
       case 'icon':
         errors.pushArray(iconCheck(this.nodeJson.viewProps||{}));
