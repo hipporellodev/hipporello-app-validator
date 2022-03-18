@@ -3,6 +3,7 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
 import HeaderNode from "../Views/HeaderNode";
 import JSONUtils from "../../JSONUtils";
+import SidebarNode from "./SidebarNode";
 
 export default class ViewNode extends AbstractHippoNode{
   constructor(appJson, path) {
@@ -12,6 +13,7 @@ export default class ViewNode extends AbstractHippoNode{
   process(appJson, path, nodeJson) {
     let envType = nodeJson.type
     let appHeaderId = nodeJson.appHeader;
+    let sidebarId = nodeJson.sidebar;
     let views = JSONUtils.query(appJson, "app.views")
     if(views){
       views = Object.values(views);
@@ -23,6 +25,9 @@ export default class ViewNode extends AbstractHippoNode{
         }
         else if(view.id === appHeaderId){
           this.addChildNode(new HeaderNode(appJson, "app.views."+view.id))
+        }
+        else if(view.id === sidebarId){
+          this.addChildNode(new SidebarNode(appJson, "app.views."+view.id))
         }
       })
     }

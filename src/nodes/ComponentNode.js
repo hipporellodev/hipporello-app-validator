@@ -16,6 +16,7 @@ const componentScheme = {
       'icon',
       'appList',
       'formList',
+      'sidebar',
       'hyperlink',
       'image',
       'video',
