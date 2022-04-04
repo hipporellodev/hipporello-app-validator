@@ -112,8 +112,20 @@ const trelloCSCheck = new Validator().compile({
     optional: true,
     props: {
       ...actionConditionSchema,
+      collections:{
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      },
+      includeArchived:{
+        type: 'enum',
+        optional: true,
+        values: ['all', "archived", "notarchived"]
+      },
       type: {
         type: 'enum',
+        optional: true,
         values: ['basic']
       }
     }
@@ -151,6 +163,17 @@ const dynamicMenuItemCheck = new Validator().compile({
     optional: true,
     props: {
       ...actionConditionSchema,
+      collections:{
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      },
+      includeArchived:{
+        type: 'enum',
+        optional: true,
+        values: ['all', "archived", "notarchived"]
+      },
       type: {
         type: 'enum',
         values: ['basic']

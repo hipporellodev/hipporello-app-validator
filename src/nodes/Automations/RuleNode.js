@@ -3,6 +3,18 @@ import EventNode from "../EventNode";
 import Validator from "fastest-validator";
 
 export const ruleConditionSchema = {
+  collections:{
+    type: 'array',
+    optional: true,
+    items: {
+      type: 'string'
+    }
+  },
+  includeArchived:{
+    type: 'enum',
+    optional: true,
+    values: ['all', "archived", "notarchived"]
+  },
   conditions: {
     type: 'array',
     items: {

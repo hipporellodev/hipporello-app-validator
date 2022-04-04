@@ -7,7 +7,7 @@ import HipporelloFieldNode from "./HipporelloFieldNode";
 import ViewSettingsNode from "./Settings/ViewSettingsNode";
 import AppInfoNode from "./Settings/AppInfoNode";
 import AppVariableFieldsNode from "./Settings/FieldDefinitions/appVariableFieldsNode";
-import CardTypesNode from "./CardTypes/CardTypesNode";
+import CardCollectionsNode from "./CardCollections/CardCollectionsNode";
 import RolesNode from "./Roles/RolesNode";
 import FormNode from "./Forms/FormNode";
 import EmailNode from "./Forms/EmailNode";
@@ -45,7 +45,7 @@ export default class AppNode extends AbstractHippoNode{
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
     this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloCardBack"));
-    this.addChildNode(new  CardTypesNode(appJson, "app.cardTypes"));
+    this.addChildNode(new  CardCollectionsNode(appJson, "app.cardCollections"));
     this.addChildNode(new  RolesNode(appJson, "app.roles"));
     this.addChildNode(new  ViewSettingsNode(appJson, "app.viewSettings"));
     let appVariables = JSONUtils.query(appJson, "app.fieldDefinitions.appVariableFields");
