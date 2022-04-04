@@ -12,7 +12,7 @@ const cardCollectionSchema = {
     }
   },
   conditions:{
-    type:"object",
+    type:"array",
     optional:true
   }
 }
