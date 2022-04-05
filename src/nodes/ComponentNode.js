@@ -34,7 +34,7 @@ const componentScheme = {
       "dropdownItem",
       "attachmentList",
       "menuItem",
-      "dynamicMenuItem",
+      "cardMenuItem",
       "tableColumn",
       "menu",
       "HippoFields",
