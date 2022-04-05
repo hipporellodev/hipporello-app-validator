@@ -156,7 +156,7 @@ const dateCheck = new Validator().compile({
 const menuItemCheck = new Validator().compile({
   text: 'string',
 });
-const dynamicMenuItemCheck = new Validator().compile({
+const cardMenuItemCheck = new Validator().compile({
   text: 'string',
   query: {
     type: 'object',
@@ -262,8 +262,8 @@ export default class ComponentNode extends AbstractHippoNode{
       case 'menuItem':
         errors.pushArray(menuItemCheck(this.nodeJson.viewProps||{}));
         break;
-      case 'dynamicMenuItem':
-        errors.pushArray(dynamicMenuItemCheck(this.nodeJson.viewProps||{}));
+      case 'cardMenuItem':
+        errors.pushArray(cardMenuItemCheck(this.nodeJson.viewProps||{}));
         break;
       case 'icon':
         errors.pushArray(iconCheck(this.nodeJson.viewProps||{}));
