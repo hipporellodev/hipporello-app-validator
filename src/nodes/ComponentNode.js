@@ -89,7 +89,7 @@ const headerCheck = new Validator().compile({
   },
   alignment: {
     type: 'enum',
-    values: ['left', 'right','center'],
+    values: ['left', 'right','center', 'justify'],
     optional: true
   }
 })
@@ -97,7 +97,7 @@ const paragraphCheck = new Validator().compile({
   text: 'string',
   alignment: {
     type: 'enum',
-    values: ['left', 'right','center'],
+    values: ['left', 'right','center', 'justify'],
     optional: true
   }
 })
