@@ -23,4 +23,8 @@ export default class CardCollectionsNode extends AbstractHippoNode{
       ]
     }
   }
+
+  isMandatory() {
+    return false;
+  }
 }
