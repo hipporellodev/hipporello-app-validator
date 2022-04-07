@@ -175,6 +175,7 @@ const cardMenuItemCheck = new Validator().compile({
         values: ['all', "archived", "notarchived"]
       },
       type: {
+        optional: true,
         type: 'enum',
         values: ['basic']
       }

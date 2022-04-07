@@ -15,6 +15,16 @@ export const ruleConditionSchema = {
     optional: true,
     values: ['all', "archived", "notarchived"]
   },
+}
+function conditionValueCheckFunc(value, errors, schema, path, parentNode){
+  if(!["empty", "notempty"].includes(parentNode?.operator)){
+    if(value === "[[[nullValue]]]" && parentNode?.valueType === "value"){
+      errors.push({type: "required"})
+    }
+  }
+  return value
+}
+const conditionsWithAnd = new Validator({useNewCustomCheckerFunction: true}).compile({
   conditions: {
     type: 'array',
     optional: true,
@@ -49,7 +59,12 @@ export const ruleConditionSchema = {
               "doesnthave",
             ]
           },
-          value: 'any|empty:false',
+          value: {
+            type: "custom",
+            nullable: true,
+            default: "[[[nullValue]]]",
+            check: conditionValueCheckFunc
+          },
           valueType: {
             type: 'enum',
             values: ["variable", "value"]
@@ -58,8 +73,54 @@ export const ruleConditionSchema = {
       }
     }
   }
-}
-
+})
+const conditionsWithOr = new Validator({useNewCustomCheckerFunction: true}).compile({
+  conditions: {
+    type: 'array',
+    optional: true,
+    items: {
+      type: 'object',
+      props: {
+        field: 'string|empty:false',
+        operator: {
+          type: 'enum',
+          values: [
+            "equals",
+            "notequals",
+            "contains",
+            "notcontains",
+            "startswith",
+            "notstartswith",
+            "endswith",
+            "notendswith",
+            "lessthan",
+            "lessthanequals",
+            "greaterthan",
+            "greaterthanequals",
+            "in",
+            "allin",
+            "anyin",
+            "notin",
+            "empty",
+            "notempty",
+            "has",
+            "doesnthave",
+          ]
+        },
+        value: {
+          type: 'custom',
+          nullable: true,
+          default: "[[[nullValue]]]",
+          check: conditionValueCheckFunc
+        },
+        valueType: {
+          type: 'enum',
+          values: ["variable", "value"]
+        }
+      }
+    }
+  }
+})
 const ruleCheck = new Validator().compile({
   id: 'string',
   order: 'number',
@@ -88,9 +149,19 @@ export default class RuleNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
+    let errors = []
+    errors.pushArray(ruleCheck(this.nodeJson));
     if(!this.nodeJson?.filter?.conditions && !this.nodeJson?.filter?.collections){
-      return [this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action')]
+      errors.push(this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action'))
     }
-    return ruleCheck;
+    else if(this.nodeJson?.filter?.conditions?.length > 1){//Or Condition
+      this.validatorPath = `${this.path}.filter`;
+      errors.pushArray(conditionsWithOr(this.nodeJson?.filter))
+    }
+    else if(this.nodeJson?.filter?.conditions?.length){
+      this.validatorPath = `${this.path}.filter`;
+      errors.pushArray(conditionsWithAnd(this.nodeJson?.filter))
+    }
+    return errors;
   }
 }

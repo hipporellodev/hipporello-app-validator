@@ -55,7 +55,7 @@ export default class HippoValidator {
 
     }
 
-    isEmpty(val) {
+    static isEmpty(val) {
         if (val === undefined)
             return true;
         if (typeof (val) == 'function' || typeof (val) == 'number' || typeof (val) == 'boolean' || Object.prototype.toString.call(val) === '[object Date]')
@@ -71,7 +71,7 @@ export default class HippoValidator {
     jsonTraverse(obj) {
         for (const key in obj) {
             const value = obj[key];
-            if (this.isEmpty(value)) {
+            if (HippoValidator.isEmpty(value)) {
                 delete obj[key];
             } else if (typeof value === "object") {
                 this.jsonTraverse(value);
