@@ -17,6 +17,7 @@ export const ruleConditionSchema = {
   },
   conditions: {
     type: 'array',
+    optional: true,
     items: {
       type: 'array',
       items: {
@@ -87,6 +88,9 @@ export default class RuleNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
+    if(!this.nodeJson?.filter?.conditions && !this.nodeJson?.filter?.collections){
+      return [this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action')]
+    }
     return ruleCheck;
   }
 }
