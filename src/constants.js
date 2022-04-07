@@ -1,4 +1,4 @@
-const SUBDOMAIN_BLACKLIST = ["playground", "console", "hipporello", "hippo", "admin"]
+const SUBDOMAIN_BLACKLIST = ["playground", "console", "hippo", "admin"]
 const PAGE_SLUG_BLACKLIST = [
   "forms",
   "form",
