@@ -151,10 +151,10 @@ export default class RuleNode extends AbstractHippoNode{
   getValidatorFunction() {
     let errors = []
     errors.pushArray(ruleCheck(this.nodeJson));
-    if(!this.nodeJson?.filter?.conditions && !this.nodeJson?.filter?.collections){
-      errors.push(this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action'))
-    }
-    else if(this.nodeJson?.filter?.conditions?.length > 1){//Or Condition
+    // if(!this.nodeJson?.filter?.conditions && !this.nodeJson?.filter?.collections){
+    //   errors.push(this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action'))
+    // }
+    if(this.nodeJson?.filter?.conditions?.length > 1){//Or Condition
       this.validatorPath = `${this.path}.filter`;
       errors.pushArray(conditionsWithOr(this.nodeJson?.filter))
     }
