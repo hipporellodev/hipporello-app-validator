@@ -2,6 +2,7 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
 import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
+import FormButtonNode from "./FormButtonNode";
 
 const formCheck = new Validator().compile({
   id: 'string|empty:false',
@@ -64,10 +65,10 @@ export default class FormNode extends AbstractHippoNode{
     nodeJson?.body?.rows.forEach((row, rowIndex) =>{
       if(row?.columns?.length){
         row?.columns.forEach((column, colIndex) =>{
-          if(column?.element?.props?.['optional-actionGroupId']){
-            const actionGroupId = column?.element?.props?.['optional-actionGroupId'];
-            this.addChildNode(new ActionGroupNode(appJson, "app.actionGroups."+actionGroupId));
+          if(column?.element?.input === "Button"){
+            this.addChildNode(new FormButtonNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, nodeJson?.type))
           }
+
         })
       }
     })
