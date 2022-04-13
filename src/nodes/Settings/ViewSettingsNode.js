@@ -27,26 +27,33 @@ const viewSettingsSchema = {
     portalViewSettingOverrides: {
         type: 'object',
         optional: true,
+        nullable: true,
         props: {
+            type: {
+              type: "enum",
+              values: ["custom"]
+            },
             css: {
                 type: 'object',
+                optional: true,
                 props: {
                     simple: {
                         type: 'object',
                         props: {
-                            "body-text-color": 'string',
-                            "font-family": 'string',
-                            "primary-color": 'string'
+                            "body-text-color": 'string|optional',
+                            "font-family": 'string|optional',
+                            "primary-color": 'string|optional'
                         }
                     }
                 }
             },
             images: {
                 type: 'object',
+                optional: true,
                 props: {
-                    banner: 'string',
-                    logo: 'string',
-                    socialShareImage: 'string'
+                    banner: 'string|optional',
+                    logo: 'string|optional',
+                    socialShareImage: 'string|optional'
                 }
             }
         }
