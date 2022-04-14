@@ -70,7 +70,7 @@ export default class AbstractHippoNode {
     this.checkedPaths[this.path] = true;
     if(!this.exists){
       if (this.isMandatory()) {
-        errors.push({path:this.path, code:"not_exists"})
+        errors.push({path: this.parentNode?.path, type:"notExists"})
       }
       return;
     }
@@ -81,8 +81,8 @@ export default class AbstractHippoNode {
       if(newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
         newerrors.forEach(err => {
           err.path = `${this.validatorPath}.${err.field}`;
+          err.relativePath = err?.field;
         })
-
         errors.pushArray(newerrors);
       }
     }

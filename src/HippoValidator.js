@@ -154,7 +154,6 @@ export default class HippoValidator {
             }))
         ).nullable().default(null))
     }
-
     newValidate = async () => {
         return new Promise((resolve, reject) => {
             let errors = [];
@@ -934,13 +933,36 @@ export default class HippoValidator {
         return Object.keys(this?.data?.components || {});
     }
 
+
+    errorFlat = (errors) => {
+      return errors;
+      return errors.filter((err, index) => {
+        return !errors?.some((e, i) => e?.code === err?.code && e?.path === err?.path && index !== i)
+      })
+    }
+    errorHumanize = (errors) => {
+      return errors?.map(error => {
+        let message = error?.message||""
+        if (message.includes(error?.path)) {
+          message = message.replace(error?.path, this.getLabel(error?.path))
+        }
+        if (message.includes(error?.relativePath)) {
+          message = message.replace(error?.relativePath, this.getLabel(error?.relativePath))
+        }
+        return {
+          ...error,
+          message: message,
+          errorTitle: this.camelCaseToNormal(`${error?.code}Error`),
+        }
+      })
+    }
     convertErrors = (errors) => {
-        return errors.map(error => {
+        errors = errors.map(error => {
             let convertedError = {
                 code: this.convertErrorCode(error.type),
-                message:  this.convertMessage(error),
-                errorTitle: this.camelCaseToNormal(`${this.convertErrorCode(error.type)}Error`),
+                message: this.convertMessage(error),
                 path: error.path,
+                relativePath: error?.relativePath,
                 params: {
                     value: error?.actual,
                     originalValue: error?.actual,
@@ -952,6 +974,8 @@ export default class HippoValidator {
             }
             return convertedError;
         })
+        errors = this.errorFlat(errors)
+        errors = this.errorHumanize(errors)
         return errors;
     }
     convertErrorCode = (code) => {
@@ -982,6 +1006,8 @@ export default class HippoValidator {
             case 'oneOf':
             case 'enumValue':
                 return `${error.field} must be on of ${this.convertActualValues(error)}`
+            case 'notExists':
+                return `The value used in '${error?.path}' could not be found`
             default:
                 return error.message;
         }

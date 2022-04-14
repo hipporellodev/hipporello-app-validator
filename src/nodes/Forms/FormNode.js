@@ -2,55 +2,7 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
 import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
-import FormButtonNode from "./FormButtonNode";
-
-const formCheck = new Validator().compile({
-  id: 'string|empty:false',
-  anonymous: 'boolean|optional',
-  enabled: 'boolean|optional',
-  formatVersion: 'number',
-  icon: 'string|empty:false',
-  name: 'string|empty:false',
-  type: {
-    type: 'enum',
-    values: ['form', 'updateform']
-  },
-  aliases: 'array|optional',
-  usesParent: 'boolean|optional',
-  boardId: 'string|optional|empty:false',
-  showInTrello : 'boolean|optional',
-  body: {
-    type: 'object',
-    props: {
-      formAutoIncrementId: 'number',
-      readOnly: 'boolean|optional',
-      rows: {
-        type: 'array',
-        items: {
-          type: 'object',
-          props: {
-            id: 'string',
-            columns: {
-              type: 'array',
-              items: {
-                type: 'object',
-                props: {
-                  id: 'string',
-                  element: {
-                    type: 'object',
-                    props: {
-                      id: 'string'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-})
+import FormInputNode from "./FormInputNode";
 export default class FormNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
@@ -65,16 +17,82 @@ export default class FormNode extends AbstractHippoNode{
     nodeJson?.body?.rows.forEach((row, rowIndex) =>{
       if(row?.columns?.length){
         row?.columns.forEach((column, colIndex) =>{
-          if(column?.element?.input === "Button"){
-            this.addChildNode(new FormButtonNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, nodeJson?.type))
-          }
-
+          this.addChildNode(new FormInputNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, column?.element?.id))
+          // if(column?.element?.input === "Button"){
+          //   this.addChildNode(new FormButtonNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, nodeJson?.type))
+          // }
+          // else{
+          //
+          // }
         })
       }
     })
   }
 
   getValidatorFunction() {
+    const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
+    const elementIds = this.childNodes?.reduce((a, i)=> {
+      if(!i.nodeJson?.props?.schema?.type) return a
+      a[i?.id] = {
+        type: "enum",
+        values: hippoFieldIds
+      }
+      return a;
+    }, {});
+    const formCheck = new Validator().compile({
+      id: 'string|empty:false',
+      anonymous: 'boolean|optional',
+      enabled: 'boolean|optional',
+      formatVersion: 'number',
+      icon: 'string|empty:false',
+      name: 'string|empty:false',
+      type: {
+        type: 'enum',
+        values: ['form', 'updateform']
+      },
+      aliases: 'array|optional',
+      usesParent: 'boolean|optional',
+      boardId: 'string|optional|empty:false',
+      showInTrello : 'boolean|optional',
+      body: {
+        type: 'object',
+        props: {
+          formAutoIncrementId: 'number',
+          readOnly: 'boolean|optional',
+          rows: {
+            type: 'array',
+            items: {
+              type: 'object',
+              props: {
+                id: 'string',
+                columns: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    props: {
+                      id: 'string',
+                      element: {
+                        type: 'object',
+                        props: {
+                          id: 'string'
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          hippoFieldMapping: (Object?.keys(elementIds))?.length ? {
+            type: "object",
+            props: elementIds
+          } : {
+            type: "object",
+            optional: true
+          }
+        }
+      }
+    })
     return formCheck;
   }
 }
