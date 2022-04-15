@@ -23,7 +23,7 @@ function addDefaults(originalApp) {
 }
 
 export default class HippoValidator {
-    constructor(appJson) {
+    constructor(appJson, entities) {
         this.data = this.jsonTraverse(appJson);
         if (this.data.appJson) {
             this.data.appJson = {
