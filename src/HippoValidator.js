@@ -935,10 +935,13 @@ export default class HippoValidator {
 
 
     errorFlat = (errors) => {
-      return errors;
-      return errors.filter((err, index) => {
-        return !errors?.some((e, i) => e?.code === err?.code && e?.path === err?.path && index !== i)
-      })
+      const goToError =  errors.reduce((sumErrors, errorItem) => {
+        if(!sumErrors?.find(e => e?.code === errorItem?.code && e?.path === errorItem?.path)){
+          sumErrors.push(errorItem)
+        }
+        return sumErrors
+      }, [])
+      return goToError
     }
     errorHumanize = (errors) => {
       return errors?.map(error => {
