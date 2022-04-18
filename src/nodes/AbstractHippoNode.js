@@ -34,15 +34,16 @@ export default class AbstractHippoNode {
       AbstractHippoNode.counter = 0;
     }
   }
-  init(actions){
+  init(actions, entities){
     this.actions = actions;
+    this.entities = entities;
     this.childNodes = []
     this.nodeJson = JSONUtils.query(this.appJson, this.path);
     if(this.nodeJson) {
       this.id = this.generateNodeId(this.nodeJson);
       this.process(this.appJson, this.path, this.nodeJson)
       this.childNodes.forEach(childNode=>{
-        childNode.init(this.actions);
+        childNode.init(this.actions, this.entities);
       })
     } else{
       this.exists = false;
@@ -102,6 +103,65 @@ export default class AbstractHippoNode {
           ?.map(it => it?.viewProps?.name)
     }
     return this.viewNames;
+  }
+  getViewIds = (isValue) => {
+    if (isValue)
+      return Object.keys(this.appJson?.app?.views || {})?.map(i => i?.viewProps?.name)
+    return Object.keys(this.appJson?.app?.views || {});
+  }
+
+  getPageIds = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page")?.map(i => i?.viewProps?.name || "")
+    return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page").map(it => {
+      return it.id;
+    });
+  }
+
+  getActions = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.actionGroups || {})?.map(i => i?.actions?.name)
+    return Object.keys(this.appJson?.app?.actionGroups || {});
+  }
+
+  getCollections = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.cardCollections || {})?.map(i => i?.name)
+    return Object.keys(this.appJson?.app?.cardCollections || {})
+  }
+
+  getOneOfMessage = (names, e) => {
+    return `${e?.label || e?.path} one of ${names?.join(', ')}`
+  }
+
+  getFormIds = (isValue, filter) => {
+    let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {});
+    if(filter) inComings = inComings.filter(filter)
+    if (isValue)
+      return inComings?.map(i => i?.name)
+    return inComings?.map(i => i?.id);
+  }
+
+  getRoles = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.roles || {})?.map(i => i?.name)
+    return Object.keys(this.appJson?.app?.roles || {});
+  }
+
+  getHippoFields = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})?.map(i => i?.label)
+    return Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields || {});
+  }
+
+  getEnvironments = () => {
+    return Object.keys(this.appJson?.app?.environments);
+  }
+
+  getComponents = (isValue) => {
+    if (isValue)
+      return Object.values(this.appJson?.app?.components || {}).map(i => i?.type)
+    return Object.keys(this?.data?.components || {});
   }
 
   createValidationError(type, field, actual,expected, expectedMeaningful, message) {
