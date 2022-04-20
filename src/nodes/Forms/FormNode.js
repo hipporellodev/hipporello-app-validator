@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
-import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
 import FormInputNode from "./FormInputNode";
 export default class FormNode extends AbstractHippoNode{
@@ -31,6 +30,7 @@ export default class FormNode extends AbstractHippoNode{
 
   getValidatorFunction() {
     const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
+    const cardCollectionsIds = Object.keys(this.appJson?.app?.cardCollections||{})
     const elementIds = this.childNodes?.reduce((a, i)=> {
       if(!i.nodeJson?.props?.schema?.type) return a
       a[i?.id] = {
@@ -52,6 +52,7 @@ export default class FormNode extends AbstractHippoNode{
       },
       aliases: 'array|optional',
       usesParent: 'boolean|optional',
+      slug: 'string',
       boardId: 'string|optional|empty:false',
       showInTrello : 'boolean|optional',
       body: {
@@ -91,6 +92,42 @@ export default class FormNode extends AbstractHippoNode{
             optional: true
           }
         }
+      },
+      accessRight: {
+        type: "object",
+        props: {
+          dataRule: {
+            type: "object",
+            props: {
+              collections: {
+                type: "array",
+                items: {
+                  type: "enum",
+                  values: cardCollectionsIds
+                },
+                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+              },
+              includeArchived: {
+                type: "enum",
+                values: ["all","archived","notarchived"],
+                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+              }
+            },
+            optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+          },
+          roleRules: {
+            type: "array",
+            items:{
+              type: "object",
+              props:{
+                type: "string",
+                roles: "array"
+              }
+            },
+            optional: true
+          }
+        },
+        optional: true
       }
     })
     return formCheck;
