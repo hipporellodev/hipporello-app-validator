@@ -81,7 +81,7 @@ export default class HippoValidator {
     }
 
     getLabel(path) {
-        const regex = new RegExp(/\.?([a-zA-Z0-9]+)$/gm).exec(path || "")
+        const regex = new RegExp(/\.?([a-zA-Z0-9]+)[\W\d]*?$/gm).exec(path || "")
         const message = regex?.[1] || path || ""
         return this.camelCaseToNormal(message)
     }
@@ -936,7 +936,7 @@ export default class HippoValidator {
 
     errorFlat = (errors) => {
       const goToError =  errors.reduce((sumErrors, errorItem) => {
-        if(!sumErrors?.find(e => e?.code === errorItem?.code && e?.path === errorItem?.path)){
+        if(!sumErrors?.some(e => e?.code === errorItem?.code && e?.path === errorItem?.path)){
           sumErrors.push(errorItem)
         }
         return sumErrors
@@ -990,9 +990,30 @@ export default class HippoValidator {
         }
     }
     convertActualValues = (error) => {
-        let values = error.expected;
+        const toIdsItem = (id, label) => {
+          return {
+            id,
+            label
+          }
+        }
+        const collections = Object.values(this.data?.app?.cardCollections||{})?.map(i => toIdsItem(i?.id, i?.name))
+        const views = Object.values(this.data?.app?.views||{})?.map(i => toIdsItem(i?.id, i?.name))
+        const forms = Object.values(this.data?.app?.integrations?.incoming||{})?.map(i => toIdsItem(i?.id, i?.name))
+        const hippoFields = Object.values(this.data?.app?.fieldDefinitions?.hippoFields||{})?.map(i => toIdsItem(i?.id, i?.label))
+        const appVariables = Object.values(this.data?.app?.fieldDefinitions?.appVariableFields||{})?.map(i => toIdsItem(i?.id, i?.label))
+        const automations = Object.values(this.data?.app?.automations||{})?.map(i => toIdsItem(i?.id, i?.name))
+        const ids = [
+          ...(collections||[]),
+          ...(views||[]),
+          ...(forms||[]),
+          ...(hippoFields||[]),
+          ...(appVariables||[]),
+          ...(automations||[]),
+        ]
+        let values = (error?.expected||"")?.includes(", ") ? error?.expected?.split(', ') : error?.expected;
         if (Array.isArray(values)) {
-            values = values.join(',');
+            values = values?.map(id => ids?.find(i => i?.id === id)?.label||id)
+            values = values.join(', ');
         }
         return values;
     }
@@ -1008,7 +1029,7 @@ export default class HippoValidator {
         switch (error.type) {
             case 'oneOf':
             case 'enumValue':
-                return `${error.field} must be on of ${this.convertActualValues(error)}`
+                return `${error.field} must be one of ${this.convertActualValues(error)}`
             case 'notExists':
                 return `The value used in '${error?.path}' could not be found`
             default:
