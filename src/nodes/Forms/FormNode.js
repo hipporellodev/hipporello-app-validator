@@ -32,7 +32,7 @@ export default class FormNode extends AbstractHippoNode{
     const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
     const cardCollectionsIds = Object.keys(this.appJson?.app?.cardCollections||{})
     const elementIds = this.childNodes?.reduce((a, i)=> {
-      if(!i.nodeJson?.props?.schema?.type) return a
+      if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
         type: "enum",
         values: hippoFieldIds
