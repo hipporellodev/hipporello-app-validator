@@ -31,6 +31,13 @@ export default class FormNode extends AbstractHippoNode{
   getValidatorFunction() {
     const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
     const cardCollectionsIds = Object.keys(this.appJson?.app?.cardCollections||{})
+    const slugs = Object.values(this.appJson?.app?.integrations?.incoming||{})?.filter(item=>item?.id!==this?.nodeJson?.id)?.map(item => item?.slug)
+    function uniqueCheck(value, errors, schema, path, parentNode){
+      if(slugs.includes(value)){
+        errors.push({type: "unique", message: "Form slug must be unique"})
+      }
+      return value
+    }
     const elementIds = this.childNodes?.reduce((a, i)=> {
       if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
@@ -39,7 +46,7 @@ export default class FormNode extends AbstractHippoNode{
       }
       return a;
     }, {});
-    const formCheck = new Validator().compile({
+    const formCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
       id: 'string|empty:false',
       anonymous: 'boolean|optional',
       enabled: 'boolean|optional',
@@ -52,7 +59,10 @@ export default class FormNode extends AbstractHippoNode{
       },
       aliases: 'array|optional',
       usesParent: 'boolean|optional',
-      slug: 'string',
+      slug: {
+        type: "custom",
+        check: uniqueCheck
+      },
       boardId: 'string|optional|empty:false',
       showInTrello : 'boolean|optional',
       body: {
