@@ -80,10 +80,10 @@ export default class HippoValidator {
         return obj;
     }
 
-    getLabel(path) {
+    getLabel(path, label) {
         const regex = new RegExp(/\.?([a-zA-Z0-9]+)[\W\d]*?$/gm).exec(path || "")
         const message = regex?.[1] || path || ""
-        return this.camelCaseToNormal(message)
+        return this.camelCaseToNormal(label||message)
     }
 
     camelCaseToNormal(message) {
@@ -947,10 +947,10 @@ export default class HippoValidator {
       return errors?.map(error => {
         let message = error?.message||""
         if (message.includes(error?.path)) {
-          message = message.replace(error?.path, this.getLabel(error?.path))
+          message = message.replace(error?.path, this.getLabel(error?.path, error?.params?.label))
         }
         if (message.includes(error?.relativePath)) {
-          message = message.replace(error?.relativePath, this.getLabel(error?.relativePath))
+          message = message.replace(error?.relativePath, this.getLabel(error?.relativePath, error?.params?.label))
         }
         return {
           ...error,
