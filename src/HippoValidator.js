@@ -1010,17 +1010,22 @@ export default class HippoValidator {
           ...(appVariables||[]),
           ...(automations||[]),
         ]
-        let values = (error?.expected||"")?.includes(", ") ? error?.expected?.split(', ') : error?.expected;
-        if (Array.isArray(values)) {
+        const expected = error?.expected
+        const expectedType = typeof expected;
+        if(Array.isArray(expected) || expectedType === "string"){
+          let values = expected?.includes(", ") ? expected?.split(', ') : error?.expected;
+          if (Array.isArray(values)) {
             values = values?.map(id => ids?.find(i => i?.id === id)?.label||id)
             values = values.join(', ');
+          }
+          return values;
         }
-        return values;
+        return expected;
     }
 
     convertActualResolved = (error) => {
         let values = error.expected;
-        if (values && !Array.isArray(values)) {
+        if (values && typeof values === 'string') {
             values = values.split(',');
         }
         return values;

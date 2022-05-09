@@ -72,6 +72,10 @@ export default class FormNode extends AbstractHippoNode{
           readOnly: 'boolean|optional',
           rows: {
             type: 'array',
+            min: 2,
+            messages: {
+              arrayMin: "At least 1 element required to create form"
+            },
             items: {
               type: 'object',
               props: {
