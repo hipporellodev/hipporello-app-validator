@@ -100,7 +100,7 @@ const schemaExternal = {
 }
 const checkExternal = new Validator().compile(schemaExternal);
 const actionWhenMoveTo = new Validator().compile({
-    list: 'string'
+    listHippoId: 'string'
 })
 const actionWhenAssignLabel = new Validator().compile({
     labels: 'array'

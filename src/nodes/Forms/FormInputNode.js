@@ -35,7 +35,7 @@ export default class FormInputNode extends AbstractHippoNode{
                 nullable: true
               },
               name: "string|empty:false",
-              list: "string|empty:false",
+              listHippoId: "string|empty:false",
               description: "string|optional",
             }
           }
