@@ -6,7 +6,7 @@ const appVariableSchema = {
   multiple: 'boolean',
   type : {
     type: 'enum',
-    values: ["string", "double", "long", "boolean", "attachment", "date", "time"]
+    values: ["string", "double", "long", "boolean", "attachment", "date", "datetime", "time"]
   }
 }
 const appVariableCheck = new Validator().compile(appVariableSchema)
