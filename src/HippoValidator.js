@@ -83,7 +83,7 @@ export default class HippoValidator {
     getLabel(path, label) {
         const regex = new RegExp(/\.?([a-zA-Z0-9]+)[\W\d]*?$/gm).exec(path || "")
         const message = regex?.[1] || path || ""
-        return this.camelCaseToNormal(label||message)
+        return this.camelCaseToNormal(message)
     }
 
     camelCaseToNormal(message) {

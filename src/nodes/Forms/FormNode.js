@@ -38,6 +38,7 @@ export default class FormNode extends AbstractHippoNode{
       }
       return value
     }
+    const buttonsEl = this.childNodes?.find((a) => a.nodeJson?.input === "Button")?.nodeJson
     const elementIds = this.childNodes?.reduce((a, i)=> {
       if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
@@ -46,6 +47,37 @@ export default class FormNode extends AbstractHippoNode{
       }
       return a;
     }, {});
+    let objectValidation = null;
+    if(this.nodeJson?.body?.successViews?.[buttonsEl?.id]?.type === "page"){
+      objectValidation = {
+        page: {
+          type: "object",
+          props: {
+            url: "url",
+            target: {
+              type: "enum",
+              optional: true,
+              values: ["_self", "_blank"]
+            },
+          },
+        }
+      }
+    } else{
+      objectValidation = {
+        view: {
+          type: "object",
+          props: {
+            id: "string",
+            target: {
+              type: "object",
+              props: {
+                type: "string"
+              }
+            },
+          }
+        }
+      }
+    }
     const formCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
       id: 'string|empty:false',
       anonymous: 'boolean|optional',
@@ -93,6 +125,25 @@ export default class FormNode extends AbstractHippoNode{
                         }
                       }
                     }
+                  }
+                }
+              }
+            }
+          },
+          successViews: {
+            type: "object",
+            props: {
+              [buttonsEl?.id]: {
+                type: "object",
+                props: {
+                  id: "string|optional",
+                  type: {
+                    type: "enum",
+                    values: ['page', 'view']
+                  },
+                  props: {
+                    type: "object",
+                    props: objectValidation
                   }
                 }
               }
