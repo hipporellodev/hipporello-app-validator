@@ -35,7 +35,7 @@ export default class FormInputNode extends AbstractHippoNode{
                 nullable: true
               },
               name: "string|empty:false",
-              list: {
+              listHippoId: {
                 type: "enum",
                 values: (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
               },

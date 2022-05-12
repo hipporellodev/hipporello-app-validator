@@ -64,7 +64,12 @@ const viewSettingsNameSchema = {
     name: 'string',
 }
 const viewSettingsUrlSchema = {
-    url: 'string',
+    url: {
+      type: 'string',
+      messages: {
+        required: "The 'Image' is required."
+      }
+    },
 }
 const viewSettingsUrlCheck = new Validator().compile(viewSettingsUrlSchema);
 const viewSettingsNameCheck = new Validator().compile(viewSettingsNameSchema);

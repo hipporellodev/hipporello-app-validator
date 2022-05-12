@@ -7,7 +7,7 @@ const hippoFieldCheck = new Validator().compile({
   multiple: 'boolean',
   type: {
     type: 'enum',
-    values: ["string", "double", "long", "boolean", "attachment", "date", "time"]
+    values: ["string", "double", "long", "boolean", "attachment", "date", "datetime", "time"]
   }
 })
 export default class HipporelloFieldNode extends AbstractHippoNode{
@@ -16,7 +16,7 @@ export default class HipporelloFieldNode extends AbstractHippoNode{
   }
 
   process(appJson, path, nodeJson) {
-    
+
   }
 
   getValidatorFunction() {

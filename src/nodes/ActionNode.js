@@ -121,7 +121,7 @@ export default class ActionNode extends AbstractHippoNode {
           }
         });
         const actionWhenMoveTo = new Validator().compile({
-          list: {
+          listHippoId: {
             type: "enum",
             values: (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
           }

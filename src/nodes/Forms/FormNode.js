@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
-import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
 import FormInputNode from "./FormInputNode";
 export default class FormNode extends AbstractHippoNode{
@@ -31,15 +30,55 @@ export default class FormNode extends AbstractHippoNode{
 
   getValidatorFunction() {
     const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
+    const cardCollectionsIds = Object.keys(this.appJson?.app?.cardCollections||{})
+    const slugs = Object.values(this.appJson?.app?.integrations?.incoming||{})?.filter(item=>item?.id!==this?.nodeJson?.id)?.map(item => item?.slug)
+    function uniqueCheck(value, errors, schema, path, parentNode){
+      if(slugs.includes(value)){
+        errors.push({type: "unique", message: "Form slug must be unique"})
+      }
+      return value
+    }
+    const buttonsEl = this.childNodes?.find((a) => a.nodeJson?.input === "Button")?.nodeJson
     const elementIds = this.childNodes?.reduce((a, i)=> {
-      if(!i.nodeJson?.props?.schema?.type) return a
+      if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
         type: "enum",
         values: hippoFieldIds
       }
       return a;
     }, {});
-    const formCheck = new Validator().compile({
+    let objectValidation = null;
+    if(this.nodeJson?.body?.successViews?.[buttonsEl?.id]?.type === "page"){
+      objectValidation = {
+        page: {
+          type: "object",
+          props: {
+            url: "url",
+            target: {
+              type: "enum",
+              optional: true,
+              values: ["_self", "_blank"]
+            },
+          },
+        }
+      }
+    } else{
+      objectValidation = {
+        view: {
+          type: "object",
+          props: {
+            id: "string",
+            target: {
+              type: "object",
+              props: {
+                type: "string"
+              }
+            },
+          }
+        }
+      }
+    }
+    const formCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
       id: 'string|empty:false',
       anonymous: 'boolean|optional',
       enabled: 'boolean|optional',
@@ -52,6 +91,10 @@ export default class FormNode extends AbstractHippoNode{
       },
       aliases: 'array|optional',
       usesParent: 'boolean|optional',
+      slug: {
+        type: "custom",
+        check: uniqueCheck
+      },
       boardId: 'string|optional|empty:false',
       showInTrello : 'boolean|optional',
       body: {
@@ -61,6 +104,10 @@ export default class FormNode extends AbstractHippoNode{
           readOnly: 'boolean|optional',
           rows: {
             type: 'array',
+            min: 2,
+            messages: {
+              arrayMin: "At least 1 element required to create form"
+            },
             items: {
               type: 'object',
               props: {
@@ -83,6 +130,25 @@ export default class FormNode extends AbstractHippoNode{
               }
             }
           },
+          successViews: {
+            type: "object",
+            props: {
+              [buttonsEl?.id]: {
+                type: "object",
+                props: {
+                  id: "string|optional",
+                  type: {
+                    type: "enum",
+                    values: ['page', 'view']
+                  },
+                  props: {
+                    type: "object",
+                    props: objectValidation
+                  }
+                }
+              }
+            }
+          },
           hippoFieldMapping: (Object?.keys(elementIds))?.length ? {
             type: "object",
             props: elementIds
@@ -91,8 +157,47 @@ export default class FormNode extends AbstractHippoNode{
             optional: true
           }
         }
+      },
+      accessRight: {
+        type: "object",
+        props: {
+          dataRule: {
+            type: "object",
+            props: {
+              collections: {
+                type: "array",
+                items: {
+                  type: "enum",
+                  values: cardCollectionsIds
+                },
+                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+              },
+              includeArchived: {
+                type: "enum",
+                values: ["all","archived","notarchived"],
+                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+              }
+            },
+            optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
+          },
+          roleRules: {
+            type: "array",
+            items:{
+              type: "object",
+              props:{
+                type: "string",
+                roles: "array"
+              }
+            },
+            optional: true
+          }
+        },
+        optional: true
       }
     })
-    return formCheck;
+    if(this.nodeJson?.enabled){
+      return formCheck;
+    }
+    return []
   }
 }
