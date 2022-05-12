@@ -144,6 +144,9 @@ export default class FormNode extends AbstractHippoNode{
         optional: true
       }
     })
-    return formCheck;
+    if(this.nodeJson?.enabled){
+      return formCheck;
+    }
+    return []
   }
 }
