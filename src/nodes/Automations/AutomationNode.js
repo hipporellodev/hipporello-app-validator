@@ -42,6 +42,9 @@ export default class AutomationNode extends AbstractHippoNode{
   getValidatorFunction() {
     const errors = [];
     errors.pushArray(automationCheck(this.nodeJson));
-    return errors;
+    if(!this.nodeJson?.enabled)
+      return []
+    else
+      return errors;
   }
 }
