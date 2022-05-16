@@ -43,7 +43,9 @@ export default class PageNode extends AbstractHippoNode{
         const slugCheckResult = pageSlugCheck(this.nodeJson);
         errors.pushArray(slugCheckResult);
       }
-      return () => errors;
+      if(this.nodeJson?.enabled)
+        return () => errors;
+      return () => []
   }
 
   process(appJson, path, nodeJson) {

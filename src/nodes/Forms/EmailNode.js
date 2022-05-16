@@ -5,6 +5,10 @@ export default class EmailNode extends AbstractHippoNode{
     super(appJson, path);
   }
   getValidatorFunction() {
-    return super.getValidatorFunction();
+    let errors = [];
+    if(!this.nodeJson?.enabled)
+      return [];
+    else
+      return errors
   }
 }
