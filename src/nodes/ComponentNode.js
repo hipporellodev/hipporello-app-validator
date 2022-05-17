@@ -165,6 +165,7 @@ const cardMenuItemCheck = new Validator().compile({
       ...actionConditionSchema,
       collections:{
         type: 'array',
+        optional: true,
         items: {
           type: 'string'
         }
