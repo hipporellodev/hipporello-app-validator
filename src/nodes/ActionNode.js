@@ -120,10 +120,13 @@ export default class ActionNode extends AbstractHippoNode {
             }
           }
         });
+        const staticListOptions = ["nextListOnBoard", "previousListOnBoard"]
+        const trelloListOptions =  (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
+        const allListOptions = [...staticListOptions, ...trelloListOptions]
         const actionWhenMoveTo = new Validator().compile({
           listHippoId: {
             type: "enum",
-            values: (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
+            values: allListOptions
           }
         })
         const actionWhenAssignLabel = new Validator().compile({
