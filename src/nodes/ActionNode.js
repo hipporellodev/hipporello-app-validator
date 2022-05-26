@@ -123,7 +123,8 @@ export default class ActionNode extends AbstractHippoNode {
         const staticListOptions = ["nextListOnBoard", "previousListOnBoard"]
         const trelloListOptions =  (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
         const allListOptions = [...staticListOptions, ...trelloListOptions]
-        const actionWhenMoveTo = new Validator().compile({
+        const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
+      const actionWhenMoveTo = new Validator().compile({
           listHippoId: {
             type: "enum",
             values: allListOptions
@@ -142,8 +143,24 @@ export default class ActionNode extends AbstractHippoNode {
           members: {
             type: "array",
             items: {
-              type: "enum",
-              values: (this.entities?.members||[])?.map(i=>i?.id)
+              type: "object",
+              props:{
+                type: {
+                  type: "enum",
+                  values: ["trelloMember", "trelloRole"]
+                },
+                value: {
+                  type: "enum",
+                  values: [
+                    ...(this.entities?.members||[])?.map(i=>i?.id),
+                    "allTrelloCardMembers",
+                    "allTrelloBoardMembers",
+                    "allTrelloBoardAdminMembers",
+                    "allTrelloNormalMembers",
+                    "allTrelloObserverMembers",
+                  ]
+                }
+              }
             }
           }
         })
@@ -157,12 +174,13 @@ export default class ActionNode extends AbstractHippoNode {
               props: {
                 type: {
                   type: "enum",
-                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "contactMembers"]
+                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole"]
                 },
                 id: {
                   type: "enum",
                   values: [
                     ...(this.entities?.members||[])?.map(i=>i?.id),
+                    ...(roles||[]),
                     "allTrelloCardMembers",
                     "allTrelloBoardMembers",
                     "allTrelloBoardAdminMembers",
