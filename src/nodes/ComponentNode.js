@@ -116,7 +116,8 @@ const trelloCSCheck = new Validator().compile({
         type: 'array',
         items: {
           type: 'string'
-        }
+        },
+        optional: true
       },
       includeArchived:{
         type: 'enum',

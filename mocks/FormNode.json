@@ -2315,6 +2315,20 @@
                       "validationRules": {
                         "required": true
                       },
+                      "visibilityRules": {
+                        "conjunction": "AND",
+                        "rules": [
+                          {
+                            "field": "",
+                            "operator": "",
+                            "operatorProps": {
+                              "type": "",
+                              "isUnary": false
+                            }
+                          }
+                        ],
+                        "version": 1
+                      },
                       "value": ""
                     }
                   },

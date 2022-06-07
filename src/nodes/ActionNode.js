@@ -122,6 +122,7 @@ export default class ActionNode extends AbstractHippoNode {
         });
         const staticListOptions = ["nextListOnBoard", "previousListOnBoard"]
         const trelloListOptions =  (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
+        const trelloLabels =  (this.entities?.trelloLabels||[])?.map(i=>i?.hippoId)
         const allListOptions = [...staticListOptions, ...trelloListOptions]
         const allHippoFields = this?.appJson?.app?.fieldDefinitions?.hippoFields||{}
         const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
@@ -136,7 +137,7 @@ export default class ActionNode extends AbstractHippoNode {
             type: "array",
             items: {
               type: "enum",
-              values: (this.entities?.trelloLabels||[])?.map(i=>i?.hippoId)
+              values: trelloLabels || []
             }
           }
         })
