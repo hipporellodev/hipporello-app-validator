@@ -123,6 +123,7 @@ export default class ActionNode extends AbstractHippoNode {
         const staticListOptions = ["nextListOnBoard", "previousListOnBoard"]
         const trelloListOptions =  (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
         const allListOptions = [...staticListOptions, ...trelloListOptions]
+        const allHippoFields = this?.appJson?.app?.fieldDefinitions?.hippoFields||{}
         const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
       const actionWhenMoveTo = new Validator().compile({
           listHippoId: {
@@ -271,6 +272,62 @@ export default class ActionNode extends AbstractHippoNode {
             }
           }
         })
+      const hippoTypes = {
+          "attachment": "array",
+          "double": "number",
+          "datetime": "number",
+          "time": "number",
+          "date": "number"
+      }
+      const getHippoFieldType = (hippoId) => {
+          const valueType = this.nodeJson.props?.cardUpdateFields?.[hippoId]?.valueType||"value"
+          let type = "string"
+          if(valueType === "value"){
+            type = hippoTypes?.[allHippoFields?.[hippoId]?.type]||"string"
+          }
+          return type
+      }
+      const actionWhenUpdateHippoFields = new Validator().compile({
+        cardUpdateFields: {
+          type: "object",
+          props: Object.keys(allHippoFields||{}).reduce((a, i) => {
+            a[i] = {
+              type: "object",
+              optional: true,
+              props: {
+                type: {
+                  type: "equal",
+                  value: "replacement"
+                },
+                valueType: {
+                  type: "enum",
+                  optional: true,
+                  values: ["value", "variable"]
+                },
+                value: {
+                  type:  getHippoFieldType(i),
+                  check(value, errors, schema, path, parentNode){
+                    if(value === "[[[nullValue]]]" && parentNode?.valueType === "variable"){
+                      errors.push({type: "required"})
+                    }
+                    return value
+                  }
+                }
+              }
+            }
+            return a
+          }, {})
+        },
+        params: {
+          type: "object",
+          props: {
+            context: {
+              type: 'enum',
+              values: ["parent", "self", "children"]
+            }
+          }
+        }
+      })
         const actionWhenOpenForm = new Validator().compile({
           formId: {
             type: "enum",
@@ -313,8 +370,16 @@ export default class ActionNode extends AbstractHippoNode {
         if (this.nodeJson.type === 'send-conversation-message') {
             errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props||{}));
         }
-        if (['update-hipporello-card', 'update-trello-card'].includes(this.nodeJson.type)) {
+        if (this.nodeJson.type === 'update-trello-card') {
           errors.pushArray(actionWhenUpdateHipporelloCard(this.nodeJson.props||{}));
+        }
+        if (this.nodeJson.type === 'update-hipporello-card') {
+          if(Object.keys(allHippoFields||{}).includes(Object.keys(this.nodeJson.props?.cardUpdateFields)?.[0]))
+            errors.pushArray(actionWhenUpdateHippoFields(this.nodeJson.props||{}));
+          else{
+            this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields)?.[0]}` || this.path
+            errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
+          }
         }
         if (this.nodeJson.type === 'open-page') {
             errors.pushArray(actionWhenOpenPage(this.nodeJson.props||{}));
