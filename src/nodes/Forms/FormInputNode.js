@@ -3,6 +3,20 @@ import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
 import JSONUtils from "../../JSONUtils";
 
+const formInputSchema = {
+  input: "string",
+  id: 'string|empty:false',
+  props: {
+    type: "object",
+    props: {
+      value: "string|optional",
+      label: "string|optional",
+      name: "string",
+      settings: "any|optional",
+    }
+  }
+};
+const formInputCheck = new Validator().compile(formInputSchema);
 export default class FormInputNode extends AbstractHippoNode{
   constructor(appJson, path, id) {
     super(appJson, path);
@@ -45,19 +59,35 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
-    return new Validator().compile({
-      input: "string",
-      id: 'string|empty:false',
-      props: {
-        type: "object",
+    const buttonCheck = new Validator().compile(ButtonSchema);
+    const visibilityRuleSchema =  {
+      visibilityRules: {
+        type: 'object',
         props: {
-          value: "string|optional",
-          label: "string|optional",
-          name: "string",
-          settings: "any|optional",
-          ...(this.nodeJson?.input === "Button" ? ButtonSchema : {})
+          rules: {
+            type: 'array',
+            items: {
+              type: "object",
+              props: {
+                field: "string|required",
+                value: "array",
+                operator: "string"
+              }
+            }
+          }
         }
       }
-    })
+    }
+    const visibilityRuleCheck = new Validator().compile(visibilityRuleSchema);
+    const errors = [];
+    errors.pushArray(formInputCheck(this.nodeJson));
+    if (this.nodeJson?.input === "Button") {
+      errors.pushArray(buttonCheck(this.nodeJson));
+    }
+    if (this.nodeJson.props.visibilityRules) {
+      errors.pushArray(visibilityRuleCheck(this.nodeJson.props));
+    }
+
+    return errors;
   }
 }

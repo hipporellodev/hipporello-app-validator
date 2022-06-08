@@ -84,11 +84,8 @@ describe("Form Test", () => {
     hippoValidator = new HippoValidator(tempFormJson);
     try{
      const a = await hippoValidator.validate()
-      debugger
     }catch (e) {
-      debugger
-      expect(e).toBeGreaterThan(0);
-      debugger
+      expect(e.errors.length).toBeGreaterThan(0)
     }
   })
 })
