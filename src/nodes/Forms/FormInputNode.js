@@ -1,7 +1,6 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
-import JSONUtils from "../../JSONUtils";
 
 const formInputSchema = {
   input: "string",
@@ -82,7 +81,7 @@ export default class FormInputNode extends AbstractHippoNode{
     const errors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
     if (this.nodeJson?.input === "Button") {
-      errors.pushArray(buttonCheck(this.nodeJson));
+      errors.pushArray(buttonCheck(this.nodeJson?.props));
     }
     if (this.nodeJson.props.visibilityRules) {
       errors.pushArray(visibilityRuleCheck(this.nodeJson.props));
