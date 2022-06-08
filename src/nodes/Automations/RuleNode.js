@@ -79,7 +79,7 @@ const conditionsWithOr = new Validator({useNewCustomCheckerFunction: true}).comp
     type: 'array',
     optional: true,
     items: {
-      type: 'object',
+      type: 'array',
       props: {
         field: 'string|empty:false',
         operator: {
