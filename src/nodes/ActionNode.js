@@ -321,6 +321,7 @@ export default class ActionNode extends AbstractHippoNode {
         },
         params: {
           type: "object",
+          optional: true,
           props: {
             context: {
               type: 'enum',
@@ -375,10 +376,14 @@ export default class ActionNode extends AbstractHippoNode {
           errors.pushArray(actionWhenUpdateHipporelloCard(this.nodeJson.props||{}));
         }
         if (this.nodeJson.type === 'update-hipporello-card') {
-          if(Object.keys(allHippoFields||{}).includes(Object.keys(this.nodeJson.props?.cardUpdateFields)?.[0]))
+          if(!this.nodeJson.props){
+            errors.pushArray([{type: "required", message: "Hippo Field is required"}])
+          }
+          else if(Object.keys(allHippoFields||{}).includes(Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0])){
             errors.pushArray(actionWhenUpdateHippoFields(this.nodeJson.props||{}));
+          }
           else{
-            this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields)?.[0]}` || this.path
+            this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
             errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
           }
         }
