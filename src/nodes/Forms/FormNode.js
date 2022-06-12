@@ -193,11 +193,33 @@ export default class FormNode extends AbstractHippoNode{
           }
         },
         optional: true
+      },
+      submitter: {
+        type: "object",
+        optional: true,
+        props: {
+          type: "string"
+        }
       }
     })
-    if(this.nodeJson?.enabled){
-      return formCheck;
+    const errors = [];
+    const submitterCheck = new Validator().compile({
+      submitter: {
+        type: "object",
+        props: {
+          type: 'string',
+          field: 'string'
+        }
+      }
+    })
+    if (this.nodeJson?.submitter?.type === "specifiedEmail" && !this?.nodeJson?.submitter?.field) {
+      errors.pushArray(submitterCheck(this.nodeJson));
     }
-    return []
+
+    if(this.nodeJson?.enabled){
+      errors.pushArray(formCheck(this.nodeJson));
+    }
+
+    return errors;
   }
 }

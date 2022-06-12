@@ -1089,11 +1089,7 @@
                           {
                             "field": "elem40",
                             "valueType": "select",
-                            "value": [
-                              "Hybrid",
-                              "On-Site"
-                            ],
-                            "operator": "select_any_in"
+                            "operator": "is_not_empty"
                           }
                         ],
                         "version": 1
