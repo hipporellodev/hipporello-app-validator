@@ -281,12 +281,13 @@ export default class ActionNode extends AbstractHippoNode {
           "date": "number"
       }
       const getHippoFieldType = (hippoId) => {
+          let isMultiple = allHippoFields?.[hippoId]?.multiple
           const valueType = this.nodeJson.props?.cardUpdateFields?.[hippoId]?.valueType||"value"
           let type = "string"
           if(valueType === "value"){
             type = hippoTypes?.[allHippoFields?.[hippoId]?.type]||"string"
           }
-          return type
+          return isMultiple ? "array" : type
       }
       const actionWhenUpdateHippoFields = new Validator().compile({
         cardUpdateFields: {
