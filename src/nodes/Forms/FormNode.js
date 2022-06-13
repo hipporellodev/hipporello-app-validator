@@ -48,12 +48,29 @@ export default class FormNode extends AbstractHippoNode{
       return a;
     }, {});
     let objectValidation = null;
+    function validURL(str) {
+      const regex = /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+      let m = regex.exec(str);
+      return (m !== null);
+    }
+    function urlCheck(value, errors){
+      if(validURL(value)){
+        return value
+      }
+      else{
+        errors.push({type: "not valid", message: "External URL is not valid"})
+        return ""
+      }
+    }
     if(this.nodeJson?.body?.successViews?.[buttonsEl?.id]?.type === "page"){
       objectValidation = {
         page: {
           type: "object",
           props: {
-            url: "url",
+            url: {
+              type: "custom",
+              check: urlCheck
+            },
             target: {
               type: "enum",
               optional: true,
