@@ -64,7 +64,7 @@ const formListCheck = new Validator().compile({
   viewType: 'string|empty:false',
   type: {
     type: 'enum',
-    values: ["all", "selected"]
+    values: ["all", "selected", "allCreatingForms", "allUpdatingForms"]
   },
   showDescription: 'boolean|optional',
   selectedForms: {
