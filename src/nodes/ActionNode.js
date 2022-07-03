@@ -176,7 +176,7 @@ export default class ActionNode extends AbstractHippoNode {
               props: {
                 type: {
                   type: "enum",
-                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole"]
+                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
                 },
                 id: {
                   type: "enum",
