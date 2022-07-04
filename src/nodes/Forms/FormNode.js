@@ -16,7 +16,7 @@ export default class FormNode extends AbstractHippoNode{
     nodeJson?.body?.rows.forEach((row, rowIndex) =>{
       if(row?.columns?.length){
         row?.columns.forEach((column, colIndex) =>{
-          this.addChildNode(new FormInputNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, column?.element?.id))
+          this.addChildNode(new FormInputNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, column?.element?.id, nodeJson))
           // if(column?.element?.input === "Button"){
           //   this.addChildNode(new FormButtonNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, nodeJson?.type))
           // }

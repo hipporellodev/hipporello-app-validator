@@ -9,8 +9,9 @@ const visibilityRuleSchema = {
 }
 const visibilityRuleCheck = new Validator().compile(visibilityRuleSchema);
 export default class VisibilityRuleNode extends AbstractHippoNode {
-    constructor(appJson, path) {
+    constructor(appJson, path, formJson) {
         super(appJson, path);
+        this.formJson = formJson;
     }
 
     process(appJson, path, nodeJson) {
@@ -23,6 +24,26 @@ export default class VisibilityRuleNode extends AbstractHippoNode {
         if (!['is_not_empty', 'is_empty'].includes(this.nodeJson.operator) && !Array.isArray(this.nodeJson.value)) {
             errors.push(this.createValidationError('required', 'value', this.nodeJson.value, null, null, "The 'Value' is required"))
         }
+        if (this.nodeJson.valueType =='select' && Array.isArray(this.nodeJson.value)) {
+            const elements = this.getFormElements();
+            const selectedElement = elements?.find(it => it.id === this.nodeJson.field);
+            const data = selectedElement?.props?.data?.map(item => {
+                return item.value;
+            })
+            this.nodeJson?.value?.forEach(value => {
+                if (!data?.includes(value)) {
+                    errors.push(this.createValidationError('oneOf', 'value', this.nodeJson.value, data, data));
+                }
+            });
+        }
         return errors;
+    }
+
+    getFormElements(){
+        return this.formJson?.body?.rows?.reduce((acc, cur) => {
+            return [...acc, ...cur?.columns?.map(column => {
+                return column.element;
+            })]
+        }, [])
     }
 }

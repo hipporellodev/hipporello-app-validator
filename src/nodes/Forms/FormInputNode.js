@@ -18,9 +18,10 @@ const formInputSchema = {
 };
 const formInputCheck = new Validator().compile(formInputSchema);
 export default class FormInputNode extends AbstractHippoNode{
-  constructor(appJson, path, id) {
+  constructor(appJson, path, id, formJson) {
     super(appJson, path);
     this.id = id;
+    this.formJson = formJson;
   }
 
   process(appJson, path, nodeJson) {
@@ -30,7 +31,7 @@ export default class FormInputNode extends AbstractHippoNode{
     }
     if (nodeJson.props?.visibilityRules?.rules?.length) {
       nodeJson.props.visibilityRules.rules.forEach((it, index) => {
-        this.addChildNode(new VisibilityRuleNode(appJson, `${this.path}.props.visibilityRules.rules.${index}`));
+        this.addChildNode(new VisibilityRuleNode(appJson, `${this.path}.props.visibilityRules.rules.${index}`, this.formJson));
       })
     }
   }

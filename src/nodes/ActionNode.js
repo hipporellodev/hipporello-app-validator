@@ -176,7 +176,7 @@ export default class ActionNode extends AbstractHippoNode {
               props: {
                 type: {
                   type: "enum",
-                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole"]
+                  values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
                 },
                 id: {
                   type: "enum",
@@ -390,8 +390,12 @@ export default class ActionNode extends AbstractHippoNode {
         }
         if (this.nodeJson.type === 'open-page') {
             errors.pushArray(actionWhenOpenPage(this.nodeJson.props||{}));
-            if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]) {
-                errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, Object.keys(this.appJson.app.views), this.getPageNames()))
+            if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]?.enabled) {
+                const availables = Object.entries(this.appJson.app.views)
+                    .filter(it => it?.[1].enabled)
+                    .map(it => it?.[0]);
+                ;
+                errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, availables, this.getPageNames()))
             }
             if (this.nodeJson.props.type === 'external') {
                 errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props||{}));
@@ -403,8 +407,11 @@ export default class ActionNode extends AbstractHippoNode {
         // TODO Caner Add open URL checks here
         if (this.nodeJson.type === 'open-form') {
             errors.pushArray(actionWhenOpenForm(this.nodeJson.props||{}))
-            if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]) {
-                errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, Object.keys(this.appJson?.app?.integrations?.incoming || {})))
+            if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]?.enabled) {
+                const availables = Object.entries(this.appJson?.app?.integrations?.incoming || {})
+                    .filter(it => it?.[1]?.enabled)
+                    .map(it => it?.[0]);
+                errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, availables))
             }
             if (this.nodeJson.props?.target?.type === '_modal') {
                 this.validatorPath = `${this.path}.props.target`;
