@@ -13,6 +13,7 @@ const tcMayUpdateFields = [
   "tc_shortUrl",
   "tc_url",
 ]
+const PRECISE_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const schema = {
     id: 'string',
     order: 'number',
@@ -170,20 +171,36 @@ export default class ActionNode extends AbstractHippoNode {
             }
           }
         })
-        const actionWhenSendConvMessage = new Validator().compile({
+        const conversationMembersCheck = (value, errors, schema) => {
+          if(!(schema?.props?.type?.values||[]).includes(value?.type)){
+            errors.push({ type: "enumValue",  actual: value?.type, field: "type", expected: (schema?.props?.type?.values||[])})
+          }
+          if(value?.type === "email"){
+            if(!PRECISE_PATTERN.test(value?.id)){
+              errors.push({ type: "email",  actual: value?.id, field: "id"})
+            }
+          } else{
+            if(!(schema?.props?.id?.values||[]).includes(value?.id)){
+              errors.push({ type: "enumValue",  actual: value?.id, field: "id", expected: (schema?.props?.id?.values||[])})
+            }
+          }
+          return value
+        }
+        const actionWhenSendConvMessage = new Validator({useNewCustomCheckerFunction: true}).compile({
           message: 'string',
           subject: 'string',
           conversationMembers: {
             type: "array",
             items: {
-              type: "object",
+              type: "custom",
+              check: conversationMembersCheck,
               props: {
                 type: {
                   type: "enum",
                   values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
                 },
                 id: {
-                  type: "enum",
+                  type: "string",
                   values: [
                     ...(this.entities?.members||[])?.map(i=>i?.id),
                     ...(roles||[]),
