@@ -142,6 +142,10 @@ export default class ActionNode extends AbstractHippoNode {
           }
         })
         const actionWhenAssignMember = new Validator().compile({
+          updateMemberActionType: {
+            type: "enum",
+            values: ['add-members', 'set-members', 'remove-members', 'remove-all-members']
+          },
           members: {
             type: "array",
             items: {
@@ -394,7 +398,6 @@ export default class ActionNode extends AbstractHippoNode {
                 const availables = Object.entries(this.appJson.app.views)
                     .filter(it => it?.[1].enabled)
                     .map(it => it?.[0]);
-                ;
                 errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, availables, this.getPageNames()))
             }
             if (this.nodeJson.props.type === 'external') {
