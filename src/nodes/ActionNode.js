@@ -412,12 +412,13 @@ export default class ActionNode extends AbstractHippoNode {
         }
         if (this.nodeJson.type === 'open-page') {
             errors.pushArray(actionWhenOpenPage(this.nodeJson.props||{}));
-            if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]?.enabled) {
-                const availables = Object.entries(this.appJson.app.views)
-                    .filter(it => it?.[1].enabled)
-                    .map(it => it?.[0]);
-                errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, availables, this.getPageNames()))
-            }
+            // Todo: Disabled pages is not error for usage actions, actually warning
+            // if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]?.enabled) {
+            //     const availables = Object.entries(this.appJson.app.views)
+            //         .filter(it => it?.[1].enabled)
+            //         .map(it => it?.[0]);
+            //     errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, availables, this.getPageNames()))
+            // }
             if (this.nodeJson.props.type === 'external') {
                 errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props||{}));
             }
