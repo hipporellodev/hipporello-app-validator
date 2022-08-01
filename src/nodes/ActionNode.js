@@ -311,6 +311,20 @@ export default class ActionNode extends AbstractHippoNode {
           }
           return isMultiple ? "array" : type
       }
+      const actionWhenUpdateHippoFieldsContext = new Validator().compile({
+        params: {
+          type: "object",
+          props: {
+            context: {
+              type: 'enum',
+              values: ["parent", "self", "children"]
+            }
+          }
+        },
+        cardUpdateFields: {
+          type: "object"
+        }
+      })
       const actionWhenUpdateHippoFields = new Validator().compile({
         cardUpdateFields: {
           type: "object",
@@ -329,10 +343,12 @@ export default class ActionNode extends AbstractHippoNode {
                   values: ["value", "variable"]
                 },
                 value: {
-                  type:  getHippoFieldType(i),
+                  type: "string",
+                  nullable: true,
+                  default: "[[[nullValue]]]",
                   check(value, errors, schema, path, parentNode){
                     if(value === "[[[nullValue]]]" && parentNode?.valueType === "variable"){
-                      errors.push({type: "required"})
+                      errors.push({type: "required", field: "value"})
                     }
                     return value
                   }
@@ -344,7 +360,6 @@ export default class ActionNode extends AbstractHippoNode {
         },
         params: {
           type: "object",
-          optional: true,
           props: {
             context: {
               type: 'enum',
@@ -399,15 +414,13 @@ export default class ActionNode extends AbstractHippoNode {
           errors.pushArray(actionWhenUpdateHipporelloCard(this.nodeJson.props||{}));
         }
         if (this.nodeJson.type === 'update-hipporello-card') {
-          if(!this.nodeJson.props){
-            errors.pushArray([{type: "required", message: "Hippo Field is required"}])
-          }
-          else if(Object.keys(allHippoFields||{}).includes(Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0])){
+          if(Object.keys(allHippoFields||{}).includes(Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0])){
             errors.pushArray(actionWhenUpdateHippoFields(this.nodeJson.props||{}));
           }
           else{
-            this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
-            errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
+            errors.pushArray(actionWhenUpdateHippoFieldsContext(this.nodeJson.props||{}));
+            // this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
+            // errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
           }
         }
         if (this.nodeJson.type === 'open-page') {
