@@ -37,6 +37,10 @@ export default class AbstractHippoNode {
   init(actions, entities){
     this.actions = actions;
     this.entities = entities;
+    this.entitiesIds = {
+      trelloLists: (this.entities?.trelloLists||[])?.map(i=>i?.hippoId),
+      trelloLabels: (this.entities?.trelloLabels||[])?.map(i=>i?.hippoId)
+    }
     this.childNodes = []
     this.nodeJson = JSONUtils.query(this.appJson, this.path);
     if(this.nodeJson) {
