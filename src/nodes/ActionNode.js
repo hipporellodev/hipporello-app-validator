@@ -299,11 +299,7 @@ export default class ActionNode extends AbstractHippoNode {
                   values: ["value", "variable"]
                 },
                 value: {
-                  type: "multi",
-                  rules: [
-                    { type: "string" },
-                    { type: "array" }
-                  ],
+                  type: "any",
                   nullable: true,
                   default: "[[[nullValue]]]",
                   check(value, errors, schema, path, parentNode){
