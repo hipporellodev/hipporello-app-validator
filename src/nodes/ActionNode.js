@@ -388,12 +388,12 @@ export default class ActionNode extends AbstractHippoNode {
     }
     else if (this.nodeJson.type === 'open-form') {
       errors.pushArray(actionWhenOpenForm(this.nodeJson.props||{}))
-      if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]?.enabled) {
-        const availables = Object.entries(this.appJson?.app?.integrations?.incoming || {})
-          .filter(it => it?.[1]?.enabled)
-          .map(it => it?.[0]);
-        errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, availables))
-      }
+      // if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]?.enabled) {
+      //   const availables = Object.entries(this.appJson?.app?.integrations?.incoming || {})
+      //     .filter(it => it?.[1]?.enabled)
+      //     .map(it => it?.[0]);
+      //   errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, availables))
+      // }
       if (this.nodeJson.props?.target?.type === '_modal') {
         this.validatorPath = `${this.path}.props.target`;
         errors.pushArray(actionWhenOpenFormModal(this.nodeJson.props.target));

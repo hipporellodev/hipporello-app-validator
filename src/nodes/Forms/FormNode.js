@@ -234,6 +234,9 @@ export default class FormNode extends AbstractHippoNode{
     }
 
     if(this.nodeJson?.enabled){
+      if(!this.nodeJson.body.hippoFieldMapping) {
+        this.nodeJson.body.hippoFieldMapping = {}
+      }
       errors.pushArray(formCheck(this.nodeJson));
     }
 
