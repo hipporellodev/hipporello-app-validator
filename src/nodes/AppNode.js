@@ -52,13 +52,13 @@ export default class AppNode extends AbstractHippoNode{
     if (appVariables) {
       this.addChildNode(new  AppVariableFieldsNode(appJson, "app.fieldDefinitions.appVariableFields"));
     }
-    let actionGroups = JSONUtils.query(appJson, "app.actionGroups");
-    if(actionGroups){
-      actionGroups = Object.values(actionGroups)
-      actionGroups.forEach(actionGroup=>{
-        this.addChildNode(new ActionGroupNode(appJson, `app.actionGroups.${actionGroup.id}`))
-      })
-    }
+    // let actionGroups = JSONUtils.query(appJson, "app.actionGroups");
+    // if(actionGroups){
+    //   actionGroups = Object.values(actionGroups)
+    //   actionGroups.forEach(actionGroup=>{
+    //     this.addChildNode(new ActionGroupNode(appJson, `app.actionGroups.${actionGroup.id}`))
+    //   })
+    // }
     let automations = JSONUtils.query(appJson, "app.automations");
     if(automations){
       automations = Object.values(automations)
