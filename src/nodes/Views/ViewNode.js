@@ -18,16 +18,18 @@ export default class ViewNode extends AbstractHippoNode{
     if(views){
       views = Object.values(views);
       views.forEach(view=>{
-        if(view.type === "page"){
-          if(view.viewProps.environments != null && view.viewProps.environments.indexOf(envType) >= 0){
+        if(view?.enabled){
+          if(view.type === "page"){
+            if(view.viewProps.environments != null && view.viewProps.environments.indexOf(envType) >= 0){
               this.addChildNode(new PageNode(appJson, "app.views."+view.id))
+            }
           }
-        }
-        else if(view.id === appHeaderId){
-          this.addChildNode(new HeaderNode(appJson, "app.views."+view.id))
-        }
-        else if(view.id === sidebarId){
-          this.addChildNode(new SidebarNode(appJson, "app.views."+view.id))
+          else if(view.id === appHeaderId){
+            this.addChildNode(new HeaderNode(appJson, "app.views."+view.id))
+          }
+          else if(view.id === sidebarId){
+            this.addChildNode(new SidebarNode(appJson, "app.views."+view.id))
+          }
         }
       })
     }
