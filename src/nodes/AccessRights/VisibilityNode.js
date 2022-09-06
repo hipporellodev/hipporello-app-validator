@@ -1,10 +1,10 @@
-import AbstractHippoNode from "./AbstractHippoNode";
-import {conditionsWithOr} from "../Utils/conditionWithOr";
-import {conditionsWithAnd} from "../Utils/conditionsWithAnd";
+import AbstractHippoNode from "../AbstractHippoNode";
+import {conditionsWithOr} from "../../Utils/conditionWithOr";
+import {conditionsWithAnd} from "../../Utils/conditionsWithAnd";
 
 
 
-export default class ComponentVisibilityNode extends AbstractHippoNode{
+export default class VisibilityNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
   }

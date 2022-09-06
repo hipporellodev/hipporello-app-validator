@@ -1,6 +1,8 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
 import Validator from "fastest-validator";
+import VisibilityNode from "../AccessRights/VisibilityNode";
+import CollectionNode from "../AccessRights/CollectionNode";
 
 
 export default class PageNode extends AbstractHippoNode{
@@ -52,6 +54,12 @@ export default class PageNode extends AbstractHippoNode{
 
   process(appJson, path, nodeJson) {
     this.env = nodeJson.viewProps?.environments?.[0] || "webView";
+    if(nodeJson?.accessRight?.dataRule?.conditions){
+      this.addChildNode(new VisibilityNode(appJson, `${path}.accessRight.dataRule`))
+    }
+    if(nodeJson?.viewProps?.cardAware){
+      this.addChildNode(new CollectionNode(appJson, `${path}.accessRight.dataRule`))
+    }
     if(nodeJson?.viewProps?.children?.length){
       this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
     }

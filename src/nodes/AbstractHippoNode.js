@@ -167,7 +167,25 @@ export default class AbstractHippoNode {
       return Object.values(this.appJson?.app?.components || {}).map(i => i?.type)
     return Object.keys(this?.data?.components || {});
   }
-
+  getCollectionValidateJson = () => {
+    const collections = {
+      type: 'array',
+      optional: true,
+      items: {
+        type: 'enum',
+        values: this.getCollections()
+      }
+    }
+    const includeArchived = {
+      type: 'enum',
+      optional: true,
+      values: ['all', "archived", "notarchived"]
+    }
+    return {
+      collections,
+      includeArchived,
+    }
+  }
   createValidationError(type, field, actual,expected, expectedMeaningful, message) {
     return {
       type,

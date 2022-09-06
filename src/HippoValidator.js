@@ -599,7 +599,7 @@ export default class HippoValidator {
         const toIdsItem = (id, label) => {
           return {
             id,
-            label: label||"Unknown"
+            label: label
           }
         }
         const collections = Object.values(this.data?.app?.cardCollections||{})?.map(i => toIdsItem(i?.id, i?.name))
@@ -609,7 +609,7 @@ export default class HippoValidator {
         const appVariables = Object.values(this.data?.app?.fieldDefinitions?.appVariableFields||{})?.map(i => toIdsItem(i?.id, i?.label))
         const automations = Object.values(this.data?.app?.automations||{})?.map(i => toIdsItem(i?.id, i?.name))
         const lists = (this.entities.trelloLists||[])?.map(i => toIdsItem(i?.hippoId, i?.name))
-        const labels = (this.entities.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name))
+        const labels = (this.entities.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name||i?.color||false))
         const members = (this.entities.members||[])?.map(i => toIdsItem(i?.hippoId||i?.id, i?.name))
         const ids = [
           ...(collections||[]),
@@ -621,7 +621,7 @@ export default class HippoValidator {
           ...(lists||[]),
           ...(labels||[]),
           ...(members||[]),
-        ]
+        ].filter(Boolean)
         const expected = error?.expected
         const expectedType = typeof expected;
         if(Array.isArray(expected) || expectedType === "string"){
@@ -629,6 +629,9 @@ export default class HippoValidator {
           if (Array.isArray(values)) {
             values = values?.map(id => ids?.find(i => i?.id === id)?.label||id)
             values = values.join(', ');
+          } else{
+              const trimValue = (values||"").trim()
+              values = ids?.find(i => i?.id === trimValue)?.label||values
           }
           return values;
         }

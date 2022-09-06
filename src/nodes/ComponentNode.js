@@ -4,7 +4,7 @@ import EventNode from "./EventNode";
 import ChildrenNode from "./Views/ChildrenNode";
 import Validator from "fastest-validator";
 import {actionConditionSchema} from "./Automations/AutomationNode";
-import ComponentVisibilityNode from "./ComponentVisibilityNode";
+import VisibilityNode from "./AccessRights/VisibilityNode";
 
 const componentScheme = {
   id: 'string|empty:false',
@@ -303,7 +303,7 @@ export default class ComponentNode extends AbstractHippoNode{
       }))
     }
     if(nodeJson?.accessRight?.dataRule?.conditions){
-      this.addChildNode(new ComponentVisibilityNode(appJson, `${path}.accessRight.dataRule`))
+      this.addChildNode(new VisibilityNode(appJson, `${path}.accessRight.dataRule`))
     }
   }
 
