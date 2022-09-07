@@ -57,7 +57,7 @@ export default class PageNode extends AbstractHippoNode{
     if(nodeJson?.accessRight?.dataRule?.conditions){
       this.addChildNode(new VisibilityNode(appJson, `${path}.accessRight.dataRule`))
     }
-    if(nodeJson?.viewProps?.cardAware){
+    if(nodeJson?.viewProps?.cardAware && nodeJson?.viewProps?.environments?.length){
       this.addChildNode(new CollectionNode(appJson, `${path}.accessRight.dataRule`))
     }
     if(nodeJson?.viewProps?.children?.length){
