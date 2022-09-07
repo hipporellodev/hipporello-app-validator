@@ -152,10 +152,19 @@ export default class AbstractHippoNode {
     return Object.keys(this.appJson?.app?.roles || {});
   }
 
-  getHippoFields = (isValue) => {
-    if (isValue)
-      return Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})?.map(i => i?.label)
-    return Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields || {});
+  getHippoFields = (isValue, filter) => {
+    let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})
+    if(filter){
+      hippoFields = hippoFields.filter(filter)
+    }
+    if (isValue){
+      return hippoFields?.map(i => i?.id)
+    }
+    return hippoFields;
+  }
+  getAllHippoAttachmentFields = () => {
+    let hippoFields = this.getHippoFields(true, (hippoField) => hippoField?.type === "attachment")
+    return ['c_attachments', ...hippoFields, ...hippoFields.map( h => `card.${h}`),  ...hippoFields.map( h => `parentCard.${h}`)]
   }
 
   getEnvironments = () => {

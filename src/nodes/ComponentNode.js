@@ -229,6 +229,14 @@ const hfCheck = new Validator().compile({
 const labelCheck = new Validator().compile({
   text: 'string',
 });
+ function getAttachmentListCheck(){
+  return new Validator().compile({
+    field: {
+      type:'string',
+      values: this.getAllHippoAttachmentFields()
+    }
+  })
+}
 export default class ComponentNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
@@ -239,6 +247,9 @@ export default class ComponentNode extends AbstractHippoNode{
     errors.pushArray(componentCheck(this.nodeJson));
     this.validatorPath = `${this.path}.viewProps`
     switch (this.nodeJson.type) {
+      case 'attachmentList':
+        errors.pushArray(getAttachmentListCheck.call(this)(this.nodeJson.viewProps||{}))
+        break;
       case 'formList':
         errors.pushArray(formListCheck(this.nodeJson.viewProps||{}));
         break;
