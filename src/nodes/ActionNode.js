@@ -177,8 +177,13 @@ export default class ActionNode extends AbstractHippoNode {
       }
     })
     const actionWhenAssignLabel = new Validator().compile({
+      updateLabelActionType: {
+        type: "enum",
+        values: ["remove-all-labels", "remove-labels", "set-labels", "add-labels"]
+      },
       labels: {
         type: "array",
+        optional: this.nodeJson.props?.updateLabelActionType === "remove-all-labels",
         items: {
           type: "enum",
           values: trelloLabels || []
