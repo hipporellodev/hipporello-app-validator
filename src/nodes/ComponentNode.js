@@ -219,13 +219,26 @@ const snippetCheck = new Validator().compile({
   html: 'string',
   name: 'string|empty:false',
 });
-const hfCheck = new Validator().compile({
-  allFields: 'boolean|optional',
-  showSearch: 'boolean|optional',
-  showUpdateWith: 'boolean|optional',
-  target: 'object'
-  /* @todo addTargetScheme */
-});
+function hippoFieldsCheck() {
+  return new Validator().compile({
+    downloadCsvFile: 'boolean',
+    hideEmptyFields: 'boolean',
+    selectedFields: {
+      type: "array",
+      items: {
+        type: 'enum',
+        values: this.getHippoFields(true)
+      }
+    },
+    showHippoFieldIcon: 'boolean',
+    showSearch: 'boolean',
+    showUpdateWith: 'boolean',
+    source: {
+      type: "enum",
+      values: ['all', 'selected']
+    }
+  })
+}
 const labelCheck = new Validator().compile({
   text: 'string',
 });
@@ -292,8 +305,8 @@ export default class ComponentNode extends AbstractHippoNode{
       case 'snippet':
         errors.pushArray(snippetCheck(this.nodeJson.viewProps||{}));
         break;
-      case 'HippoFields':
-        errors.pushArray(hfCheck(this.nodeJson.viewProps||{}));
+      case 'hippoFields':
+        errors.pushArray(hippoFieldsCheck.call(this)(this.nodeJson.viewProps||{}));
         break;
       case 'label':
         errors.pushArray(labelCheck(this.nodeJson.viewProps||{}));
