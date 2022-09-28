@@ -220,11 +220,12 @@ const snippetCheck = new Validator().compile({
   name: 'string|empty:false',
 });
 function hippoFieldsCheck() {
+  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected"
   return new Validator().compile({
     downloadCsvFile: 'boolean',
     hideEmptyFields: 'boolean',
     selectedFields: {
-      type: "array",
+      type: isSelectedFields ? "array" : "array|optional",
       items: {
         type: 'enum',
         values: this.getHippoFields(true)
