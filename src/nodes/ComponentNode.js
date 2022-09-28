@@ -225,7 +225,8 @@ function hippoFieldsCheck() {
     downloadCsvFile: 'boolean',
     hideEmptyFields: 'boolean',
     selectedFields: {
-      type: isSelectedFields ? "array" : "array|optional",
+      type:  "array",
+      optional: !isSelectedFields,
       items: {
         type: 'enum',
         values: this.getHippoFields(true)
