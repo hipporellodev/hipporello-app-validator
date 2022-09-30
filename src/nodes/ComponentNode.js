@@ -61,27 +61,53 @@ const componentScheme = {
 };
 const componentCheck = new Validator().compile(componentScheme);
 
-const formListCheck = new Validator().compile({
-  viewType: 'string|empty:false',
-  type: {
-    type: 'enum',
-    values: ["all", "selected", "allCreatingForms", "allUpdatingForms"]
-  },
-  showDescription: 'boolean|optional',
-  selectedForms: {
-    type: 'array',
-    optional: true
-  }
-})
-const appListCheck = new Validator().compile({
-  viewType: 'string|empty:false',
-  type: {
-    type: 'enum',
-    values: ["all", "selected"],
-  },
-  showDescription:'boolean|optional',
-  selectedApps: 'array|optional'
-})
+function formListCheck() {
+  const sourceTypes =  ["all", "selected", "allCreatingForms", "allUpdatingForms"]
+  const isSelectedForms = this.nodeJson?.viewProps?.type === "selected"
+  const formsOptions = this.getFormIds()
+  return new Validator().compile({
+    viewType: {
+      type: 'enum',
+      values: ['grid', 'list']
+    },
+    type: {
+      type: 'enum',
+      values: sourceTypes
+    },
+    showDescription: 'boolean|optional',
+    selectedForms: {
+      type: 'array',
+      optional: !isSelectedForms,
+      items: {
+        type: 'enum',
+        values: formsOptions
+      }
+    }
+  })
+}
+function appListCheck() {
+  const isSelectedApps = this.nodeJson?.viewProps?.type === "selected"
+  const appsOptions = this.getApps(true)
+  return  new Validator().compile({
+    viewType: {
+      type: "enum",
+      values: ['grid', 'list']
+    },
+    type: {
+      type: 'enum',
+      values: ["all", "selected"],
+    },
+    showDescription:'boolean|optional',
+    selectedApps: {
+      type:  "array",
+      optional: !isSelectedApps,
+      items: {
+        type: 'enum',
+        values: appsOptions
+      }
+    }
+  })
+}
 const headerCheck = new Validator().compile({
   text: 'string',
   heading: {
@@ -266,10 +292,10 @@ export default class ComponentNode extends AbstractHippoNode{
         errors.pushArray(getAttachmentListCheck.call(this)(this.nodeJson.viewProps||{}))
         break;
       case 'formList':
-        errors.pushArray(formListCheck(this.nodeJson.viewProps||{}));
+        errors.pushArray(formListCheck.call(this)(this.nodeJson.viewProps||{}));
         break;
       case 'appList':
-        errors.pushArray(appListCheck(this.nodeJson.viewProps||{}));
+        errors.pushArray(appListCheck.call(this)(this.nodeJson.viewProps||{}));
         break;
       case 'header':
         errors.pushArray(headerCheck(this.nodeJson.viewProps||{}));

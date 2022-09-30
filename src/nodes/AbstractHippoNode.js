@@ -100,6 +100,16 @@ export default class AbstractHippoNode {
     return true;
   }
 
+  getApps(isValue, filter){
+    let apps =  this.entities?.apps ||[]
+    if(filter){
+      apps = apps.filter(filter)
+    }
+    if(isValue){
+      return apps.map( app => app?.id)
+    }
+    return apps
+  }
   getPageNames() {
     if (!this.viewNames) {
       this.viewNames = (Object.values(this.appJson?.app?.views) || [])
