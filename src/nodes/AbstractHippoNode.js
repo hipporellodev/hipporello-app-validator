@@ -15,6 +15,7 @@ export default class AbstractHippoNode {
   appJson;
   exists;
   validatorPath;
+  initialValidate = true;
   checkedPaths = {};
   lists = [];
   members = [];
@@ -73,9 +74,10 @@ export default class AbstractHippoNode {
       return;
     }
     this.checkedPaths[this.path] = true;
-    if(!this.exists){
+    if(!this.exists && this.initialValidate){
       if (this.isMandatory()) {
-        errors.push({path: this.parentNode?.path, type:"notExists"})
+        console.log(this)
+        errors.push({path: this?.path, type:"notExists"})
       }
       return;
     }
@@ -91,6 +93,7 @@ export default class AbstractHippoNode {
         errors.pushArray(newerrors);
       }
     }
+    if(!this.exists) return;
     this.childNodes.forEach(childNode=>{
       return childNode.validate(errors);
     });
