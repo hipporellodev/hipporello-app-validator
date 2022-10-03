@@ -24,12 +24,10 @@ export default class ViewNode extends AbstractHippoNode{
               this.addChildNode(new PageNode(appJson, "app.views."+view.id))
             }
           }
-          else if(view.id === appHeaderId){
-            this.addChildNode(new HeaderNode(appJson, "app.views."+view.id))
-          }
-          else if(view.id === sidebarId){
-            this.addChildNode(new SidebarNode(appJson, "app.views."+view.id))
-          }
+        }else if(view.id === appHeaderId){
+          this.addChildNode(new HeaderNode(appJson, "app.views."+view.id))
+        }else if(view.id === sidebarId){
+          this.addChildNode(new SidebarNode(appJson, "app.views."+view.id))
         }
       })
     }
