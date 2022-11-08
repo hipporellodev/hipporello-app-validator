@@ -44,8 +44,41 @@ export default class FormNode extends AbstractHippoNode{
     const elementIds = this.childNodes?.reduce((a, i)=> {
       if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
-        type: "enum",
-        values: hippoFieldIds
+        type: "object",
+        props: {
+          hippoField:{
+            type: "object",
+            optional: true,
+            props:{
+              targetField: {
+                type: "enum",
+                values: hippoFieldIds
+              },
+              operation: {
+                type: "enum",
+                values: ["set"]
+              }
+            }
+          },
+          trelloCardField: {
+            type: "object",
+            optional: true,
+            props:{
+              targetField: {
+                type: "enum",
+                values: ["label"]
+              },
+              operation: {
+                type: "enum",
+                values: ["set", "keepexcluded"]
+              }
+            }
+          },
+          trelloCardCustomField: {
+            type: "object",
+            optional: true
+          }
+        }
       }
       return a;
     }, {});
@@ -168,7 +201,7 @@ export default class FormNode extends AbstractHippoNode{
               }
             }
           },
-          hippoFieldMapping: (Object?.keys(elementIds))?.length ? {
+          fieldMapping: (Object?.keys(elementIds))?.length ? {
             type: "object",
             props: elementIds
           } : {
@@ -234,10 +267,9 @@ export default class FormNode extends AbstractHippoNode{
     if (this.nodeJson?.submitter?.type === "specifiedEmail" && !this?.nodeJson?.submitter?.field) {
       errors.pushArray(submitterCheck(this.nodeJson));
     }
-
     if(this.nodeJson?.enabled){
-      if(!this.nodeJson.body.hippoFieldMapping) {
-        this.nodeJson.body.hippoFieldMapping = {}
+      if(!this.nodeJson.body.fieldMapping) {
+        this.nodeJson.body.fieldMapping = {}
       }
       errors.pushArray(formCheck(this.nodeJson));
     }
