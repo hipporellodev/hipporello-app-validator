@@ -38,9 +38,7 @@ export default class AppNode extends AbstractHippoNode{
   }
 
   getValidatorFunction(){
-    return (data)=>{
-      return appNodeCheck(data);
-    };
+    return appNodeCheck(this.appJson.app);
   }
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
