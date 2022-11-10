@@ -608,9 +608,9 @@ export default class HippoValidator {
         const hippoFields = Object.values(this.data?.app?.fieldDefinitions?.hippoFields||{})?.map(i => toIdsItem(i?.id, i?.label))
         const appVariables = Object.values(this.data?.app?.fieldDefinitions?.appVariableFields||{})?.map(i => toIdsItem(i?.id, i?.label))
         const automations = Object.values(this.data?.app?.automations||{})?.map(i => toIdsItem(i?.id, i?.name))
-        const lists = (this.entities.trelloLists||[])?.map(i => toIdsItem(i?.hippoId, i?.name))
-        const labels = (this.entities.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name||i?.color||false))
-        const members = (this.entities.members||[])?.map(i => toIdsItem(i?.hippoId||i?.id, i?.name))
+        const lists = (this.entities?.trelloLists||[])?.map(i => toIdsItem(i?.hippoId, i?.name))
+        const labels = (this.entities?.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name||i?.color||false))
+        const members = (this.entities?.members||[])?.map(i => toIdsItem(i?.hippoId||i?.id, i?.name))
         const ids = [
           ...(collections||[]),
           ...(views||[]),
