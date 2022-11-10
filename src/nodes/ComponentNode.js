@@ -30,6 +30,7 @@ const componentScheme = {
       'dropdown',
       'row',
       'Image',
+	    "AppVariables",
       'Header',
       'horizontalline',
       "dropdownItem",

@@ -37,7 +37,9 @@ const checkExternal = new Validator().compile({
       "conversation-delete-thread",
       "conversation-update-members",
       "conversation-new-thread",
-      "conversation-reply"
+      "conversation-reply",
+	    "UpdateAppVariable",
+	    "UpdateHippoField"
     ]
   },
   props: {
