@@ -13,6 +13,7 @@ import FormNode from "./Forms/FormNode";
 import EmailNode from "./Forms/EmailNode";
 import ActionGroupNode from "./ActionGroupNode";
 import JSONUtils from "../JSONUtils";
+import TrelloBoardViewNode from "./TrelloBoardViewNode";
 const Validator = require("fastest-validator");
 
 const appNodeScheme = {
@@ -45,7 +46,10 @@ export default class AppNode extends AbstractHippoNode{
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
     this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloCardBack"));
-    this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloBoardView"));
+		console.log(appJson)
+		if(appJson?.app?.environments?.trelloBoardView?.enabled){
+      this.addChildNode(new TrelloBoardViewNode(appJson, "app.environments.trelloBoardView"));
+		}
     this.addChildNode(new  CardCollectionsNode(appJson, "app.cardCollections"));
     this.addChildNode(new  RolesNode(appJson, "app.roles"));
     this.addChildNode(new  ViewSettingsNode(appJson, "app.viewSettings"));
