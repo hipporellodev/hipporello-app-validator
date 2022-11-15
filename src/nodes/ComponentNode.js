@@ -22,6 +22,7 @@ const componentScheme = {
       'image',
       'video',
       'hippoFields',
+	    'appVariables',
       'label',
       'button',
       'TrelloCardSharing',
@@ -251,6 +252,9 @@ function hippoFieldsCheck() {
   return new Validator().compile({
     downloadCsvFile: 'boolean',
     hideEmptyFields: 'boolean',
+	  excerptContent: 'boolean|optional',
+	  allowEdit: 'boolean|optional',
+	  allowCopy: 'boolean|optional',
     selectedFields: {
       type:  "array",
       optional: !isSelectedFields,
@@ -267,6 +271,29 @@ function hippoFieldsCheck() {
       values: ['all', 'selected']
     }
   })
+}
+function appVariablesCheck() {
+	const isSelectedFields = this.nodeJson?.viewProps?.source === "selected"
+	return new Validator().compile({
+		downloadCsvFile: 'boolean|optional',
+		hideEmptyFields: 'boolean|optional',
+		excerptContent: 'boolean|optional',
+		allowEdit: 'boolean|optional',
+		selectedFields: {
+			type:  "array",
+			optional: !isSelectedFields,
+			items: {
+				type: 'enum',
+				values: this.getHippoFields(true)
+			}
+		},
+		showIcon: 'boolean|optional',
+		showSearch: 'boolean|optional',
+		source: {
+			type: "enum",
+			values: ['all', 'selected']
+		}
+	})
 }
 const labelCheck = new Validator().compile({
   text: 'string',
@@ -334,9 +361,12 @@ export default class ComponentNode extends AbstractHippoNode{
       case 'snippet':
         errors.pushArray(snippetCheck(this.nodeJson.viewProps||{}));
         break;
-      case 'hippoFields':
-        errors.pushArray(hippoFieldsCheck.call(this)(this.nodeJson.viewProps||{}));
-        break;
+	    case 'hippoFields':
+		    errors.pushArray(hippoFieldsCheck.call(this)(this.nodeJson.viewProps||{}));
+		    break;
+	    case 'appVariables':
+		    errors.pushArray(appVariablesCheck.call(this)(this.nodeJson.viewProps||{}));
+		    break;
       case 'label':
         errors.pushArray(labelCheck(this.nodeJson.viewProps||{}));
         break;

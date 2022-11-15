@@ -45,6 +45,7 @@ export default class AppNode extends AbstractHippoNode{
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
     this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloCardBack"));
+    this.addChildNode(new TrelloCardBackViewNode(appJson, "app.environments.trelloBoardView"));
     this.addChildNode(new  CardCollectionsNode(appJson, "app.cardCollections"));
     this.addChildNode(new  RolesNode(appJson, "app.roles"));
     this.addChildNode(new  ViewSettingsNode(appJson, "app.viewSettings"));
