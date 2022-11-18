@@ -164,7 +164,16 @@ export default class AbstractHippoNode {
       return Object.values(this.appJson?.app?.roles || {})?.map(i => i?.name)
     return Object.keys(this.appJson?.app?.roles || {});
   }
-
+	getAppParameters = (isValue, filter) => {
+		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {})
+		if(filter){
+			appVariables = appVariables.filter(filter)
+		}
+		if (isValue){
+			return appVariables?.map(i => i?.id)
+		}
+		return appVariables;
+	}
   getHippoFields = (isValue, filter) => {
     let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})
     if(filter){

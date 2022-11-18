@@ -284,7 +284,7 @@ function appVariablesCheck() {
 			optional: !isSelectedFields,
 			items: {
 				type: 'enum',
-				values: this.getHippoFields(true)
+				values: this.getAppParameters(true)
 			}
 		},
 		showIcon: 'boolean|optional',
