@@ -172,6 +172,7 @@ export default class ActionNode extends AbstractHippoNode {
     const allListOptions = staticListOptions.concat(trelloListOptions)
     const allHippoFields = this?.appJson?.app?.fieldDefinitions?.hippoFields||{}
     const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
+	  const allFieldWithContext = this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "string" && !field?.multiple)
     const actionWhenMoveTo = new Validator().compile({
       listHippoId: {
         type: "enum",
@@ -248,13 +249,14 @@ export default class ActionNode extends AbstractHippoNode {
           props: {
             type: {
               type: "enum",
-              values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
+              values: ["trelloMember", "cardField", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
             },
             id: {
               type: "string",
               values: [
                 ...(this.entities?.members||[])?.map(i=>i?.id),
                 ...(roles||[]),
+                ...(allFieldWithContext||[]),
                 "allTrelloCardMembers",
                 "allTrelloBoardMembers",
                 "allTrelloBoardAdminMembers",
