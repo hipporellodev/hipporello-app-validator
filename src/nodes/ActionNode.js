@@ -36,6 +36,7 @@ const checkExternal = new Validator().compile({
       "conversation-delete-message",
       "conversation-delete-thread",
       "conversation-update-members",
+      "conversation-get-card-fields",
       "conversation-new-thread",
       "conversation-reply",
 	    "UpdateAppVariable",
