@@ -365,6 +365,12 @@ export default class AbstractHippoNode {
 				"multiple": false
 			},
 			{
+				"id": "system.environment",
+				"label": "Current Environment",
+				"type": "string",
+				"multiple": false
+			},
+			{
 				"id": "cardOwner.name",
 				"label": "Card Owner Full Name",
 				"type": "string",
@@ -525,7 +531,8 @@ export default class AbstractHippoNode {
 	getCardFieldsWithContext = (contexts = ['parentCard', 'card'], isValue, filter) => {
 		const hippoFields = this.getHippoFields(false)
 		const staticFields = this.getStaticFields()
-		let allFieldsList = [...hippoFields, ...staticFields];
+		const appVariables = this.getAppParameters()
+		let allFieldsList = [...hippoFields, ...staticFields, ...appVariables];
 		if(filter){
 			allFieldsList = allFieldsList.filter(filter)
 		}
