@@ -155,7 +155,7 @@ const actionWhenOpenFormModal = new Validator().compile({
   size: {
     optional: true,
     type: 'enum',
-    values: ["small", "medium", "large"]
+    values: ["small", "medium", "large","fullscreen"]
   }
 });
 export default class ActionNode extends AbstractHippoNode {
