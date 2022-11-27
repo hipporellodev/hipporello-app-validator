@@ -36,8 +36,11 @@ const checkExternal = new Validator().compile({
       "conversation-delete-message",
       "conversation-delete-thread",
       "conversation-update-members",
+      "conversation-get-card-fields",
       "conversation-new-thread",
-      "conversation-reply"
+      "conversation-reply",
+	    "UpdateAppVariable",
+	    "UpdateHippoField"
     ]
   },
   props: {
@@ -152,7 +155,7 @@ const actionWhenOpenFormModal = new Validator().compile({
   size: {
     optional: true,
     type: 'enum',
-    values: ["small", "medium", "large"]
+	  values: ["small", "medium", "large","fullscreen"]
   }
 });
 export default class ActionNode extends AbstractHippoNode {
@@ -170,6 +173,7 @@ export default class ActionNode extends AbstractHippoNode {
     const allListOptions = staticListOptions.concat(trelloListOptions)
     const allHippoFields = this?.appJson?.app?.fieldDefinitions?.hippoFields||{}
     const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
+	  const allFieldWithContext = this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "string")
     const actionWhenMoveTo = new Validator().compile({
       listHippoId: {
         type: "enum",
@@ -246,13 +250,14 @@ export default class ActionNode extends AbstractHippoNode {
           props: {
             type: {
               type: "enum",
-              values: ["trelloMember", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
+              values: ["trelloMember", "cardField", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
             },
             id: {
               type: "string",
               values: [
                 ...(this.entities?.members||[])?.map(i=>i?.id),
                 ...(roles||[]),
+                ...(allFieldWithContext||[]),
                 "allTrelloCardMembers",
                 "allTrelloBoardMembers",
                 "allTrelloBoardAdminMembers",
