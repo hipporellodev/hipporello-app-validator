@@ -14,23 +14,20 @@ import EmailNode from "./Forms/EmailNode";
 import ActionGroupNode from "./ActionGroupNode";
 import JSONUtils from "../JSONUtils";
 import TrelloBoardViewNode from "./TrelloBoardViewNode";
-const Validator = require("fastest-validator");
+import Validator from "fastest-validator";
 
 const appNodeScheme = {
-  'id': 'string',
-  'schemaVersion': 'number',
-  'name': 'string',
-  'slug': 'string',
-  'description': 'string|optional',
-  'type': {
+  id: 'string',
+  schemaVersion: 'number',
+  name: "string|empty:false|trim",
+  slug: 'string|empty:false|trim',
+  description: 'string|optional|empty:false|trim',
+  type: {
     type: 'enum',
-    values: [
-        'defaultApp', 'homeApp'
-    ]
+    values: ['defaultApp', 'homeApp']
   },
-  'boards': 'array|optional'
+  boards: 'array|optional'
 }
-const appNodeCheck = new Validator().compile(appNodeScheme);
 export default class AppNode extends AbstractHippoNode{
 
   static INSTANCE = null;
@@ -39,7 +36,9 @@ export default class AppNode extends AbstractHippoNode{
   }
 
   getValidatorFunction(){
-    return appNodeCheck(this.appJson.app);
+    const appNodeCheck = new Validator().compile(appNodeScheme);
+    const errors = appNodeCheck(this.appJson.app)
+    return errors
   }
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
