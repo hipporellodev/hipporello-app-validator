@@ -388,7 +388,9 @@ export default class HippoValidator {
         switch (error.type) {
             case 'oneOf':
             case 'enumValue':
-                return `${error.field} must be one of ${this.convertActualValues(error)}`
+                return `"${error?.label||error.field}" must be one of ${this.convertActualValues(error)}`
+          case "notOneOf":
+                return `"${error?.label||error.field}" must not be one of ${this.convertActualValues(error)}`
             case 'notExists':
                 return `The value used in '${error?.path}' could not be found`
             default:

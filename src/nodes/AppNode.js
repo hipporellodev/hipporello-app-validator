@@ -15,19 +15,8 @@ import ActionGroupNode from "./ActionGroupNode";
 import JSONUtils from "../JSONUtils";
 import TrelloBoardViewNode from "./TrelloBoardViewNode";
 import Validator from "fastest-validator";
+import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "../constants";
 
-const appNodeScheme = {
-  id: 'string',
-  schemaVersion: 'number',
-  name: "string|empty:false|trim",
-  slug: 'string|empty:false|trim',
-  description: 'string|optional|empty:false|trim',
-  type: {
-    type: 'enum',
-    values: ['defaultApp', 'homeApp']
-  },
-  boards: 'array|optional'
-}
 export default class AppNode extends AbstractHippoNode{
 
   static INSTANCE = null;
@@ -36,7 +25,27 @@ export default class AppNode extends AbstractHippoNode{
   }
 
   getValidatorFunction(){
-    const appNodeCheck = new Validator().compile(appNodeScheme);
+    const appNodeCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
+      id: 'string',
+      schemaVersion: 'number',
+      name: "string|empty:false|trim",
+      slug: {
+        type: "custom",
+        check: (value, errors) => {
+          if(APP_SLUG_BLACKLIST.includes(value)){
+            errors.push({type: "notOneOf", label: 'App Slug', expected: APP_SLUG_BLACKLIST})
+          }
+          //Todo: Must be unique check for other apps slug
+          return value
+        }
+      },
+      description: 'string|optional|empty:false|trim',
+      type: {
+        type: 'enum',
+        values: ['defaultApp', 'homeApp']
+      },
+      boards: 'array|optional'
+    });
     const errors = appNodeCheck(this.appJson.app)
     return errors
   }
