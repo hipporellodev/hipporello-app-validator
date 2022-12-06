@@ -3,6 +3,7 @@ import ChildrenNode from "../Views/ChildrenNode";
 import Validator from "fastest-validator";
 import VisibilityNode from "../AccessRights/VisibilityNode";
 import CollectionNode from "../AccessRights/CollectionNode";
+import {PAGE_SLUG_BLACKLIST} from "../../constants";
 
 
 export default class PageNode extends AbstractHippoNode{
@@ -12,6 +13,7 @@ export default class PageNode extends AbstractHippoNode{
 
   getValidatorFunction() {
     const isFormThankYouPage = !this.nodeJson?.viewProps?.environments?.length
+    const slugs = Object.values(this.appJson?.app?.views||{})?.filter(item=>item?.id!==this?.nodeJson?.id)?.map(item => item?.viewProps?.slug)
     const pageCheck = new Validator().compile({
       enabled: 'boolean',
       id: 'string',
@@ -30,11 +32,22 @@ export default class PageNode extends AbstractHippoNode{
         }
       }
     });
-    const pageSlugCheck = new Validator().compile({
+    const pageSlugCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
       viewProps: {
         type: 'object',
         props: {
-          slug: 'string',
+          slug: {
+            type: "custom",
+            check:  (value, errors, schema) => {
+              if(PAGE_SLUG_BLACKLIST.includes(value)){
+                errors.push({type: "notOneOf", label: "Page Slug", expected: PAGE_SLUG_BLACKLIST})
+              }
+              else if(slugs.includes(value)){
+                errors.push({type: "unique", message: "Page slug must be unique"})
+              }
+              return value;
+            }
+          }
         }
       }
     });
@@ -43,7 +56,7 @@ export default class PageNode extends AbstractHippoNode{
       if (Array.isArray(pageCheckResult)) {
         errors.pushArray(pageCheckResult);
       }
-      if (this.nodeJson?.environments?.includes('webview')) {
+      if (this.nodeJson?.viewProps?.environments?.some(env => ["webView", "trelloBoardView"].includes(env))) {
         const slugCheckResult = pageSlugCheck(this.nodeJson);
         errors.pushArray(slugCheckResult);
       }

@@ -80,9 +80,10 @@ export default class AbstractHippoNode {
       }
       return;
     }
-    if(this.getValidatorFunction() != null) {
+    const validationErrors = this.getValidatorFunction();
+    if(validationErrors != null) {
       AbstractHippoNode.counter += 1;
-      const validatorFuncResult = this.getValidatorFunction();
+      const validatorFuncResult = validationErrors
       let newerrors =  typeof validatorFuncResult === 'function' ? validatorFuncResult(this.nodeJson) : validatorFuncResult ;
       if(newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
         newerrors.forEach(err => {

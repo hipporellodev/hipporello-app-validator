@@ -65,11 +65,46 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
-    const buttonCheck = new Validator().compile(ButtonSchema);
+    const TrelloLabelScheme = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: "object",
+      elementData: {
+        type: "object",
+        props: {
+          include: {
+            type: "object",
+            props: {
+              type: {
+                type: "enum",
+                values: ['selected', 'all']
+              },
+              selected: {
+                type: "array",
+                nullable: this.nodeJson?.props?.elementData?.include?.type === "all",
+                optional: this.nodeJson?.props?.elementData?.include?.type === "all",
+                minItems: 1,
+                messages: {
+                  required: "No label selected for Trello Label Selector",
+                }
+              }
+            }
+          },
+          fields: 'array'
+        }
+      }
+    }
     const errors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
     if (this.nodeJson?.input === "Button") {
-      errors.pushArray(buttonCheck(this.nodeJson?.props));
+      const checker = new Validator().compile(ButtonSchema);
+      errors.pushArray(checker(this.nodeJson?.props));
+    }
+    if (this.nodeJson?.input === "TrelloLabelSelector") {
+      const checker = new Validator().compile(TrelloLabelScheme);
+      errors.pushArray(checker(this.nodeJson.props))
     }
     return errors;
   }

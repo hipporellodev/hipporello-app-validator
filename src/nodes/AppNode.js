@@ -5,32 +5,16 @@ import TrelloCardBackViewNode from "./TrelloCardBackViewNode";
 import AutomationNode from "./Automations/AutomationNode";
 import HipporelloFieldNode from "./HipporelloFieldNode";
 import ViewSettingsNode from "./Settings/ViewSettingsNode";
-import AppInfoNode from "./Settings/AppInfoNode";
 import AppVariableFieldsNode from "./Settings/FieldDefinitions/appVariableFieldsNode";
 import CardCollectionsNode from "./CardCollections/CardCollectionsNode";
 import RolesNode from "./Roles/RolesNode";
 import FormNode from "./Forms/FormNode";
 import EmailNode from "./Forms/EmailNode";
-import ActionGroupNode from "./ActionGroupNode";
 import JSONUtils from "../JSONUtils";
 import TrelloBoardViewNode from "./TrelloBoardViewNode";
-const Validator = require("fastest-validator");
+import Validator from "fastest-validator";
+import {APP_SLUG_BLACKLIST, LATEST_APP_SCHEMA_VERSION} from "../constants";
 
-const appNodeScheme = {
-  'id': 'string',
-  'schemaVersion': 'number',
-  'name': 'string',
-  'slug': 'string',
-  'description': 'string|optional',
-  'type': {
-    type: 'enum',
-    values: [
-        'defaultApp', 'homeApp'
-    ]
-  },
-  'boards': 'array|optional'
-}
-const appNodeCheck = new Validator().compile(appNodeScheme);
 export default class AppNode extends AbstractHippoNode{
 
   static INSTANCE = null;
@@ -39,9 +23,32 @@ export default class AppNode extends AbstractHippoNode{
   }
 
   getValidatorFunction(){
-    return (data)=>{
-      return appNodeCheck(data);
-    };
+    const appNodeCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
+      id: 'string',
+      schemaVersion: {
+        type: 'number',
+        equal: LATEST_APP_SCHEMA_VERSION
+      },
+      name: "string|empty:false|trim",
+      slug: {
+        type: "custom",
+        check: (value, errors) => {
+          if(APP_SLUG_BLACKLIST.includes(value)){
+            errors.push({type: "notOneOf", label: 'App Slug', expected: APP_SLUG_BLACKLIST})
+          }
+          //Todo: Must be unique check for other apps slug
+          return value
+        }
+      },
+      description: 'string|optional|empty:false|trim',
+      type: {
+        type: 'enum',
+        values: ['defaultApp', 'homeApp']
+      },
+      boards: 'array|optional'
+    });
+    const errors = appNodeCheck(this.appJson.app)
+    return errors
   }
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
