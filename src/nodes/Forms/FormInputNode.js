@@ -2,6 +2,7 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
 import VisibilityRuleNode from "./VisibilityRuleNode";
+import {FORM_INPUT_NAMES} from "../../Utils/formInputNames";
 
 const formInputSchema = {
   input: "string",
@@ -96,16 +97,56 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
+    const BooleanSchema = {
+      label: "string",
+      description: "string|optional",
+      name: "string",
+      schema: "object",
+      validationRules: "object",
+      settings: {
+        type: "object",
+        props: {
+          inputType: "string",
+          noText: {
+            type: "string",
+            optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
+            messages: {
+              required: "The 'No' field is required."
+            }
+          },
+          yesText: {
+            type: "string",
+            optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
+            messages: {
+              required: "The 'Yes' field is required."
+            }
+          },
+          placeholder: "string|optional",
+          descriptionSwitch: "boolean",
+          defaultValue: "boolean|optional"
+        }
+      }
+    }
     const errors = [];
+    let propsErrors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
-    if (this.nodeJson?.input === "Button") {
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.BUTTON) {
       const checker = new Validator().compile(ButtonSchema);
-      errors.pushArray(checker(this.nodeJson?.props));
+      propsErrors.pushArray(checker(this.nodeJson?.props));
     }
-    if (this.nodeJson?.input === "TrelloLabelSelector") {
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = new Validator().compile(TrelloLabelScheme);
-      errors.pushArray(checker(this.nodeJson.props))
+      propsErrors.pushArray(checker(this.nodeJson.props))
     }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
+      const checker = new Validator().compile(BooleanSchema);
+      propsErrors.pushArray(checker(this.nodeJson.props))
+    }
+    propsErrors = propsErrors.map( error => ({
+      ...error,
+      field: `props.${error?.field}`
+    }))
+    errors.pushArray(propsErrors)
     return errors;
   }
 }
