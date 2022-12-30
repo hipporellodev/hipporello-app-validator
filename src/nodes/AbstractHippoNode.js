@@ -69,7 +69,27 @@ export default class AbstractHippoNode {
 
     }
   }
-  validate(errors){
+	findNodeWithPath(path){
+		let node = null
+		if(path === this.path){
+			node =  this;
+		} else{
+			for (let childNode of this.childNodes) {
+				node = childNode.findNodeWithPath(path)
+				if(node) break;
+			}
+		}
+		return node;
+	}
+  validate(errors,path){
+	  if(path){
+		const foundNode =	this.findNodeWithPath(path)
+		  if(foundNode){
+				return foundNode.validate(errors)
+		  }else {
+				return false;
+		  }
+	  }
     if (this.checkedPaths[this.path]) {
       return;
     }
@@ -129,8 +149,8 @@ export default class AbstractHippoNode {
 
   getPageIds = (isValue) => {
     if (isValue)
-      return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page")?.map(i => i?.viewProps?.name || "")
-    return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page").map(it => {
+      return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page" && !it.deleted)?.map(i => i?.viewProps?.name || "")
+    return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page" && !it.deleted).map(it => {
       return it.id;
     });
   }
@@ -152,7 +172,7 @@ export default class AbstractHippoNode {
   }
 
   getFormIds = (isValue, filter) => {
-    let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {});
+    let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {}).filter(ic => !ic.deleted);
     if(filter) inComings = inComings.filter(filter)
     if (isValue)
       return inComings?.map(i => i?.name)
@@ -175,7 +195,7 @@ export default class AbstractHippoNode {
 		return appVariables;
 	}
   getHippoFields = (isValue, filter) => {
-    let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})
+    let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {}).filter(field => !field.deleted)
     if(filter){
       hippoFields = hippoFields.filter(filter)
     }
