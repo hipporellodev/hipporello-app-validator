@@ -85,7 +85,8 @@ const schema =  new Validator().compile({
       "update-card-members",
       "update-card-labels",
       "move-card",
-      "archive-card"
+      "archive-card",
+      "copy-to-clipboard"
     ]
   },
   props: {
@@ -158,6 +159,14 @@ const actionWhenOpenFormModal = new Validator().compile({
 	  values: ["small", "medium", "large","fullscreen"]
   }
 });
+const actionCopyToClipboard = new Validator().compile({
+  dataToBeCopied: {
+    type: "string",
+    messages: {
+      required: "Source can not be empty."
+    }
+  },
+})
 export default class ActionNode extends AbstractHippoNode {
   constructor(appJson, path, external) {
     super(appJson, path);
@@ -408,6 +417,9 @@ export default class ActionNode extends AbstractHippoNode {
         this.validatorPath = `${this.path}.props.target`;
         errors.pushArray(actionWhenOpenFormModal(this.nodeJson.props.target));
       }
+    }
+    else if (this.nodeJson.type === 'copy-to-clipboard') {
+      errors.pushArray(actionCopyToClipboard(this.nodeJson.props||{}));
     }
     return errors;
   }
