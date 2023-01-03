@@ -15,6 +15,7 @@ export default class AbstractHippoNode {
   appJson;
   exists;
   validatorPath;
+  deleted = false;
   initialValidate = true;
   checkedPaths = {};
   lists = [];
@@ -46,6 +47,7 @@ export default class AbstractHippoNode {
     this.nodeJson = JSONUtils.query(this.appJson, this.path);
     if(this.nodeJson) {
       this.id = this.generateNodeId(this.nodeJson);
+      this.deleted = !!this.nodeJson?.deleted
       this.process(this.appJson, this.path, this.nodeJson)
       this.childNodes.forEach(childNode=>{
         childNode.init(this.actions, this.entities);
@@ -83,14 +85,14 @@ export default class AbstractHippoNode {
 	}
   validate(errors,path){
 	  if(path){
-		const foundNode =	this.findNodeWithPath(path)
+		  const foundNode =	this.findNodeWithPath(path)
 		  if(foundNode){
 				return foundNode.validate(errors)
 		  }else {
 				return false;
 		  }
 	  }
-    if (this.checkedPaths[this.path]) {
+    if (this.checkedPaths[this.path] || this.deleted) {
       return;
     }
     this.checkedPaths[this.path] = true;
@@ -175,7 +177,7 @@ export default class AbstractHippoNode {
     let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {}).filter(ic => !ic.deleted);
     if(filter) inComings = inComings.filter(filter)
     if (isValue)
-      return inComings?.map(i => i?.name)
+      return inComings
     return inComings?.map(i => i?.id);
   }
 
