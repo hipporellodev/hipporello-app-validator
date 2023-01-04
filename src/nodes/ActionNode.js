@@ -171,7 +171,7 @@ export default class ActionNode extends AbstractHippoNode {
     const trelloListOptions = this.entitiesIds?.trelloLists
     const trelloLabels = this.entitiesIds?.trelloLabels
     const allListOptions = staticListOptions.concat(trelloListOptions)
-    const allHippoFields = this?.appJson?.app?.fieldDefinitions?.hippoFields||{}
+    const allHippoFields = this.getHippoFields(true)
     const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
 	  const allFieldWithContext = this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "string")
     const actionWhenMoveTo = new Validator().compile({
@@ -371,7 +371,7 @@ export default class ActionNode extends AbstractHippoNode {
     }
     else if (this.nodeJson.type === 'update-hipporello-card' || this.nodeJson.type === 'update-trello-card') {
       const firstField = Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0];
-      if(Object.keys(allHippoFields||{}).includes(firstField)){
+      if(allHippoFields.includes(firstField)){
         errors.pushArray(updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props||{}));
       }
       else{

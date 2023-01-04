@@ -143,10 +143,14 @@ export default class AbstractHippoNode {
     }
     return this.viewNames;
   }
-  getViewIds = (isValue) => {
-    if (isValue)
-      return Object.keys(this.appJson?.app?.views || {})?.map(i => i?.viewProps?.name)
-    return Object.keys(this.appJson?.app?.views || {});
+  getViewIds = (onlyId = true, filter) => {
+    let views = Object.values(this.appJson?.app?.views || {}).filter(it => !it.deleted);
+    if(typeof filter === "function"){
+      views = views.filter(filter)
+    }
+    if (onlyId)
+      return views.map(i => i?.id)
+    return views
   }
 
   getPageIds = (isValue) => {
@@ -165,10 +169,16 @@ export default class AbstractHippoNode {
 
   getCollections = (isValue) => {
     if (isValue)
-      return Object.values(this.appJson?.app?.cardCollections || {})?.map(i => i?.name)
+      return Object.values(this.appJson?.app?.cardCollections || {})
     return Object.keys(this.appJson?.app?.cardCollections || {})
   }
-
+  getAutomations = (onlyId = false, filter) => {
+    let automations = Object.values(this.appJson?.app?.automations || {}).filter(field => !field.deleted)
+    if(filter){
+      automations = automations.filter(filter)
+    }
+    return onlyId ? automations?.map(i => i?.id) : automations
+  }
   getOneOfMessage = (names, e) => {
     return `${e?.label || e?.path} one of ${names?.join(', ')}`
   }
@@ -186,12 +196,12 @@ export default class AbstractHippoNode {
       return Object.values(this.appJson?.app?.roles || {})?.map(i => i?.name)
     return Object.keys(this.appJson?.app?.roles || {});
   }
-	getAppParameters = (isValue, filter) => {
-		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {})
+	getAppParameters = (onlyId, filter) => {
+		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {}).filter(i => !i?.deleted)
 		if(filter){
 			appVariables = appVariables.filter(filter)
 		}
-		if (isValue){
+		if (onlyId){
 			return appVariables?.map(i => i?.id)
 		}
 		return appVariables;

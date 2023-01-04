@@ -8,11 +8,10 @@ export default class CardCollectionsNode extends AbstractHippoNode{
   }
 
   process(appJson, path, nodeJson) {
-    let cardCollections = JSONUtils.query(appJson, "app.cardCollections");
-    if(cardCollections){
-      cardCollections = Object.values(cardCollections)
-      cardCollections.forEach(cardCollection=>{
-        this.addChildNode(new CardCollectionNode(appJson, "app.cardCollections."+cardCollection.id))
+    let cardCollectionIds = this.getCollections()
+    if(cardCollectionIds){
+      cardCollectionIds.forEach(cardCollectionId=>{
+        this.addChildNode(new CardCollectionNode(appJson, "app.cardCollections." + cardCollectionId))
       })
     }
   }

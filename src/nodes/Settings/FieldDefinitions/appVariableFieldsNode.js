@@ -8,12 +8,10 @@ export default class AppVariableFieldsNode extends AbstractHippoNode{
   }
 
   process(appJson, path, nodeJson) {
-
-    let appVariableFields = JSONUtils.query(appJson, "app.fieldDefinitions.appVariableFields");
-    if(appVariableFields){
-      appVariableFields = Object.values(appVariableFields)
-      appVariableFields.forEach(appVariableField=>{
-        this.addChildNode(new AppVariableNode(appJson, "app.fieldDefinitions.appVariableFields."+appVariableField.id))
+    const appVariableIds = this.getAppParameters(true)
+    if(appVariableIds){
+      appVariableIds.forEach(appVariableId=>{
+        this.addChildNode(new AppVariableNode(appJson, "app.fieldDefinitions.appVariableFields."+appVariableId))
       })
     }
   }

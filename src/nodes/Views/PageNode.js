@@ -13,7 +13,8 @@ export default class PageNode extends AbstractHippoNode{
 
   getValidatorFunction() {
     const isFormThankYouPage = !this.nodeJson?.viewProps?.environments?.length
-    const slugs = Object.values(this.appJson?.app?.views||{})?.filter(item=>item?.id!==this?.nodeJson?.id)?.map(item => item?.viewProps?.slug)
+    const views = this.getViewIds(false, item => item?.id !== this?.nodeJson?.id);
+    const slugs = views.map(item => item?.viewProps?.slug)
     const pageCheck = new Validator().compile({
       enabled: 'boolean',
       id: 'string',

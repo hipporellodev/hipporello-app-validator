@@ -21,7 +21,7 @@ export default class TrelloBoardViewNode extends ViewNode{
       // if (!this.appJson?.app?.views[this.nodeJson.appHeader]) {
       //   errors.push(this.createValidationError('required', 'appHeader', this.nodeJson.appHeader, 'Error Message'));
       // }
-	    const viewsOfViewNode = Object.values(this.appJson?.app?.views||{}).filter(view => view?.viewProps?.environments?.includes(this.nodeJson?.type))
+      const viewsOfViewNode = this.getViewIds(false, view => view?.viewProps?.environments?.includes(this.nodeJson?.type))
 	    if (!viewsOfViewNode?.length){
 		    errors.push(this.createValidationError('required', 'views', this.nodeJson.views, null, null, "You must create at least one page for the Board View."));
 	    }
