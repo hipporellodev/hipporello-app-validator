@@ -206,12 +206,12 @@ export default class AbstractHippoNode {
 		}
 		return appVariables;
 	}
-  getHippoFields = (isValue, filter) => {
+  getHippoFields = (onlyId, filter) => {
     let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {}).filter(field => !field.deleted)
     if(filter){
       hippoFields = hippoFields.filter(filter)
     }
-    if (isValue){
+    if (onlyId){
       return hippoFields?.map(i => i?.id)
     }
     return hippoFields;

@@ -63,13 +63,13 @@ export default class AppNode extends AbstractHippoNode{
     if (appVariables) {
       this.addChildNode(new  AppVariableFieldsNode(appJson, "app.fieldDefinitions.appVariableFields"));
     }
-    let automations = this.getAutomations()
-    if(automations){
-      automations.forEach(automation=>{
-        this.addChildNode(new AutomationNode(appJson, "app.automations."+automation.id))
+    let automationIds = this.getAutomations(true)
+    if(automationIds?.length){
+      automationIds.forEach(automationId => {
+        this.addChildNode(new AutomationNode(appJson, "app.automations." + automationId))
       })
     }
-    let hippoFieldIds = this.getHippoFields()
+    let hippoFieldIds = this.getHippoFields(true)
     if(hippoFieldIds?.length){
       hippoFieldIds.forEach(hfId => {
         this.addChildNode(new HipporelloFieldNode(appJson, "app.fieldDefinitions.hippoFields."+hfId))
