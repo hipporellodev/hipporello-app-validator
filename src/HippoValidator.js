@@ -93,11 +93,11 @@ export default class HippoValidator {
         })
     }
 
-    validate = (cast = false) => {
+    validate = (path) => {
         if (!this.data || typeof this.data != "object") {
             throw new TypeError("Invalid json data")
         }
-        return this.newValidate();
+        return this.newValidate(path);
         // this.extendYup();
         // this.yup = this.createScheme(this.data);
         // return new Promise((resolve, reject) => {
@@ -155,12 +155,12 @@ export default class HippoValidator {
             }))
         ).nullable().default(null))
     }
-    newValidate = async () => {
+    newValidate = async (path) => {
         return new Promise((resolve, reject) => {
             let errors = [];
             const node = new AppNode(this.data);
             node.init([],  this.entities)
-            node.validate(errors);
+            node.validate(errors,path);
             if (errors.length > 0) {
                 reject({
                     type: 'ValidationException',

@@ -18,8 +18,8 @@ export default class EmailNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
-    const formsAndEmails =  this?.appJson?.app?.integrations?.incoming || {};
-    const allEmails = (Object.values(formsAndEmails||{}) || []).filter( e => e?.type === "email" && e?.id !== this?.nodeJson?.id).map(e => e?.email)
+    const emailForms = this.getFormIds(true, e => e?.type === "email" && e?.id !== this?.nodeJson?.id)
+    const allEmails = emailForms.map(e => e?.email)
     let errors = [];
     if(!this.nodeJson?.enabled)
       return [];

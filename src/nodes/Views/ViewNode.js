@@ -14,9 +14,8 @@ export default class ViewNode extends AbstractHippoNode{
     let envType = nodeJson.type
     let appHeaderId = nodeJson.appHeader;
     let sidebarId = nodeJson.sidebar;
-    let views = JSONUtils.query(appJson, "app.views")
-    if(views){
-      views = Object.values(views);
+    let views = this.getViewIds(false)
+    if(views?.length){
       views.forEach(view=>{
         if(view?.enabled){
           if(view.type === "page"){

@@ -63,36 +63,26 @@ export default class AppNode extends AbstractHippoNode{
     if (appVariables) {
       this.addChildNode(new  AppVariableFieldsNode(appJson, "app.fieldDefinitions.appVariableFields"));
     }
-    // let actionGroups = JSONUtils.query(appJson, "app.actionGroups");
-    // if(actionGroups){
-    //   actionGroups = Object.values(actionGroups)
-    //   actionGroups.forEach(actionGroup=>{
-    //     this.addChildNode(new ActionGroupNode(appJson, `app.actionGroups.${actionGroup.id}`))
-    //   })
-    // }
-    let automations = JSONUtils.query(appJson, "app.automations");
-    if(automations){
-      automations = Object.values(automations)
-      automations.forEach(automation=>{
-        this.addChildNode(new AutomationNode(appJson, "app.automations."+automation.id))
+    let automationIds = this.getAutomations(true)
+    if(automationIds?.length){
+      automationIds.forEach(automationId => {
+        this.addChildNode(new AutomationNode(appJson, "app.automations." + automationId))
       })
     }
-    let hippoFields = JSONUtils.query(appJson, "app.fieldDefinitions.hippoFields");
-    if(hippoFields){
-      hippoFields = Object.values(hippoFields)
-      hippoFields.forEach(hippoField=>{
-        this.addChildNode(new HipporelloFieldNode(appJson, "app.fieldDefinitions.hippoFields."+hippoField.id))
+    let hippoFieldIds = this.getHippoFields(true)
+    if(hippoFieldIds?.length){
+      hippoFieldIds.forEach(hfId => {
+        this.addChildNode(new HipporelloFieldNode(appJson, "app.fieldDefinitions.hippoFields."+hfId))
       })
     }
-    let incomingIntegrations = JSONUtils.query(appJson, "app.integrations.incoming");
-    if(incomingIntegrations){
-      incomingIntegrations = Object.values(incomingIntegrations)
-      incomingIntegrations.forEach(integration=>{
-        if(["form", "updateform"].includes(integration.type)){
-          this.addChildNode(new FormNode(appJson, "app.integrations.incoming."+integration.id));
+    let forms = this.getFormIds(true)
+    if(forms?.length){
+      forms.forEach(form => {
+        if(["form", "updateform"].includes(form.type)){
+          this.addChildNode(new FormNode(appJson, "app.integrations.incoming."+form.id));
         }
-        else if(integration.type === "email"){
-          this.addChildNode(new EmailNode(appJson, "app.integrations.incoming."+integration.id));
+        else if(forms.type === "email"){
+          this.addChildNode(new EmailNode(appJson, "app.integrations.incoming."+forms.id));
         }
       })
     }

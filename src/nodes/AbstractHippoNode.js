@@ -15,6 +15,7 @@ export default class AbstractHippoNode {
   appJson;
   exists;
   validatorPath;
+  deleted = false;
   initialValidate = true;
   checkedPaths = {};
   lists = [];
@@ -46,6 +47,7 @@ export default class AbstractHippoNode {
     this.nodeJson = JSONUtils.query(this.appJson, this.path);
     if(this.nodeJson) {
       this.id = this.generateNodeId(this.nodeJson);
+      this.deleted = !!this.nodeJson?.deleted
       this.process(this.appJson, this.path, this.nodeJson)
       this.childNodes.forEach(childNode=>{
         childNode.init(this.actions, this.entities);
@@ -69,8 +71,28 @@ export default class AbstractHippoNode {
 
     }
   }
-  validate(errors){
-    if (this.checkedPaths[this.path]) {
+	findNodeWithPath(path){
+		let node = null
+		if(path === this.path){
+			node =  this;
+		} else{
+			for (let childNode of this.childNodes) {
+				node = childNode.findNodeWithPath(path)
+				if(node) break;
+			}
+		}
+		return node;
+	}
+  validate(errors,path){
+	  if(path){
+		  const foundNode =	this.findNodeWithPath(path)
+		  if(foundNode){
+				return foundNode.validate(errors)
+		  }else {
+				return false;
+		  }
+	  }
+    if (this.checkedPaths[this.path] || this.deleted) {
       return;
     }
     this.checkedPaths[this.path] = true;
@@ -121,16 +143,20 @@ export default class AbstractHippoNode {
     }
     return this.viewNames;
   }
-  getViewIds = (isValue) => {
-    if (isValue)
-      return Object.keys(this.appJson?.app?.views || {})?.map(i => i?.viewProps?.name)
-    return Object.keys(this.appJson?.app?.views || {});
+  getViewIds = (onlyId = true, filter) => {
+    let views = Object.values(this.appJson?.app?.views || {}).filter(it => !it.deleted);
+    if(typeof filter === "function"){
+      views = views.filter(filter)
+    }
+    if (onlyId)
+      return views.map(i => i?.id)
+    return views
   }
 
   getPageIds = (isValue) => {
     if (isValue)
-      return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page")?.map(i => i?.viewProps?.name || "")
-    return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page").map(it => {
+      return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page" && !it.deleted)?.map(i => i?.viewProps?.name || "")
+    return Object.values(this.appJson?.app?.views || {}).filter(it => it.type === "page" && !it.deleted).map(it => {
       return it.id;
     });
   }
@@ -143,19 +169,25 @@ export default class AbstractHippoNode {
 
   getCollections = (isValue) => {
     if (isValue)
-      return Object.values(this.appJson?.app?.cardCollections || {})?.map(i => i?.name)
+      return Object.values(this.appJson?.app?.cardCollections || {})
     return Object.keys(this.appJson?.app?.cardCollections || {})
   }
-
+  getAutomations = (onlyId = false, filter) => {
+    let automations = Object.values(this.appJson?.app?.automations || {}).filter(field => !field.deleted)
+    if(filter){
+      automations = automations.filter(filter)
+    }
+    return onlyId ? automations?.map(i => i?.id) : automations
+  }
   getOneOfMessage = (names, e) => {
     return `${e?.label || e?.path} one of ${names?.join(', ')}`
   }
 
   getFormIds = (isValue, filter) => {
-    let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {});
+    let inComings = Object.values(this.appJson?.app?.integrations?.incoming || {}).filter(ic => !ic.deleted);
     if(filter) inComings = inComings.filter(filter)
     if (isValue)
-      return inComings?.map(i => i?.name)
+      return inComings
     return inComings?.map(i => i?.id);
   }
 
@@ -164,22 +196,22 @@ export default class AbstractHippoNode {
       return Object.values(this.appJson?.app?.roles || {})?.map(i => i?.name)
     return Object.keys(this.appJson?.app?.roles || {});
   }
-	getAppParameters = (isValue, filter) => {
-		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {})
+	getAppParameters = (onlyId, filter) => {
+		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {}).filter(i => !i?.deleted)
 		if(filter){
 			appVariables = appVariables.filter(filter)
 		}
-		if (isValue){
+		if (onlyId){
 			return appVariables?.map(i => i?.id)
 		}
 		return appVariables;
 	}
-  getHippoFields = (isValue, filter) => {
-    let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {})
+  getHippoFields = (onlyId, filter) => {
+    let hippoFields = Object.values(this.appJson?.app?.fieldDefinitions?.hippoFields || {}).filter(field => !field.deleted)
     if(filter){
       hippoFields = hippoFields.filter(filter)
     }
-    if (isValue){
+    if (onlyId){
       return hippoFields?.map(i => i?.id)
     }
     return hippoFields;

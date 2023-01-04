@@ -31,11 +31,12 @@ export default class FormNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
-    const hippoFieldIds = Object.keys(this.appJson?.app?.fieldDefinitions?.hippoFields||{})
-    const cardCollectionsIds = Object.keys(this.appJson?.app?.cardCollections||{})
-    const slugs = Object.values(this.appJson?.app?.integrations?.incoming||{})?.filter(item=>item?.id!==this?.nodeJson?.id)?.map(item => item?.slug)
+    const hippoFieldIds = this.getHippoFields(true)
+    const cardCollectionsIds = this.getCollections()
+    const incomings = this.getFormIds(true, item=>item?.id!==this?.nodeJson?.id)
+    const formSlugs = incomings?.map(item => item?.slug)
     function uniqueCheck(value, errors, schema, path, parentNode){
-      if(slugs.includes(value)){
+      if(formSlugs.includes(value)){
         errors.push({type: "unique", message: "Form slug must be unique"})
       }
       return value
