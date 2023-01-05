@@ -564,7 +564,7 @@ export default class AbstractHippoNode {
 	getCardFieldsWithContext = (contexts = ['parentCard', 'card'], isValue, filter) => {
 		const hippoFields = this.getHippoFields(false)
 		const staticFields = this.getStaticFields()
-		const appVariables = this.getAppParameters()
+		const appVariables = this.getAppParameters().map(item => ({...item, id: "appVariables."+item?.id}))
 		let allFieldsList = [...hippoFields, ...staticFields, ...appVariables];
 		if(filter){
 			allFieldsList = allFieldsList.filter(filter)
@@ -589,8 +589,7 @@ export default class AbstractHippoNode {
 		return allFields
 	}
   getAllHippoAttachmentFields = () => {
-    let hippoFields = this.getHippoFields(true, (hippoField) => hippoField?.type === "attachment")
-    return ['c_attachments', ...hippoFields, ...hippoFields.map( h => `card.${h}`),  ...hippoFields.map( h => `parentCard.${h}`)]
+    return this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "attachment")
   }
 
   getEnvironments = () => {
