@@ -177,7 +177,7 @@ export default class ActionNode extends AbstractHippoNode {
     this.formId = nodeJson.props?.formId
   }
   getValidatorFunction() {
-    const trelloListOptions = this.entitiesIds?.trelloLists
+    const trelloListOptions = this.getTrelloList(true, true)
     const trelloLabels = this.entitiesIds?.trelloLabels
     const allListOptions = staticListOptions.concat(trelloListOptions)
     const allHippoFields = this.getHippoFields(true)

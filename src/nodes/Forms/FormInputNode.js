@@ -37,6 +37,8 @@ export default class FormInputNode extends AbstractHippoNode{
     }
   }
   getValidatorFunction() {
+    const hasParent = this?.parentNode?.nodeJson?.type === "updateform" || this?.parentNode?.nodeJson?.usesParent
+    const trelloListIds = this.getTrelloList(true, hasParent)
     const ButtonSchema = {
       "mandatory-action": {
         type: "object",
@@ -58,7 +60,7 @@ export default class FormInputNode extends AbstractHippoNode{
               name: "string|empty:false",
               listHippoId: {
                 type: "enum",
-                values: (this.entities?.trelloLists||[])?.map(i=>i?.hippoId)
+                values: trelloListIds
               },
               description: "string|optional",
             }

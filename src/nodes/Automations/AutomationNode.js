@@ -22,7 +22,7 @@ export default class AutomationNode extends AbstractHippoNode{
   }
 
   getValidatorFunction() {
-    const allListOptions = this.entitiesIds?.trelloLists;
+    const allListOptions = this.getTrelloList(true)
     const trelloListEnum = {
       type: "enum",
       values: allListOptions,
