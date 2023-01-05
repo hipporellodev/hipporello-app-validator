@@ -167,10 +167,12 @@ export default class AbstractHippoNode {
     return Object.keys(this.appJson?.app?.actionGroups || {});
   }
 
-  getCollections = (isValue) => {
-    if (isValue)
-      return Object.values(this.appJson?.app?.cardCollections || {})
-    return Object.keys(this.appJson?.app?.cardCollections || {})
+  getCollections = (onlyId = true, filter) => {
+    let collections = Object.values(this.appJson?.app?.cardCollections || {}).filter(field => !field.deleted)
+    if(filter){
+      collections = collections.filter(filter)
+    }
+    return onlyId ? collections?.map(i => i?.id) : collections
   }
   getAutomations = (onlyId = false, filter) => {
     let automations = Object.values(this.appJson?.app?.automations || {}).filter(field => !field.deleted)
@@ -615,6 +617,7 @@ export default class AbstractHippoNode {
       optional: true,
       values: ['all', "archived", "notarchived"]
     }
+    console.log(collections)
     return {
       collections,
       includeArchived,
