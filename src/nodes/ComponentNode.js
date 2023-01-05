@@ -301,7 +301,7 @@ const labelCheck = new Validator().compile({
  function getAttachmentListCheck(){
   return new Validator().compile({
     field: {
-      type:'string',
+      type: 'enum',
       values: this.getAllHippoAttachmentFields()
     }
   })

@@ -262,7 +262,7 @@ export default class ActionNode extends AbstractHippoNode {
               values: ["trelloMember", "cardField", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
             },
             id: {
-              type: "string",
+              type: "enum",
               values: [
                 ...(this.entities?.members||[])?.map(i=>i?.id),
                 ...(roles||[]),
