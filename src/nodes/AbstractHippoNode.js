@@ -617,7 +617,6 @@ export default class AbstractHippoNode {
       optional: true,
       values: ['all', "archived", "notarchived"]
     }
-    console.log(collections)
     return {
       collections,
       includeArchived,
