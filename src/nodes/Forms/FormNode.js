@@ -67,7 +67,7 @@ export default class FormNode extends AbstractHippoNode{
             props:{
               targetField: {
                 type: "enum",
-                values: ["label"]
+                values: ["label", "tc_name", "tc_desc"]
               },
               operation: {
                 type: "enum",
