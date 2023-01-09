@@ -1,7 +1,6 @@
 import * as yup from 'yup';
-import _, {isEmpty, mapValues} from 'lodash';
-import {lazy, string, number, mixed, object, array, boolean} from "yup";
-import {APP_SLUG_BLACKLIST, PAGE_SLUG_BLACKLIST} from "./constants";
+import {array, lazy, mixed, object, string} from 'yup';
+import {mapValues} from 'lodash';
 import AppNode from "./nodes/AppNode";
 
 function getDefaultCardType() {
@@ -35,6 +34,7 @@ export default class HippoValidator {
             }
         }
         this.entities = entities;
+        this.inplaceErrorMessage = false ;
         /*this.actionConditionsScheme = this.getActionConditionsScheme();
         this.accessRightScheme = this.getAccessRightScheme();
         this.rolesScheme = this.getRolesScheme();
@@ -158,6 +158,7 @@ export default class HippoValidator {
     newValidate = async (path) => {
         return new Promise((resolve, reject) => {
             let errors = [];
+            this.inplaceErrorMessage = !!path ;
             const node = new AppNode(this.data);
             node.init([],  this.entities)
             node.validate(errors,path);
@@ -288,9 +289,20 @@ export default class HippoValidator {
       }, [])
       return goToError
     }
+    getInvalidValueErrorTitle = (errorType,label) => {
+        switch(errorType){
+            case "oneOf":
+            case "enumValue":
+                return `'${this.camelCaseToNormal(label)}' value is deleted`;
+            case "required":
+                return `'${this.camelCaseToNormal(label)}' value is required`;
+            default :
+                return ""
+        }
+    }
     errorHumanize = (errors) => {
       return errors?.map(error => {
-        let message = error?.message||""
+        let message = error?.message||"";
         if (message.includes(error?.path)) {
           message = message.replace(error?.path, this.getLabel(error?.path, error?.params?.label))
         }
@@ -300,7 +312,7 @@ export default class HippoValidator {
         return {
           ...error,
           message: message,
-          errorTitle: this.camelCaseToNormal(`${error?.code}Error`),
+          errorTitle: error?.fieldLabel ? this.getInvalidValueErrorTitle(error?.code,error?.fieldLabel) : this.camelCaseToNormal(`${error?.code}Error`),
         }
       })
     }
@@ -310,6 +322,7 @@ export default class HippoValidator {
                 code: this.convertErrorCode(error.type),
                 message: this.convertMessage(error),
                 path: error.path,
+                fieldLabel : this.searchForLabelRegex(error?.message),
                 relativePath: error?.relativePath,
                 params: {
                     value: error?.actual,
@@ -384,17 +397,42 @@ export default class HippoValidator {
         }
         return values;
     }
+    
+    searchForLabelRegex = (message) => {
+        const messageRegx = new RegExp(/{{{label\:(.*)\}\}\}/gm)
+        const messageFound = messageRegx.exec(message||"");
+        return messageFound?.[1] || false;
+    }
+    labelOneOfMultipleSelect = (label) => {
+        return ["label","member"].includes(label)
+    }
+    
     convertMessage = (error) => {
-        switch (error.type) {
-            case 'oneOf':
-            case 'enumValue':
-                return `"${error?.label||error.field}" must be one of ${this.convertActualValues(error)}`
-          case "notOneOf":
-                return `"${error?.label||error.field}" must not be one of ${this.convertActualValues(error)}`
-            case 'notExists':
-                return `The value used in '${error?.path}' could not be found`
-            default:
-                return error.message;
+        const fieldLabel = this.searchForLabelRegex(error?.message)
+        if(fieldLabel){
+            switch (error.type) {
+                case 'oneOf':
+                case 'enumValue':
+                    return this.labelOneOfMultipleSelect(fieldLabel) ? `Remove the deleted ${fieldLabel}`: `Choose another ${fieldLabel}` ;
+                case "notOneOf":
+                    return `"${error?.label||error.field}" must not be one of ${this.convertActualValues(error)}`
+                case 'notExists':
+                    return `The value used in '${error?.path}' could not be found`
+                default:
+                    return error.message;
+            }
+        }else{
+            switch (error.type) {
+                case 'oneOf':
+                case 'enumValue':
+                    return `"${error?.label||error.field}" must be one of ${this.convertActualValues(error)}`
+                case "notOneOf":
+                    return `"${error?.label||error.field}" must not be one of ${this.convertActualValues(error)}`
+                case 'notExists':
+                    return `The value used in '${error?.path}' could not be found`
+                default:
+                    return error.message;
+            }
         }
     }
 }

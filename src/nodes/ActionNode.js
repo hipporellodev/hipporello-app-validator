@@ -199,7 +199,11 @@ export default class ActionNode extends AbstractHippoNode {
         optional: this.nodeJson.props?.updateLabelActionType === "remove-all-labels",
         items: {
           type: "enum",
-          values: trelloLabels || []
+          values: trelloLabels || [],
+          messages : {
+            enumValue : this.createMustacheLabel("label"),
+            required : this.createMustacheLabel("label")
+          }
         }
       }
     })
@@ -227,7 +231,11 @@ export default class ActionNode extends AbstractHippoNode {
                 "allTrelloBoardAdminMembers",
                 "allTrelloNormalMembers",
                 "allTrelloObserverMembers",
-              ]
+              ],
+              messages : {
+                enumValue : this.createMustacheLabel("member"),
+                required : this.createMustacheLabel("member")
+              }
             }
           }
         }
@@ -283,7 +291,11 @@ export default class ActionNode extends AbstractHippoNode {
     const actionWhenOpenPage = new Validator().compile({
       viewId: {
         type: "enum",
-        values: this.getPageIds()
+        values: this.getPageIds(),
+        messages : {
+          enumValue : this.createMustacheLabel("page"),
+          required : "Select a page"
+        }
       },
       target: {
         type: 'object',
@@ -347,7 +359,11 @@ export default class ActionNode extends AbstractHippoNode {
     const actionWhenOpenForm = new Validator().compile({
       formId: {
         type: "enum",
-        values: this.getFormIds(false, (i) => ["form", "updateform"]?.includes(i?.type))
+        values: this.getFormIds(false, (i) => ["form", "updateform"]?.includes(i?.type)),
+        messages : {
+          enumValue : this.createMustacheLabel("form"),
+          required : "Select a form"
+        }
       },
       target: {
         type: 'object',

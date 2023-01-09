@@ -632,6 +632,7 @@ export default class AbstractHippoNode {
       includeArchived,
     }
   }
+	createMustacheLabel = (label) => `${"{{{label:"+ label +"}}}"}`
   createValidationError(type, field, actual,expected, expectedMeaningful, message) {
     return {
       type,
