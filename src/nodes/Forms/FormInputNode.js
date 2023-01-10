@@ -81,7 +81,6 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
-    console.log(ButtonSchema)
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
