@@ -1,49 +1,39 @@
 import AbstractHippoNode from "../AbstractHippoNode";
-import Validator from "fastest-validator";
-import {isEmpty} from "lodash";
+import {formConditionRule} from "../../Utils/formConditionWithAnd";
 
-const visibilityRuleSchema = {
-    field: "string|required",
-    value: "array|optional",
-    operator: "string"
-}
-const visibilityRuleCheck = new Validator().compile(visibilityRuleSchema);
 export default class VisibilityRuleNode extends AbstractHippoNode {
-    constructor(appJson, path, formJson) {
-        super(appJson, path);
-        this.formJson = formJson;
-    }
+  constructor(appJson, path, formJson) {
+    super(appJson, path);
+    this.formJson = formJson;
+  }
 
-    process(appJson, path, nodeJson) {
-        super.process(appJson, path, nodeJson);
-    }
+  process(appJson, path, nodeJson) {
+    super.process(appJson, path, nodeJson);
+  }
 
-    getValidatorFunction() {
-        const errors = [];
-        errors.pushArray(visibilityRuleCheck(this.nodeJson));
-        if (!['is_not_empty', 'is_empty'].includes(this.nodeJson.operator) && !Array.isArray(this.nodeJson.value)) {
-            errors.push(this.createValidationError('required', 'value', this.nodeJson.value, null, null, "The 'Value' is required"))
+  getValidatorFunction() {
+    const errors = [];
+    errors.pushArray(formConditionRule(this?.nodeJson))
+    if (this.nodeJson.valueType === 'select' && Array.isArray(this.nodeJson.value)) {
+      const elements = this.getFormElements();
+      const selectedElement = elements?.find(it => it.id === this.nodeJson.field);
+      const data = selectedElement?.props?.data?.map(item => {
+        return item.value;
+      })
+      this.nodeJson?.value?.forEach(value => {
+        if (!data?.includes(value)) {
+          errors.push(this.createValidationError('oneOf', 'value', this.nodeJson.value, data, data));
         }
-        if (this.nodeJson.valueType =='select' && Array.isArray(this.nodeJson.value)) {
-            const elements = this.getFormElements();
-            const selectedElement = elements?.find(it => it.id === this.nodeJson.field);
-            const data = selectedElement?.props?.data?.map(item => {
-                return item.value;
-            })
-            this.nodeJson?.value?.forEach(value => {
-                if (!data?.includes(value)) {
-                    errors.push(this.createValidationError('oneOf', 'value', this.nodeJson.value, data, data));
-                }
-            });
-        }
-        return errors;
+      });
     }
+    return errors;
+  }
 
-    getFormElements(){
-        return this.formJson?.body?.rows?.reduce((acc, cur) => {
-            return [...acc, ...cur?.columns?.map(column => {
-                return column.element;
-            })]
-        }, [])
-    }
+  getFormElements(){
+    return this.formJson?.body?.rows?.reduce((acc, cur) => {
+      return [...acc, ...cur?.columns?.map(column => {
+        return column.element;
+      })]
+    }, [])
+  }
 }

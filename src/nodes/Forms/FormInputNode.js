@@ -3,6 +3,7 @@ import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
 import VisibilityRuleNode from "./VisibilityRuleNode";
 import {FORM_INPUT_NAMES} from "../../Utils/formInputNames";
+import FormInputVisibilityNode from "./FormInputVisibilityNode";
 
 const formInputSchema = {
   input: "string",
@@ -31,14 +32,19 @@ export default class FormInputNode extends AbstractHippoNode{
       this.addChildNode(new ActionGroupNode(appJson, "app.actionGroups."+actionGroupId));
     }
     if (nodeJson.props?.visibilityRules?.rules?.length) {
-      nodeJson.props.visibilityRules.rules.forEach((it, index) => {
-        this.addChildNode(new VisibilityRuleNode(appJson, `${this.path}.props.visibilityRules.rules.${index}`, this.formJson));
-      })
+      this.addChildNode(new FormInputVisibilityNode(appJson, `${this.path}.props.visibilityRules`))
     }
   }
   getValidatorFunction() {
     const hasParent = this?.parentNode?.nodeJson?.type === "updateform" || this?.parentNode?.nodeJson?.usesParent
     const trelloListIds = this.getTrelloList(true, hasParent)
+    let isNameOptional = false;
+    const fieldMapping = this?.parentNode?.nodeJson?.body?.fieldMapping;
+    Object.values(fieldMapping||{}).forEach((fieldMap) => {
+      if(fieldMap?.trelloCardField && fieldMap.trelloCardField?.targetField === "name"){
+        isNameOptional = true
+      }
+    })
     const ButtonSchema = {
       "mandatory-action": {
         type: "object",
@@ -57,7 +63,14 @@ export default class FormInputNode extends AbstractHippoNode{
                 optional: true,
                 nullable: true
               },
-              name: "string|empty:false",
+              name: {
+                type: "string",
+                empty: false,
+                optional: isNameOptional,
+                messages: {
+                  required: "Card Name is a required field"
+                }
+              },
               listHippoId: {
                 type: "enum",
                 values: trelloListIds
@@ -68,6 +81,7 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
+    console.log(ButtonSchema)
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
