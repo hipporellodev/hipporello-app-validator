@@ -175,6 +175,44 @@ const actionFeedbackMessage = new Validator().compile({
       required: "Title can not be empty."
     }
   },
+  type: {
+    type: "enum",
+    values: [
+      "info",
+      "error",
+      "warning",
+      "success"
+    ]
+  },
+  icon: {
+    type: "enum",
+    values: [
+      "check-circle",
+      "exclamation-circle",
+      "exclamation-triangle",
+      "info-circle"
+    ]
+  },
+  message: {
+    type: "string"
+  },
+  duration: {
+    type: "number",
+    min: 0,
+    max: 20
+  },
+  position: {
+    type: "enum",
+    values: [
+      "top-left",
+      "top-left",
+      "top-center",
+      "top-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ]
+  }
 })
 export default class ActionNode extends AbstractHippoNode {
   constructor(appJson, path, external) {
