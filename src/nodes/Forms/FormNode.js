@@ -46,6 +46,7 @@ export default class FormNode extends AbstractHippoNode{
       if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
         type: "object",
+        label: i?.nodeJson?.props?.label,
         props: {
           hippoField:{
             type: "object",
