@@ -16,14 +16,17 @@ export default class VisibilityRuleNode extends AbstractHippoNode {
     if (this.nodeJson.valueType === 'select' && Array.isArray(this.nodeJson.value)) {
       const elements = this.getFormElements();
       const selectedElement = elements?.find(it => it.id === this.nodeJson.field);
-      const data = selectedElement?.props?.data?.map(item => {
-        return item.value;
-      })
-      this.nodeJson?.value?.forEach(value => {
-        if (!data?.includes(value)) {
-          errors.push(this.createValidationError('oneOf', 'value', this.nodeJson.value, data, data));
-        }
-      });
+      const isAfterLoadData = !!selectedElement?.props?.elementData
+      if(!isAfterLoadData){
+        const data = selectedElement?.props?.data?.map(item => {
+          return item.value;
+        })
+        this.nodeJson?.value?.forEach(value => {
+          if (!data?.includes(value)) {
+            errors.push(this.createValidationError('oneOf', 'value', this.nodeJson.value, data, data));
+          }
+        });
+      }
     }
     return errors;
   }
