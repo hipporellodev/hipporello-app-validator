@@ -46,6 +46,7 @@ export default class FormNode extends AbstractHippoNode{
       if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
       a[i?.id] = {
         type: "object",
+        label: i?.nodeJson?.props?.label,
         props: {
           hippoField:{
             type: "object",
@@ -67,7 +68,7 @@ export default class FormNode extends AbstractHippoNode{
             props:{
               targetField: {
                 type: "enum",
-                values: ["label", "tc_name", "tc_desc"]
+                values: ["label", "name", "description"]
               },
               operation: {
                 type: "enum",
