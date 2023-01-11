@@ -2,9 +2,9 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import {formConditionRule} from "../../Utils/formConditionWithAnd";
 
 export default class VisibilityRuleNode extends AbstractHippoNode {
-  constructor(appJson, path, formJson) {
+  constructor(appJson, path) {
     super(appJson, path);
-    this.formJson = formJson;
+    this.formJson = this.parentNode.parentNode;
   }
 
   process(appJson, path, nodeJson) {
@@ -30,7 +30,7 @@ export default class VisibilityRuleNode extends AbstractHippoNode {
   }
 
   getFormElements(){
-    return this.formJson?.body?.rows?.reduce((acc, cur) => {
+    return (this.formJson?.body?.rows||[])?.reduce((acc, cur) => {
       return [...acc, ...cur?.columns?.map(column => {
         return column.element;
       })]
