@@ -186,7 +186,7 @@ export default class ActionNode extends AbstractHippoNode {
     this.formId = nodeJson.props?.formId
   }
   getValidatorFunction() {
-    const trelloListOptions = this.getTrelloList(true, true)
+    const trelloListOptions = this.getTrelloList(true, true,false)
     const trelloLabels = this.entitiesIds?.trelloLabels
     const allListOptions = staticListOptions.concat(trelloListOptions)
     const allHippoFields = this.getHippoFields(true)
@@ -195,7 +195,11 @@ export default class ActionNode extends AbstractHippoNode {
     const actionWhenMoveTo = new Validator().compile({
       listHippoId: {
         type: "enum",
-        values: allListOptions
+        values: allListOptions,
+        messages : {
+          enumValue : this.createMustacheLabel("list"),
+          required : this.createMustacheLabel("list")
+        }
       }
     })
     const actionWhenAssignLabel = new Validator().compile({
@@ -303,7 +307,7 @@ export default class ActionNode extends AbstractHippoNode {
         values: this.getPageIds(),
         messages : {
           enumValue : this.createMustacheLabel("page"),
-          required : "Select a page"
+          required : this.createMustacheLabel("page")
         }
       },
       target: {
@@ -371,7 +375,7 @@ export default class ActionNode extends AbstractHippoNode {
         values: this.getFormIds(false, (i) => ["form", "updateform"]?.includes(i?.type)),
         messages : {
           enumValue : this.createMustacheLabel("form"),
-          required : "Select a form"
+          required : this.createMustacheLabel("form")
         }
       },
       target: {

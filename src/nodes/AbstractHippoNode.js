@@ -135,8 +135,11 @@ export default class AbstractHippoNode {
     }
     return apps
   }
-  getTrelloList(onlyIds = true, hasParent = false){
-    let lists = (this.entities?.trelloLists||[])?.filter(i => !i?.closed)
+  getTrelloList(onlyIds = true, hasParent = false,onlyActives=true){
+    let lists = (this.entities?.trelloLists||[])
+	  if(onlyActives){
+		  lists = (lists||[])?.filter(i => !i?.closed)
+	  }
     if(hasParent){
       lists = [...lists, {hippoId: "{{{card.tc_listHippoId}}}", value: "{{{card.tc_listHippoId}}}"}]
     }

@@ -418,6 +418,8 @@ export default class HippoValidator {
                     return `"${error?.label||error.field}" must not be one of ${this.convertActualValues(error)}`
                 case 'notExists':
                     return `The value used in '${error?.path}' could not be found`
+                case 'required':
+                    return `Select a ${fieldLabel}`
                 default:
                     return error.message;
             }
