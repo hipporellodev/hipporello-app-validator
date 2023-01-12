@@ -194,7 +194,8 @@ const actionFeedbackMessage = new Validator().compile({
     ]
   },
   message: {
-    type: "string"
+    type: "string",
+    optional: true
   },
   duration: {
     type: "number",
