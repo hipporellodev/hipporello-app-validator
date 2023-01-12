@@ -141,7 +141,7 @@ export default class AbstractHippoNode {
 		  lists = (lists||[])?.filter(i => !i?.closed)
 	  }
     if(hasParent){
-      lists = [...lists, {hippoId: "{{{card.tc_listHippoId}}}", value: "{{{card.tc_listHippoId}}}"}]
+      lists = [...lists, {hippoId: "{{{parentCard.tc_listHippoId}}}", value: "{{{parentCard.tc_listHippoId}}}"}]
     }
     if(onlyIds){
       return lists?.map(i => i?.hippoId)

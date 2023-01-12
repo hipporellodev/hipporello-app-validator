@@ -36,7 +36,13 @@ export default class FormInputNode extends AbstractHippoNode{
     }
   }
   getValidatorFunction() {
-    const hasParent = this?.parentNode?.nodeJson?.type === "updateform" || this?.parentNode?.nodeJson?.usesParent
+    let hasParent = this?.parentNode?.nodeJson?.type === "updateform" || this?.parentNode?.nodeJson?.usesParent
+    const formMapping = this.parentNode.nodeJson.body.fieldMapping || {}
+    for (const formMappingKey in formMapping) {
+      if(formMapping[formMappingKey]?.["cardField"]?.targetField === "c_parentCardId"){
+        hasParent = true
+      }
+    }
     const trelloListIds = this.getTrelloList(true, hasParent)
     let isNameOptional = false;
     const fieldMapping = this?.parentNode?.nodeJson?.body?.fieldMapping;
