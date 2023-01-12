@@ -81,8 +81,8 @@ export default class AppNode extends AbstractHippoNode{
         if(["form", "updateform"].includes(form.type)){
           this.addChildNode(new FormNode(appJson, "app.integrations.incoming."+form.id));
         }
-        else if(forms.type === "email"){
-          this.addChildNode(new EmailNode(appJson, "app.integrations.incoming."+forms.id));
+        else if(form.type === "email"){
+          this.addChildNode(new EmailNode(appJson, "app.integrations.incoming."+form.id));
         }
       })
     }
