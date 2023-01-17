@@ -43,7 +43,8 @@ const componentScheme = {
       "HippoFields",
       "Conversation",
       "column",
-      "columns"
+      "columns",
+      "userManagement"
     ]
   },
   viewProps: {
