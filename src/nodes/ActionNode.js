@@ -29,6 +29,7 @@ const checkExternal = new Validator().compile({
       "update-card-labels",
       "move-card",
       "archive-card",
+      "send-card-to-board",
       "conversation-get-board-members",
       "conversation-get-contacts",
       "conversation-get-roles",
@@ -86,6 +87,7 @@ const schema =  new Validator().compile({
       "update-card-labels",
       "move-card",
       "archive-card",
+      "send-card-to-board",
       "copy-to-clipboard",
       "feedback-message"
     ]
