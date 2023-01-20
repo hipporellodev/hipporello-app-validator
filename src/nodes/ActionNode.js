@@ -41,7 +41,10 @@ const checkExternal = new Validator().compile({
       "conversation-new-thread",
       "conversation-reply",
 	    "UpdateAppVariable",
-	    "UpdateHippoField"
+	    "UpdateHippoField",
+      "user-management-add-user",
+      "user-management-update-user",
+      "user-management-check-user"
     ]
   },
   props: {
