@@ -13,7 +13,7 @@ const APP_SLUG_BLACKLIST = [
   "hipporello",
   "onboarding"
 ]
-const LATEST_APP_SCHEMA_VERSION = 3;
+const LATEST_APP_SCHEMA_VERSION = 4;
 export {
   LATEST_APP_SCHEMA_VERSION,
   SUBDOMAIN_BLACKLIST,
