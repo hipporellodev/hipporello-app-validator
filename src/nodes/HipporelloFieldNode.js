@@ -1,13 +1,27 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import Validator from "fastest-validator";
+import {RESOLVE_TYPES, VARIABLE_TYPES} from "../constants";
 
 const hippoFieldCheck = new Validator().compile({
   id: 'string|empty:false',
   label: 'string|empty:false',
   multiple: 'boolean',
+  resolveBy: {
+    type: "enum",
+    optional: true,
+    values: [
+      RESOLVE_TYPES.RESOLVE_LIST_BY_HIPPO_ID,
+      RESOLVE_TYPES.RESOLVE_LABEL_BY_HIPPO_ID,
+      RESOLVE_TYPES.RESOLVE_MEMBER_BY_TRELLO_ID,
+      RESOLVE_TYPES.RESOLVE_USER_BY_USER_ID,
+      RESOLVE_TYPES.RESOLVE_BOARD_BY_TRELLO_BOARD_ID,
+      RESOLVE_TYPES.RESOLVE_CARD_BY_CARD_ID,
+      RESOLVE_TYPES.RESOLVE_APP_BY_APP_ID,
+    ]
+  },
   type: {
     type: 'enum',
-    values: ["string", "double", "long", "boolean", "attachment", "date", "datetime", "time"]
+    values: VARIABLE_TYPES
   }
 })
 export default class HipporelloFieldNode extends AbstractHippoNode{
