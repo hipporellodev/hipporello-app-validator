@@ -1,5 +1,3 @@
-import HipporelloFieldNode from "./nodes/HipporelloFieldNode";
-
 const SUBDOMAIN_BLACKLIST = ["playground", "console", "hippo", "admin"]
 const PAGE_SLUG_BLACKLIST = [
   "forms",
