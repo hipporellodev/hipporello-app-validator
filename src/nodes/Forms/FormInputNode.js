@@ -101,7 +101,11 @@ export default class FormInputNode extends AbstractHippoNode{
             props: {
               type: {
                 type: "enum",
-                values: ['selected', 'all']
+                values: ['selected', 'all', 'variable']
+              },
+              variable: {
+                type: "string",
+                optional: true,
               },
               selected: {
                 type: "array",
