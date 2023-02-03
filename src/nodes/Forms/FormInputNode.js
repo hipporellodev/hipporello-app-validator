@@ -122,6 +122,19 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
+    const TrelloUserSelectorSchema = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: "object",
+      elementData: {
+        type: "object",
+        props: {
+
+        }
+      }
+    }
     const BooleanSchema = {
       label: "string",
       description: "string|optional",
@@ -161,6 +174,10 @@ export default class FormInputNode extends AbstractHippoNode{
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = new Validator().compile(TrelloLabelScheme);
+      propsErrors.pushArray(checker(this.nodeJson.props))
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
+      const checker = new Validator().compile(TrelloUserSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props))
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {

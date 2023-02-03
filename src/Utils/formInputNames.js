@@ -1,5 +1,6 @@
 export const FORM_INPUT_NAMES = {
   TRELLO_LABEL_SELECTOR: "TrelloLabelSelector",
+  USER_SELECTOR: "UserSelector",
   SHORT_TEXT: "EditText",
   LONG_TEXT: "LongText",
   EMAIL: "Email",
