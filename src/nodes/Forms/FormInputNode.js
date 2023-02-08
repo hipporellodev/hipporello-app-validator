@@ -87,6 +87,7 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
+    console.log(this.nodeJson?.props?.elementData)
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
@@ -105,12 +106,12 @@ export default class FormInputNode extends AbstractHippoNode{
               },
               variable: {
                 type: "string",
-                optional: true,
+                optional: this.nodeJson?.props?.elementData?.include?.type !== "variable",
               },
               selected: {
                 type: "array",
-                nullable: this.nodeJson?.props?.elementData?.include?.type === "all",
-                optional: this.nodeJson?.props?.elementData?.include?.type === "all",
+                nullable: this.nodeJson?.props?.elementData?.include?.type !== "selected",
+                optional: this.nodeJson?.props?.elementData?.include?.type !== "selected",
                 minItems: 1,
                 messages: {
                   required: "No label selected for Trello Label Selector",
