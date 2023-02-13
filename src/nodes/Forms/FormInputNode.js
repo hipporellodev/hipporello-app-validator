@@ -106,6 +106,7 @@ export default class FormInputNode extends AbstractHippoNode{
               variable: {
                 type: "string",
                 optional: this.nodeJson?.props?.elementData?.include?.type !== "variable",
+                label: "Variable",
               },
               selected: {
                 type: "array",
@@ -128,10 +129,41 @@ export default class FormInputNode extends AbstractHippoNode{
       schema: "object",
       settings: "object",
       validationRules: "object",
+      allowAddUser: "boolean",
       elementData: {
         type: "object",
         props: {
-
+          userGroups: {
+            type: "array",
+            minItems: 1,
+            items: {
+              type: "object",
+              props: {
+                type: {
+                  type: "enum",
+                  values: ["hipporelloRole", "consoleRoles", "trelloRoles"]
+                },
+                id: "string"
+              }
+            },
+            messages: {
+              required: "At least 1 group must be selected",
+              minItems: "At least 1 group must be selected"
+            }
+          },
+          creatingGroups: {
+            optional: !this.nodeJson?.props?.allowAddUser,
+            type: "array",
+            minItems: 1,
+            items: {
+              type: "enum",
+              values: this.getRoles(true)
+            },
+            messages: {
+              required: "At least 1 role must be selected for the user to be created.",
+              minItems: "At least 1 role must be selected for the user to be created."
+            }
+          }
         }
       }
     }

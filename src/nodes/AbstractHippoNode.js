@@ -207,9 +207,9 @@ export default class AbstractHippoNode {
   }
 
   getRoles = (isValue) => {
-    if (isValue)
-      return Object.values(this.appJson?.app?.roles || {})?.map(i => i?.name)
-    return Object.keys(this.appJson?.app?.roles || {});
+    const roles = Object.values(this.appJson?.app?.roles || {}).filter((i) => !i?.deleted)
+    if (isValue) return roles?.map(i => i?.id)
+    return roles;
   }
 	getAppParameters = (onlyId, filter) => {
 		let appVariables = Object.values(this.appJson?.app?.fieldDefinitions?.appVariableFields || {}).filter(i => !i?.deleted)
