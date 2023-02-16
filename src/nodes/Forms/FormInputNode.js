@@ -129,7 +129,7 @@ export default class FormInputNode extends AbstractHippoNode{
       schema: "object",
       settings: "object",
       validationRules: "object",
-      allowAddUser: "boolean",
+      allowAddUser: "boolean|optional",
       elementData: {
         type: "object",
         props: {
