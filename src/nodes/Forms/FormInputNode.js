@@ -51,6 +51,46 @@ export default class FormInputNode extends AbstractHippoNode{
         isNameOptional = true
       }
     })
+    const validationRulesScheme = {
+      type: "object",
+      optional: true,
+      props: {
+        required:{
+          type: "boolean",
+          optional: true
+        },
+        minLength: {
+          type: "number",
+          optional: true,
+          nullable: true,
+          min: 0,
+          max: this.nodeJson?.props?.validationRules?.maxLength,
+          label: "Min Length"
+        },
+        maxLength: {
+          type: "number",
+          optional: true,
+          nullable: true,
+          min: this.nodeJson?.props?.validationRules?.minLength,
+          label: "Max Length"
+        },
+        minItems: {
+          type: "number",
+          optional: true,
+          nullable: true,
+          min: 0,
+          max: this.nodeJson?.props?.validationRules?.maxItems,
+          label: "Min Items"
+        },
+        maxItems: {
+          type: "number",
+          optional: true,
+          nullable: true,
+          min: this.nodeJson?.props?.validationRules?.minItems,
+          label: "Max Items"
+        }
+      }
+    }
     const ButtonSchema = {
       "mandatory-action": {
         type: "object",
@@ -92,7 +132,7 @@ export default class FormInputNode extends AbstractHippoNode{
       name: "string",
       schema: "object",
       settings: "object",
-      validationRules: "object",
+      validationRules: validationRulesScheme,
       elementData: {
         type: "object",
         props: {
@@ -128,7 +168,7 @@ export default class FormInputNode extends AbstractHippoNode{
       name: "string",
       schema: "object",
       settings: "object",
-      validationRules: "object",
+      validationRules: validationRulesScheme,
       allowAddUser: "boolean|optional",
       elementData: {
         type: "object",
@@ -172,7 +212,7 @@ export default class FormInputNode extends AbstractHippoNode{
       description: "string|optional",
       name: "string",
       schema: "object",
-      validationRules: "object",
+      validationRules: validationRulesScheme,
       settings: {
         type: "object",
         props: {
