@@ -355,6 +355,7 @@ export default class HippoValidator {
           }
         }
         const collections = Object.values(this.data?.app?.cardCollections||{})?.map(i => toIdsItem(i?.id, i?.name))
+        const roles = Object.values(this.data?.app?.roles||{})?.map(i => toIdsItem(i?.id, i?.name))
         const views = Object.values(this.data?.app?.views||{})?.map(i => toIdsItem(i?.id, i?.viewProps?.name))
         const forms = Object.values(this.data?.app?.integrations?.incoming||{})?.map(i => toIdsItem(i?.id, i?.name))
         const hippoFields = Object.values(this.data?.app?.fieldDefinitions?.hippoFields||{})?.map(i => toIdsItem(i?.id, i?.label))
@@ -364,6 +365,7 @@ export default class HippoValidator {
         const labels = (this.entities.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name||i?.color||false))
         const members = (this.entities.members||[])?.map(i => toIdsItem(i?.hippoId||i?.id, i?.name))
         const ids = [
+          ...(roles||[]),
           ...(collections||[]),
           ...(views||[]),
           ...(forms||[]),
