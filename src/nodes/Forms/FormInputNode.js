@@ -4,6 +4,7 @@ import Validator from "fastest-validator";
 import VisibilityRuleNode from "./VisibilityRuleNode";
 import {FORM_INPUT_NAMES} from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
+import {APP_SLUG_BLACKLIST} from "../../constants";
 
 const formInputSchema = {
   input: "string",
@@ -184,6 +185,15 @@ export default class FormInputNode extends AbstractHippoNode{
                   values: ["hipporelloRole", "consoleRoles", "trelloRoles"]
                 },
                 id: "string"
+              },
+              custom: (value, errors) => {
+                const enumValues = this.getRoles(true)
+                if(value?.type === "hipporelloRole"){
+                  if(!enumValues.includes(value?.id)){
+                    errors.push({ type: "enumValue",  expected: this.getRoles()?.map(i => i?.name)})
+                  }
+                }
+                return value
               }
             },
             messages: {
@@ -249,7 +259,7 @@ export default class FormInputNode extends AbstractHippoNode{
       propsErrors.pushArray(checker(this.nodeJson.props))
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
-      const checker = new Validator().compile(TrelloUserSelectorSchema);
+      const checker = new Validator({useNewCustomCheckerFunction: true}).compile(TrelloUserSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props))
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
