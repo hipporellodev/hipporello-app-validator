@@ -104,9 +104,10 @@ function appListCheck() {
     selectedApps: {
       type:  "array",
       optional: !isSelectedApps,
+      label: "Selected Power-Ups",
       items: {
         type: 'enum',
-        values: appsOptions
+        values: appsOptions,
       }
     }
   })

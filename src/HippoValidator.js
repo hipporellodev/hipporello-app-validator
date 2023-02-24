@@ -364,8 +364,10 @@ export default class HippoValidator {
         const lists = (this.entities.trelloLists||[])?.map(i => toIdsItem(i?.hippoId, i?.name))
         const labels = (this.entities.trelloLabels||[])?.map(i => toIdsItem(i?.hippoId, i?.name||i?.color||false))
         const members = (this.entities.members||[])?.map(i => toIdsItem(i?.hippoId||i?.id, i?.name))
+        const apps = (this.entities?.apps||[])?.map(i => toIdsItem(i?.id, i?.name))
         const ids = [
           ...(roles||[]),
+          ...(apps||[]),
           ...(collections||[]),
           ...(views||[]),
           ...(forms||[]),
