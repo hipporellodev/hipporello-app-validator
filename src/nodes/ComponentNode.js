@@ -307,6 +307,21 @@ const labelCheck = new Validator().compile({
     }
   })
 }
+function getImageCheck(){
+   return new Validator().compile({
+     attachmentListId: {
+       type: "string",
+       label: "Source",
+       optional: this.nodeJson?.viewProps?.sourceType !== "attachment"
+       //Todo: Variable Check
+     },
+     src: {
+       type: "string",
+       label: "Source",
+       optional: this.nodeJson?.viewProps?.sourceType !== "url"
+     }
+   })
+}
 export default class ComponentNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);
@@ -319,6 +334,9 @@ export default class ComponentNode extends AbstractHippoNode{
     switch (this.nodeJson.type) {
       case 'attachmentList':
         errors.pushArray(getAttachmentListCheck.call(this)(this.nodeJson.viewProps||{}))
+        break;
+      case 'image':
+        errors.pushArray(getImageCheck.call(this)(this.nodeJson.viewProps||{}))
         break;
       case 'formList':
         errors.pushArray(formListCheck.call(this)(this.nodeJson.viewProps||{}));
