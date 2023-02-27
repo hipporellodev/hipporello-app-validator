@@ -5,6 +5,7 @@ import VisibilityRuleNode from "./VisibilityRuleNode";
 import {FORM_INPUT_NAMES} from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
 import {APP_SLUG_BLACKLIST} from "../../constants";
+import _ from 'lodash'
 
 const formInputSchema = {
   input: "string",
@@ -265,6 +266,19 @@ export default class FormInputNode extends AbstractHippoNode{
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
       const checker = new Validator().compile(BooleanSchema);
       propsErrors.pushArray(checker(this.nodeJson.props))
+    }
+    if (
+        [
+              FORM_INPUT_NAMES.RADIO_BUTTON,
+              FORM_INPUT_NAMES.SELECT_BOX,
+              FORM_INPUT_NAMES.MULTISELECTBOX,
+              FORM_INPUT_NAMES.CHECKBOX,
+        ].includes(this.nodeJson?.input)
+    ) {
+        const data = this?.nodeJson?.props?.data?.map(it => it.value) || [];
+        if (data.length !== _.uniq(data).length) {
+            errors.push({ type: "uniqueValue", label: 'Option values', actual: JSON.stringify(data), field: "props.data"})
+        }
     }
     propsErrors = propsErrors.map( error => ({
       ...error,
