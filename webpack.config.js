@@ -4,6 +4,10 @@ module.exports = {
     mode: 'production',
     entry: './src/index.js',
     watch: true,
+    watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000,
+    },
     output: {
         path: path.resolve('lib'),
         filename: 'index.js',
