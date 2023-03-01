@@ -247,12 +247,40 @@ export default class FormInputNode extends AbstractHippoNode{
         }
       }
     }
+    const RadioBoxSchema = {
+      label: "string",
+      description: "string|optional",
+      name: "string",
+      schema: "object",
+      validationRules: "object",
+      settings: "object",
+      data: {
+        type: "array",
+        items: {
+          type: "object",
+          props: {
+            value:{
+              type:"string",
+              optional: false,
+              "minLength": 1,
+              messages: {
+                required: "Option cannot be empty"
+              }
+            }
+          }
+        }
+      }
+    }
     const errors = [];
     let propsErrors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BUTTON) {
       const checker = new Validator().compile(ButtonSchema);
       propsErrors.pushArray(checker(this.nodeJson?.props));
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.RADIO_BUTTON || this.nodeJson?.input === FORM_INPUT_NAMES.CHECKBOX || this.nodeJson?.input === FORM_INPUT_NAMES.SELECT_BOX) {
+      const checker = new Validator().compile(RadioBoxSchema);
+      propsErrors.pushArray(checker(this.nodeJson.props))
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = new Validator().compile(TrelloLabelScheme);

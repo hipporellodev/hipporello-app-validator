@@ -14,6 +14,8 @@ import JSONUtils from "../JSONUtils";
 import TrelloBoardViewNode from "./TrelloBoardViewNode";
 import Validator from "fastest-validator";
 import {APP_SLUG_BLACKLIST, LATEST_APP_SCHEMA_VERSION} from "../constants";
+import VariableNode from "./VariableNode";
+import Mustache from "mustache";
 
 export default class AppNode extends AbstractHippoNode{
 
@@ -47,8 +49,15 @@ export default class AppNode extends AbstractHippoNode{
       },
       boards: 'array|optional'
     });
-    const errors = appNodeCheck(this.appJson.app)
-    return errors
+    const appErrors = appNodeCheck(this.appJson.app)
+    let allErrors = Array.isArray(appErrors)?appErrors:[];
+    this.variableNodes.forEach(valNode=>{
+      let errors = valNode.getValidatorFunction();
+      if(errors && errors.length > 0){
+        allErrors.splice(allErrors.length, 0, ...errors)
+      }
+    })
+    return allErrors
   }
   process(appJson, path, nodeJson) {
     this.addChildNode(new WebViewNode(appJson, "app.environments.webView"));
@@ -84,6 +93,38 @@ export default class AppNode extends AbstractHippoNode{
         else if(form.type === "email"){
           this.addChildNode(new EmailNode(appJson, "app.integrations.incoming."+form.id));
         }
+      })
+    }
+    this.generateVariableNodes(nodeJson)
+  }
+
+  generateVariableNodes(nodeJson){
+    this.variableNodes = [];
+    this._generateVariableNodes("app", nodeJson, this.variableNodes)
+  }
+  _generateVariableNodes(path, nodeJson, variableNodes){
+    if(Array.isArray(nodeJson)){
+      nodeJson.forEach((item, index)=>{
+        this._generateVariableNodes(path+"."+index, item, variableNodes)
+      })
+    }
+    else if(typeof nodeJson === "string"){
+      if(nodeJson.indexOf("{{") >= 0) {
+        try {
+          let parsedContent = Mustache.parse(nodeJson || "");
+          parsedContent.forEach((item) => {
+            if (item[0] === "name" || item[0] === "&") {
+              let exp = item[1];
+              variableNodes.push(new VariableNode(this.appJson, path, exp));
+            }
+          })
+        } catch (err) {
+        }
+      }
+    }
+    else if(nodeJson instanceof Object){
+      Object.entries(nodeJson).forEach(([key, value])=>{
+        this._generateVariableNodes(path+"."+key, value, variableNodes)
       })
     }
   }
