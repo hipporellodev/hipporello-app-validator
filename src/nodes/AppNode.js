@@ -104,7 +104,7 @@ export default class AppNode extends AbstractHippoNode{
     this._generateVariableNodes("app", nodeJson, this.variableNodes)
   }
   _generateVariableNodes(path, nodeJson, variableNodes){
-    if(nodeJson?.deleted || !nodeJson?.enabled) return false;
+    if(nodeJson?.deleted || nodeJson?.enabled === false) return false;
     if(Array.isArray(nodeJson)){
       nodeJson.forEach((item, index)=>{
         this._generateVariableNodes(path+"."+index, item, variableNodes)
