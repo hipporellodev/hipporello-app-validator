@@ -17,7 +17,7 @@ export default class ViewNode extends AbstractHippoNode{
     let views = this.getViewIds(false)
     if(views?.length){
       views.forEach(view=>{
-        if(view?.enabled){
+        if(view?.enabled && !view?.deleted){
           if(view.type === "page"){
             if(view.viewProps.environments != null && view.viewProps.environments.indexOf(envType) >= 0){
               this.addChildNode(new PageNode(appJson, "app.views."+view.id))

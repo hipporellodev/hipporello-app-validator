@@ -316,19 +316,62 @@ export default class HippoValidator {
         }
       })
     }
+    static jsonPatchPathToQueryPath(path, seperator = "/"){
+      let allPaths = path.split(seperator);
+      allPaths = allPaths.filter(Boolean)
+      let finalResult = "";
+      let numRegExp = /^\d+$/;
+      for(let i=0; i < allPaths.length; i++){
+        let pathItem = allPaths[i];
+        let val = null;
+        if(numRegExp.test(pathItem)){
+          val = "["+pathItem+"]"
+        }
+        else{
+          val = pathItem
+        }
+        // else{
+        //     val = "[\""+pathItem+"\"]";
+        // }
+        if(val.charAt(0) === '['){
+          finalResult += val;
+        }
+        else{
+          finalResult += finalResult.length===0?val:"."+val;
+        }
+      }
+      return finalResult
+    }
+    static queryPathToJsonPath(path, seperator = "."){
+      if(!path) return null
+      let allPaths = (path||"").split(seperator)
+      allPaths = allPaths.filter(Boolean)
+      let finalResult = "";
+      for(let i=0; i < allPaths.length; i++){
+        let pathItem = allPaths[i];
+        finalResult += "/"+pathItem.replace(/\[(\d*)\]/g, (m,i) => "/"+i);
+      }
+      return finalResult;
+    }
+    static normalizePath = (path) => {
+      let processPath = path;
+      processPath = HippoValidator.queryPathToJsonPath(processPath)
+      processPath = HippoValidator.jsonPatchPathToQueryPath(processPath)
+      return processPath
+    }
     convertErrors = (errors) => {
         errors = errors.map(error => {
             let convertedError = {
                 code: this.convertErrorCode(error.type),
                 message: this.convertMessage(error),
-                path: error.path,
+                path: HippoValidator.normalizePath(error.path),
                 fieldLabel : this.searchForLabelRegex(error?.message),
                 relativePath: error?.relativePath,
                 params: {
                     value: error?.actual,
                     originalValue: error?.actual,
                     label: error.field,
-                    path: error.path,
+                    path: HippoValidator.normalizePath(error.path),
                     values: this.convertActualValues(error),
                     resolved: this.convertActualResolved(error)
                 }

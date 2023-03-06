@@ -54,6 +54,7 @@ export default class AppNode extends AbstractHippoNode{
     this.variableNodes.forEach(valNode=>{
       let errors = valNode.getValidatorFunction();
       if(errors && errors.length > 0){
+        console.log()
         allErrors.splice(allErrors.length, 0, ...errors)
       }
     })
@@ -103,6 +104,7 @@ export default class AppNode extends AbstractHippoNode{
     this._generateVariableNodes("app", nodeJson, this.variableNodes)
   }
   _generateVariableNodes(path, nodeJson, variableNodes){
+    if(nodeJson?.deleted || !nodeJson?.enabled) return false;
     if(Array.isArray(nodeJson)){
       nodeJson.forEach((item, index)=>{
         this._generateVariableNodes(path+"."+index, item, variableNodes)
