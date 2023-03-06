@@ -743,9 +743,14 @@ export default class AbstractHippoNode {
     Object.values(fieldMap).forEach(item => {
       allFieldsMap[item?.id] = item;
       if(item?.resolveBy){
-        allFieldsMap[item.id+"Object"] = {
+				let objectKey = item.id+"Object";
+				if(item.multiple){
+					objectKey += "[]";
+				}
+
+        allFieldsMap[objectKey] = {
           ...item,
-          id: item.id+"Object"
+          id: objectKey
         };
       }
     })
