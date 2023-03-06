@@ -41,7 +41,7 @@ export default class VariableNode extends AbstractHippoNode {
     let activeContext = null;
     let proxy = new Proxy({}, {
       get: function (target, propertyName) {
-        if(varErrors.length === 0 && propertyName !== "sequence") {
+        if(varErrors.length === 0 && propertyName !== "sequence" && !me.expression.startsWith("form.")) {
           let fieldId = propertyName;
           if (activeContext != null) {
             fieldId = activeContext.resolveBy?activeContext.resolveBy+"."+fieldId:activeContext.id+"."+fieldId

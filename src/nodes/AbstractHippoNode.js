@@ -267,6 +267,16 @@ export default class AbstractHippoNode {
 				label: "Cards",
 				type: AbstractHippoNode.RESOLVE_CARD_BY_CARD_ID
 			},
+      {
+        id: "user",
+        label: "User Fields",
+        type: AbstractHippoNode.RESOLVE_USER_BY_USER_ID
+      },
+      {
+        id: "portal",
+        label: "Workspace Fields",
+        type: AbstractHippoNode.RESOLVE_PORTAL
+      },
 			{
 				id: "role",
 				label: "Roles & Groups",
@@ -707,13 +717,13 @@ export default class AbstractHippoNode {
 	getAccessibleFieldTypes = ()=>{
 		const hippoFields = this.getHippoFields(false)
 		const staticFields = this.getStaticFields()
-		const appVariables = this.getAppParameters().map(item => ({...item, id: "appVariables."+item?.id}))
+		const appVariables = this.getAppParameters()
 		const fieldMap = {};
 		staticFields.forEach(staticField=>{
 			fieldMap[staticField.id] = staticField;
 		})
 		hippoFields.forEach(hippoField=>{
-			fieldMap[hippoField.id] = {
+			fieldMap["card."+hippoField.id] = {
 				id:"card."+hippoField.id,
 				type: hippoField.type,
 				resolveBy: AbstractHippoNode.FIELD_RESOLVE_BY_TO_VALIDATOR[hippoField.resolveBy],
@@ -722,14 +732,24 @@ export default class AbstractHippoNode {
 		})
 
 		appVariables.forEach(appVar=>{
-			fieldMap[appVar.id] = {
+			fieldMap["appVariables."+appVar.id] = {
 				id:"appVariables."+appVar.id,
 				type: appVar.type,
 				resolveBy: AbstractHippoNode.FIELD_RESOLVE_BY_TO_VALIDATOR[appVar.resolveBy],
 				multiple: appVar.multiple
 			};
 		})
-		return fieldMap;
+    let allFieldsMap = {}
+    Object.values(fieldMap).forEach(item => {
+      allFieldsMap[item?.id] = item;
+      if(item?.resolveBy){
+        allFieldsMap[item.id+"Object"] = {
+          ...item,
+          id: item.id+"Object"
+        };
+      }
+    })
+		return allFieldsMap;
 	}
 	getCardFieldsWithContext = (contexts = ['parentCard', 'card'], isValue, filter) => {
 		const hippoFields = this.getHippoFields(false)
