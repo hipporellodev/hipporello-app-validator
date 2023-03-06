@@ -4071,6 +4071,11 @@ json5@^2.1.2:
   dependencies:
     minimist "^1.2.5"
 
+jsonata@^1.8.5:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/jsonata/-/jsonata-1.8.6.tgz#e5f0e6ace870a34bac881a182ca2b31227122791"
+  integrity sha512-ZH2TPYdNP2JecOl/HvrH47Xc+9imibEMQ4YqKy/F/FrM+2a6vfbGxeCX23dB9Fr6uvGwv+ghf1KxWB3iZk09wA==
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-3.2.2.tgz"
@@ -4305,6 +4310,11 @@ ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+
+mustache@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.2.0.tgz#e5892324d60a12ec9c2a73359edca52972bf6f64"
+  integrity sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==
 
 nanoclone@^0.2.1:
   version "0.2.1"

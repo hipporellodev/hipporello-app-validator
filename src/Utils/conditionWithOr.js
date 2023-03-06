@@ -1,5 +1,6 @@
 import Validator from "fastest-validator";
 import {conditionValueCheckFunc} from "./conditionValueCheckFunc";
+import {OPERATORS} from "../constants";
 
  export const conditionsWithOr = new Validator({useNewCustomCheckerFunction: true}).compile({
   conditions: {
@@ -13,28 +14,7 @@ import {conditionValueCheckFunc} from "./conditionValueCheckFunc";
           field: 'string|empty:false',
           operator: {
             type: 'enum',
-            values: [
-              "equals",
-              "notequals",
-              "contains",
-              "notcontains",
-              "startswith",
-              "notstartswith",
-              "endswith",
-              "notendswith",
-              "lessthan",
-              "lessthanequals",
-              "greaterthan",
-              "greaterthanequals",
-              "in",
-              "allin",
-              "anyin",
-              "notin",
-              "empty",
-              "notempty",
-              "has",
-              "doesnthave",
-            ]
+            values: OPERATORS
           },
           value: {
             type: 'custom',
