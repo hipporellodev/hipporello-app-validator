@@ -273,6 +273,12 @@ export default class AbstractHippoNode {
         type: AbstractHippoNode.RESOLVE_USER_BY_USER_ID
       },
       {
+        id: "triggeringUser",
+        label: "Triggering User Fields",
+        type: AbstractHippoNode.RESOLVE_USER_BY_USER_ID,
+        resolveBy: AbstractHippoNode.RESOLVE_USER_BY_USER_ID
+      },
+      {
         id: "portal",
         label: "Workspace Fields",
         type: AbstractHippoNode.RESOLVE_PORTAL
@@ -713,7 +719,16 @@ export default class AbstractHippoNode {
 			},
 		];
 	};
-
+  getObjectKey = (field) => {
+    let objectKey = field.id;
+    if(field?.resolveBy) {
+      objectKey = objectKey + "Object";
+      if (field.multiple) {
+        // objectKey += "[]";
+      }
+    }
+    return objectKey
+  }
 	getAccessibleFieldTypes = ()=>{
 		const hippoFields = this.getHippoFields(false)
 		const staticFields = this.getStaticFields()
@@ -743,11 +758,7 @@ export default class AbstractHippoNode {
     Object.values(fieldMap).forEach(item => {
       allFieldsMap[item?.id] = item;
       if(item?.resolveBy){
-				let objectKey = item.id+"Object";
-				if(item.multiple){
-					objectKey += "[]";
-				}
-
+				let objectKey = this.getObjectKey(item)
         allFieldsMap[objectKey] = {
           ...item,
           id: objectKey
