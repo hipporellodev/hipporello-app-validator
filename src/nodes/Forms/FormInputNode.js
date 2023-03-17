@@ -1,14 +1,13 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ActionGroupNode from "../ActionGroupNode";
 import Validator from "fastest-validator";
-import VisibilityRuleNode from "./VisibilityRuleNode";
-import {FORM_INPUT_NAMES} from "../../Utils/formInputNames";
+import { FORM_INPUT_NAMES } from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
-import {APP_SLUG_BLACKLIST} from "../../constants";
+import uniq from "lodash/uniq";
 
 const formInputSchema = {
   input: "string",
-  id: 'string|empty:false',
+  id: "string|empty:false",
   props: {
     type: "object",
     props: {
@@ -16,11 +15,12 @@ const formInputSchema = {
       label: "string|optional",
       name: "string",
       settings: "any|optional",
-    }
-  }
+    },
+  },
 };
+
 const formInputCheck = new Validator().compile(formInputSchema);
-export default class FormInputNode extends AbstractHippoNode{
+export default class FormInputNode extends AbstractHippoNode {
   constructor(appJson, path, id, formJson) {
     super(appJson, path);
     this.id = id;
@@ -28,37 +28,56 @@ export default class FormInputNode extends AbstractHippoNode{
   }
 
   process(appJson, path, nodeJson) {
-    if(nodeJson?.input === "Button" && nodeJson?.props?.['optional-actionGroupId']){
-      const actionGroupId = nodeJson?.props?.['optional-actionGroupId'];
-      this.addChildNode(new ActionGroupNode(appJson, "app.actionGroups."+actionGroupId));
+    if (
+      nodeJson?.input === "Button" &&
+      nodeJson?.props?.["optional-actionGroupId"]
+    ) {
+      const actionGroupId = nodeJson?.props?.["optional-actionGroupId"];
+      this.addChildNode(
+        new ActionGroupNode(appJson, "app.actionGroups." + actionGroupId)
+      );
     }
     if (nodeJson.props?.visibilityRules?.rules?.length) {
-      this.addChildNode(new FormInputVisibilityNode(appJson, `${this.path}.props.visibilityRules`))
+      this.addChildNode(
+        new FormInputVisibilityNode(
+          appJson,
+          `${this.path}.props.visibilityRules`
+        )
+      );
     }
   }
+
   getValidatorFunction() {
-    let hasParent = this?.parentNode?.nodeJson?.type === "updateform" || this?.parentNode?.nodeJson?.usesParent
-    const formMapping = this.parentNode.nodeJson.body.fieldMapping || {}
+    let hasParent =
+      this?.parentNode?.nodeJson?.type === "updateform" ||
+      this?.parentNode?.nodeJson?.usesParent;
+    const formMapping = this.parentNode.nodeJson.body.fieldMapping || {};
     for (const formMappingKey in formMapping) {
-      if(formMapping[formMappingKey]?.["cardField"]?.targetField === "c_parentCardId"){
-        hasParent = true
+      if (
+        formMapping[formMappingKey]?.["cardField"]?.targetField ===
+        "c_parentCardId"
+      ) {
+        hasParent = true;
       }
     }
-    const trelloListIds = this.getTrelloList(true, hasParent)
+    const trelloListIds = this.getTrelloList(true, hasParent);
     let isNameOptional = false;
     const fieldMapping = this?.parentNode?.nodeJson?.body?.fieldMapping;
-    Object.values(fieldMapping||{}).forEach((fieldMap) => {
-      if(fieldMap?.trelloCardField && fieldMap.trelloCardField?.targetField === "name"){
-        isNameOptional = true
+    Object.values(fieldMapping || {}).forEach((fieldMap) => {
+      if (
+        fieldMap?.trelloCardField &&
+        fieldMap.trelloCardField?.targetField === "name"
+      ) {
+        isNameOptional = true;
       }
-    })
+    });
     const validationRulesScheme = {
       type: "object",
       optional: true,
       props: {
-        required:{
+        required: {
           type: "boolean",
-          optional: true
+          optional: true,
         },
         minLength: {
           type: "number",
@@ -66,14 +85,14 @@ export default class FormInputNode extends AbstractHippoNode{
           nullable: true,
           min: 0,
           max: this.nodeJson?.props?.validationRules?.maxLength,
-          label: "Min Length"
+          label: "Min Length",
         },
         maxLength: {
           type: "number",
           optional: true,
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minLength,
-          label: "Max Length"
+          label: "Max Length",
         },
         minItems: {
           type: "number",
@@ -81,17 +100,17 @@ export default class FormInputNode extends AbstractHippoNode{
           nullable: true,
           min: 0,
           max: this.nodeJson?.props?.validationRules?.maxItems,
-          label: "Min Items"
+          label: "Min Items",
         },
         maxItems: {
           type: "number",
           optional: true,
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minItems,
-          label: "Max Items"
-        }
-      }
-    }
+          label: "Max Items",
+        },
+      },
+    };
     const ButtonSchema = {
       "mandatory-action": {
         type: "object",
@@ -99,8 +118,8 @@ export default class FormInputNode extends AbstractHippoNode{
         nullable: this?.parentNode?.nodeJson?.type === "updateform",
         props: {
           type: {
-            type: 'enum',
-            values: ['create-card', 'update-card']
+            type: "enum",
+            values: ["create-card", "update-card"],
           },
           variables: {
             type: "object",
@@ -108,26 +127,26 @@ export default class FormInputNode extends AbstractHippoNode{
               cardCollection: {
                 type: "string",
                 optional: true,
-                nullable: true
+                nullable: true,
               },
               name: {
                 type: "string",
                 empty: false,
                 optional: isNameOptional,
                 messages: {
-                  required: "Card Name is a required field"
-                }
+                  required: "Card Name is a required field",
+                },
               },
               listHippoId: {
                 type: "enum",
-                values: trelloListIds
+                values: trelloListIds,
               },
               description: "string|optional",
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    };
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
@@ -142,28 +161,34 @@ export default class FormInputNode extends AbstractHippoNode{
             props: {
               type: {
                 type: "enum",
-                values: ['selected', 'all', 'variable']
+                values: ["selected", "all", "variable"],
               },
               variable: {
                 type: "string",
-                optional: this.nodeJson?.props?.elementData?.include?.type !== "variable",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "variable",
                 label: "Variable",
               },
               selected: {
                 type: "array",
-                nullable: this.nodeJson?.props?.elementData?.include?.type !== "selected",
-                optional: this.nodeJson?.props?.elementData?.include?.type !== "selected",
+                nullable:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
                 minItems: 1,
                 messages: {
                   required: "No label selected for Trello Label Selector",
-                }
-              }
-            }
+                },
+              },
+            },
           },
-          fields: 'array'
-        }
-      }
-    }
+          fields: "array",
+        },
+      },
+    };
     const TrelloUserSelectorSchema = {
       label: "string",
       name: "string",
@@ -182,24 +207,27 @@ export default class FormInputNode extends AbstractHippoNode{
               props: {
                 type: {
                   type: "enum",
-                  values: ["hipporelloRole", "consoleRoles", "trelloRoles"]
+                  values: ["hipporelloRole", "consoleRoles", "trelloRoles"],
                 },
-                id: "string"
+                id: "string",
               },
               custom: (value, errors) => {
-                const enumValues = this.getRoles(true)
-                if(value?.type === "hipporelloRole"){
-                  if(!enumValues.includes(value?.id)){
-                    errors.push({ type: "enumValue",  expected: this.getRoles()?.map(i => i?.name)})
+                const enumValues = this.getRoles(true);
+                if (value?.type === "hipporelloRole") {
+                  if (!enumValues.includes(value?.id)) {
+                    errors.push({
+                      type: "enumValue",
+                      expected: this.getRoles()?.map((i) => i?.name),
+                    });
                   }
                 }
-                return value
-              }
+                return value;
+              },
             },
             messages: {
               required: "At least 1 group must be selected",
-              minItems: "At least 1 group must be selected"
-            }
+              minItems: "At least 1 group must be selected",
+            },
           },
           creatingGroups: {
             optional: !this.nodeJson?.props?.allowAddUser,
@@ -207,16 +235,18 @@ export default class FormInputNode extends AbstractHippoNode{
             minItems: 1,
             items: {
               type: "enum",
-              values: this.getRoles(true)
+              values: this.getRoles(true),
             },
             messages: {
-              required: "At least 1 role must be selected for the user to be created.",
-              minItems: "At least 1 role must be selected for the user to be created."
-            }
-          }
-        }
-      }
-    }
+              required:
+                "At least 1 role must be selected for the user to be created.",
+              minItems:
+                "At least 1 role must be selected for the user to be created.",
+            },
+          },
+        },
+      },
+    };
     const BooleanSchema = {
       label: "string",
       description: "string|optional",
@@ -231,22 +261,22 @@ export default class FormInputNode extends AbstractHippoNode{
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: "The 'No' field is required."
-            }
+              required: "The 'No' field is required.",
+            },
           },
           yesText: {
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: "The 'Yes' field is required."
-            }
+              required: "The 'Yes' field is required.",
+            },
           },
           placeholder: "string|optional",
           descriptionSwitch: "boolean",
-          defaultValue: "boolean|optional"
-        }
-      }
-    }
+          defaultValue: "boolean|optional",
+        },
+      },
+    };
     const RadioBoxSchema = {
       label: "string",
       description: "string|optional",
@@ -259,18 +289,18 @@ export default class FormInputNode extends AbstractHippoNode{
         items: {
           type: "object",
           props: {
-            value:{
-              type:"string",
+            value: {
+              type: "string",
               optional: false,
-              "minLength": 1,
+              minLength: 1,
               messages: {
-                required: "Option cannot be empty"
-              }
-            }
-          }
-        }
-      }
-    }
+                required: "Option cannot be empty",
+              },
+            },
+          },
+        },
+      },
+    };
     const errors = [];
     let propsErrors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
@@ -278,27 +308,51 @@ export default class FormInputNode extends AbstractHippoNode{
       const checker = new Validator().compile(ButtonSchema);
       propsErrors.pushArray(checker(this.nodeJson?.props));
     }
-    if (this.nodeJson?.input === FORM_INPUT_NAMES.RADIO_BUTTON || this.nodeJson?.input === FORM_INPUT_NAMES.CHECKBOX || this.nodeJson?.input === FORM_INPUT_NAMES.SELECT_BOX) {
+    if (
+      this.nodeJson?.input === FORM_INPUT_NAMES.RADIO_BUTTON ||
+      this.nodeJson?.input === FORM_INPUT_NAMES.CHECKBOX ||
+      this.nodeJson?.input === FORM_INPUT_NAMES.SELECT_BOX
+    ) {
       const checker = new Validator().compile(RadioBoxSchema);
-      propsErrors.pushArray(checker(this.nodeJson.props))
+      propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = new Validator().compile(TrelloLabelScheme);
-      propsErrors.pushArray(checker(this.nodeJson.props))
+      propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
-      const checker = new Validator({useNewCustomCheckerFunction: true}).compile(TrelloUserSelectorSchema);
-      propsErrors.pushArray(checker(this.nodeJson.props))
+      const checker = new Validator({
+        useNewCustomCheckerFunction: true,
+      }).compile(TrelloUserSelectorSchema);
+      propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
       const checker = new Validator().compile(BooleanSchema);
-      propsErrors.pushArray(checker(this.nodeJson.props))
+      propsErrors.pushArray(checker(this.nodeJson.props));
     }
-    propsErrors = propsErrors.map( error => ({
+    if (
+      [
+        FORM_INPUT_NAMES.RADIO_BUTTON,
+        FORM_INPUT_NAMES.SELECT_BOX,
+        FORM_INPUT_NAMES.MULTISELECTBOX,
+        FORM_INPUT_NAMES.CHECKBOX,
+      ].includes(this.nodeJson?.input)
+    ) {
+      const data = this?.nodeJson?.props?.data?.map((it) => it.value) || [];
+      if (data.length !== uniq(data).length) {
+        errors.push({
+          type: "uniqueValue",
+          label: "Option values",
+          actual: JSON.stringify(data),
+          field: "props.data",
+        });
+      }
+    }
+    propsErrors = propsErrors.map((error) => ({
       ...error,
-      field: `props.${error?.field}`
-    }))
-    errors.pushArray(propsErrors)
+      field: `props.${error?.field}`,
+    }));
+    errors.pushArray(propsErrors);
     return errors;
   }
 }
