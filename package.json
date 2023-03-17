@@ -1,16 +1,18 @@
 {
   "name": "hipporello-validator",
-  "version": "1.0.138",
+  "version": "1.0.143",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack --watch --progress",
     "start": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jsonata": "^1.8.5",
+    "mustache": "^4.2.0",
     "@babel/core": "^7.15.8",
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
