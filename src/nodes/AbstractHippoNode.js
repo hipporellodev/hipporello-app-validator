@@ -177,8 +177,8 @@ export default class AbstractHippoNode {
       lists = [
         ...lists,
         {
-          hippoId: "{{{card.tc_listHippoIdObject.hippoId}}}",
-          value: "{{{card.tc_listHippoIdObject.hippoId}}}",
+          hippoId: "{{{card.c_parentCardIdObject.tc_listHippoIdObject.hippoId}}}",
+          value: "{{{card.c_parentCardIdObject.tc_listHippoIdObject.hippoId}}}",
         },
       ];
     }
