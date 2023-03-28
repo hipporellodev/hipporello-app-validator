@@ -617,7 +617,7 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
-        id: "member.name",
+        id: "member.fullName",
         label: "Full Name",
         type: "string",
         multiple: false,

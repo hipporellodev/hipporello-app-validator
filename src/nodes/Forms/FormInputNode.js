@@ -278,7 +278,7 @@ export default class FormInputNode extends AbstractHippoNode {
       },
     };
     const RadioBoxSchema = {
-      label: "string",
+      label: "string|optional",
       description: "string|optional",
       name: "string",
       schema: "object",
