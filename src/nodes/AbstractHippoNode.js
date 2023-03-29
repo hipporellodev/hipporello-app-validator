@@ -449,6 +449,13 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
+        id: "card.c_ticketId",
+        label: "Card Ticket Id",
+        type: "string",
+        multiple: false,
+        sortable: true,
+      },
+      {
         id: "card.tc_desc",
         label: "Card Description",
         type: "string",

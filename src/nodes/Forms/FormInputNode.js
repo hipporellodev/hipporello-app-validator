@@ -310,6 +310,7 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if (
       this.nodeJson?.input === FORM_INPUT_NAMES.RADIO_BUTTON ||
+      this.nodeJson?.input === FORM_INPUT_NAMES.MULTISELECTBOX ||
       this.nodeJson?.input === FORM_INPUT_NAMES.CHECKBOX ||
       this.nodeJson?.input === FORM_INPUT_NAMES.SELECT_BOX
     ) {
