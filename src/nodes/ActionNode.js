@@ -246,7 +246,6 @@ export default class ActionNode extends AbstractHippoNode {
         label: "List",
         custom: (value, errors) => {
           const isQuery = /\{\{\{.*}}}/gi.test(String(value))
-          console.log(isQuery, value, allListOptions)
           if(isQuery){
             //Query Validation
           } else if(!allListOptions.includes(value)){
