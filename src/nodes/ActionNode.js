@@ -238,12 +238,23 @@ export default class ActionNode extends AbstractHippoNode {
     const allHippoFields = this.getHippoFields(true)
     const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
 	  const allFieldWithContext = this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "string")
-    const actionWhenMoveTo = new Validator().compile({
+    const actionWhenMoveTo = new Validator({
+      useNewCustomCheckerFunction: true,
+    }).compile({
       listHippoId: {
-        type: "enum",
-        values: allListOptions,
+        type: "string",
+        label: "List",
+        custom: (value, errors) => {
+          const isQuery = /\{\{\{.*}}}/gi.test(String(value))
+          console.log(isQuery, value, allListOptions)
+          if(isQuery){
+            //Query Validation
+          } else if(!allListOptions.includes(value)){
+            errors.push({type: "enum", expected: allListOptions, actual: value, message: "Choose another List"})
+          }
+        },
+        // values: allListOptions,
         messages : {
-          enumValue : this.createMustacheLabel("list"),
           required : this.createMustacheLabel("list")
         }
       }
@@ -309,7 +320,10 @@ export default class ActionNode extends AbstractHippoNode {
           errors.push({ type: "email",  actual: value?.id, field: "id"})
         }
       } else{
-        if(!(schema?.props?.id?.values||[]).includes(value?.id)){
+        if(/^card\./gi.test(value?.id)){
+          //Variable Validator
+        }
+        else if(!(schema?.props?.id?.values||[]).includes(value?.id)){
           errors.push({ type: "enumValue",  actual: value?.id, field: "id", expected: (schema?.props?.id?.values||[])})
         }
       }
