@@ -320,7 +320,7 @@ export default class ActionNode extends AbstractHippoNode {
           errors.push({ type: "email",  actual: value?.id, field: "id"})
         }
       } else{
-        if(/^card\./gi.test(value?.id)){
+        if(/^card\..+/gi.test(value?.id)){
           //Variable Validator
         }
         else if(!(schema?.props?.id?.values||[]).includes(value?.id)){
