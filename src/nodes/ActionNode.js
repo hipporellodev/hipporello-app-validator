@@ -393,8 +393,9 @@ export default class ActionNode extends AbstractHippoNode {
               optional: true,
               props: {
                 type: {
-                  type: "equal",
-                  value: "replacement"
+                  type: "enum",
+                  optional: true,
+                  values: ["replacement", "minus", "plus", "multiply"]
                 },
                 valueType: {
                   type: "enum",
