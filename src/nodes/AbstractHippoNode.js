@@ -177,7 +177,8 @@ export default class AbstractHippoNode {
       lists = [
         ...lists,
         {
-          hippoId: "{{{card.c_parentCardIdObject.tc_listHippoIdObject.hippoId}}}",
+          hippoId:
+            "{{{card.c_parentCardIdObject.tc_listHippoIdObject.hippoId}}}",
           value: "{{{card.c_parentCardIdObject.tc_listHippoIdObject.hippoId}}}",
         },
       ];
@@ -692,6 +693,13 @@ export default class AbstractHippoNode {
         label: "Segments",
         type: "string",
         multiple: true,
+        sortable: false,
+      },
+      {
+        id: "user.loggedIn",
+        label: "Logged in",
+        type: "boolean",
+        multiple: false,
         sortable: false,
       },
       {
