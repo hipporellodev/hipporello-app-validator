@@ -2,121 +2,155 @@ import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
 import Validator from "fastest-validator";
 import FormInputNode from "./FormInputNode";
-export default class FormNode extends AbstractHippoNode{
+import VisibilityNode from "../AccessRights/VisibilityNode";
+import CollectionNode from "../AccessRights/CollectionNode";
+export default class FormNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);
   }
   process(appJson, path, nodeJson) {
-    if(nodeJson?.enabled){
+    if (nodeJson?.enabled) {
       let successViewObj = nodeJson.body?.successViews || {};
-      let successView = Object.values(successViewObj||{})
-      if(successView && successView?.[0]?.props?.type === "view" || successView?.[0]?.type === "view"){
+      let successView = Object.values(successViewObj || {});
+      if (
+        (successView && successView?.[0]?.props?.type === "view") ||
+        successView?.[0]?.type === "view"
+      ) {
         const pageId = successView?.[0]?.props?.view?.id;
-        this.addChildNode(new PageNode(appJson, "app.views."+pageId))
+        this.addChildNode(new PageNode(appJson, "app.views." + pageId));
       }
-      nodeJson?.body?.rows.forEach((row, rowIndex) =>{
-        if(row?.columns?.length){
-          row?.columns.forEach((column, colIndex) =>{
-            this.addChildNode(new FormInputNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, column?.element?.id, nodeJson))
+      if (nodeJson?.accessRight?.dataRule?.conditions) {
+        this.addChildNode(
+          new VisibilityNode(appJson, `${path}.accessRight.dataRule`)
+        );
+      }
+      if (nodeJson?.type === "update" || nodeJson?.usesParent) {
+        this.addChildNode(
+          new CollectionNode(appJson, `${path}.accessRight.dataRule`)
+        );
+      }
+      nodeJson?.body?.rows.forEach((row, rowIndex) => {
+        if (row?.columns?.length) {
+          row?.columns.forEach((column, colIndex) => {
+            this.addChildNode(
+              new FormInputNode(
+                appJson,
+                `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`,
+                column?.element?.id,
+                nodeJson
+              )
+            );
             // if(column?.element?.input === "Button"){
             //   this.addChildNode(new FormButtonNode(appJson, `${this.path}.body.rows.${rowIndex}.columns.${colIndex}.element`, nodeJson?.type))
             // }
             // else{
             //
             // }
-          })
+          });
         }
-      })
+      });
     }
   }
 
   getValidatorFunction() {
-    const hippoFieldIds = this.getHippoFields(true)
-    const cardCollectionsIds = this.getCollections()
-    const incomings = this.getFormIds(true, item=>item?.id!==this?.nodeJson?.id)
-    const formSlugs = incomings?.map(item => item?.slug)
-    function uniqueCheck(value, errors, schema, path, parentNode){
-      if(formSlugs.includes(value)){
-        errors.push({type: "unique", message: "Form slug must be unique"})
+    const hippoFieldIds = this.getHippoFields(true);
+    const cardCollectionsIds = this.getCollections();
+    const incomings = this.getFormIds(
+      true,
+      (item) => item?.id !== this?.nodeJson?.id
+    );
+    const formSlugs = incomings?.map((item) => item?.slug);
+    function uniqueCheck(value, errors, schema, path, parentNode) {
+      if (formSlugs.includes(value)) {
+        errors.push({ type: "unique", message: "Form slug must be unique" });
       }
-      return value
+      return value;
     }
-    const buttonsEl = this.childNodes?.find((a) => a.nodeJson?.input === "Button")?.nodeJson
-    const elementIds = this.childNodes?.reduce((a, i)=> {
-      if(!i.nodeJson?.props?.schema?.type || i.nodeJson?.props?.name === "Captcha") return a
+    const buttonsEl = this.childNodes?.find(
+      (a) => a.nodeJson?.input === "Button"
+    )?.nodeJson;
+    const elementIds = this.childNodes?.reduce((a, i) => {
+      if (
+        !i.nodeJson?.props?.schema?.type ||
+        i.nodeJson?.props?.name === "Captcha"
+      )
+        return a;
       a[i?.id] = {
         type: "object",
         label: i?.nodeJson?.props?.label,
         props: {
-          hippoField:{
+          hippoField: {
             type: "object",
             optional: true,
-            props:{
+            props: {
               targetField: {
                 type: "enum",
-                values: hippoFieldIds
+                values: hippoFieldIds,
               },
               operation: {
                 type: "enum",
-                values: ["set"]
-              }
-            }
+                values: ["set"],
+              },
+            },
           },
           trelloCardField: {
             type: "object",
             optional: true,
-            props:{
+            props: {
               targetField: {
                 type: "enum",
-                values: ["userselector", "label", "name", "description"]
+                values: ["userselector", "label", "name", "description"],
               },
               operation: {
                 type: "enum",
-                values: ["set", "keepexcluded"]
-              }
-            }
+                values: ["set", "keepexcluded"],
+              },
+            },
           },
           trelloCardCustomField: {
             type: "object",
-            optional: true
-          }
-        }
-      }
+            optional: true,
+          },
+        },
+      };
       return a;
     }, {});
     let objectValidation = null;
     function validURL(str) {
-      const regex = /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+      const regex =
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
       let m = regex.exec(str);
-      return (m !== null);
+      return m !== null;
     }
-    function urlCheck(value, errors){
-      if(validURL(value)){
-        return value
-      }
-      else{
-        errors.push({type: "not valid", message: "External URL is not valid"})
-        return ""
+    function urlCheck(value, errors) {
+      if (validURL(value)) {
+        return value;
+      } else {
+        errors.push({
+          type: "not valid",
+          message: "External URL is not valid",
+        });
+        return "";
       }
     }
-    if(this.nodeJson?.body?.successViews?.[buttonsEl?.id]?.type === "page"){
+    if (this.nodeJson?.body?.successViews?.[buttonsEl?.id]?.type === "page") {
       objectValidation = {
         page: {
           type: "object",
           props: {
             url: {
               type: "custom",
-              check: urlCheck
+              check: urlCheck,
             },
             target: {
               type: "enum",
               optional: true,
-              values: ["_self", "_blank"]
+              values: ["_self", "_blank"],
             },
           },
-        }
-      }
-    } else{
+        },
+      };
+    } else {
       objectValidation = {
         view: {
           type: "object",
@@ -125,64 +159,66 @@ export default class FormNode extends AbstractHippoNode{
             target: {
               type: "object",
               props: {
-                type: "string"
-              }
+                type: "string",
+              },
             },
-          }
-        }
-      }
+          },
+        },
+      };
     }
-    const formCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
-      id: 'string|empty:false',
-      anonymous: 'boolean|optional',
-      enabled: 'boolean|optional',
-      formatVersion: 'number',
-      icon: 'string|empty:false',
-      name: 'string|empty:false',
+    const formCheck = new Validator({
+      useNewCustomCheckerFunction: true,
+    }).compile({
+      id: "string|empty:false",
+      anonymous: "boolean|optional",
+      enabled: "boolean|optional",
+      formatVersion: "number",
+      icon: "string|empty:false",
+      name: "string|empty:false",
       type: {
-        type: 'enum',
-        values: ['form', 'updateform']
+        type: "enum",
+        values: ["form", "updateform"],
       },
-      aliases: 'array|optional',
-      usesParent: 'boolean|optional',
+      aliases: "array|optional",
+      usesParent: "boolean|optional",
       slug: {
         type: "custom",
-        check: uniqueCheck
+        check: uniqueCheck,
       },
-      boardId: 'string|optional|empty:false',
-      showInTrello : 'boolean|optional',
+      boardId: "string|optional|empty:false",
+      showInTrello: "boolean|optional",
       body: {
-        type: 'object',
+        type: "object",
         props: {
-          formAutoIncrementId: 'number',
-          readOnly: 'boolean|optional',
+          formAutoIncrementId: "number",
+          readOnly: "boolean|optional",
           rows: {
-            type: 'array',
+            type: "array",
             min: 2,
             messages: {
-              arrayMin: "At least 1 element required to create form"
+              arrayMin: "At least 1 element required to create form",
             },
             items: {
-              type: 'object',
+              type: "object",
               props: {
-                id: 'string',
+                id: "string",
                 columns: {
-                  type: 'array',
+                  type: "array",
                   items: {
-                    type: 'object',
+                    type: "object",
                     props: {
-                      id: 'string',
+                      id: "string",
                       element: {
-                        type: 'object',
+                        type: "object",
                         props: {
-                          id: 'string'
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+                          id: "string",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
           successViews: {
             type: "object",
@@ -193,85 +229,54 @@ export default class FormNode extends AbstractHippoNode{
                   id: "string|optional",
                   type: {
                     type: "enum",
-                    values: ['page', 'view']
+                    values: ["page", "view"],
                   },
                   props: {
                     type: "object",
-                    props: objectValidation
-                  }
-                }
-              }
-            }
-          },
-          fieldMapping: (Object?.keys(elementIds))?.length ? {
-            type: "object",
-            props: elementIds
-          } : {
-            type: "object",
-            optional: true
-          }
-        }
-      },
-      accessRight: {
-        type: "object",
-        props: {
-          dataRule: {
-            type: "object",
-            props: {
-              collections: {
-                type: "array",
-                items: {
-                  type: "enum",
-                  values: cardCollectionsIds
+                    props: objectValidation,
+                  },
                 },
-                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
               },
-              includeArchived: {
-                type: "enum",
-                values: ["all","archived","notarchived"],
-                optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
-              }
             },
-            optional: this.nodeJson.type === "form" && !this.nodeJson.usesParent
           },
-          roleRules: {
-            type: "array",
-            items:{
-              type: "object",
-              props:{
-                type: "string",
-                roles: "array"
+          fieldMapping: Object?.keys(elementIds)?.length
+            ? {
+                type: "object",
+                props: elementIds,
               }
-            },
-            optional: true
-          }
+            : {
+                type: "object",
+                optional: true,
+              },
         },
-        optional: true
       },
       submitter: {
         type: "object",
         optional: true,
         props: {
-          type: "string"
-        }
-      }
-    })
+          type: "string",
+        },
+      },
+    });
     const errors = [];
     const submitterCheck = new Validator().compile({
       submitter: {
         type: "object",
         props: {
-          type: 'string',
-          field: 'string'
-        }
-      }
-    })
-    if (this.nodeJson?.submitter?.type === "specifiedEmail" && !this?.nodeJson?.submitter?.field) {
+          type: "string",
+          field: "string",
+        },
+      },
+    });
+    if (
+      this.nodeJson?.submitter?.type === "specifiedEmail" &&
+      !this?.nodeJson?.submitter?.field
+    ) {
       errors.pushArray(submitterCheck(this.nodeJson));
     }
-    if(this.nodeJson?.enabled){
-      if(!this.nodeJson.body.fieldMapping) {
-        this.nodeJson.body.fieldMapping = {}
+    if (this.nodeJson?.enabled) {
+      if (!this.nodeJson.body.fieldMapping) {
+        this.nodeJson.body.fieldMapping = {};
       }
       errors.pushArray(formCheck(this.nodeJson));
     }
