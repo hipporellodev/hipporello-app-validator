@@ -112,6 +112,30 @@ function appListCheck() {
     }
   })
 }
+function getParagraphCheck() {
+  const displayedTextLimit =  this.nodeJson?.viewProps?.displayedTextLimit
+  const checkMin = displayedTextLimit ? 1 : null
+  return new Validator().compile({
+    text: 'string',
+    alignment: {
+      type: 'enum',
+      values: ['left', 'right','center', 'justify'],
+      optional: true
+    },
+    displayedTextLimit: {
+      type: "enum",
+      values: [true, false],
+      optional: true
+    },
+    maxCharacter: {
+      optional: !displayedTextLimit,
+      type: "number",
+      min: checkMin,
+      label: "Maximum Character"
+    }
+  })
+
+}
 const headerCheck = new Validator().compile({
   text: 'string',
   heading: {
@@ -349,7 +373,7 @@ export default class ComponentNode extends AbstractHippoNode{
         errors.pushArray(headerCheck(this.nodeJson.viewProps||{}));
         break;
       case 'paragraph':
-        errors.pushArray(paragraphCheck(this.nodeJson.viewProps||{}));
+        errors.pushArray(getParagraphCheck.call(this)(this.nodeJson.viewProps||{}));
         break;
       case 'hyperLink':
         errors.pushArray(linkCheck(this.nodeJson.viewProps||{}));
