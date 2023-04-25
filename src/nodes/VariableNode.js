@@ -33,7 +33,8 @@ export default class VariableNode extends AbstractHippoNode {
   getValidatorFunction() {
     let exp = VariableNode.createJsonataExpression(this.expression);
     let varErrors = [];
-    let staticFields = this.getAccessibleFieldTypes();
+    let withDeletedStaticFields = this.getAccessibleFieldTypes(true);
+    let staticFields = this.getAccessibleFieldTypes(false);
     let me = this;
     let activeContext = null;
     let proxy = new Proxy(
@@ -55,14 +56,26 @@ export default class VariableNode extends AbstractHippoNode {
                 ? activeContext.resolveBy + "." + fieldId
                 : activeContext.id + "." + fieldId;
             }
-            let fieldConfig = staticFields[fieldId];
+            let fieldConfig = staticFields?.[fieldId];
+            const deletedFieldConfig = withDeletedStaticFields?.[fieldId];
+            const label = deletedFieldConfig?.label || "";
             if (!fieldConfig) {
-              varErrors.push({
-                path: me.validatorPath,
-                type: "invalid_variable",
-                message: "Invalid variable field " + propertyName,
-                args: [propertyName, me.expression],
-              });
+              if (deletedFieldConfig) {
+                varErrors.push({
+                  path: me.validatorPath,
+                  type: "invalidVariable",
+                  message: `The variable named **"${label}"** has been deleted and is currently unavailable.`,
+                  args: [label, me.expression],
+                });
+              } else {
+                varErrors.push({
+                  path: me.validatorPath,
+                  type: "invalidVariable",
+                  message:
+                    "The variable used cannot be found. Please remove or replace.",
+                  args: [label, me.expression],
+                });
+              }
             } else {
               if (activeContext == null || fieldConfig.resolveBy != null) {
                 activeContext = fieldConfig;

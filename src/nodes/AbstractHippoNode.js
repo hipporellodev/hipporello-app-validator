@@ -265,10 +265,11 @@ export default class AbstractHippoNode {
     if (isValue) return roles?.map((i) => i?.id);
     return roles;
   };
-  getAppParameters = (onlyId, filter) => {
+  getAppParameters = (onlyId, filter, showDeleted) => {
     let appVariables = Object.values(
       this.appJson?.app?.fieldDefinitions?.appVariableFields || {}
-    ).filter((i) => !i?.deleted);
+    );
+    if (!showDeleted) appVariables = appVariables.filter((i) => !i?.deleted);
     if (filter) {
       appVariables = appVariables.filter(filter);
     }
@@ -277,10 +278,11 @@ export default class AbstractHippoNode {
     }
     return appVariables;
   };
-  getHippoFields = (onlyId, filter) => {
+  getHippoFields = (onlyId, filter, showDeleted) => {
     let hippoFields = Object.values(
       this.appJson?.app?.fieldDefinitions?.hippoFields || {}
-    ).filter((field) => !field.deleted);
+    );
+    if (!showDeleted) hippoFields = hippoFields.filter((i) => !i?.deleted);
     if (filter) {
       hippoFields = hippoFields.filter(filter);
     }
@@ -777,10 +779,10 @@ export default class AbstractHippoNode {
     }
     return objectKey;
   };
-  getAccessibleFieldTypes = () => {
-    const hippoFields = this.getHippoFields(false);
+  getAccessibleFieldTypes = (showDeleted = false) => {
+    const hippoFields = this.getHippoFields(false, null, showDeleted);
     const staticFields = this.getStaticFields();
-    const appVariables = this.getAppParameters();
+    const appVariables = this.getAppParameters(false, null, showDeleted);
     const fieldMap = {};
     staticFields.forEach((staticField) => {
       fieldMap[staticField.id] = staticField;
@@ -789,6 +791,7 @@ export default class AbstractHippoNode {
       fieldMap["card." + hippoField.id] = {
         id: "card." + hippoField.id,
         type: hippoField.type,
+        label: hippoField.label,
         resolveBy:
           AbstractHippoNode.FIELD_RESOLVE_BY_TO_VALIDATOR[hippoField.resolveBy],
         multiple: hippoField.multiple,
@@ -799,6 +802,7 @@ export default class AbstractHippoNode {
       fieldMap["appVariables." + appVar.id] = {
         id: "appVariables." + appVar.id,
         type: appVar.type,
+        label: appVar.label,
         resolveBy:
           AbstractHippoNode.FIELD_RESOLVE_BY_TO_VALIDATOR[appVar.resolveBy],
         multiple: appVar.multiple,
