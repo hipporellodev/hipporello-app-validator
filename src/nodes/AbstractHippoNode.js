@@ -733,6 +733,13 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
+        id: "portal.consoleUrl",
+        label: "Hipporello Console URL",
+        type: "string",
+        multiple: false,
+        sortable: false,
+      },
+      {
         id: "board.name",
         label: "Board Name",
         type: "string",
