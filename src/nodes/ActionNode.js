@@ -12,11 +12,11 @@ const tcMayUpdateFields = [
   "tc_dueComplete",
   "tc_shortUrl",
   "tc_url",
-]
+];
 const checkExternal = new Validator().compile({
-  id: 'string|optional',
+  id: "string|optional",
   type: {
-    type: 'enum',
+    type: "enum",
     values: [
       "send-conversation-message",
       "update-hipporello-card",
@@ -41,44 +41,45 @@ const checkExternal = new Validator().compile({
       "conversation-get-card-fields",
       "conversation-new-thread",
       "conversation-reply",
-	    "UpdateAppVariable",
-	    "UpdateHippoField",
+      "UpdateAppVariable",
+      "UpdateHippoField",
       "user-management-add-user",
       "user-management-update-user",
-      "user-management-check-user"
-    ]
+      "user-management-check-user",
+    ],
   },
   props: {
-    type: 'object',
+    type: "object",
     optional: true,
     props: {
       onSuccess: {
-        type: 'object',
+        type: "object",
         optional: true,
         props: {
-          id: 'string',
-          required: 'string'
-        }
+          id: "string",
+          required: "string",
+        },
       },
       params: {
-        type: 'object',
+        type: "object",
         optional: true,
         props: {
           context: {
-            type: 'enum',
-            values: ["parent", "self", "children"]
-          }
-        }
-      }
-    }
-  }
+            type: "enum",
+            values: ["parent", "self", "children"],
+          },
+        },
+      },
+    },
+  },
 });
-const PRECISE_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const schema =  new Validator().compile({
-  id: 'string',
-  order: 'number',
+const PRECISE_PATTERN =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const schema = new Validator().compile({
+  id: "string",
+  order: "number",
   type: {
-    type: 'enum',
+    type: "enum",
     values: [
       "send-conversation-message",
       "update-hipporello-card",
@@ -94,102 +95,97 @@ const schema =  new Validator().compile({
       "archive-card",
       "send-card-to-board",
       "copy-to-clipboard",
-      "feedback-message"
-    ]
+      "feedback-message",
+    ],
   },
   props: {
-    type: 'object',
+    type: "object",
     optional: true,
     props: {
       onSuccess: {
-        type: 'object',
+        type: "object",
         optional: true,
         props: {
-          id: 'string',
-          required: 'string'
-        }
+          id: "string",
+          required: "string",
+        },
       },
       params: {
-        type: 'object',
+        type: "object",
         optional: true,
         props: {
           context: {
-            type: 'enum',
-            values: ["parent", "self", "children"]
-          }
-        }
-      }
-    }
-  }
-})
-const staticListOptions = ["nextListOnBoard", "previousListOnBoard"]
+            type: "enum",
+            values: ["parent", "self", "children"],
+          },
+        },
+      },
+    },
+  },
+});
+const staticListOptions = ["nextListOnBoard", "previousListOnBoard"];
 const actionWhenOpenURL = new Validator().compile({
   target: {
-    type: 'object',
+    type: "object",
     props: {
       type: {
-        type: 'enum',
-        values: ["_self", "_blank"]
-      }
-    }
+        type: "enum",
+        values: ["_self", "_blank"],
+      },
+    },
   },
-  url: 'string|empty:false'
-})
+  url: "string|empty:false",
+});
 const actionWhenOpenPageExternal = new Validator().compile({
-  url: 'string|empty:false'
+  url: "string|empty:false",
 });
 const hippoTypes = {
-  "attachment": "array",
-  "double": "number",
-  "datetime": "number",
-  "time": "number",
-  "date": "number"
-}
+  attachment: "array",
+  double: "number",
+  datetime: "number",
+  time: "number",
+  date: "number",
+};
 const actionWhenUpdateHippoFieldsContext = new Validator().compile({
   params: {
     type: "object",
     props: {
       context: {
-        type: 'enum',
-        values: ["parent", "self", "children"]
-      }
-    }
+        type: "enum",
+        values: ["parent", "self", "children"],
+      },
+    },
   },
   cardUpdateFields: {
-    type: "object"
-  }
-})
+    type: "object",
+  },
+});
 const actionWhenOpenFormModal = new Validator().compile({
   title: "string|optional",
   size: {
     optional: true,
-    type: 'enum',
-	  values: ["small", "medium", "large","fullscreen"]
-  }
+    type: "enum",
+    values: ["small", "medium", "large", "fullscreen"],
+  },
 });
 const actionCopyToClipboard = new Validator().compile({
   dataToBeCopied: {
     type: "string",
     messages: {
-      required: "Source can not be empty."
-    }
+      required: "Source can not be empty.",
+    },
   },
-})
+});
 const actionFeedbackMessage = new Validator().compile({
   title: {
     type: "string",
     messages: {
-      required: "Title can not be empty."
-    }
+      required: "Title can not be empty.",
+    },
   },
   type: {
     type: "enum",
-    values: [
-      "info",
-      "error",
-      "warning",
-      "success"
-    ]
+    values: ["info", "error", "warning", "success"],
   },
   icon: {
     type: "enum",
@@ -197,17 +193,17 @@ const actionFeedbackMessage = new Validator().compile({
       "check-circle",
       "exclamation-circle",
       "exclamation-triangle",
-      "info-circle"
-    ]
+      "info-circle",
+    ],
   },
   message: {
     type: "string",
-    optional: true
+    optional: true,
   },
   duration: {
     type: "number",
     min: 0,
-    max: 20
+    max: 20,
   },
   position: {
     type: "enum",
@@ -218,10 +214,10 @@ const actionFeedbackMessage = new Validator().compile({
       "top-right",
       "bottom-left",
       "bottom-center",
-      "bottom-right"
-    ]
-  }
-})
+      "bottom-right",
+    ],
+  },
+});
 export default class ActionNode extends AbstractHippoNode {
   constructor(appJson, path, external) {
     super(appJson, path);
@@ -229,15 +225,21 @@ export default class ActionNode extends AbstractHippoNode {
   }
 
   process(appJson, path, nodeJson) {
-    this.formId = nodeJson.props?.formId
+    this.formId = nodeJson.props?.formId;
   }
   getValidatorFunction() {
-    const trelloListOptions = this.getTrelloList(true, true,false)
-    const trelloLabels = this.entitiesIds?.trelloLabels
-    const allListOptions = staticListOptions.concat(trelloListOptions)
-    const allHippoFields = this.getHippoFields(true)
-    const roles = Object.values((this.appJson?.app?.roles || {})).map(role => role?.id)
-	  const allFieldWithContext = this.getCardFieldsWithContext(['card', 'parentCard'], true, (field) => field?.type === "string")
+    const trelloListOptions = this.getTrelloList(true, true, false);
+    const trelloLabels = this.entitiesIds?.trelloLabels;
+    const allListOptions = staticListOptions.concat(trelloListOptions);
+    const allHippoFields = this.getHippoFields(true);
+    const roles = Object.values(this.appJson?.app?.roles || {}).map(
+      (role) => role?.id
+    );
+    const allFieldWithContext = this.getCardFieldsWithContext(
+      ["card", "parentCard"],
+      true,
+      (field) => field?.type === "string"
+    );
     const actionWhenMoveTo = new Validator({
       useNewCustomCheckerFunction: true,
     }).compile({
@@ -245,55 +247,71 @@ export default class ActionNode extends AbstractHippoNode {
         type: "string",
         label: "List",
         custom: (value, errors) => {
-          const isQuery = /\{\{\{.*}}}/gi.test(String(value))
-          if(isQuery){
+          const isQuery = /\{\{\{.*}}}/gi.test(String(value));
+          if (isQuery) {
             //Query Validation
-          } else if(!allListOptions.includes(value)){
-            errors.push({type: "enum", expected: allListOptions, actual: value, message: "Choose another List"})
+          } else if (!allListOptions.includes(value)) {
+            errors.push({
+              type: "enum",
+              expected: allListOptions,
+              actual: value,
+              message: "Choose another List",
+            });
           }
         },
         // values: allListOptions,
-        messages : {
-          required : this.createMustacheLabel("list")
-        }
-      }
-    })
+        messages: {
+          required: this.createMustacheLabel("list"),
+        },
+      },
+    });
     const actionWhenAssignLabel = new Validator().compile({
       updateLabelActionType: {
         type: "enum",
-        values: ["remove-all-labels", "remove-labels", "set-labels", "add-labels"]
+        values: [
+          "remove-all-labels",
+          "remove-labels",
+          "set-labels",
+          "add-labels",
+        ],
       },
       labels: {
         type: "array",
-        optional: this.nodeJson.props?.updateLabelActionType === "remove-all-labels",
+        optional:
+          this.nodeJson.props?.updateLabelActionType === "remove-all-labels",
         items: {
           type: "enum",
           values: trelloLabels || [],
-          messages : {
-            enumValue : this.createMustacheLabel("label"),
-            required : this.createMustacheLabel("label")
-          }
-        }
-      }
-    })
+          messages: {
+            enumValue: this.createMustacheLabel("label"),
+            required: this.createMustacheLabel("label"),
+          },
+        },
+      },
+    });
     const actionWhenAssignMember = new Validator().compile({
       updateMemberActionType: {
         type: "enum",
-        values: ['add-members', 'set-members', 'remove-members', 'remove-all-members']
+        values: [
+          "add-members",
+          "set-members",
+          "remove-members",
+          "remove-all-members",
+        ],
       },
       members: {
         type: "array",
         items: {
           type: "object",
-          props:{
+          props: {
             type: {
               type: "enum",
-              values: ["trelloMember", "trelloRole"]
+              values: ["trelloMember", "trelloRole"],
             },
             value: {
               type: "enum",
               values: [
-                ...(this.entities?.members||[])?.map(i=>i?.id),
+                ...(this.entities?.members || [])?.map((i) => i?.id),
                 "all",
                 "allTrelloCardMembers",
                 "allTrelloBoardMembers",
@@ -301,36 +319,47 @@ export default class ActionNode extends AbstractHippoNode {
                 "allTrelloNormalMembers",
                 "allTrelloObserverMembers",
               ],
-              messages : {
-                enumValue : this.createMustacheLabel("member"),
-                required : this.createMustacheLabel("member")
-              }
-            }
-          }
-        }
-      }
-    })
+              messages: {
+                enumValue: this.createMustacheLabel("member"),
+                required: this.createMustacheLabel("member"),
+              },
+            },
+          },
+        },
+      },
+    });
     const conversationMembersCheck = (value, errors, schema) => {
-      if(!(schema?.props?.type?.values||[]).includes(value?.type)){
-        errors.push({ type: "enumValue",  actual: value?.type, field: "type", expected: (schema?.props?.type?.values||[])})
+      if (!(schema?.props?.type?.values || []).includes(value?.type)) {
+        errors.push({
+          type: "enumValue",
+          actual: value?.type,
+          field: "type",
+          expected: schema?.props?.type?.values || [],
+        });
       }
-      if(value?.type === "email"){
-        if(!PRECISE_PATTERN.test(value?.id)){
-          errors.push({ type: "email",  actual: value?.id, field: "id"})
+      if (value?.type === "email") {
+        if (!PRECISE_PATTERN.test(value?.id)) {
+          errors.push({ type: "email", actual: value?.id, field: "id" });
         }
-      } else{
-        if(/^card\..+/gi.test(value?.id)){
+      } else {
+        if (value?.type === "cardField") {
           //Variable Validator
-        }
-        else if(!(schema?.props?.id?.values||[]).includes(value?.id)){
-          errors.push({ type: "enumValue",  actual: value?.id, field: "id", expected: (schema?.props?.id?.values||[])})
+        } else if (!(schema?.props?.id?.values || []).includes(value?.id)) {
+          errors.push({
+            type: "enumValue",
+            actual: value?.id,
+            field: "id",
+            expected: schema?.props?.id?.values || [],
+          });
         }
       }
-      return value
-    }
-    const actionWhenSendConvMessage = new Validator({useNewCustomCheckerFunction: true}).compile({
-      message: 'string',
-      subject: 'string',
+      return value;
+    };
+    const actionWhenSendConvMessage = new Validator({
+      useNewCustomCheckerFunction: true,
+    }).compile({
+      message: "string",
+      subject: "string",
       conversationMembers: {
         type: "array",
         items: {
@@ -339,50 +368,58 @@ export default class ActionNode extends AbstractHippoNode {
           props: {
             type: {
               type: "enum",
-              values: ["trelloMember", "cardField", "trelloRoles", "submissionOwner", "hipporelloMember", "hipporelloRole", "email"]
+              values: [
+                "trelloMember",
+                "cardField",
+                "trelloRoles",
+                "submissionOwner",
+                "hipporelloMember",
+                "hipporelloRole",
+                "email",
+              ],
             },
             id: {
               type: "enum",
               values: [
-                ...(this.entities?.members||[])?.map(i=>i?.id),
-                ...(roles||[]),
-                ...(allFieldWithContext||[]),
+                ...(this.entities?.members || [])?.map((i) => i?.id),
+                ...(roles || []),
+                ...(allFieldWithContext || []),
                 "allTrelloCardMembers",
                 "allTrelloBoardMembers",
                 "allTrelloBoardAdminMembers",
                 "allTrelloNormalMembers",
                 "allTrelloObserverMembers",
                 "submissionOwner",
-              ]
+              ],
             },
-            isContributor: "boolean|optional"
-          }
-        }
-      }
-    })
+            isContributor: "boolean|optional",
+          },
+        },
+      },
+    });
     const actionWhenOpenPage = new Validator().compile({
       viewId: {
         type: "enum",
         values: this.getPageIds(),
-        messages : {
-          enumValue : this.createMustacheLabel("page"),
-          required : this.createMustacheLabel("page")
-        }
+        messages: {
+          enumValue: this.createMustacheLabel("page"),
+          required: this.createMustacheLabel("page"),
+        },
       },
       target: {
-        type: 'object',
+        type: "object",
         props: {
           type: {
-            type: 'enum',
-            values: ["_self", "_blank", "_modal"]
-          }
-        }
+            type: "enum",
+            values: ["_self", "_blank", "_modal"],
+          },
+        },
       },
       type: {
-        type: 'enum',
-        values: ['internal', 'external']
-      }
-    })
+        type: "enum",
+        values: ["internal", "external"],
+      },
+    });
     const updateHippoFieldGenerateScheme = (key) => {
       const actionWhenUpdateHippoFields = new Validator().compile({
         cardUpdateFields: {
@@ -395,58 +432,63 @@ export default class ActionNode extends AbstractHippoNode {
                 type: {
                   type: "enum",
                   optional: true,
-                  values: ["replacement", "minus", "plus", "multiply"]
+                  values: ["replacement", "minus", "plus", "multiply"],
                 },
                 valueType: {
                   type: "enum",
                   optional: true,
-                  values: ["value", "variable"]
+                  values: ["value", "variable"],
                 },
                 value: {
                   type: "any",
                   nullable: true,
                   default: "[[[nullValue]]]",
-                  check(value, errors, schema, path, parentNode){
-                    if(value === "[[[nullValue]]]" && parentNode?.valueType === "variable"){
-                      errors.push({type: "required", field: "value"})
+                  check(value, errors, schema, path, parentNode) {
+                    if (
+                      value === "[[[nullValue]]]" &&
+                      parentNode?.valueType === "variable"
+                    ) {
+                      errors.push({ type: "required", field: "value" });
                     }
-                    return value
-                  }
-                }
-              }
-            }
-          }
+                    return value;
+                  },
+                },
+              },
+            },
+          },
         },
         params: {
           type: "object",
           props: {
             context: {
-              type: 'enum',
-              values: ["parent", "self", "children"]
-            }
-          }
-        }
-      })
-      return actionWhenUpdateHippoFields
-    }
+              type: "enum",
+              values: ["parent", "self", "children"],
+            },
+          },
+        },
+      });
+      return actionWhenUpdateHippoFields;
+    };
     const actionWhenOpenForm = new Validator().compile({
       formId: {
         type: "enum",
-        values: this.getFormIds(false, (i) => ["form", "updateform"]?.includes(i?.type)),
-        messages : {
-          enumValue : this.createMustacheLabel("form"),
-          required : this.createMustacheLabel("form")
-        }
+        values: this.getFormIds(false, (i) =>
+          ["form", "updateform"]?.includes(i?.type)
+        ),
+        messages: {
+          enumValue: this.createMustacheLabel("form"),
+          required: this.createMustacheLabel("form"),
+        },
       },
       target: {
-        type: 'object',
+        type: "object",
         props: {
           type: {
-            type: 'enum',
-            values: ["_modal", "_blank", "_self"]
-          }
-        }
-      }
+            type: "enum",
+            values: ["_modal", "_blank", "_self"],
+          },
+        },
+      },
     });
     const errors = [];
     if (this.external) {
@@ -455,31 +497,34 @@ export default class ActionNode extends AbstractHippoNode {
       errors.pushArray(schema(this.nodeJson));
     }
     this.validatorPath = `${this.path}.props`;
-    if (this.nodeJson.type === 'move-card') {
-      errors.pushArray(actionWhenMoveTo(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'update-card-labels') {
-      errors.pushArray(actionWhenAssignLabel(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'update-card-members') {
-      errors.pushArray(actionWhenAssignMember(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'send-conversation-message') {
-      errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'update-hipporello-card' || this.nodeJson.type === 'update-trello-card') {
-      const firstField = Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0];
-      if(allHippoFields.includes(firstField)){
-        errors.pushArray(updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props||{}));
-      }
-      else{
-        errors.pushArray(actionWhenUpdateHippoFieldsContext(this.nodeJson.props||{}));
+    if (this.nodeJson.type === "move-card") {
+      errors.pushArray(actionWhenMoveTo(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "update-card-labels") {
+      errors.pushArray(actionWhenAssignLabel(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "update-card-members") {
+      errors.pushArray(actionWhenAssignMember(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "send-conversation-message") {
+      errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props || {}));
+    } else if (
+      this.nodeJson.type === "update-hipporello-card" ||
+      this.nodeJson.type === "update-trello-card"
+    ) {
+      const firstField = Object.keys(
+        this.nodeJson.props?.cardUpdateFields || {}
+      )?.[0];
+      if (allHippoFields.includes(firstField)) {
+        errors.pushArray(
+          updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
+        );
+      } else {
+        errors.pushArray(
+          actionWhenUpdateHippoFieldsContext(this.nodeJson.props || {})
+        );
         // this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
         // errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
       }
-    }
-    else if (this.nodeJson.type === 'open-page') {
-      errors.pushArray(actionWhenOpenPage(this.nodeJson.props||{}));
+    } else if (this.nodeJson.type === "open-page") {
+      errors.pushArray(actionWhenOpenPage(this.nodeJson.props || {}));
       // Todo: Disabled pages is not error for usage actions, actually warning
       // if (this.nodeJson.props.type === 'internal' && !this.appJson.app.views[this.nodeJson.props.viewId]?.enabled) {
       //     const availables = Object.entries(this.appJson.app.views)
@@ -487,31 +532,27 @@ export default class ActionNode extends AbstractHippoNode {
       //         .map(it => it?.[0]);
       //     errors.push(this.createValidationError('oneOf', 'viewId', this.nodeJson.props.viewId, availables, this.getPageNames()))
       // }
-      if (this.nodeJson.props.type === 'external') {
-        errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props||{}));
+      if (this.nodeJson.props.type === "external") {
+        errors.pushArray(actionWhenOpenPageExternal(this.nodeJson.props || {}));
       }
-    }
-    else if (this.nodeJson.type === 'open-url') {
-      errors.pushArray(actionWhenOpenURL(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'open-form') {
-      errors.pushArray(actionWhenOpenForm(this.nodeJson.props||{}))
+    } else if (this.nodeJson.type === "open-url") {
+      errors.pushArray(actionWhenOpenURL(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "open-form") {
+      errors.pushArray(actionWhenOpenForm(this.nodeJson.props || {}));
       // if (!(this.appJson?.app?.integrations?.incoming || {})[this.nodeJson.props.formId]?.enabled) {
       //   const availables = Object.entries(this.appJson?.app?.integrations?.incoming || {})
       //     .filter(it => it?.[1]?.enabled)
       //     .map(it => it?.[0]);
       //   errors.push(this.createValidationError('oneOf', 'formId', this.nodeJson.props.formId, availables))
       // }
-      if (this.nodeJson.props?.target?.type === '_modal') {
+      if (this.nodeJson.props?.target?.type === "_modal") {
         this.validatorPath = `${this.path}.props.target`;
         errors.pushArray(actionWhenOpenFormModal(this.nodeJson.props.target));
       }
-    }
-    else if (this.nodeJson.type === 'copy-to-clipboard') {
-      errors.pushArray(actionCopyToClipboard(this.nodeJson.props||{}));
-    }
-    else if (this.nodeJson.type === 'feedback-message') {
-      errors.pushArray(actionFeedbackMessage(this.nodeJson.props||{}));
+    } else if (this.nodeJson.type === "copy-to-clipboard") {
+      errors.pushArray(actionCopyToClipboard(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "feedback-message") {
+      errors.pushArray(actionFeedbackMessage(this.nodeJson.props || {}));
     }
     return errors;
   }
