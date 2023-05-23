@@ -3,37 +3,37 @@ import AbstractHippoNode from "./AbstractHippoNode";
 import EventNode from "./EventNode";
 import ChildrenNode from "./Views/ChildrenNode";
 import Validator from "fastest-validator";
-import {actionConditionSchema} from "./Automations/AutomationNode";
+import { actionConditionSchema } from "./Automations/AutomationNode";
 import VisibilityNode from "./AccessRights/VisibilityNode";
 
 const componentScheme = {
-  id: 'string|empty:false',
+  id: "string|empty:false",
   type: {
-    type: 'enum',
+    type: "enum",
     values: [
-      'header',
-      'paragraph',
-      'list',
-      'icon',
-      'appList',
-      'formList',
-      'sidebar',
-      'hyperlink',
-      'image',
-      'video',
-      'hippoFields',
-	    'appVariables',
-      'label',
-      'button',
-      'TrelloCardSharing',
-      'table',
-      'date',
-      'dropdown',
-      'row',
-      'Image',
-	    "AppVariables",
-      'Header',
-      'horizontalline',
+      "header",
+      "paragraph",
+      "list",
+      "icon",
+      "appList",
+      "formList",
+      "sidebar",
+      "hyperlink",
+      "image",
+      "video",
+      "hippoFields",
+      "appVariables",
+      "label",
+      "button",
+      "TrelloCardSharing",
+      "table",
+      "date",
+      "dropdown",
+      "row",
+      "Image",
+      "AppVariables",
+      "Header",
+      "horizontalline",
       "dropdownItem",
       "attachmentList",
       "menuItem",
@@ -44,310 +44,314 @@ const componentScheme = {
       "Conversation",
       "column",
       "columns",
-      "userManagement"
-    ]
+      "userManagement",
+    ],
   },
   viewProps: {
-    type: 'object',
+    type: "object",
     optional: true,
     props: {
-      name: 'string|optional',
-      gap: 'number|optional',
+      name: "string|optional",
+      gap: "number|optional",
       align: {
-        type: 'enum',
-        values: ['left', 'right', 'center'],
-        optional: true
-      }
-    }
+        type: "enum",
+        values: ["left", "right", "center"],
+        optional: true,
+      },
+    },
   },
-  accessRight: 'object|optional'
+  accessRight: "object|optional",
 };
 const componentCheck = new Validator().compile(componentScheme);
 
 function formListCheck() {
-  const sourceTypes =  ["all", "selected", "allCreatingForms", "allUpdatingForms"]
-  const isSelectedForms = this.nodeJson?.viewProps?.type === "selected"
-  const formsOptions = this.getFormIds()
+  const sourceTypes = [
+    "all",
+    "selected",
+    "allCreatingForms",
+    "allUpdatingForms",
+  ];
+  const isSelectedForms = this.nodeJson?.viewProps?.type === "selected";
+  const formsOptions = this.getFormIds();
   return new Validator().compile({
     viewType: {
-      type: 'enum',
-      values: ['grid', 'list']
+      type: "enum",
+      values: ["grid", "list"],
     },
     type: {
-      type: 'enum',
-      values: sourceTypes
+      type: "enum",
+      values: sourceTypes,
     },
-    showDescription: 'boolean|optional',
+    showDescription: "boolean|optional",
     selectedForms: {
-      type: 'array',
+      type: "array",
       optional: !isSelectedForms,
       items: {
-        type: 'enum',
-        values: formsOptions
-      }
-    }
-  })
+        type: "enum",
+        values: formsOptions,
+      },
+    },
+  });
 }
 function appListCheck() {
-  const isSelectedApps = this.nodeJson?.viewProps?.type === "selected"
-  const appsOptions = this.getApps(true)
-  return  new Validator().compile({
+  const isSelectedApps = this.nodeJson?.viewProps?.type === "selected";
+  const appsOptions = this.getApps(true);
+  return new Validator().compile({
     viewType: {
       type: "enum",
-      values: ['grid', 'list']
+      values: ["grid", "list"],
     },
     type: {
-      type: 'enum',
+      type: "enum",
       values: ["all", "selected"],
     },
-    showDescription:'boolean|optional',
+    showDescription: "boolean|optional",
     selectedApps: {
-      type:  "array",
+      type: "array",
       optional: !isSelectedApps,
       label: "Selected Power-Ups",
       items: {
-        type: 'enum',
+        type: "enum",
         values: appsOptions,
-      }
-    }
-  })
+      },
+    },
+  });
 }
 function getParagraphCheck() {
-  const displayedTextLimit =  this.nodeJson?.viewProps?.displayedTextLimit
-  const checkMin = displayedTextLimit ? 1 : null
+  const displayedTextLimit = this.nodeJson?.viewProps?.displayedTextLimit;
+  const checkMin = displayedTextLimit ? 1 : null;
   return new Validator().compile({
-    text: 'string',
+    text: "string",
     alignment: {
-      type: 'enum',
-      values: ['left', 'right','center', 'justify'],
-      optional: true
+      type: "enum",
+      values: ["left", "right", "center", "justify"],
+      optional: true,
     },
     displayedTextLimit: {
       type: "enum",
       values: [true, false],
-      optional: true
+      optional: true,
     },
     maxCharacter: {
       optional: !displayedTextLimit,
       type: "number",
       min: checkMin,
-      label: "Maximum Character"
-    }
-  })
-
+      label: "Maximum Character",
+    },
+  });
 }
 const headerCheck = new Validator().compile({
-  text: 'string',
+  text: "string",
   heading: {
-    type: 'enum',
-    values: ["h1", "h2", "h3", "h4", "h5", "h6"]
+    type: "enum",
+    values: ["h1", "h2", "h3", "h4", "h5", "h6"],
   },
   alignment: {
-    type: 'enum',
-    values: ['left', 'right','center', 'justify'],
-    optional: true
-  }
-})
+    type: "enum",
+    values: ["left", "right", "center", "justify"],
+    optional: true,
+  },
+});
 const paragraphCheck = new Validator().compile({
-  text: 'string',
+  text: "string",
   alignment: {
-    type: 'enum',
-    values: ['left', 'right','center', 'justify'],
-    optional: true
-  }
-})
+    type: "enum",
+    values: ["left", "right", "center", "justify"],
+    optional: true,
+  },
+});
 const linkCheck = new Validator().compile({
-  text: 'string',
-  url: 'string|optional'
+  text: "string",
+  url: "string|optional",
 });
 const trelloCSCheck = new Validator().compile({
-  pageSize: 'number|optional',
+  pageSize: "number|optional",
   query: {
-    type: 'object',
+    type: "object",
     optional: true,
     props: {
       ...actionConditionSchema,
-      collections:{
-        type: 'array',
+      collections: {
+        type: "array",
         items: {
-          type: 'string'
+          type: "string",
         },
-        optional: true
-      },
-      includeArchived:{
-        type: 'enum',
         optional: true,
-        values: ['all', "archived", "notarchived"]
+      },
+      includeArchived: {
+        type: "enum",
+        optional: true,
+        values: ["all", "archived", "notarchived"],
       },
       type: {
-        type: 'enum',
+        type: "enum",
         optional: true,
-        values: ['basic']
-      }
-    }
+        values: ["basic"],
+      },
+    },
   },
-  showExport: 'boolean|optional',
-  showSearch: 'boolean|optional',
-})
+  showExport: "boolean|optional",
+  showSearch: "boolean|optional",
+});
 const tableCheck = new Validator().compile({
   columns: {
     optional: true,
-    type: 'array',
+    type: "array",
     items: {
-      type: 'object',
+      type: "object",
       props: {
-        header: 'string',
+        header: "string",
         view: {
-          type: 'object',
-          props: componentScheme
-        }
-      }
-    }
-  }
+          type: "object",
+          props: componentScheme,
+        },
+      },
+    },
+  },
 });
 const dateCheck = new Validator().compile({
-  text: 'string',
-  format: 'string'
+  text: "string",
+  format: "string",
 });
 const menuItemCheck = new Validator().compile({
-  text: 'string',
+  text: "string",
 });
 const cardMenuItemCheck = new Validator().compile({
-  text: 'string',
+  text: "string",
   query: {
-    type: 'object',
+    type: "object",
     optional: true,
     props: {
       ...actionConditionSchema,
-      collections:{
-        type: 'array',
+      collections: {
+        type: "array",
         optional: true,
         items: {
-          type: 'string'
-        }
+          type: "string",
+        },
       },
-      includeArchived:{
-        type: 'enum',
+      includeArchived: {
+        type: "enum",
         optional: true,
-        values: ['all', "archived", "notarchived"]
+        values: ["all", "archived", "notarchived"],
       },
       type: {
         optional: true,
-        type: 'enum',
-        values: ['basic']
-      }
-    }
+        type: "enum",
+        values: ["basic"],
+      },
+    },
   },
 });
 const iconCheck = new Validator().compile({
-  name: 'string|empty:false',
-  family: 'string|optional',
-  size: 'number|optional'
+  name: "string|empty:false",
+  family: "string|optional",
+  size: "number|optional",
 });
 const convCheck = new Validator().compile({
-  allowDeleteMessage : 'boolean|optional',
-  allowDeleteThread : 'boolean|optional',
-  allowGetBoardMembers : 'boolean|optional',
-  allowGetContacts : 'boolean|optional',
-  allowGetRoles : 'boolean|optional',
-  allowMembersUpdate : 'boolean|optional',
-  allowNewThread : 'boolean|optional',
-  allowQuickText : 'boolean|optional',
-  allowReply : 'boolean|optional',
-  canAddQuickText: 'boolean|optional',
-  canDeleteQuickText: 'boolean|optional',
-  canEditQuickText: 'boolean|optional',
-  canReply: 'boolean|optional',
-  canUploadAttachment: 'boolean|optional',
-  canUseQuickText: 'boolean|optional',
-  showMeta: 'boolean|optional',
-  showMetaDetail: 'boolean|optional'
-})
+  allowDeleteMessage: "boolean|optional",
+  allowDeleteThread: "boolean|optional",
+  allowGetBoardMembers: "boolean|optional",
+  allowGetContacts: "boolean|optional",
+  allowGetRoles: "boolean|optional",
+  allowMembersUpdate: "boolean|optional",
+  allowNewThread: "boolean|optional",
+  allowQuickText: "boolean|optional",
+  allowReply: "boolean|optional",
+  canAddQuickText: "boolean|optional",
+  canDeleteQuickText: "boolean|optional",
+  canEditQuickText: "boolean|optional",
+  canReply: "boolean|optional",
+  canUploadAttachment: "boolean|optional",
+  canUseQuickText: "boolean|optional",
+  showMeta: "boolean|optional",
+  showMetaDetail: "boolean|optional",
+});
 const tableColumnCheck = new Validator().compile({
-  field: 'string|optional',
-  header: 'string|optional',
-  sortable: 'boolean|optional',
+  field: "string|optional",
+  header: "string|optional",
+  sortable: "boolean|optional",
 });
 const snippetCheck = new Validator().compile({
-  css: 'string|optional',
-  html: 'string',
-  name: 'string|empty:false',
+  css: "string|optional",
+  html: "string",
+  name: "string|empty:false",
 });
 function hippoFieldsCheck() {
-  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected"
+  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
   return new Validator().compile({
-    downloadCsvFile: 'boolean',
-    hideEmptyFields: 'boolean',
-	  excerptContent: 'boolean|optional',
-	  allowEdit: 'boolean|optional',
-	  allowCopy: 'boolean|optional',
+    downloadCsvFile: "boolean",
+    hideEmptyFields: "boolean",
+    excerptContent: "boolean|optional",
+    allowEdit: "boolean|optional",
+    allowCopy: "boolean|optional",
     selectedFields: {
-      type:  "array",
+      type: "array",
       optional: !isSelectedFields,
       items: {
-        type: 'enum',
-        values: this.getHippoFields(true)
-      }
+        type: "enum",
+        values: this.getHippoFields(true),
+      },
     },
-    showHippoFieldIcon: 'boolean',
-    showSearch: 'boolean',
-    showUpdateWith: 'boolean',
+    showHippoFieldIcon: "boolean",
+    showSearch: "boolean",
+    showUpdateWith: "boolean",
     source: {
       type: "enum",
-      values: ['all', 'selected']
-    }
-  })
+      values: ["all", "selected"],
+    },
+  });
 }
 function appVariablesCheck() {
-	const isSelectedFields = this.nodeJson?.viewProps?.source === "selected"
-	return new Validator().compile({
-		downloadCsvFile: 'boolean|optional',
-		hideEmptyFields: 'boolean|optional',
-		excerptContent: 'boolean|optional',
-		allowEdit: 'boolean|optional',
-		selectedFields: {
-			type:  "array",
-			optional: !isSelectedFields,
-			items: {
-				type: 'enum',
-				values: this.getAppParameters(true)
-			}
-		},
-		showIcon: 'boolean|optional',
-		showSearch: 'boolean|optional',
-		source: {
-			type: "enum",
-			values: ['all', 'selected']
-		}
-	})
+  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
+  return new Validator().compile({
+    downloadCsvFile: "boolean|optional",
+    hideEmptyFields: "boolean|optional",
+    excerptContent: "boolean|optional",
+    allowEdit: "boolean|optional",
+    selectedFields: {
+      type: "array",
+      optional: !isSelectedFields,
+      items: {
+        type: "enum",
+        values: this.getAppParameters(true),
+      },
+    },
+    showIcon: "boolean|optional",
+    showSearch: "boolean|optional",
+    source: {
+      type: "enum",
+      values: ["all", "selected"],
+    },
+  });
 }
 const labelCheck = new Validator().compile({
-  text: 'string',
+  text: "string",
 });
- function getAttachmentListCheck(){
+function getAttachmentListCheck() {
   return new Validator().compile({
     field: {
-      type: 'enum',
-      values: this.getAllHippoAttachmentFields()
-    }
-  })
+      type: "string",
+      //Todo: Variable Check
+    },
+  });
 }
-function getImageCheck(){
-   return new Validator().compile({
-     attachmentListId: {
-       type: "string",
-       label: "Source",
-       optional: this.nodeJson?.viewProps?.sourceType !== "attachment"
-       //Todo: Variable Check
-     },
-     src: {
-       type: "string",
-       label: "Source",
-       optional: this.nodeJson?.viewProps?.sourceType !== "url"
-     }
-   })
+function getImageCheck() {
+  return new Validator().compile({
+    attachmentListId: {
+      type: "string",
+      label: "Source",
+      optional: this.nodeJson?.viewProps?.sourceType !== "attachment",
+      //Todo: Variable Check
+    },
+    src: {
+      type: "string",
+      label: "Source",
+      optional: this.nodeJson?.viewProps?.sourceType !== "url",
+    },
+  });
 }
-export default class ComponentNode extends AbstractHippoNode{
+export default class ComponentNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);
   }
@@ -355,64 +359,78 @@ export default class ComponentNode extends AbstractHippoNode{
   getValidatorFunction() {
     const errors = [];
     errors.pushArray(componentCheck(this.nodeJson));
-    this.validatorPath = `${this.path}.viewProps`
+    this.validatorPath = `${this.path}.viewProps`;
     switch (this.nodeJson.type) {
-      case 'attachmentList':
-        errors.pushArray(getAttachmentListCheck.call(this)(this.nodeJson.viewProps||{}))
+      case "attachmentList":
+        errors.pushArray(
+          getAttachmentListCheck.call(this)(this.nodeJson.viewProps || {})
+        );
         break;
-      case 'image':
-        errors.pushArray(getImageCheck.call(this)(this.nodeJson.viewProps||{}))
+      case "image":
+        errors.pushArray(
+          getImageCheck.call(this)(this.nodeJson.viewProps || {})
+        );
         break;
-      case 'formList':
-        errors.pushArray(formListCheck.call(this)(this.nodeJson.viewProps||{}));
+      case "formList":
+        errors.pushArray(
+          formListCheck.call(this)(this.nodeJson.viewProps || {})
+        );
         break;
-      case 'appList':
-        errors.pushArray(appListCheck.call(this)(this.nodeJson.viewProps||{}));
+      case "appList":
+        errors.pushArray(
+          appListCheck.call(this)(this.nodeJson.viewProps || {})
+        );
         break;
-      case 'header':
-        errors.pushArray(headerCheck(this.nodeJson.viewProps||{}));
+      case "header":
+        errors.pushArray(headerCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'paragraph':
-        errors.pushArray(getParagraphCheck.call(this)(this.nodeJson.viewProps||{}));
+      case "paragraph":
+        errors.pushArray(
+          getParagraphCheck.call(this)(this.nodeJson.viewProps || {})
+        );
         break;
-      case 'hyperLink':
-        errors.pushArray(linkCheck(this.nodeJson.viewProps||{}));
+      case "hyperLink":
+        errors.pushArray(linkCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'TrelloCardSharing':
-        errors.pushArray(trelloCSCheck(this.nodeJson.viewProps||{}));
+      case "TrelloCardSharing":
+        errors.pushArray(trelloCSCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'table':
-        errors.pushArray(tableCheck(this.nodeJson.viewProps||{}));
+      case "table":
+        errors.pushArray(tableCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'date':
-        errors.pushArray(dateCheck(this.nodeJson.viewProps||{}));
+      case "date":
+        errors.pushArray(dateCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'menuItem':
-        errors.pushArray(menuItemCheck(this.nodeJson.viewProps||{}));
+      case "menuItem":
+        errors.pushArray(menuItemCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'cardMenuItem':
-        errors.pushArray(cardMenuItemCheck(this.nodeJson.viewProps||{}));
+      case "cardMenuItem":
+        errors.pushArray(cardMenuItemCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'icon':
-        errors.pushArray(iconCheck(this.nodeJson.viewProps||{}));
+      case "icon":
+        errors.pushArray(iconCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'Conversation':
-        errors.pushArray(convCheck(this.nodeJson.viewProps||{}));
+      case "Conversation":
+        errors.pushArray(convCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'tableColumn':
-        errors.pushArray(tableColumnCheck(this.nodeJson.viewProps||{}));
+      case "tableColumn":
+        errors.pushArray(tableColumnCheck(this.nodeJson.viewProps || {}));
         break;
-      case 'snippet':
-        errors.pushArray(snippetCheck(this.nodeJson.viewProps||{}));
+      case "snippet":
+        errors.pushArray(snippetCheck(this.nodeJson.viewProps || {}));
         break;
-	    case 'hippoFields':
-		    errors.pushArray(hippoFieldsCheck.call(this)(this.nodeJson.viewProps||{}));
-		    break;
-	    case 'appVariables':
-		    errors.pushArray(appVariablesCheck.call(this)(this.nodeJson.viewProps||{}));
-		    break;
-      case 'label':
-        errors.pushArray(labelCheck(this.nodeJson.viewProps||{}));
+      case "hippoFields":
+        errors.pushArray(
+          hippoFieldsCheck.call(this)(this.nodeJson.viewProps || {})
+        );
+        break;
+      case "appVariables":
+        errors.pushArray(
+          appVariablesCheck.call(this)(this.nodeJson.viewProps || {})
+        );
+        break;
+      case "label":
+        errors.pushArray(labelCheck(this.nodeJson.viewProps || {}));
         break;
     }
     return errors;
@@ -420,19 +438,23 @@ export default class ComponentNode extends AbstractHippoNode{
 
   process(appJson, path, nodeJson) {
     this.id = nodeJson.id;
-    if(nodeJson?.viewProps?.children) {
-      this.addChildNode(new ChildrenNode(appJson, path+".viewProps.children"))
+    if (nodeJson?.viewProps?.children) {
+      this.addChildNode(
+        new ChildrenNode(appJson, path + ".viewProps.children")
+      );
     }
     let events = nodeJson?.viewProps?.events;
-    if(events){
-      Object.entries(events).forEach((entry=>{
-        this.addChildNode(new EventNode(appJson, path+".viewProps.events."+entry[0]))
-      }))
+    if (events) {
+      Object.entries(events).forEach((entry) => {
+        this.addChildNode(
+          new EventNode(appJson, path + ".viewProps.events." + entry[0])
+        );
+      });
     }
-    if(nodeJson?.accessRight?.dataRule?.conditions){
-      this.addChildNode(new VisibilityNode(appJson, `${path}.accessRight.dataRule`))
+    if (nodeJson?.accessRight?.dataRule?.conditions) {
+      this.addChildNode(
+        new VisibilityNode(appJson, `${path}.accessRight.dataRule`)
+      );
     }
   }
-
-
 }
