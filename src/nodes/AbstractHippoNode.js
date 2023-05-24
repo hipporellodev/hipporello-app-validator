@@ -774,6 +774,20 @@ export default class AbstractHippoNode {
         multiple: false,
         sortable: false,
       },
+      {
+        id: "app.name",
+        label: "Power-Up Name",
+        type: "string",
+        multiple: false,
+        sortable: false,
+      },
+      {
+        id: "app.url",
+        label: "Power-Up URL",
+        type: "string",
+        multiple: false,
+        sortable: false,
+      },
     ];
   };
   getObjectKey = (field) => {
