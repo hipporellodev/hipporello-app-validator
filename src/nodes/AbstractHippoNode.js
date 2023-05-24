@@ -345,6 +345,11 @@ export default class AbstractHippoNode {
         type: AbstractHippoNode.RESOLVE_SYSTEM,
       },
       {
+        id: "app",
+        label: "Power-Up",
+        type: AbstractHippoNode.RESOLVE_SYSTEM,
+      },
+      {
         id: "appVariables",
         label: "App Variables",
         type: AbstractHippoNode.RESOLVE_APP_VARS,
