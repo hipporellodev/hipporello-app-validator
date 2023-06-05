@@ -34,6 +34,7 @@ const componentScheme = {
       "AppVariables",
       "Header",
       "horizontalline",
+      "html",
       "dropdownItem",
       "attachmentList",
       "menuItem",
