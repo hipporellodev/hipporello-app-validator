@@ -2,7 +2,7 @@ import Validator from "fastest-validator";
 import {conditionValueCheckFunc} from "./conditionValueCheckFunc";
 import {OPERATORS} from "../constants";
 
- export const conditionsWithOr = new Validator({useNewCustomCheckerFunction: true}).compile({
+ export const conditionsWithOr = (appJson, entries) => new Validator({useNewCustomCheckerFunction: true}).compile({
   conditions: {
     type: 'array',
     optional: true,
@@ -20,7 +20,7 @@ import {OPERATORS} from "../constants";
             type: 'custom',
             nullable: true,
             default: "[[[nullValue]]]",
-            check: conditionValueCheckFunc
+            check: conditionValueCheckFunc.bind(this, appJson, entries)
           },
           valueType: {
             type: 'enum',

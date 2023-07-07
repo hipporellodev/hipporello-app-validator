@@ -188,6 +188,27 @@ export default class AbstractHippoNode {
     }
     return lists;
   }
+  getTrelloLabels(onlyIds = false, onlyActives = true){
+    let labels = this.entities?.trelloLabels || [];
+    if (onlyActives) {
+      labels = (labels || [])?.filter((i) => !i?.deleted);
+    }
+    if (onlyIds) {
+      return labels?.map((i) => i?.hippoId);
+    }
+    return  labels;
+  }
+  getTrelloMembers(onlyIds = false, onlyActives){
+    let members = this.entities?.members || [];
+    console.log(members, this.entities)
+    if (onlyActives) {
+      members = (members || [])?.filter((i) => !i?.deleted);
+    }
+    if (onlyIds) {
+      return members?.map((i) => i?.id);
+    }
+    return  members.map((member) => ({...member, label: member?.fullName}));
+  }
   getPageNames() {
     if (!this.viewNames) {
       this.viewNames = (Object.values(this.appJson?.app?.views) || [])

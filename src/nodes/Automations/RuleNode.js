@@ -36,10 +36,10 @@ export default class RuleNode extends AbstractHippoNode{
     //   errors.push(this.createValidationError('required', 'filter', this.nodeJson?.filter, null, null, 'Collections or Conditions filter must be entered for automation action'))
     // }
     if(this.nodeJson?.filter?.conditions?.length > 1){//Or Condition
-      errors.pushArray(conditionsWithOr(this.nodeJson?.filter))
+      errors.pushArray(conditionsWithOr(this.appJson, this.entities)(this.nodeJson?.filter))
     }
     else if(this.nodeJson?.filter?.conditions?.length){
-      errors.pushArray(conditionsWithAnd(this.nodeJson?.filter))
+      errors.pushArray(conditionsWithAnd(this.appJson, this.entities)(this.nodeJson?.filter))
     }
     return errors;
   }
