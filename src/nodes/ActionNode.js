@@ -421,7 +421,7 @@ export default class ActionNode extends AbstractHippoNode {
       },
     });
     const updateHippoFieldGenerateScheme = (key) => {
-      const actionWhenUpdateHippoFields = new Validator().compile({
+      const actionWhenUpdateHippoFields = new Validator({useNewCustomCheckerFunction: true}).compile({
         cardUpdateFields: {
           type: "object",
           props: {
@@ -437,18 +437,22 @@ export default class ActionNode extends AbstractHippoNode {
                 valueType: {
                   type: "enum",
                   optional: true,
-                  values: ["value", "variable"],
+                  values: ["value", "variable"]
                 },
                 value: {
-                  type: "any",
+                  type: "custom",
                   nullable: true,
                   default: "[[[nullValue]]]",
-                  check(value, errors, schema, path, parentNode) {
+                  check: (value, errors, schema, path, parentNode) => {
                     if (
                       value === "[[[nullValue]]]" &&
                       parentNode?.valueType === "variable"
                     ) {
                       errors.push({ type: "required", field: "value" });
+                    }
+                    const hasEmptyItem = Array.isArray(value) ? Object.values(value).length !== value.length : false;
+                    if(hasEmptyItem && parentNode?.valueType === "value"){
+                      errors.push({ type: "required", field: "value", message: "Any of the added items must not be empty" });
                     }
                     return value;
                   },
@@ -513,10 +517,12 @@ export default class ActionNode extends AbstractHippoNode {
         this.nodeJson.props?.cardUpdateFields || {}
       )?.[0];
       if (allHippoFields.includes(firstField)) {
+        this.validatorPath = `${this.path}.props.cardUpdateFields.${firstField}`;
         errors.pushArray(
           updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
         );
       } else {
+        this.validatorPath = `${this.path}.props.cardUpdateFields`;
         errors.pushArray(
           actionWhenUpdateHippoFieldsContext(this.nodeJson.props || {})
         );
