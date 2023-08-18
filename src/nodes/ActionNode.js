@@ -96,6 +96,7 @@ const schema = new Validator().compile({
       "send-card-to-board",
       "copy-to-clipboard",
       "feedback-message",
+      "confirmation-box"
     ],
   },
   props: {

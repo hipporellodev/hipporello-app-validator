@@ -46,6 +46,7 @@ const componentScheme = {
       "column",
       "columns",
       "userManagement",
+      "shareButton"
     ],
   },
   viewProps: {
