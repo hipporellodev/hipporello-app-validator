@@ -353,6 +353,53 @@ function getImageCheck() {
     },
   });
 }
+function shareButtonCheck() {
+  return new Validator({useNewCustomCheckerFunction: true}).compile({
+      align: {
+        type: "enum",
+        values: ["left", "center", "right"]
+      },
+      viewType: {
+        type: "enum",
+        values: ["horizontal", "floating"]
+      },
+      style: {
+        type: "enum",
+        values: ["circle", "square"]
+      },
+      size: {
+        type: "enum",
+        values: ["small", "medium", "large"]
+      },
+      color: "string",
+      message: {
+        type: "string",
+        messages: {
+          required: "'Share Message' field is required."
+        }
+      },
+    services: {
+      type: "array",
+      items: {
+        type: "object",
+        props: {
+          id: "string",
+          message: "string|optional",
+          media: {
+            type: "custom",
+            default: "[[[nullValue]]]",
+            custom(value, errors, schema, path, parentNode, context){
+              // errors.push({ type: "required"});
+              return value
+            }
+          }
+        }
+      }
+    },
+      title: "string|optional"
+  })
+
+}
 export default class ComponentNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);
@@ -433,6 +480,8 @@ export default class ComponentNode extends AbstractHippoNode {
         break;
       case "label":
         errors.pushArray(labelCheck(this.nodeJson.viewProps || {}));
+      case "shareButton":
+        errors.pushArray(shareButtonCheck.call(this)(this.nodeJson.viewProps||{}))
         break;
     }
     return errors;
