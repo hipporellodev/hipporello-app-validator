@@ -3,7 +3,6 @@ import AbstractHippoNode from "./AbstractHippoNode";
 import EventNode from "./EventNode";
 import ChildrenNode from "./Views/ChildrenNode";
 import Validator from "fastest-validator";
-import { actionConditionSchema } from "./Automations/AutomationNode";
 import VisibilityNode from "./AccessRights/VisibilityNode";
 
 const componentScheme = {
@@ -172,7 +171,6 @@ const trelloCSCheck = new Validator().compile({
     type: "object",
     optional: true,
     props: {
-      ...actionConditionSchema,
       collections: {
         type: "array",
         items: {
@@ -224,7 +222,6 @@ const cardMenuItemCheck = new Validator().compile({
     type: "object",
     optional: true,
     props: {
-      ...actionConditionSchema,
       collections: {
         type: "array",
         optional: true,
