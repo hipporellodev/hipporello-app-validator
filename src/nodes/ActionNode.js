@@ -1,5 +1,8 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import Validator from "fastest-validator";
+import {actionConditionSchema} from "./Automations/AutomationNode";
+import {conditionsWithOr} from "../Utils/conditionWithOr";
+import {conditionsWithAnd} from "../Utils/conditionsWithAnd";
 const tcMayUpdateFields = [
   "tc_desc",
   "tc_name",
@@ -13,6 +16,21 @@ const tcMayUpdateFields = [
   "tc_shortUrl",
   "tc_url",
 ];
+function findToCardValidation(props){
+  const {query} = props || {};
+  const queryValidationScheme = this.getCollectionValidateJson()
+  const root = new Validator({useNewCustomCheckerFunction: true}).compile({query: {type: "object", props:  queryValidationScheme}})(props)
+  if (root?.length){
+    return root;
+  }
+  if(query?.conditions?.length > 1){//Or Condition
+    return conditionsWithOr(this.appJson, this.entities)(query)
+  }
+  else if(query?.conditions?.conditions?.length){
+    return conditionsWithAnd(this.appJson, this.entities)(query)
+  }
+  return []
+}
 const checkExternal = new Validator().compile({
   id: "string|optional",
   type: {
@@ -26,6 +44,7 @@ const checkExternal = new Validator().compile({
       "open-page",
       "open-url",
       "navigate-to-card",
+      "find-to-card",
       "update-card-members",
       "update-card-labels",
       "move-card",
@@ -89,6 +108,7 @@ const schema = new Validator().compile({
       "open-page",
       "open-url",
       "navigate-to-card",
+      "find-to-card",
       "update-card-members",
       "update-card-labels",
       "move-card",
@@ -504,7 +524,9 @@ export default class ActionNode extends AbstractHippoNode {
     this.validatorPath = `${this.path}.props`;
     if (this.nodeJson.type === "move-card") {
       errors.pushArray(actionWhenMoveTo(this.nodeJson.props || {}));
-    } else if (this.nodeJson.type === "update-card-labels") {
+    }else if (this.nodeJson.type === "find-to-card") {
+      errors.pushArray(findToCardValidation.call(this, this.nodeJson.props || {}));
+    }  else if (this.nodeJson.type === "update-card-labels") {
       errors.pushArray(actionWhenAssignLabel(this.nodeJson.props || {}));
     } else if (this.nodeJson.type === "update-card-members") {
       errors.pushArray(actionWhenAssignMember(this.nodeJson.props || {}));
