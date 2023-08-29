@@ -378,18 +378,21 @@ function shareButtonCheck() {
     services: {
       type: "array",
       items: {
-        type: "object",
+        type: "custom",
         props: {
           id: "string",
           message: "string|optional",
           media: {
             type: "custom",
             default: "[[[nullValue]]]",
-            custom(value, errors, schema, path, parentNode, context){
-              // errors.push({ type: "required"});
-              return value
-            }
           }
+        },
+        custom(value, errors, schema, path, parentNode, context){
+          if(value?.id === "pinterest" && !value?.media){
+            const index = (Object.values(parentNode?.services)||[]).findIndex(i => i?.id === "pinterest")
+            errors.push({ type: "required", field: `services[${index}].media`, message: "Media field required on Pinterest service."});
+          }
+          return value
         }
       }
     },
