@@ -352,6 +352,14 @@ function getImageCheck() {
 }
 function shareButtonCheck() {
   return new Validator({useNewCustomCheckerFunction: true}).compile({
+      urlSource: {
+        type: "enum",
+        values: ["current", "custom"]
+      },
+      customUrl:{
+        type: "string",
+        optional: this.nodeJson.viewProps?.urlSource === "current"
+      },
       align: {
         type: "enum",
         values: ["left", "center", "right"]
