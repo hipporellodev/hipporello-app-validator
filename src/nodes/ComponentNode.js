@@ -354,11 +354,12 @@ function shareButtonCheck() {
   return new Validator({useNewCustomCheckerFunction: true}).compile({
       urlSource: {
         type: "enum",
-        values: ["current", "custom"]
+        values: ["current", "custom"],
+        optional: true
       },
       customUrl:{
         type: "string",
-        optional: this.nodeJson.viewProps?.urlSource === "current"
+        optional: this.nodeJson.viewProps?.urlSource !== "custom"
       },
       align: {
         type: "enum",
