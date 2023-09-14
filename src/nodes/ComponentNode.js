@@ -394,12 +394,20 @@ function shareButtonCheck() {
           media: {
             type: "custom",
             default: "[[[nullValue]]]",
+          },
+          content: {
+            type: "custom",
+            default: "[[[nullValue]]]",
           }
         },
         custom(value, errors, schema, path, parentNode, context){
           if(value?.id === "pinterest" && !value?.media){
             const index = (Object.values(parentNode?.services)||[]).findIndex(i => i?.id === "pinterest")
             errors.push({ type: "required", field: `services[${index}].media`, message: "Media field required on Pinterest service."});
+          }
+          if(value?.id === "copy" && value?.content &&  !value?.message){
+            const index = (Object.values(parentNode?.services)||[]).findIndex(i => i?.id === "copy")
+            errors.push({ type: "required", field: `services[${index}].message`, message: "Content field required on Copy service."});
           }
           return value
         }
