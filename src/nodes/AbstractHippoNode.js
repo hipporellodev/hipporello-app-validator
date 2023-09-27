@@ -15,6 +15,7 @@ export default class AbstractHippoNode {
   static RESOLVE_CARD_BY_CARD_ID = "card";
   static RESOLVE_ROLE_BY_ROLE_BY_ID = "role";
   static RESOLVE_APP_BY_APP_ID = "app";
+  static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
@@ -31,6 +32,7 @@ export default class AbstractHippoNode {
     RESOLVE_CARD_BY_CARD_ID: AbstractHippoNode.RESOLVE_CARD_BY_CARD_ID,
     RESOLVE_ROLE_BY_ROLE_BY_ID: AbstractHippoNode.RESOLVE_ROLE_BY_ROLE_BY_ID,
     RESOLVE_APP_BY_APP_ID: AbstractHippoNode.RESOLVE_APP_BY_APP_ID,
+    RESOLVE_FIELD_DEFINITION_BY_ID: AbstractHippoNode.RESOLVE_FIELD_DEFINITION_BY_ID,
   };
   static counter;
   childNodes = [];
@@ -799,6 +801,20 @@ export default class AbstractHippoNode {
         type: "string",
         multiple: false,
         sortable: false,
+      },
+      {
+        id: "field.id",
+        label: "ID",
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "field.name",
+        label: "Name",
+        type: "string",
+        multiple: false,
+        sortable: false
       },
       {
         id: "app.name",
