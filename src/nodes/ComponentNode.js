@@ -46,7 +46,8 @@ const componentScheme = {
       "columns",
       "userManagement",
       "shareButton",
-      "customFields"
+      "customFields",
+      "trelloActivities"
     ],
   },
   viewProps: {
@@ -351,6 +352,26 @@ function getImageCheck() {
     },
   });
 }
+function trelloActivitiesCheck() {
+  return new Validator().compile({
+    source: "string",
+    displayOptions: {
+      type: "array",
+      items: {
+        type: "enum",
+        values: [
+          "all",
+          "comment",
+          "member",
+          "move",
+          "archiveAndSendBoard",
+          "fieldUpdate",
+          "attachment"
+        ]
+      }
+    }
+  })
+}
 function shareButtonCheck() {
   return new Validator({useNewCustomCheckerFunction: true}).compile({
       urlSource: {
@@ -500,6 +521,9 @@ export default class ComponentNode extends AbstractHippoNode {
         errors.pushArray(labelCheck(this.nodeJson.viewProps || {}));
       case "shareButton":
         errors.pushArray(shareButtonCheck.call(this)(this.nodeJson.viewProps||{}))
+        break;
+      case "trelloActivities":
+        errors.pushArray(trelloActivitiesCheck.call(this)(this.nodeJson.viewProps||{}))
         break;
     }
     return errors;
