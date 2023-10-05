@@ -364,6 +364,7 @@ function trelloActivitiesCheck() {
           "comment",
           "member",
           "move",
+          "copy",
           "archiveAndSendBoard",
           "fieldUpdate",
           "attachment"
