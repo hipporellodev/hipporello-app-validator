@@ -367,7 +367,8 @@ function trelloActivitiesCheck() {
           "copy",
           "archiveAndSendBoard",
           "fieldUpdate",
-          "attachment"
+          "attachment",
+          "date"
         ]
       }
     }
