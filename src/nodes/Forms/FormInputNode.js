@@ -184,8 +184,7 @@ export default class FormInputNode extends AbstractHippoNode {
                 },
               },
             },
-          },
-          fields: "array",
+          }
         },
       },
     };
@@ -294,6 +293,7 @@ export default class FormInputNode extends AbstractHippoNode {
             minItems: 1,
             items: {
               type: "enum",
+
               values: this.getRoles(true),
             },
             messages: {
@@ -380,7 +380,7 @@ export default class FormInputNode extends AbstractHippoNode {
       const checker = new Validator().compile(TrelloLabelScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
-    if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {
       const checker = new Validator().compile(FieldSelectorScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
