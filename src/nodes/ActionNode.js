@@ -62,6 +62,7 @@ const checkExternal = new Validator().compile({
       "conversation-reply",
       "UpdateAppVariable",
       "UpdateHippoField",
+      "UpdateCustomField",
       "user-management-add-user",
       "user-management-update-user",
       "user-management-check-user",
