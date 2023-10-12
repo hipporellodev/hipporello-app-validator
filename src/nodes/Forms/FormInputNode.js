@@ -306,6 +306,18 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
+    const AttachmentSelectorSchema = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      elementData: {
+        type: "object",
+        props: {
+          source: "string"
+        }
+      }
+    }
     const BooleanSchema = {
       label: "string",
       description: "string|optional",
@@ -388,6 +400,10 @@ export default class FormInputNode extends AbstractHippoNode {
       const checker = new Validator({
         useNewCustomCheckerFunction: true,
       }).compile(TrelloUserSelectorSchema);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT_SELECTOR){
+      const checker = new Validator().compile(AttachmentSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
