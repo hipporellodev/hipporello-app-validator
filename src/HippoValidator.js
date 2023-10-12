@@ -81,8 +81,8 @@ export default class HippoValidator {
     return new Promise((resolve, reject) => {
       let errors = [];
       this.inplaceErrorMessage = !!path;
-      const node = new AppNode(this.data);
-      node.init([], this.entities);
+      const node = new AppNode(this.data, this.entities);
+      node.init([]);
       node.validate(errors, path);
       if (errors.length > 0) {
         reject({
@@ -147,11 +147,13 @@ export default class HippoValidator {
   };
 
   getFieldDefinitions = (isValue) => {
+    const appParameters = this?.data?.fieldDefinitions?.appVariables || {};
+    const customFields = this.entities?.customFields || {};
+    const hippoFields = this?.data?.fieldDefinitions?.hippoFields;
+    const allFields = {...appParameters, ...hippoFields, ...customFields}
     if (isValue)
-      return Object.values(
-        this?.data?.fieldDefinitions?.hippoFields || {}
-      )?.map((i) => i?.label);
-    return Object.keys(this?.data?.fieldDefinitions?.hippoFields || {});
+      return Object.values(allFields)?.map((i) => i?.label);
+    return Object.keys(allFields);
   };
 
   getEnvironments = () => {

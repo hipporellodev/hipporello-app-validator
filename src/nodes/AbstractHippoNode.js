@@ -16,6 +16,8 @@ export default class AbstractHippoNode {
   static RESOLVE_ROLE_BY_ROLE_BY_ID = "role";
   static RESOLVE_APP_BY_APP_ID = "app";
   static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
+  static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem"
+  static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color"
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
@@ -33,11 +35,12 @@ export default class AbstractHippoNode {
     RESOLVE_ROLE_BY_ROLE_BY_ID: AbstractHippoNode.RESOLVE_ROLE_BY_ROLE_BY_ID,
     RESOLVE_APP_BY_APP_ID: AbstractHippoNode.RESOLVE_APP_BY_APP_ID,
     RESOLVE_FIELD_DEFINITION_BY_ID: AbstractHippoNode.RESOLVE_FIELD_DEFINITION_BY_ID,
+    RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID: AbstractHippoNode.RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID,
+    RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR: ""
   };
   static counter;
   childNodes = [];
   path;
-  actions;
   id;
   appJson;
   exists;
@@ -47,6 +50,8 @@ export default class AbstractHippoNode {
   checkedPaths = {};
   lists = [];
   members = [];
+  entries = []
+  actions = []
   constructor(appJson, path) {
     if (appJson.appJson) {
       this.appJson = appJson.appJson;
@@ -71,8 +76,8 @@ export default class AbstractHippoNode {
     }
   }
   init(actions, entities) {
-    this.actions = actions;
-    this.entities = entities;
+    if(actions) this.actions = actions;
+    if(entities) this.entities = entities;
     this.entitiesIds = {
       trelloLists: (this.entities?.trelloLists || [])?.map((i) => i?.hippoId),
       trelloLabels: (this.entities?.trelloLabels || [])?.map((i) => i?.hippoId),
@@ -202,7 +207,6 @@ export default class AbstractHippoNode {
   }
   getTrelloMembers(onlyIds = false, onlyActives){
     let members = this.entities?.members || [];
-    console.log(members, this.entities)
     if (onlyActives) {
       members = (members || [])?.filter((i) => !i?.deleted);
     }
@@ -288,6 +292,14 @@ export default class AbstractHippoNode {
     if (isValue) return roles?.map((i) => i?.id);
     return roles;
   };
+  getCustomFields = (onlyId, filter, showDeleted) => {
+    let customFields = (this.entities?.customFields || []).map(item => ({...item, id: item?.hippoId}))
+    if (filter) {
+      customFields = customFields.filter(filter);
+    }
+    if(onlyId) return customFields.map(i => i?.hippoId);
+    return customFields;
+  }
   getAppParameters = (onlyId, filter, showDeleted) => {
     let appVariables = Object.values(
       this.appJson?.app?.fieldDefinitions?.appVariableFields || {}
@@ -830,6 +842,28 @@ export default class AbstractHippoNode {
         multiple: false,
         sortable: false,
       },
+      {
+        id: "ref_cfdditem.id",
+        label: "ID",
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "ref_cfdditem.name",
+        label: "Name",
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "ref_cfdditem.color",
+        label: "Color",
+        type: "string",
+        multiple: false,
+        sortable: false,
+        resolveBy: AbstractHippoNode.RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR
+      }
     ];
   };
   getObjectKey = (field) => {
@@ -846,6 +880,7 @@ export default class AbstractHippoNode {
     const hippoFields = this.getHippoFields(false, null, showDeleted);
     const staticFields = this.getStaticFields();
     const appVariables = this.getAppParameters(false, null, showDeleted);
+    const customFields = this.getCustomFields(false, null, showDeleted);
     const fieldMap = {};
     staticFields.forEach((staticField) => {
       fieldMap[staticField.id] = staticField;
@@ -864,6 +899,16 @@ export default class AbstractHippoNode {
     appVariables.forEach((appVar) => {
       fieldMap["appVariables." + appVar.id] = {
         id: "appVariables." + appVar.id,
+        type: appVar.type,
+        label: appVar.label,
+        resolveBy:
+          AbstractHippoNode.FIELD_RESOLVE_BY_TO_VALIDATOR[appVar.resolveBy],
+        multiple: appVar.multiple,
+      };
+    });
+    customFields.forEach((appVar) => {
+      fieldMap["card.tcf_" + appVar.id] = {
+        id: "card.tcf_" + appVar.id,
         type: appVar.type,
         label: appVar.label,
         resolveBy:

@@ -23,9 +23,10 @@ export default class VariableNode extends AbstractHippoNode {
     }
     return exp;
   }
-  constructor(appJson, path, expression) {
+  constructor(appJson, path, expression, entries) {
     super(appJson, path);
     this.expression = expression;
+    this.entries = expression;
   }
 
   process(appJson, path, nodeJson) {}
@@ -67,6 +68,9 @@ export default class VariableNode extends AbstractHippoNode {
     }
     if(field.resolveBy === VariableNode.RESOLVE_MEMBER_BY_TRELLO_ID){
       return this.getTrelloMembers(true)
+    }
+    if(field.resolveBy === VariableNode.RESOLVE_FIELD_DEFINITION_BY_ID){
+      return this.getFieldDefinitions(true)
     }
     return null;
   }

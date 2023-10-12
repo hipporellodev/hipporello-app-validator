@@ -20,8 +20,9 @@ import Mustache from "mustache";
 export default class AppNode extends AbstractHippoNode{
 
   static INSTANCE = null;
-  constructor(appJson) {
+  constructor(appJson, entries) {
     super(appJson, 'app');
+    if(entries) this.entities = entries
   }
 
   getValidatorFunction(){
@@ -117,7 +118,9 @@ export default class AppNode extends AbstractHippoNode{
           parsedContent.forEach((item) => {
             if (item[0] === "name" || item[0] === "&") {
               let exp = item[1];
-              variableNodes.push(new VariableNode(this.appJson, path, exp));
+              const variableNode = new VariableNode(this.appJson, path, exp)
+              variableNode.init(this.actions, this.entities)
+              variableNodes.push(variableNode);
             }
           })
         } catch (err) {
