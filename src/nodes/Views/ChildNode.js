@@ -1,6 +1,7 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ComponentNode from "../ComponentNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 const childSchema = {
   id: 'string',
   view: {
@@ -12,7 +13,7 @@ const childSchema = {
     }
   }
 }
-const childCheck = new Validator().compile(childSchema);
+const childCheck = getValidator().compile(childSchema);
 export default class ChildNode extends AbstractHippoNode{
   rootNode;
   index;

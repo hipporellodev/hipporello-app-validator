@@ -1,12 +1,13 @@
 import ViewNode from "./Views/ViewNode";
 import Validator from "fastest-validator";
+import getValidator from "../Utils/getValidator";
 
 const trelloCardBackScheme = {
   enabled: 'boolean',
   id : "string",
   type : "string"
 }
-const trelloCardBackCheck = new Validator().compile(trelloCardBackScheme)
+const trelloCardBackCheck = getValidator().compile(trelloCardBackScheme)
 export default class TrelloCardBackViewNode extends ViewNode{
   constructor(appJson, path) {
     super(appJson, path);

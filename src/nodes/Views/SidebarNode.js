@@ -1,6 +1,7 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 const sidebarScheme = {
   id: 'string',
   viewProps: {
@@ -12,7 +13,7 @@ const sidebarScheme = {
     }
   }
 }
-const sidebarCheck = new Validator().compile(sidebarScheme);
+const sidebarCheck = getValidator().compile(sidebarScheme);
 export default class SidebarNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);

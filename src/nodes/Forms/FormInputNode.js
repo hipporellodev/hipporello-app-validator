@@ -4,6 +4,7 @@ import Validator from "fastest-validator";
 import { FORM_INPUT_NAMES } from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
 import uniq from "lodash/uniq";
+import getValidator from "../../Utils/getValidator";
 
 const formInputSchema = {
   input: "string",
@@ -19,7 +20,7 @@ const formInputSchema = {
   },
 };
 
-const formInputCheck = new Validator().compile(formInputSchema);
+const formInputCheck = getValidator().compile(formInputSchema);
 export default class FormInputNode extends AbstractHippoNode {
   constructor(appJson, path, id, formJson) {
     super(appJson, path);
@@ -376,7 +377,7 @@ export default class FormInputNode extends AbstractHippoNode {
     let propsErrors = [];
     errors.pushArray(formInputCheck(this.nodeJson));
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BUTTON) {
-      const checker = new Validator().compile(ButtonSchema);
+      const checker = getValidator().compile(ButtonSchema);
       propsErrors.pushArray(checker(this.nodeJson?.props));
     }
     if (
@@ -385,29 +386,29 @@ export default class FormInputNode extends AbstractHippoNode {
       this.nodeJson?.input === FORM_INPUT_NAMES.CHECKBOX ||
       this.nodeJson?.input === FORM_INPUT_NAMES.SELECT_BOX
     ) {
-      const checker = new Validator().compile(RadioBoxSchema);
+      const checker = getValidator().compile(RadioBoxSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
-      const checker = new Validator().compile(TrelloLabelScheme);
+      const checker = getValidator().compile(TrelloLabelScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {
-      const checker = new Validator().compile(FieldSelectorScheme);
+      const checker = getValidator().compile(FieldSelectorScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
-      const checker = new Validator({
+      const checker = getValidator({
         useNewCustomCheckerFunction: true,
       }).compile(TrelloUserSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT_SELECTOR){
-      const checker = new Validator().compile(AttachmentSelectorSchema);
+      const checker = getValidator().compile(AttachmentSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
-      const checker = new Validator().compile(BooleanSchema);
+      const checker = getValidator().compile(BooleanSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (

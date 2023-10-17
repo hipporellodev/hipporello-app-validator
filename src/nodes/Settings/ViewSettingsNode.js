@@ -1,5 +1,6 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 
 const viewSettingsSchema = {
   appViewSettings: {
@@ -58,7 +59,7 @@ const viewSettingsSchema = {
     },
   },
 };
-const viewSettingsCheck = new Validator().compile(viewSettingsSchema);
+const viewSettingsCheck = getValidator().compile(viewSettingsSchema);
 const viewSettingsNameSchema = {
   name: "string",
 };
@@ -70,8 +71,8 @@ const viewSettingsUrlSchema = {
     },
   },
 };
-const viewSettingsUrlCheck = new Validator().compile(viewSettingsUrlSchema);
-const viewSettingsNameCheck = new Validator().compile(viewSettingsNameSchema);
+const viewSettingsUrlCheck = getValidator().compile(viewSettingsUrlSchema);
+const viewSettingsNameCheck = getValidator().compile(viewSettingsNameSchema);
 export default class ViewSettingsNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);

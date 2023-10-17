@@ -1,8 +1,9 @@
 import Validator from "fastest-validator";
 import {conditionValueCheckFunc} from "./conditionValueCheckFunc";
 import {OPERATORS} from "../constants";
+import getValidator from "./getValidator";
 
- export const conditionsWithOr = (appJson, entries) => new Validator({useNewCustomCheckerFunction: true}).compile({
+ export const conditionsWithOr = (appJson, entries) => getValidator({useNewCustomCheckerFunction: true}).compile({
   conditions: {
     type: 'array',
     optional: true,

@@ -1,8 +1,9 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import Validator from "fastest-validator";
 import {RESOLVE_TYPES, VARIABLE_TYPES} from "../constants";
+import getValidator from "../Utils/getValidator";
 
-const hippoFieldCheck = new Validator().compile({
+const hippoFieldCheck = getValidator().compile({
   id: 'string|empty:false',
   label: 'string|empty:false',
   multiple: 'boolean',

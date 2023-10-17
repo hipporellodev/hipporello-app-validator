@@ -1,11 +1,12 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 
 const roleSchema = {
   id: 'string',
   name: 'string'
 }
-const roleCheck = new Validator().compile(roleSchema);
+const roleCheck = getValidator().compile(roleSchema);
 export default class RoleNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);

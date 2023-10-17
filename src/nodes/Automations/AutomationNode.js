@@ -2,6 +2,7 @@ import AbstractHippoNode from "../AbstractHippoNode";
 
 import RuleNode from "./RuleNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 
 
 export default class AutomationNode extends AbstractHippoNode{
@@ -48,7 +49,7 @@ export default class AutomationNode extends AbstractHippoNode{
       case "commented": triggerSchema.list = trelloListEnum;break;
       default: break;
     }
-    const automationCheck = new Validator().compile({
+    const automationCheck = getValidator().compile({
       id: 'string|empty:false',
       name: 'string|empty:false',
       order: 'number',

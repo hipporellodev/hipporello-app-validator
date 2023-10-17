@@ -4,6 +4,7 @@ import EventNode from "./EventNode";
 import ChildrenNode from "./Views/ChildrenNode";
 import Validator from "fastest-validator";
 import VisibilityNode from "./AccessRights/VisibilityNode";
+import getValidator from "../Utils/getValidator";
 
 const componentScheme = {
   id: "string|empty:false",
@@ -65,7 +66,7 @@ const componentScheme = {
   },
   accessRight: "object|optional",
 };
-const componentCheck = new Validator().compile(componentScheme);
+const componentCheck = getValidator().compile(componentScheme);
 
 function formListCheck() {
   const sourceTypes = [
@@ -76,7 +77,7 @@ function formListCheck() {
   ];
   const isSelectedForms = this.nodeJson?.viewProps?.type === "selected";
   const formsOptions = this.getFormIds();
-  return new Validator().compile({
+  return getValidator().compile({
     viewType: {
       type: "enum",
       values: ["grid", "list"],
@@ -99,7 +100,7 @@ function formListCheck() {
 function appListCheck() {
   const isSelectedApps = this.nodeJson?.viewProps?.type === "selected";
   const appsOptions = this.getApps(true);
-  return new Validator().compile({
+  return getValidator().compile({
     viewType: {
       type: "enum",
       values: ["grid", "list"],
@@ -123,7 +124,7 @@ function appListCheck() {
 function getParagraphCheck() {
   const displayedTextLimit = this.nodeJson?.viewProps?.displayedTextLimit;
   const checkMin = displayedTextLimit ? 1 : null;
-  return new Validator().compile({
+  return getValidator().compile({
     text: "string",
     alignment: {
       type: "enum",
@@ -143,7 +144,7 @@ function getParagraphCheck() {
     },
   });
 }
-const headerCheck = new Validator().compile({
+const headerCheck = getValidator().compile({
   text: "string",
   heading: {
     type: "enum",
@@ -155,7 +156,7 @@ const headerCheck = new Validator().compile({
     optional: true,
   },
 });
-const paragraphCheck = new Validator().compile({
+const paragraphCheck = getValidator().compile({
   text: "string",
   alignment: {
     type: "enum",
@@ -163,11 +164,11 @@ const paragraphCheck = new Validator().compile({
     optional: true,
   },
 });
-const linkCheck = new Validator().compile({
+const linkCheck = getValidator().compile({
   text: "string",
   url: "string|optional",
 });
-const trelloCSCheck = new Validator().compile({
+const trelloCSCheck = getValidator().compile({
   pageSize: "number|optional",
   query: {
     type: "object",
@@ -195,7 +196,7 @@ const trelloCSCheck = new Validator().compile({
   showExport: "boolean|optional",
   showSearch: "boolean|optional",
 });
-const tableCheck = new Validator().compile({
+const tableCheck = getValidator().compile({
   columns: {
     optional: true,
     type: "array",
@@ -211,14 +212,14 @@ const tableCheck = new Validator().compile({
     },
   },
 });
-const dateCheck = new Validator().compile({
+const dateCheck = getValidator().compile({
   text: "string",
   format: "string",
 });
-const menuItemCheck = new Validator().compile({
+const menuItemCheck = getValidator().compile({
   text: "string",
 });
-const cardMenuItemCheck = new Validator().compile({
+const cardMenuItemCheck = getValidator().compile({
   text: "string",
   query: {
     type: "object",
@@ -244,12 +245,12 @@ const cardMenuItemCheck = new Validator().compile({
     },
   },
 });
-const iconCheck = new Validator().compile({
+const iconCheck = getValidator().compile({
   name: "string|empty:false",
   family: "string|optional",
   size: "number|optional",
 });
-const convCheck = new Validator().compile({
+const convCheck = getValidator().compile({
   allowDeleteMessage: "boolean|optional",
   allowDeleteThread: "boolean|optional",
   allowGetBoardMembers: "boolean|optional",
@@ -268,19 +269,19 @@ const convCheck = new Validator().compile({
   showMeta: "boolean|optional",
   showMetaDetail: "boolean|optional",
 });
-const tableColumnCheck = new Validator().compile({
+const tableColumnCheck = getValidator().compile({
   field: "string|optional",
   header: "string|optional",
   sortable: "boolean|optional",
 });
-const snippetCheck = new Validator().compile({
+const snippetCheck = getValidator().compile({
   css: "string|optional",
   html: "string",
   name: "string|empty:false",
 });
 function hippoFieldsCheck() {
   const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
-  return new Validator().compile({
+  return getValidator().compile({
     downloadCsvFile: "boolean",
     hideEmptyFields: "boolean",
     excerptContent: "boolean|optional",
@@ -305,7 +306,7 @@ function hippoFieldsCheck() {
 }
 function appVariablesCheck() {
   const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
-  return new Validator().compile({
+  return getValidator().compile({
     downloadCsvFile: "boolean|optional",
     hideEmptyFields: "boolean|optional",
     excerptContent: "boolean|optional",
@@ -326,11 +327,11 @@ function appVariablesCheck() {
     },
   });
 }
-const labelCheck = new Validator().compile({
+const labelCheck = getValidator().compile({
   text: "string",
 });
 function getAttachmentListCheck() {
-  return new Validator().compile({
+  return getValidator().compile({
     field: {
       type: "string",
       //Todo: Variable Check
@@ -338,7 +339,7 @@ function getAttachmentListCheck() {
   });
 }
 function getImageCheck() {
-  return new Validator().compile({
+  return getValidator().compile({
     attachmentListId: {
       type: "string",
       label: "Source",
@@ -353,7 +354,7 @@ function getImageCheck() {
   });
 }
 function trelloActivitiesCheck() {
-  return new Validator().compile({
+  return getValidator().compile({
     source: "string",
     displayOptions: {
       type: "array",
@@ -375,7 +376,7 @@ function trelloActivitiesCheck() {
   })
 }
 function shareButtonCheck() {
-  return new Validator({useNewCustomCheckerFunction: true}).compile({
+  return getValidator({useNewCustomCheckerFunction: true}).compile({
       urlSource: {
         type: "enum",
         values: ["current", "custom"],

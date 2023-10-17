@@ -3,6 +3,7 @@ import EventNode from "../EventNode";
 import Validator from "fastest-validator";
 import {conditionsWithOr} from "../../Utils/conditionWithOr";
 import {conditionsWithAnd} from "../../Utils/conditionsWithAnd";
+import getValidator from "../../Utils/getValidator";
 
 export default class RuleNode extends AbstractHippoNode{
   constructor(appJson, path) {
@@ -21,7 +22,7 @@ export default class RuleNode extends AbstractHippoNode{
 
   getValidatorFunction() {
     let errors = []
-    const ruleCheck = new Validator().compile({
+    const ruleCheck = getValidator().compile({
       id: 'string',
       order: 'number',
       enabled: 'boolean|optional',

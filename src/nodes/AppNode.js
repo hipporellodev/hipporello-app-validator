@@ -16,6 +16,7 @@ import Validator from "fastest-validator";
 import {APP_SLUG_BLACKLIST, LATEST_APP_SCHEMA_VERSION} from "../constants";
 import VariableNode from "./VariableNode";
 import Mustache from "mustache";
+import getValidator from "../Utils/getValidator";
 
 export default class AppNode extends AbstractHippoNode{
 
@@ -26,7 +27,7 @@ export default class AppNode extends AbstractHippoNode{
   }
 
   getValidatorFunction(){
-    const appNodeCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
+    const appNodeCheck = getValidator({useNewCustomCheckerFunction: true}).compile({
       id: 'string',
       schemaVersion: {
         type: 'number',

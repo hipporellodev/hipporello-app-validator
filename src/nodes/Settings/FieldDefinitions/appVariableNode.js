@@ -1,6 +1,7 @@
 import AbstractHippoNode from "../../AbstractHippoNode";
 import Validator from "fastest-validator";
 import {RESOLVE_TYPES, VARIABLE_TYPES} from "../../../constants";
+import getValidator from "../../../Utils/getValidator";
 const appVariableSchema = {
   id: 'string',
   label: 'string',
@@ -23,7 +24,7 @@ const appVariableSchema = {
     values: VARIABLE_TYPES
   }
 }
-const appVariableCheck = new Validator().compile(appVariableSchema)
+const appVariableCheck = getValidator().compile(appVariableSchema)
 export default class AppVariableNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);

@@ -4,6 +4,7 @@ import Validator from "fastest-validator";
 import FormInputNode from "./FormInputNode";
 import VisibilityNode from "../AccessRights/VisibilityNode";
 import CollectionNode from "../AccessRights/CollectionNode";
+import getValidator from "../../Utils/getValidator";
 export default class FormNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);
@@ -166,7 +167,7 @@ export default class FormNode extends AbstractHippoNode {
         },
       };
     }
-    const formCheck = new Validator({
+    const formCheck = getValidator({
       useNewCustomCheckerFunction: true,
     }).compile({
       id: "string|empty:false",
@@ -259,7 +260,7 @@ export default class FormNode extends AbstractHippoNode {
       },
     });
     const errors = [];
-    const submitterCheck = new Validator().compile({
+    const submitterCheck = getValidator().compile({
       submitter: {
         type: "object",
         props: {

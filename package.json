@@ -28,8 +28,9 @@
   },
   "dependencies": {
     "fastest-validator": "1.15.0",
-    "lodash": "^4.17.21",
     "jsonata": "^1.8.5",
-    "mustache": "^4.2.0"
+    "lodash": "^4.17.21",
+    "mustache": "^4.2.0",
+    "react-localization": "^1.0.19"
   }
 }

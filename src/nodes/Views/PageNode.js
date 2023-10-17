@@ -15,7 +15,7 @@ export default class PageNode extends AbstractHippoNode{
     const isFormThankYouPage = !this.nodeJson?.viewProps?.environments?.length
     const views = this.getViewIds(false, item => item?.id !== this?.nodeJson?.id);
     const slugs = views.map(item => item?.viewProps?.slug)
-    const pageCheck = new Validator().compile({
+    const pageCheck = getValidator().compile({
       enabled: 'boolean',
       id: 'string',
       viewProps: {
@@ -33,7 +33,7 @@ export default class PageNode extends AbstractHippoNode{
         }
       }
     });
-    const pageSlugCheck = new Validator({useNewCustomCheckerFunction: true}).compile({
+    const pageSlugCheck = getValidator({useNewCustomCheckerFunction: true}).compile({
       viewProps: {
         type: 'object',
         props: {

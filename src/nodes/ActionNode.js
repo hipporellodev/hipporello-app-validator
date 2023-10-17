@@ -3,6 +3,7 @@ import Validator from "fastest-validator";
 import {actionConditionSchema} from "./Automations/AutomationNode";
 import {conditionsWithOr} from "../Utils/conditionWithOr";
 import {conditionsWithAnd} from "../Utils/conditionsWithAnd";
+import getValidator from "../Utils/getValidator";
 const tcMayUpdateFields = [
   "tc_desc",
   "tc_name",
@@ -19,7 +20,7 @@ const tcMayUpdateFields = [
 function findToCardValidation(props){
   const {query} = props || {};
   const queryValidationScheme = this.getCollectionValidateJson()
-  const root = new Validator({useNewCustomCheckerFunction: true}).compile({query: {type: "object", props:  queryValidationScheme}})(props)
+  const root = getValidator({useNewCustomCheckerFunction: true}).compile({query: {type: "object", props:  queryValidationScheme}})(props)
   if (root?.length){
     return root;
   }
@@ -31,7 +32,7 @@ function findToCardValidation(props){
   }
   return []
 }
-const checkExternal = new Validator().compile({
+const checkExternal = getValidator().compile({
   id: "string|optional",
   type: {
     type: "enum",
@@ -95,7 +96,7 @@ const checkExternal = new Validator().compile({
 });
 const PRECISE_PATTERN =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const schema = new Validator().compile({
+const schema = getValidator().compile({
   id: "string",
   order: "number",
   type: {
@@ -146,7 +147,7 @@ const schema = new Validator().compile({
   },
 });
 const staticListOptions = ["nextListOnBoard", "previousListOnBoard"];
-const actionWhenOpenURL = new Validator().compile({
+const actionWhenOpenURL = getValidator().compile({
   target: {
     type: "object",
     props: {
@@ -158,7 +159,7 @@ const actionWhenOpenURL = new Validator().compile({
   },
   url: "string|empty:false",
 });
-const actionWhenOpenPageExternal = new Validator().compile({
+const actionWhenOpenPageExternal = getValidator().compile({
   url: "string|empty:false",
 });
 const hippoTypes = {
@@ -168,7 +169,7 @@ const hippoTypes = {
   time: "number",
   date: "number",
 };
-const actionWhenUpdateHippoFieldsContext = new Validator().compile({
+const actionWhenUpdateHippoFieldsContext = getValidator().compile({
   params: {
     type: "object",
     props: {
@@ -182,7 +183,7 @@ const actionWhenUpdateHippoFieldsContext = new Validator().compile({
     type: "object",
   },
 });
-const actionWhenOpenFormModal = new Validator().compile({
+const actionWhenOpenFormModal = getValidator().compile({
   title: "string|optional",
   size: {
     optional: true,
@@ -190,7 +191,7 @@ const actionWhenOpenFormModal = new Validator().compile({
     values: ["small", "medium", "large", "fullscreen"],
   },
 });
-const actionCopyToClipboard = new Validator().compile({
+const actionCopyToClipboard = getValidator().compile({
   dataToBeCopied: {
     type: "string",
     messages: {
@@ -198,7 +199,7 @@ const actionCopyToClipboard = new Validator().compile({
     },
   },
 });
-const actionFeedbackMessage = new Validator().compile({
+const actionFeedbackMessage = getValidator().compile({
   title: {
     type: "string",
     messages: {
@@ -262,7 +263,7 @@ export default class ActionNode extends AbstractHippoNode {
       true,
       (field) => field?.type === "string"
     );
-    const actionWhenMoveTo = new Validator({
+    const actionWhenMoveTo = getValidator({
       useNewCustomCheckerFunction: true,
     }).compile({
       listHippoId: {
@@ -287,7 +288,7 @@ export default class ActionNode extends AbstractHippoNode {
         },
       },
     });
-    const actionWhenAssignLabel = new Validator().compile({
+    const actionWhenAssignLabel = getValidator().compile({
       updateLabelActionType: {
         type: "enum",
         values: [
@@ -311,7 +312,7 @@ export default class ActionNode extends AbstractHippoNode {
         },
       },
     });
-    const actionWhenAssignMember = new Validator().compile({
+    const actionWhenAssignMember = getValidator().compile({
       updateMemberActionType: {
         type: "enum",
         values: [
@@ -377,7 +378,7 @@ export default class ActionNode extends AbstractHippoNode {
       }
       return value;
     };
-    const actionWhenSendConvMessage = new Validator({
+    const actionWhenSendConvMessage = getValidator({
       useNewCustomCheckerFunction: true,
     }).compile({
       message: "string",
@@ -419,7 +420,7 @@ export default class ActionNode extends AbstractHippoNode {
         },
       },
     });
-    const actionWhenOpenPage = new Validator().compile({
+    const actionWhenOpenPage = getValidator().compile({
       viewId: {
         type: "enum",
         values: this.getPageIds(),
@@ -443,7 +444,7 @@ export default class ActionNode extends AbstractHippoNode {
       },
     });
     const updateHippoFieldGenerateScheme = (key) => {
-      const actionWhenUpdateHippoFields = new Validator({useNewCustomCheckerFunction: true}).compile({
+      const actionWhenUpdateHippoFields = getValidator({useNewCustomCheckerFunction: true}).compile({
         cardUpdateFields: {
           type: "object",
           props: {
@@ -495,7 +496,7 @@ export default class ActionNode extends AbstractHippoNode {
       });
       return actionWhenUpdateHippoFields;
     };
-    const actionWhenOpenForm = new Validator().compile({
+    const actionWhenOpenForm = getValidator().compile({
       formId: {
         type: "enum",
         values: this.getFormIds(false, (i) =>

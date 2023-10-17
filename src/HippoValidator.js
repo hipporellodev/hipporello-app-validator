@@ -1,4 +1,5 @@
 import AppNode from "./nodes/AppNode";
+import {TransText} from "./localize/localize";
 
 function getDefaultCardType() {
   return {
@@ -19,7 +20,13 @@ function addDefaults(originalApp) {
 }
 
 export default class HippoValidator {
-  constructor(appJson, entities) {
+  constructor(appJson, entities, lang = "en") {
+    this.lang = lang;
+    import(`./localize/${lang}.json`)
+      .then((langModule) => {
+        TransText.addContent({[lang]: langModule});
+        TransText.setLanguage(lang)
+      })
     this.data = this.jsonTraverse(appJson);
     if (this.data.appJson) {
       this.data.appJson = {

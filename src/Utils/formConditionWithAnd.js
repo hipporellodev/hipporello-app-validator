@@ -1,7 +1,8 @@
 import Validator from "fastest-validator";
 import HippoValidator from "../HippoValidator";
+import getValidator from "./getValidator";
 
-export const formConditionsWithAnd = new Validator().compile({
+export const formConditionsWithAnd = getValidator().compile({
   conjunction: {
     type: "enum",
     values: ['AND', 'OR', "NOR"]
@@ -11,7 +12,7 @@ export const formConditionsWithAnd = new Validator().compile({
     optional: true,
   }
 })
-export const formConditionRule = new Validator({useNewCustomCheckerFunction: true}).compile({
+export const formConditionRule = getValidator({useNewCustomCheckerFunction: true}).compile({
   field: 'string|empty:false',
   operator: {
     type: 'enum',

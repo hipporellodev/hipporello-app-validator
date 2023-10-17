@@ -2,8 +2,9 @@ import AbstractHippoNode from "./AbstractHippoNode";
 import ActionGroupNode from "./ActionGroupNode";
 import Validator from "fastest-validator";
 import ActionNode from "./ActionNode";
+import getValidator from "../Utils/getValidator";
 
-const eventCheck = new Validator().compile({
+const eventCheck = getValidator().compile({
   id: 'string'
 })
 export default class EventNode extends AbstractHippoNode{

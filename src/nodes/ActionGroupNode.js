@@ -1,6 +1,7 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import ActionNode from "./ActionNode";
 import Validator from "fastest-validator";
+import getValidator from "../Utils/getValidator";
 const schema = {
   id: {
     type: 'string'
@@ -18,11 +19,11 @@ const schema = {
     type: 'object'
   }
 }
-const check = new Validator().compile(schema);
+const check = getValidator().compile(schema);
 const nameSchema = {
   name: 'string|min:1'
 }
-const nameCheck = new Validator().compile(nameSchema);
+const nameCheck = getValidator().compile(nameSchema);
 export default class ActionGroupNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);

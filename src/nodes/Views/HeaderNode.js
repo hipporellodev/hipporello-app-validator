@@ -1,6 +1,7 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
 import Validator from "fastest-validator";
+import getValidator from "../../Utils/getValidator";
 const headerScheme = {
   id: 'string',
   viewProps: {
@@ -12,7 +13,7 @@ const headerScheme = {
     }
   }
 }
-const headerCheck = new Validator().compile(headerScheme);
+const headerCheck = getValidator().compile(headerScheme);
 export default class HeaderNode extends AbstractHippoNode{
   constructor(appJson, path) {
     super(appJson, path);

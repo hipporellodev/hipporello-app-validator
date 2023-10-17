@@ -1,12 +1,13 @@
 import ViewNode from "./Views/ViewNode";
 import Validator from "fastest-validator";
+import getValidator from "../Utils/getValidator";
 
 const webViewScheme = {
   enabled: 'boolean',
   id : "string",
   type : "string"
 }
-const webViewCheck = new Validator().compile(webViewScheme)
+const webViewCheck = getValidator().compile(webViewScheme)
 export default class WebViewNode extends ViewNode{
   constructor(appJson, path) {
     super(appJson, path);
