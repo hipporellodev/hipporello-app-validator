@@ -9,7 +9,7 @@ export default class VariableNode extends AbstractHippoNode {
     board: true,
     card: true,
     parentCard: true,
-    appParameters: true,
+    appVariables: true,
   };
   static ALL_JSONATA_EXPRESSIONS = {};
   static createJsonataExpression(text) {
