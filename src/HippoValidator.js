@@ -154,10 +154,10 @@ export default class HippoValidator {
   };
 
   getFieldDefinitions = (isValue) => {
-    const appParameters = this?.data?.fieldDefinitions?.appVariables || {};
+    const appVariables = this?.data?.fieldDefinitions?.appVariables || {};
     const customFields = this.entities?.customFields || {};
     const hippoFields = this?.data?.fieldDefinitions?.hippoFields;
-    const allFields = {...appParameters, ...hippoFields, ...customFields}
+    const allFields = {...appVariables, ...hippoFields, ...customFields}
     if (isValue)
       return Object.values(allFields)?.map((i) => i?.label);
     return Object.keys(allFields);

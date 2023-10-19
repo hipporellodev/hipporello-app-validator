@@ -223,7 +223,7 @@ export default class FormInputNode extends AbstractHippoNode {
                 items: {
                   type: "enum",
                   minItems: 1,
-                  values: ['hippoFields', 'appParameters', 'customFields']
+                  values: ['hippoFields', 'appVariables', 'customFields']
                 }
               },
               selected: {
