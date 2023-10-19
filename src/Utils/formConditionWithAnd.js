@@ -1,4 +1,3 @@
-import Validator from "fastest-validator";
 import HippoValidator from "../HippoValidator";
 import getValidator from "./getValidator";
 

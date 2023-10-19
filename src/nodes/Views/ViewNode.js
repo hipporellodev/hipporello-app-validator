@@ -2,7 +2,6 @@ import AbstractHippoNode from "../AbstractHippoNode";
 
 import PageNode from "../Views/PageNode";
 import HeaderNode from "../Views/HeaderNode";
-import JSONUtils from "../../JSONUtils";
 import SidebarNode from "./SidebarNode";
 
 export default class ViewNode extends AbstractHippoNode{

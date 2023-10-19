@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../../AbstractHippoNode";
 import AppVariableNode from "./appVariableNode";
-import JSONUtils from "../../../JSONUtils";
 
 export default class AppVariableFieldsNode extends AbstractHippoNode{
   constructor(appJson, path) {

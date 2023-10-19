@@ -1,5 +1,4 @@
 import AbstractHippoNode from "../../AbstractHippoNode";
-import Validator from "fastest-validator";
 import {RESOLVE_TYPES, VARIABLE_TYPES} from "../../../constants";
 import getValidator from "../../../Utils/getValidator";
 const appVariableSchema = {

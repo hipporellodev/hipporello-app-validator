@@ -1,6 +1,6 @@
 import ViewNode from "./Views/ViewNode";
-import Validator from "fastest-validator";
 import getValidator from "../Utils/getValidator";
+import {TransText} from "../localize/localize";
 
 const webViewScheme = {
   enabled: 'boolean',
@@ -20,10 +20,10 @@ export default class WebViewNode extends ViewNode{
         errors.pushArray(checkResult);
       }
       if (!this.appJson?.app?.views[this.nodeJson.appHeader]) {
-        errors.push(this.createValidationError('oneOf', 'appHeader', this.nodeJson.appHeader, 'Errore Message'));
+        errors.push(this.createValidationError('oneOf', 'appHeader', this.nodeJson.appHeader, TransText.getTranslate("errorMessage")));
       }
       if (!this.appJson?.app?.views[this.nodeJson.home]) {
-          errors.push(this.createValidationError('oneOf', 'home', this.nodeJson.home, 'Errore Message'));
+          errors.push(this.createValidationError('oneOf', 'home', this.nodeJson.home, TransText.getTranslate("errorMessage")));
       }
       return () => errors;
   }

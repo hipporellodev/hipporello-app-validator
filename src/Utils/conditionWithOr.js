@@ -1,4 +1,3 @@
-import Validator from "fastest-validator";
 import {conditionValueCheckFunc} from "./conditionValueCheckFunc";
 import {OPERATORS} from "../constants";
 import getValidator from "./getValidator";

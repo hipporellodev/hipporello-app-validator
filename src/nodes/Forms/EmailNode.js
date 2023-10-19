@@ -1,5 +1,6 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import FormInputNode from "./FormInputNode";
+import {TransText} from "../../localize/localize";
 
 export default class EmailNode extends AbstractHippoNode{
   constructor(appJson, path) {
@@ -25,7 +26,7 @@ export default class EmailNode extends AbstractHippoNode{
       return [];
     else{
       if((allEmails||[]).includes(this?.nodeJson?.email)){
-        errors.push({type: "unique", message: "Email must be unique"})
+        errors.push({type: "unique", message: TransText.getTranslate('mustBeUniqNode', TransText.getTranslate('email'))})
       }
       return errors
     }

@@ -1,9 +1,8 @@
 import AbstractHippoNode from "./AbstractHippoNode";
-import Validator from "fastest-validator";
-import {actionConditionSchema} from "./Automations/AutomationNode";
 import {conditionsWithOr} from "../Utils/conditionWithOr";
 import {conditionsWithAnd} from "../Utils/conditionsWithAnd";
 import getValidator from "../Utils/getValidator";
+import {TransText} from "../localize/localize";
 const tcMayUpdateFields = [
   "tc_desc",
   "tc_name",
@@ -475,7 +474,7 @@ export default class ActionNode extends AbstractHippoNode {
                     }
                     const hasEmptyItem = Array.isArray(value) ? Object.values(value).length !== value.length : false;
                     if(hasEmptyItem && parentNode?.valueType === "value"){
-                      errors.push({ type: "required", field: "value", message: "Any of the added items must not be empty" });
+                      errors.push({ type: "required", field: "value", message: TransText.getTranslate("itemsNotBeEmpty") });
                     }
                     return value;
                   },

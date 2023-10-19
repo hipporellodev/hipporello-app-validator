@@ -1,5 +1,6 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import jsonata from "jsonata";
+import {TransText} from "../localize/localize";
 
 export default class VariableNode extends AbstractHippoNode {
   static firstLevel = {
@@ -108,15 +109,14 @@ export default class VariableNode extends AbstractHippoNode {
                 varErrors.push({
                   path: me.validatorPath,
                   type: "invalidVariable",
-                  message: `The variable named **"${label}"** has been deleted and is currently unavailable.`,
+                  message: TransText.getTranslate('variableNamedDeletedMessage', label),
                   args: [label, me.expression],
                 });
               } else {
                 varErrors.push({
                   path: me.validatorPath,
                   type: "invalidVariable",
-                  message:
-                    "The variable used cannot be found. Please remove or replace.",
+                  message: TransText.getTranslate('variableUsedCannotFound'),
                   args: [label, me.expression],
                 });
               }

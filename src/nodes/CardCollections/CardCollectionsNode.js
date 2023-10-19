@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import CardCollectionNode from "../CardCollections/CardCollectionNode";
-import JSONUtils from "../../JSONUtils";
 
 export default class CardCollectionsNode extends AbstractHippoNode{
   constructor(appJson, path) {

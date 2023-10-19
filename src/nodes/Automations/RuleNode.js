@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import EventNode from "../EventNode";
-import Validator from "fastest-validator";
 import {conditionsWithOr} from "../../Utils/conditionWithOr";
 import {conditionsWithAnd} from "../../Utils/conditionsWithAnd";
 import getValidator from "../../Utils/getValidator";

@@ -12,7 +12,6 @@ import FormNode from "./Forms/FormNode";
 import EmailNode from "./Forms/EmailNode";
 import JSONUtils from "../JSONUtils";
 import TrelloBoardViewNode from "./TrelloBoardViewNode";
-import Validator from "fastest-validator";
 import {APP_SLUG_BLACKLIST, LATEST_APP_SCHEMA_VERSION} from "../constants";
 import VariableNode from "./VariableNode";
 import Mustache from "mustache";
@@ -40,7 +39,6 @@ export default class AppNode extends AbstractHippoNode{
           if(APP_SLUG_BLACKLIST.includes(value)){
             errors.push({type: "notOneOf", label: 'App Slug', expected: APP_SLUG_BLACKLIST})
           }
-          //Todo: Must be unique check for other apps slug
           return value
         }
       },

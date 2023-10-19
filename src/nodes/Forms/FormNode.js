@@ -1,10 +1,10 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import PageNode from "../Views/PageNode";
-import Validator from "fastest-validator";
 import FormInputNode from "./FormInputNode";
 import VisibilityNode from "../AccessRights/VisibilityNode";
 import CollectionNode from "../AccessRights/CollectionNode";
 import getValidator from "../../Utils/getValidator";
+import {TransText} from "../../localize/localize";
 export default class FormNode extends AbstractHippoNode {
   constructor(appJson, path) {
     super(appJson, path);
@@ -63,7 +63,7 @@ export default class FormNode extends AbstractHippoNode {
     const formSlugs = incomings?.map((item) => item?.slug);
     function uniqueCheck(value, errors, schema, path, parentNode) {
       if (formSlugs.includes(value)) {
-        errors.push({ type: "unique", message: "Form slug must be unique" });
+        errors.push({ type: "unique", message: TransText.getTranslate('mustBeUniqNode', TransText.getTranslate('formSlug')) });
       }
       return value;
     }
@@ -129,7 +129,7 @@ export default class FormNode extends AbstractHippoNode {
       } else {
         errors.push({
           type: "not valid",
-          message: "External URL is not valid",
+          message: TransText.getTranslate("validate.url", {field: TransText.getTranslate('externalUrl')}),
         });
         return "";
       }
@@ -197,7 +197,7 @@ export default class FormNode extends AbstractHippoNode {
             type: "array",
             min: 2,
             messages: {
-              arrayMin: "At least 1 element required to create form",
+              arrayMin: TransText.getTranslate('formAtLeastElement'),
             },
             items: {
               type: "object",

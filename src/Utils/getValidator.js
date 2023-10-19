@@ -4,11 +4,17 @@ import {TransText} from "../localize/localize";
 export default (others) => {
   const languageString = TransText.getLanguageString(TransText.getLanguage())
   const messages = Object.entries(languageString).reduce((acc, [key, text]) => {
-    if(key.startsWith('validate.')) acc[key] = text
+    if(key.startsWith('validate.')) {
+      const newKey = key.replace("validate.", "")
+      acc[newKey] = text
+    }
     return acc
   }, {})
   return new Validator({
-    messages,
-    ...others
+    ...others,
+    messages: {
+      ...(others?.messages),
+      ...messages
+    }
   })
 }

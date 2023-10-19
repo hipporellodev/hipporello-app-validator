@@ -1,6 +1,5 @@
 import LocalizedStrings from "react-localization";
-import en from './en.json';
-
+import en from './langs/en.json';
 class Localize extends LocalizedStrings{
   getLanguageString(lang){
     const props = this.getContent();

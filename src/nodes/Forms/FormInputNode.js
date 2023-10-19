@@ -1,10 +1,10 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ActionGroupNode from "../ActionGroupNode";
-import Validator from "fastest-validator";
 import { FORM_INPUT_NAMES } from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
 import uniq from "lodash/uniq";
 import getValidator from "../../Utils/getValidator";
+import {TransText} from "../../localize/localize";
 
 const formInputSchema = {
   input: "string",
@@ -284,8 +284,8 @@ export default class FormInputNode extends AbstractHippoNode {
               },
             },
             messages: {
-              required: "At least 1 group must be selected",
-              minItems: "At least 1 group must be selected",
+              required: TransText.getTranslate("formAtLeastGroup"),
+              minItems: TransText.getTranslate("formAtLeastGroup"),
             },
           },
           creatingGroups: {

@@ -1,9 +1,10 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
-import Validator from "fastest-validator";
 import VisibilityNode from "../AccessRights/VisibilityNode";
 import CollectionNode from "../AccessRights/CollectionNode";
 import {PAGE_SLUG_BLACKLIST} from "../../constants";
+import getValidator from "../../Utils/getValidator";
+import {TransText} from "../../localize/localize";
 
 
 export default class PageNode extends AbstractHippoNode{
@@ -41,10 +42,10 @@ export default class PageNode extends AbstractHippoNode{
             type: "custom",
             check:  (value, errors, schema) => {
               if(PAGE_SLUG_BLACKLIST.includes(value)){
-                errors.push({type: "notOneOf", label: "Page Slug", expected: PAGE_SLUG_BLACKLIST})
+                errors.push({type: "notOneOf", label: TransText.getTranslate('pageSlug'), expected: PAGE_SLUG_BLACKLIST})
               }
               else if(slugs.includes(value)){
-                errors.push({type: "unique", message: "Page slug must be unique"})
+                errors.push({type: "unique", message: TransText.getTranslate("mustBeUniqNode", TransText.getTranslate('pageSlug'))})
               }
               return value;
             }

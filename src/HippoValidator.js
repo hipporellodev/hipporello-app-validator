@@ -22,11 +22,15 @@ function addDefaults(originalApp) {
 export default class HippoValidator {
   constructor(appJson, entities, lang = "en") {
     this.lang = lang;
-    import(`./localize/${lang}.json`)
-      .then((langModule) => {
-        TransText.addContent({[lang]: langModule});
-        TransText.setLanguage(lang)
-      })
+    try{
+      const langModule = require(`./localize/langs/${lang}.json`);
+      TransText.addContent({[lang]: langModule});
+      TransText.setLanguage(lang)
+    } catch (e) {
+      const langModule = require(`./localize/langs/en.json`);
+      TransText.addContent({[lang]: langModule});
+      TransText.setLanguage(lang)
+    }
     this.data = this.jsonTraverse(appJson);
     if (this.data.appJson) {
       this.data.appJson = {
@@ -189,9 +193,9 @@ export default class HippoValidator {
     switch (errorType) {
       case "oneOf":
       case "enumValue":
-        return `'${this.camelCaseToNormal(label)}' value is deleted`;
+        return TransText.getTranslate('valueIsDeletedByNode', this.camelCaseToNormal(label))
       case "required":
-        return `'${this.camelCaseToNormal(label)}' value is required`;
+        return TransText.getTranslate('valueIsRequiredByNode', this.camelCaseToNormal(label))
       default:
         return "";
     }
@@ -211,12 +215,14 @@ export default class HippoValidator {
           this.getLabel(error?.relativePath, error?.params?.label)
         );
       }
+      const isCod = TransText.isTag(error?.code);
+      const caseTitle = isCod ? TransText.getTranslate(error.code) : this.camelCaseToNormal(error?.code);
       return {
         ...error,
         message: message,
         errorTitle: error?.fieldLabel
           ? this.getInvalidValueErrorTitle(error?.code, error?.fieldLabel)
-          : this.camelCaseToNormal(`${error?.code}Error`),
+          : TransText.getTranslate('errorTitle', caseTitle),
       };
     });
   };
@@ -388,17 +394,14 @@ export default class HippoValidator {
       switch (error.type) {
         case "oneOf":
         case "enumValue":
-          return this.labelOneOfMultipleSelect(fieldLabel)
-            ? `Remove the deleted ${fieldLabel}`
-            : `Choose another ${fieldLabel}`;
+          const isMultiple =  this.labelOneOfMultipleSelect(fieldLabel);
+          return TransText.getTranslate(isMultiple ? "removeDeletedField" : "chooseAnotherField", fieldLabel)
         case "notOneOf":
-          return `"${
-            error?.label || error.field
-          }" must not be one of ${this.convertActualValues(error)}`;
+          return TransText.getTranslate("mustNotBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
         case "notExists":
-          return `The value used in '${error?.path}' could not be found`;
+          return TransText.getTranslate('valueUsedCannotFound', error?.path)
         case "required":
-          return `Select a ${fieldLabel}`;
+          return TransText.getTranslate('selectFieldLabel', fieldLabel);
         default:
           return error.message;
       }
@@ -406,17 +409,13 @@ export default class HippoValidator {
       switch (error.type) {
         case "oneOf":
         case "enumValue":
-          return `"${
-            error?.label || error.field
-          }" must be one of ${this.convertActualValues(error)}`;
+          return TransText.getTranslate("mustBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
         case "notOneOf":
-          return `"${
-            error?.label || error.field
-          }" must not be one of ${this.convertActualValues(error)}`;
+          return TransText.getTranslate("mustNotBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
         case "notExists":
-          return `The value used in '${error?.path}' could not be found`;
+          return TransText.getTranslate('valueUsedCannotFound', error?.path)
         case "uniqueValue":
-          return `"${error?.label || error.field}" must be unique.`;
+          return TransText.getTranslate("mustBeUniqNode", error?.label || error.field || "")
         default:
           return error.message;
       }

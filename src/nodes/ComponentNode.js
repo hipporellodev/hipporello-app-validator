@@ -2,9 +2,9 @@ import AbstractHippoNode from "./AbstractHippoNode";
 
 import EventNode from "./EventNode";
 import ChildrenNode from "./Views/ChildrenNode";
-import Validator from "fastest-validator";
 import VisibilityNode from "./AccessRights/VisibilityNode";
 import getValidator from "../Utils/getValidator";
+import {TransText} from "../localize/localize";
 
 const componentScheme = {
   id: "string|empty:false",
@@ -405,9 +405,7 @@ function shareButtonCheck() {
       color: "string",
       message: {
         type: "string",
-        messages: {
-          required: "'Share Message' field is required."
-        }
+        field: TransText.getTranslate('shareMessage')
       },
     services: {
       type: "array",
@@ -428,11 +426,11 @@ function shareButtonCheck() {
         custom(value, errors, schema, path, parentNode, context){
           if(value?.id === "pinterest" && !value?.media){
             const index = (Object.values(parentNode?.services)||[]).findIndex(i => i?.id === "pinterest")
-            errors.push({ type: "required", field: `services[${index}].media`, message: "Media field required on Pinterest service."});
+            errors.push({ type: "required", field: `services[${index}].media`, message: TransText.getTranslate("mediaRequiredForNode", TransText.getTranslate('media'), "Pinterest")});
           }
           if(value?.id === "copy" && value?.content &&  !value?.message){
             const index = (Object.values(parentNode?.services)||[]).findIndex(i => i?.id === "copy")
-            errors.push({ type: "required", field: `services[${index}].message`, message: "Content field required on Copy service."});
+            errors.push({ type: "required", field: `services[${index}].message`, message: TransText.getTranslate("mediaRequiredForNode", TransText.getTranslate('content'), TransText.getTranslate('copy'))});
           }
           return value
         }

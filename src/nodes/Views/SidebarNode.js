@@ -1,6 +1,5 @@
 import AbstractHippoNode from "../AbstractHippoNode";
 import ChildrenNode from "../Views/ChildrenNode";
-import Validator from "fastest-validator";
 import getValidator from "../../Utils/getValidator";
 const sidebarScheme = {
   id: 'string',

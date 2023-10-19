@@ -1,6 +1,5 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import ActionNode from "./ActionNode";
-import Validator from "fastest-validator";
 import getValidator from "../Utils/getValidator";
 const schema = {
   id: {
