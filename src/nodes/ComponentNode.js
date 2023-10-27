@@ -280,62 +280,42 @@ const snippetCheck = getValidator().compile({
   name: "string|empty:false",
 });
 function hippoFieldsCheck() {
-  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
-  const isVariableField = this.nodeJson?.viewProps?.source === "variable";
+  const isSelectedFields = this.nodeJson?.viewProps?.dataFields?.source === "direct";
+  const isVariableField = this.nodeJson?.viewProps?.dataFields?.source === "variable";
+  let fields = this.getHippoFields(true);
+  fields = fields.concat(this.getCustomFields(true))
+  fields = fields.concat(['hippoFields', "customFields", "appVariables"])
   return getValidator().compile({
     downloadCsvFile: "boolean",
     hideEmptyFields: "boolean",
     excerptContent: "boolean|optional",
     allowEdit: "boolean|optional",
     allowCopy: "boolean|optional",
-    selectedFields: {
-      type: "array",
-      optional: !isSelectedFields,
-      items: {
-        type: "enum",
-        values: this.getHippoFields(true),
-      },
-    },
     showHippoFieldIcon: "boolean",
     showSearch: "boolean",
     showUpdateWith: "boolean",
-    variable: {
-      type: "string",
-      optional: !isVariableField
-    },
-    source: {
-      type: "enum",
-      values: ["all", "selected", "variable"],
-    },
-  });
-}
-function customFieldsCheck() {
-  const isSelectedFields = this.nodeJson?.viewProps?.source === "selected";
-  const isVariableField = this.nodeJson?.viewProps?.source === "variable";
-  return getValidator().compile({
-    downloadCsvFile: "boolean",
-    hideEmptyFields: "boolean",
-    excerptContent: "boolean|optional",
-    allowEdit: "boolean|optional",
-    allowCopy: "boolean|optional",
-    selectedFields: {
-      type: "array",
-      optional: !isSelectedFields,
-      items: {
-        type: "enum",
-        values: this.getCustomFields(true),
-      },
-    },
-    showHippoFieldIcon: "boolean",
-    showSearch: "boolean",
-    showUpdateWith: "boolean",
-    variable: {
-      type: "string",
-      optional: !isVariableField
-    },
-    source: {
-      type: "enum",
-      values: ["all", "selected", "variable"],
+    dataFields: {
+      label: TransText.getTranslate('dataFields'),
+      type: "object",
+      props: {
+        source: {
+          type: "enum",
+          values: ["direct", "variable"],
+        },
+        selected:{
+          label: TransText.getTranslate('dataFields'),
+          type: "array",
+          optional: !isSelectedFields,
+          items: {
+            type: "enum",
+            values: fields,
+          },
+        },
+        variable: {
+          type: "string",
+          optional: !isVariableField
+        },
+      }
     },
   });
 }
@@ -550,12 +530,7 @@ export default class ComponentNode extends AbstractHippoNode {
         break;
       case "hippoFields":
         errors.pushArray(
-          hippoFieldsCheck.call(this)(this.nodeJson.viewProps || {})
-        );
-        break;
-      case "customFields":
-        errors.pushArray(
-          customFieldsCheck.call(this)(this.nodeJson.viewProps || {})
+          hippoFieldsCheck.call(this)(this?.nodeJson?.viewProps || {})
         );
         break;
       case "appVariables":

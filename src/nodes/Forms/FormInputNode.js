@@ -19,7 +19,61 @@ const formInputSchema = {
     },
   },
 };
-
+function fieldSelectorCheck(validationRulesScheme) {
+  const isSelectedFields = this?.nodeJson?.props?.elementData?.include?.dataFields?.source === "direct";
+  const isVariableField = this?.nodeJson?.props?.elementData?.include?.dataFields?.source === "variable";
+  let fields = []
+  fields = this.getHippoFields(true);
+  fields = fields.concat(this.getCustomFields(true))
+  fields = fields.concat(this.getAppParameters(true))
+  fields = fields.concat(['hippoFields', "customFields", "appVariables"])
+  return getValidator().compile({
+    label: "string",
+    name: "string",
+    schema: "object",
+    settings: "object",
+    validationRules: validationRulesScheme,
+    elementData: {
+      type: "object",
+      props: {
+        include: {
+          type: "object",
+          props: {
+            dataFields: {
+              type: "object",
+              label: TransText.getTranslate('dataFields'),
+              props: {
+                source: {
+                  type: "enum",
+                  values: ["direct", "variable"],
+                },
+                variable: {
+                  type: "string",
+                  optional: !isVariableField,
+                  label: "Variable",
+                },
+                selected: {
+                  type: "array",
+                  optional: !isSelectedFields,
+                  label: TransText.getTranslate('dataFields'),
+                  minItems: isSelectedFields ? 1 : 0,
+                  items: {
+                    type: "enum",
+                    values: fields,
+                  },
+                  messages: {
+                    required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('field'), "Field Selector"),
+                  },
+                },
+              }
+            }
+          },
+        },
+        fields: "array",
+      },
+    },
+  })
+}
 const formInputCheck = getValidator().compile(formInputSchema);
 export default class FormInputNode extends AbstractHippoNode {
   constructor(appJson, path, id, formJson) {
@@ -135,7 +189,7 @@ export default class FormInputNode extends AbstractHippoNode {
                 empty: false,
                 optional: isNameOptional,
                 messages: {
-                  required: "Card Name is a required field",
+                  required: TransText.getTranslate("valueIsRequiredByNode", TransText.getTranslate('cardName'))
                 },
               },
               listHippoId: {
@@ -181,7 +235,7 @@ export default class FormInputNode extends AbstractHippoNode {
                   "selected",
                 minItems: 1,
                 messages: {
-                  required: "No label selected for Trello Label Selector",
+                  required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('label'), "Trello Label Selector"),
                 },
               },
             },
@@ -189,63 +243,6 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
-    const FieldSelectorScheme = {
-      label: "string",
-      name: "string",
-      schema: "object",
-      settings: "object",
-      validationRules: validationRulesScheme,
-      elementData: {
-        type: "object",
-        props: {
-          include: {
-            type: "object",
-            props: {
-              type: {
-                type: "enum",
-                values: ["selected", "all", "variable"],
-              },
-              variable: {
-                type: "string",
-                optional:
-                  this.nodeJson?.props?.elementData?.include?.type !==
-                  "variable",
-                label: "Variable",
-              },
-              entities: {
-                type: "array",
-                nullable:
-                  this.nodeJson?.props?.elementData?.include?.type !==
-                  "all",
-                optional:
-                  this.nodeJson?.props?.elementData?.include?.type !==
-                  "all",
-                items: {
-                  type: "enum",
-                  minItems: 1,
-                  values: ['hippoFields', 'appVariables', 'customFields']
-                }
-              },
-              selected: {
-                type: "array",
-                nullable:
-                  this.nodeJson?.props?.elementData?.include?.type !==
-                  "selected",
-                optional:
-                  this.nodeJson?.props?.elementData?.include?.type !==
-                  "selected",
-                minItems: 1,
-                messages: {
-                  required: "No label selected for Trello Label Selector",
-                },
-              },
-            },
-          },
-          fields: "array",
-        },
-      },
-    };
-
 
 
     const TrelloUserSelectorSchema = {
@@ -299,9 +296,9 @@ export default class FormInputNode extends AbstractHippoNode {
             },
             messages: {
               required:
-                "At least 1 role must be selected for the user to be created.",
+                TransText.getTranslate('atLeastRoleMustSelectedUserErrorMessage'),
               minItems:
-                "At least 1 role must be selected for the user to be created.",
+                TransText.getTranslate('atLeastRoleMustSelectedUserErrorMessage'),
             },
           },
         },
@@ -333,14 +330,14 @@ export default class FormInputNode extends AbstractHippoNode {
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: "The 'No' field is required.",
+              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('no')}),
             },
           },
           yesText: {
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: "The 'Yes' field is required.",
+              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('yes')}),
             },
           },
           placeholder: "string|optional",
@@ -362,12 +359,10 @@ export default class FormInputNode extends AbstractHippoNode {
           type: "object",
           props: {
             value: {
+              label: TransText.getTranslate('option'),
               type: "string",
               optional: false,
               minLength: 1,
-              messages: {
-                required: "Option cannot be empty",
-              },
             },
           },
         },
@@ -394,8 +389,7 @@ export default class FormInputNode extends AbstractHippoNode {
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {
-      const checker = getValidator().compile(FieldSelectorScheme);
-      propsErrors.pushArray(checker(this.nodeJson.props));
+      propsErrors.pushArray(fieldSelectorCheck.call(this, validationRulesScheme)(this?.nodeJson?.props || {}));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
       const checker = getValidator({
