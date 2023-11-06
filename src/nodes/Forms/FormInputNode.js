@@ -117,6 +117,7 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     const trelloListIds = this.getTrelloList(true, hasParent);
     let isNameOptional = false;
+    let isListOptional = false;
     const fieldMapping = this?.parentNode?.nodeJson?.body?.fieldMapping;
     Object.values(fieldMapping || {}).forEach((fieldMap) => {
       if (
@@ -124,6 +125,12 @@ export default class FormInputNode extends AbstractHippoNode {
         fieldMap.trelloCardField?.targetField === "name"
       ) {
         isNameOptional = true;
+      }
+      if (
+        fieldMap?.trelloCardField &&
+        fieldMap.trelloCardField?.targetField === "trelloList"
+      ) {
+        isListOptional = true;
       }
     });
     const validationRulesScheme = {
@@ -194,6 +201,8 @@ export default class FormInputNode extends AbstractHippoNode {
               },
               listHippoId: {
                 type: "enum",
+                nullable: true,
+                optional: isListOptional,
                 values: trelloListIds,
               },
               description: "string|optional",
