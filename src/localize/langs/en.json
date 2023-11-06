@@ -151,5 +151,10 @@
   "no": "No",
   "yes": "Yes",
   "option": "Option",
-  "dataFields": "Data Fields"
+  "dataFields": "Data Fields",
+  "attachmentType": "Attachment Type",
+  "attachmentSizeLimit": "Attachment Size Limit",
+  "minimum": "Minimum",
+  "maximum": "Maximum",
+  "maxSize": "Max Size"
 }

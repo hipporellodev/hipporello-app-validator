@@ -133,6 +133,7 @@ export default class FormInputNode extends AbstractHippoNode {
         isListOptional = true;
       }
     });
+    const isLengthIf = ["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true)
     const validationRulesScheme = {
       type: "object",
       optional: true,
@@ -143,34 +144,64 @@ export default class FormInputNode extends AbstractHippoNode {
         },
         minLength: {
           type: "number",
-          optional: true,
+          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
           nullable: true,
           min: 0,
-          max: this.nodeJson?.props?.validationRules?.maxLength,
-          label: "Min Length",
+          max: isLengthIf ? this.nodeJson?.props?.validationRules?.maxLength : 999999,
+          label: TransText.getTranslate('minimum'),
         },
         maxLength: {
           type: "number",
+          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
+          nullable: true,
+          min: isLengthIf ? this.nodeJson?.props?.validationRules?.minLength : 0,
+          label: TransText.getTranslate('maximum')
+        },
+        fileSizeLimit: {
+          type: 'boolean',
           optional: true,
           nullable: true,
-          min: this.nodeJson?.props?.validationRules?.minLength,
-          label: "Max Length",
+          label: TransText.getTranslate('attachmentType')
+        },
+        maxSize: {
+          type: "number",
+          optional: this.nodeJson?.props?.validationRules?.fileSizeLimit !== true,
+          label: TransText.getTranslate('maxSize'),
+          min: 1,
+        },
+        lengthLimit: {
+          type: 'boolean',
+          optional: true,
+          nullable: true,
+        },
+        attachmentLimit: {
+          type: 'boolean',
+          optional: true,
+          nullable: true,
+          label: TransText.getTranslate('attachmentSizeLimit')
         },
         minItems: {
           type: "number",
           optional: true,
           nullable: true,
-          min: 0,
+          min: 1,
           max: this.nodeJson?.props?.validationRules?.maxItems,
-          label: "Min Items",
+          label: TransText.getTranslate('minimum'),
         },
         maxItems: {
           type: "number",
           optional: true,
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minItems,
-          label: "Max Items",
+          label: TransText.getTranslate('maximum'),
         },
+        attachmentTypes: {
+          type: "string",
+          optional: this.nodeJson?.input !== "Attachment",
+          nullable: this.nodeJson?.input !== "Attachment",
+          min: 1,
+          label: TransText.getTranslate('attachmentType')
+        }
       },
     };
     const ButtonSchema = {
@@ -325,6 +356,12 @@ export default class FormInputNode extends AbstractHippoNode {
         }
       }
     }
+    const AttachmentSchema = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      validationRules: validationRulesScheme,
+    }
     const BooleanSchema = {
       label: "string",
       description: "string|optional",
@@ -408,6 +445,10 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT_SELECTOR){
       const checker = getValidator().compile(AttachmentSelectorSchema);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT){
+      const checker = getValidator().compile(AttachmentSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
