@@ -144,5 +144,17 @@
   "validate.stringBase64" : "'{field}' alanı bir base64 dizesi olmalıdır.",
   "validate.objectStrict" : " '{field}' nesnesi yasaklı anahtarlar içeriyor: '{actual}'.",
   "dueReminderMinutes" : "Hatırlatma Zamanı (Dakika)",
-  "username" : "Kullanıcı Adı"
+  "username" : "Kullanıcı Adı",
+  "no" : "Hayır",
+  "attachmentSizeLimit" : "Ek Dosya Boyut Sınırı",
+  "cardName" : "Kart İsmi",
+  "attachmentType" : "Ek Dosya Türü",
+  "yes" : "Evet",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Kullanıcının oluşturulabilmesi için en az 1 rol seçilmelidir.",
+  "xSelectorNoAnySelectedOption" : "{1} için seçili {0} yok",
+  "maximum" : "Maksimum",
+  "maxSize" : "Maksimum Boyut",
+  "minimum" : "Minimumum",
+  "dataFields" : "Veri Alanları",
+  "option" : "Seçenek"
 }
