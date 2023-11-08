@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Поле '{field}' должно быть строкой в формате base64.",
   "validate.objectStrict" : "Объект '{field}' содержит запрещенные ключи: '{actual}'.",
   "dueReminderMinutes" : "Напоминание о сроке (минуты)",
-  "username" : "Имя пользователя"
+  "username" : "Имя пользователя",
+  "no" : "Нет",
+  "attachmentSizeLimit" : "Ограничение размера вложения",
+  "cardName" : "Название карточки",
+  "attachmentType" : "Тип вложения",
+  "yes" : "Да",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Для создания пользователя необходимо выбрать хотя бы 1 роль.",
+  "xSelectorNoAnySelectedOption" : "Не выбрано ни одного {0} для {1}",
+  "maximum" : "Максимальное значение",
+  "maxSize" : "Максимальный размер",
+  "minimum" : "Минимальное",
+  "dataFields" : "Поля данных",
+  "option" : "Опция"
 }
