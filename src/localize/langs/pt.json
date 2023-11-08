@@ -144,5 +144,17 @@
   "validate.stringBase64" : "O campo '{field}' deve ser uma string em base64.",
   "validate.objectStrict" : "O objeto '{field}' contém chaves proibidas: '{actual}'.",
   "dueReminderMinutes" : "Lembrança devida (Minutos)",
-  "username" : "Nome de usuário"
+  "username" : "Nome de usuário",
+  "no" : "Não",
+  "attachmentSizeLimit" : "Limite de tamanho de anexo",
+  "cardName" : "Nome do Cartão",
+  "attachmentType" : "Tipo de Anexo",
+  "yes" : "Sim",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Pelo menos uma função deve ser selecionada para criar o usuário.",
+  "xSelectorNoAnySelectedOption" : "Nenhum {0} selecionado para {1}",
+  "maximum" : "Máximo",
+  "maxSize" : "Tamanho Máximo",
+  "minimum" : "Mínimo",
+  "dataFields" : "Campos de Dados",
+  "option" : "Opção"
 }
