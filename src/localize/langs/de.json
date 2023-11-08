@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Das Feld '{field}' muss eine Base64-Zeichenfolge sein.",
   "validate.objectStrict" : "Das Objekt '{field}' enthält verbotene Schlüssel: '{actual}'.",
   "dueReminderMinutes" : "Fällige Erinnerung (Minuten)",
-  "username" : "Benutzername"
+  "username" : "Benutzername",
+  "no" : "Nein",
+  "attachmentSizeLimit" : "Begrenzung der Anhangsgröße",
+  "cardName" : "Kartenname",
+  "attachmentType" : "Anhangstyp",
+  "yes" : "Ja",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Es muss mindestens eine Rolle für den Benutzer ausgewählt werden, um ihn zu erstellen.",
+  "xSelectorNoAnySelectedOption" : "Keine {0} für {1} ausgewählt",
+  "maximum" : "Maximal",
+  "maxSize" : "Maximale Größe",
+  "minimum" : "Minimum",
+  "dataFields" : "Datenfelder",
+  "option" : "Option"
 }
