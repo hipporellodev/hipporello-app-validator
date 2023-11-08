@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Il campo '{field}' deve essere una stringa in formato base64.",
   "validate.objectStrict" : "L'oggetto '{field}' contiene chiavi vietate: '{actual}'.",
   "dueReminderMinutes" : "Promemoria scadenza (minuti)",
-  "username" : "Nome utente"
+  "username" : "Nome utente",
+  "no" : "No",
+  "attachmentSizeLimit" : "Limite dimensioni allegato",
+  "cardName" : "Nome Carta",
+  "attachmentType" : "Tipo Allegato",
+  "yes" : "Yes",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Deve essere selezionato almeno 1 ruolo per creare un utente.",
+  "xSelectorNoAnySelectedOption" : "Nessun/a {0} selezionato/a per {1}.",
+  "maximum" : "Massimo",
+  "maxSize" : "Dimensione massima",
+  "minimum" : "Minimo",
+  "dataFields" : "Campi dati",
+  "option" : "Opzione"
 }
