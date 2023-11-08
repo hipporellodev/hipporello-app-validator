@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Le champ '{field}' doit être une chaîne en base64.",
   "validate.objectStrict" : "L'objet '{field}' contient des clés interdites : '{actual}'.",
   "dueReminderMinutes" : "Rappel d'échéance (minutes)",
-  "username" : "Nom d'utilisateur"
+  "username" : "Nom d'utilisateur",
+  "no" : "Non",
+  "attachmentSizeLimit" : "Limite de taille de pièce jointe",
+  "cardName" : "Nom de la carte",
+  "attachmentType" : "Type de pièce jointe",
+  "yes" : "Oui",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Au moins 1 rôle doit être sélectionné pour créer l'utilisateur.",
+  "xSelectorNoAnySelectedOption" : "Aucun {0} sélectionné pour {1}",
+  "maximum" : "Maximum",
+  "maxSize" : "Taille maximale",
+  "minimum" : "Minimum",
+  "dataFields" : "Champs de données",
+  "option" : "Option"
 }
