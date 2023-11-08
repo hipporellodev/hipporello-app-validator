@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Het veld '{field}' moet een base64 string zijn.",
   "validate.objectStrict" : "Het object '{field}' bevat verboden sleutels: '{actual}'.",
   "dueReminderMinutes" : "Herinnering verschuldigd (minuten)",
-  "username" : "Gebruikersnaam"
+  "username" : "Gebruikersnaam",
+  "no" : "Nee",
+  "attachmentSizeLimit" : "Limiet bijlagegrootte",
+  "cardName" : "Kaartnaam",
+  "attachmentType" : "Bijlagentype",
+  "yes" : "Ja",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Er moet ten minste 1 rol worden geselecteerd voor de gebruiker om te worden gemaakt.",
+  "xSelectorNoAnySelectedOption" : "Geen {0} geselecteerd voor {1}",
+  "maximum" : "Maximaal",
+  "maxSize" : "Maximale grootte",
+  "minimum" : "Minimum",
+  "dataFields" : "Gegevensvelden",
+  "option" : "Optie"
 }
