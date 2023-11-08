@@ -144,5 +144,17 @@
   "validate.stringAlphanum" : "El campo '{field}' debe ser una cadena alfanumérica.",
   "validate.stringBase64" : "El campo '{field}' debe ser una cadena base64.",
   "validate.function" : "El campo '{field}' debe ser una función.",
-  "validate.arrayMin" : "El campo '{field}' debe contener al menos {expected} elementos."
+  "validate.arrayMin" : "El campo '{field}' debe contener al menos {expected} elementos.",
+  "no" : "No",
+  "attachmentSizeLimit" : "Límite de tamaño del archivo adjunto",
+  "cardName" : "Nombre de la tarjeta",
+  "attachmentType" : "Tipo de archivo adjunto",
+  "yes" : "Sí",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Debe seleccionarse al menos 1 rol para crear el usuario.",
+  "xSelectorNoAnySelectedOption" : "No se ha seleccionado ningún {0} para {1}.",
+  "maximum" : "Máximo",
+  "maxSize" : "Tamaño máximo",
+  "minimum" : "Mínimo",
+  "dataFields" : "Campos de datos",
+  "option" : "Opción"
 }
