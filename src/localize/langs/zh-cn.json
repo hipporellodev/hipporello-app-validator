@@ -144,5 +144,17 @@
   "short" : "短Id",
   "board" : "板块",
   "validate.objectStrict" : "对象“{field}”包含禁止的键：“{actual}”。",
-  "dueReminderMinutes" : "到期提醒（分钟）"
+  "dueReminderMinutes" : "到期提醒（分钟）",
+  "no" : "否",
+  "attachmentSizeLimit" : "附件大小限制",
+  "cardName" : "卡片名称",
+  "attachmentType" : "附件类型",
+  "yes" : "是",
+  "atLeastRoleMustSelectedUserErrorMessage" : "必须为用户选择至少1种角色才能创建用户。",
+  "xSelectorNoAnySelectedOption" : "没有选择{1}的任何{0}。",
+  "maximum" : "最大",
+  "maxSize" : "最大尺寸",
+  "minimum" : "最小值",
+  "dataFields" : "数据字段",
+  "option" : "选项"
 }
