@@ -144,5 +144,17 @@
   "validate.stringBase64" : "Pole '{field}' musi być ciągiem base64.",
   "validate.objectStrict" : "Obiekt '{field}' zawiera niedozwolone klucze: '{actual}'.",
   "dueReminderMinutes" : "Przypomnienie o terminie (minuty)",
-  "username" : "Nazwa Użytkownika"
+  "username" : "Nazwa Użytkownika",
+  "no" : "Nie",
+  "attachmentSizeLimit" : "Limit rozmiaru załączników",
+  "cardName" : "Nazwa karty",
+  "attachmentType" : "Typ załącznika",
+  "yes" : "Tak",
+  "atLeastRoleMustSelectedUserErrorMessage" : "Aby utworzyć użytkownika, musi być wybrana co najmniej jedna rola.",
+  "xSelectorNoAnySelectedOption" : "Nie wybrano żadnych {0} dla {1}",
+  "maximum" : "Maksimum",
+  "maxSize" : "Maksymalny rozmiar",
+  "minimum" : "Minimalny(a/e)",
+  "dataFields" : "Pola danych",
+  "option" : "Opcja"
 }
