@@ -20,6 +20,7 @@ export default class VariableNode extends AbstractHippoNode {
       exp.registerFunction("createLinkEnc", () => {}, "<ssssssa:s>");
       exp.registerFunction("createLink", () => {}, "<ssssssa:s>");
       exp.registerFunction("toString", () => {}, "<s-a:s>");
+      exp.registerFunction("length", () => {}, "<a-:n>");
       this.ALL_JSONATA_EXPRESSIONS[text] = exp;
     }
     return exp;
@@ -76,6 +77,7 @@ export default class VariableNode extends AbstractHippoNode {
     return null;
   }
   getValidatorFunction() {
+    console.log(this.expression)
     let exp = VariableNode.createJsonataExpression(this.expression);
     let varErrors = [];
     let withDeletedStaticFields = this.getAccessibleFieldTypes(true);
@@ -90,11 +92,13 @@ export default class VariableNode extends AbstractHippoNode {
           const hasIgnoredPath = ignoredPropertyNames.some((i) =>
             me.expression.includes(i)
           );
+          console.log("before", propertyName)
           if (
             varErrors.length === 0 &&
             propertyName !== "sequence" &&
             !hasIgnoredPath
           ) {
+            console.log(propertyName)
             let fieldId = propertyName;
             if (activeContext != null) {
               fieldId = activeContext.resolveBy
