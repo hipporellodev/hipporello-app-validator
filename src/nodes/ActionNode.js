@@ -454,7 +454,7 @@ export default class ActionNode extends AbstractHippoNode {
                 type: {
                   type: "enum",
                   optional: true,
-                  values: ["replacement", "minus", "plus", "multiply", "remove"],
+                  values: ["replacement", "minus", "plus", "multiply", "remove", "addItem", "removeItem"],
                 },
                 valueType: {
                   type: "enum",
