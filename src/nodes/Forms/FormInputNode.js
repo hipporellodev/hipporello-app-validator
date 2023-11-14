@@ -144,7 +144,7 @@ export default class FormInputNode extends AbstractHippoNode {
         },
         minLength: {
           type: "number",
-          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
+          optional: !isLengthIf,
           nullable: true,
           min: 0,
           max: isLengthIf ? this.nodeJson?.props?.validationRules?.maxLength : 999999,
@@ -152,7 +152,7 @@ export default class FormInputNode extends AbstractHippoNode {
         },
         maxLength: {
           type: "number",
-          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
+          optional: true,
           nullable: true,
           min: isLengthIf ? this.nodeJson?.props?.validationRules?.minLength : 0,
           label: TransText.getTranslate('maximum')
@@ -163,7 +163,7 @@ export default class FormInputNode extends AbstractHippoNode {
           nullable: true,
           label: TransText.getTranslate('attachmentType')
         },
-        maxSize: {
+        sizeLimit: {
           type: "number",
           optional: this.nodeJson?.props?.validationRules?.fileSizeLimit !== true,
           label: TransText.getTranslate('maxSize'),
@@ -449,6 +449,7 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT){
       const checker = getValidator().compile(AttachmentSchema);
+      console.log(this.nodeJson.props)
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
