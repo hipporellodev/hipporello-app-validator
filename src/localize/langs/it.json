@@ -156,5 +156,6 @@
   "maxSize" : "Dimensione massima",
   "minimum" : "Minimo",
   "dataFields" : "Campi dati",
-  "option" : "Opzione"
+  "option" : "Opzione",
+  "field" : "Campo"
 }
