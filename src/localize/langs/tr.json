@@ -156,5 +156,6 @@
   "maxSize" : "Maksimum Boyut",
   "minimum" : "Minimumum",
   "dataFields" : "Veri Alanları",
-  "option" : "Seçenek"
+  "option" : "Seçenek",
+  "field" : "Alan"
 }
