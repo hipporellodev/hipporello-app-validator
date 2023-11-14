@@ -156,5 +156,6 @@
   "maxSize" : "最大尺寸",
   "minimum" : "最小值",
   "dataFields" : "数据字段",
-  "option" : "选项"
+  "option" : "选项",
+  "field" : "字段"
 }
