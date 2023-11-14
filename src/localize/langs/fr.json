@@ -156,5 +156,6 @@
   "maxSize" : "Taille maximale",
   "minimum" : "Minimum",
   "dataFields" : "Champs de données",
-  "option" : "Option"
+  "option" : "Option",
+  "field" : "Champ"
 }
