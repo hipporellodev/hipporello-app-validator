@@ -156,5 +156,6 @@
   "maxSize" : "Maximale grootte",
   "minimum" : "Minimum",
   "dataFields" : "Gegevensvelden",
-  "option" : "Optie"
+  "option" : "Optie",
+  "field" : "Veld"
 }
