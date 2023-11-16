@@ -157,5 +157,6 @@
   "minimum": "Minimum",
   "maximum": "Maximum",
   "maxSize": "Max Size",
-  "field": "Field"
+  "field": "Field",
+  "attachmentSource": "Attachment Source"
 }

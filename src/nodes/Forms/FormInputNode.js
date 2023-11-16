@@ -194,14 +194,15 @@ export default class FormInputNode extends AbstractHippoNode {
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minItems,
           label: TransText.getTranslate('maximum'),
-        },
-        attachmentTypes: {
-          type: "string",
-          optional: this.nodeJson?.input !== "Attachment",
-          nullable: this.nodeJson?.input !== "Attachment",
-          min: 1,
-          label: TransText.getTranslate('attachmentType')
         }
+        // ,
+        // attachmentTypes: {
+        //   type: "string",
+        //   optional: this.nodeJson?.input !== "Attachment",
+        //   nullable: this.nodeJson?.input !== "Attachment",
+        //   min: 1,
+        //   label: TransText.getTranslate('attachmentType')
+        // }
       },
     };
     const ButtonSchema = {
@@ -352,7 +353,12 @@ export default class FormInputNode extends AbstractHippoNode {
       elementData: {
         type: "object",
         props: {
-          source: "string"
+          source: {
+            type: "string",
+            messages: {
+              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('attachmentSource')}),
+            },
+          }
         }
       }
     }
@@ -449,7 +455,6 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT){
       const checker = getValidator().compile(AttachmentSchema);
-      console.log(this.nodeJson.props)
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
