@@ -1,6 +1,6 @@
 {
   "name": "hipporello-validator",
-  "version": "1.0.191",
+  "version": "1.0.192",
   "description": "",
   "main": "lib/main.js",
   "scripts": {
