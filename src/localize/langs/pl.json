@@ -157,5 +157,6 @@
   "minimum" : "Minimalny(a/e)",
   "dataFields" : "Pola danych",
   "option" : "Opcja",
-  "field" : "Pole"
+  "field" : "Pole",
+  "attachmentSource" : "Źródło załącznika"
 }
