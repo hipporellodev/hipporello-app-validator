@@ -157,5 +157,6 @@
   "minimum" : "Minimumum",
   "dataFields" : "Veri Alanları",
   "option" : "Seçenek",
-  "field" : "Alan"
+  "field" : "Alan",
+  "attachmentSource" : "Ek Kaynağı"
 }
