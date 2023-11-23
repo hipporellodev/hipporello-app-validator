@@ -157,5 +157,6 @@
   "minimum" : "最小值",
   "dataFields" : "数据字段",
   "option" : "选项",
-  "field" : "字段"
+  "field" : "字段",
+  "attachmentSource" : "附件来源"
 }
