@@ -157,5 +157,6 @@
   "minimum" : "Minimum",
   "dataFields" : "Champs de données",
   "option" : "Option",
-  "field" : "Champ"
+  "field" : "Champ",
+  "attachmentSource" : "Source de l'attachement"
 }
