@@ -157,5 +157,6 @@
   "minimum" : "Минимальное",
   "dataFields" : "Поля данных",
   "option" : "Опция",
-  "field" : "Поле"
+  "field" : "Поле",
+  "attachmentSource" : "Источник вложения"
 }
