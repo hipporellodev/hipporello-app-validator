@@ -157,5 +157,6 @@
   "minimum" : "Minimum",
   "dataFields" : "Datenfelder",
   "option" : "Option",
-  "field" : "Feld"
+  "field" : "Feld",
+  "attachmentSource" : "Quelle der Anlage"
 }
