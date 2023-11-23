@@ -157,5 +157,6 @@
   "minimum" : "Minimo",
   "dataFields" : "Campi dati",
   "option" : "Opzione",
-  "field" : "Campo"
+  "field" : "Campo",
+  "attachmentSource" : "Origine dell'Allegato"
 }
