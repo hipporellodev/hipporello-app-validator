@@ -443,6 +443,7 @@ export default class ActionNode extends AbstractHippoNode {
       },
     });
     const updateHippoFieldGenerateScheme = (key) => {
+      console.log(key)
       const actionWhenUpdateHippoFields = getValidator({useNewCustomCheckerFunction: true}).compile({
         cardUpdateFields: {
           type: "object",
@@ -537,21 +538,37 @@ export default class ActionNode extends AbstractHippoNode {
       this.nodeJson.type === "update-hipporello-card" ||
       this.nodeJson.type === "update-trello-card"
     ) {
+      const staticFields = this.getAccessibleFieldTypes(true);
+      const staticFieldsKeys = Object.keys(staticFields||{});
       const firstField = Object.keys(
         this.nodeJson.props?.cardUpdateFields || {}
       )?.[0];
-      if (allHippoFields.includes(firstField)) {
-        this.validatorPath = `${this.path}.props.cardUpdateFields.${firstField}`;
-        errors.pushArray(
-          updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
-        );
-      } else {
+      const foundFieldKey = staticFieldsKeys.find(i => i.includes(firstField));
+      if (foundFieldKey) {
+        const field = staticFields[foundFieldKey]
+        const label = field?.label ||field?.name;
+        if(!field?.deleted){
+          this.validatorPath = `${this.path}.props.cardUpdateFields.${firstField}`;
+          errors.pushArray(
+            updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
+          );
+        }else{
+          errors.push({
+            path: this.validatorPath,
+            type: "invalidVariable",
+            message: TransText.getTranslate('variableNamedDeletedMessage', fied),
+            args: [label],
+          })
+        }
+      }
+      else {
         this.validatorPath = `${this.path}.props.cardUpdateFields`;
-        errors.pushArray(
-          actionWhenUpdateHippoFieldsContext(this.nodeJson.props || {})
-        );
-        // this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
-        // errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
+        errors.push({
+          path: this.validatorPath,
+          type: "invalidVariable",
+          message: TransText.getTranslate('variableUsedCannotFound'),
+          args: [""],
+        })
       }
     } else if (this.nodeJson.type === "open-page") {
       errors.pushArray(actionWhenOpenPage(this.nodeJson.props || {}));
