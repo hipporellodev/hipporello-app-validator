@@ -908,8 +908,8 @@ export default class AbstractHippoNode {
       };
     });
     customFields.forEach((appVar) => {
-      fieldMap["card.tcf_" + appVar.id] = {
-        id: "card.tcf_" + appVar.id,
+      fieldMap["card.cf_" + appVar.id] = {
+        id: "card.cf_" + appVar.id,
         type: appVar.type,
         label: appVar.label,
         resolveBy:
