@@ -26,6 +26,7 @@ const componentScheme = {
       "label",
       "button",
       "TrelloCardSharing",
+      "trelloChecklist",
       "table",
       "date",
       "dropdown",
