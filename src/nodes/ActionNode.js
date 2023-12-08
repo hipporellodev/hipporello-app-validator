@@ -38,6 +38,7 @@ const checkExternal = getValidator().compile({
     values: [
       "send-conversation-message",
       "update-hipporello-card",
+      "update-custom-field",
       "update-trello-card",
       "add-comment",
       "open-form",
@@ -104,6 +105,7 @@ const schema = getValidator().compile({
       "send-conversation-message",
       "update-hipporello-card",
       "update-trello-card",
+      "update-custom-field",
       "add-comment",
       "open-form",
       "open-page",
@@ -536,7 +538,8 @@ export default class ActionNode extends AbstractHippoNode {
       errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props || {}));
     } else if (
       this.nodeJson.type === "update-hipporello-card" ||
-      this.nodeJson.type === "update-trello-card"
+      this.nodeJson.type === "update-trello-card"||
+      this.nodeJson.type === "update-custom-field"
     ) {
       const staticFields = this.getAccessibleFieldTypes(true);
       const staticFieldsKeys = Object.keys(staticFields||{});
