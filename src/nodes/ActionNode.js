@@ -435,7 +435,7 @@ export default class ActionNode extends AbstractHippoNode {
         props: {
           type: {
             type: "enum",
-            values: ["_self", "_blank", "_modal"],
+            values: ["_tModal", "_self", "_blank", "_modal"],
           },
         },
       },
@@ -514,7 +514,7 @@ export default class ActionNode extends AbstractHippoNode {
         props: {
           type: {
             type: "enum",
-            values: ["_modal", "_blank", "_self"],
+            values: ["_tModal","_modal", "_blank", "_self"],
           },
         },
       },
