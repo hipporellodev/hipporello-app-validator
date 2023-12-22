@@ -216,6 +216,18 @@ export default class AbstractHippoNode {
     }
     return  members.map((member) => ({...member, label: member?.fullName}));
   }
+  getFieldDefinitions = (onlyId) => {
+    const appVariables = this?.appJson.app?.fieldDefinitions?.appVariableFields || {};
+    const customFields = this.getCustomFields(false).reduce((acc, item) => {
+      acc["cf_"+item?.hippoId] = item;
+      return acc;
+    }, {})
+    const hippoFields = this.appJson.app?.fieldDefinitions?.hippoFields;
+    const allFields = {...appVariables, ...hippoFields, ...customFields}
+    if (!onlyId)
+      return Object.values(allFields)?.map((i) => i?.label);
+    return Object.keys(allFields);
+  };
   getPageNames() {
     if (!this.viewNames) {
       this.viewNames = (Object.values(this.appJson?.app?.views) || [])

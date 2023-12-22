@@ -445,7 +445,6 @@ export default class ActionNode extends AbstractHippoNode {
       },
     });
     const updateHippoFieldGenerateScheme = (key) => {
-      console.log(key)
       const actionWhenUpdateHippoFields = getValidator({useNewCustomCheckerFunction: true}).compile({
         cardUpdateFields: {
           type: "object",

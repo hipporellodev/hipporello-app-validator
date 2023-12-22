@@ -137,7 +137,7 @@ export default class VariableNode extends AbstractHippoNode {
       // console.log({me, err})
     }
     if (varErrors?.length) {
-      console.log(varErrors);
+      // console.log(varErrors);
     }
     return varErrors;
   }
