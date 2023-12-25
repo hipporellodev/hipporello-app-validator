@@ -219,7 +219,7 @@ export default class AbstractHippoNode {
   getFieldDefinitions = (onlyId) => {
     const appVariables = this?.appJson.app?.fieldDefinitions?.appVariableFields || {};
     const customFields = this.getCustomFields(false).reduce((acc, item) => {
-      acc["cf_"+item?.hippoId] = item;
+      acc[item?.hippoId] = item;
       return acc;
     }, {})
     const hippoFields = this.appJson.app?.fieldDefinitions?.hippoFields;
