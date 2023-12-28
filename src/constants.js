@@ -13,7 +13,7 @@ const APP_SLUG_BLACKLIST = [
   "hipporello",
   "onboarding"
 ]
-const LATEST_APP_SCHEMA_VERSION = 4;
+const LATEST_APP_SCHEMA_VERSION = 5;
 const VARIABLE_TYPES = ["string", "double", "long", "boolean", "attachment", "date", "datetime", "time"]
 const RESOLVE_TYPES = {
   RESOLVE_LIST_BY_HIPPO_ID: "RESOLVE_LIST_BY_HIPPO_ID",
