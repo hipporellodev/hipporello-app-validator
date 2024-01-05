@@ -28,7 +28,7 @@ function fieldSelectorCheck(validationRulesScheme) {
   fields = fields.concat(this.getAppParameters(true))
   fields = fields.concat(['hippoFields', "customFields", "appVariables"])
   return getValidator().compile({
-    label: "string",
+    label: "string|optional",
     name: "string",
     schema: "object",
     settings: "object",
