@@ -128,7 +128,7 @@ export default class FormInputNode extends AbstractHippoNode {
       }
       if (
         fieldMap?.trelloCardField &&
-        fieldMap.trelloCardField?.targetField === "trelloList"
+        fieldMap.trelloCardField?.targetField === "list"
       ) {
         isListOptional = true;
       }
