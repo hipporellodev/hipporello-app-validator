@@ -305,7 +305,51 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
-
+    const TrelloListScheme = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: validationRulesScheme,
+      elementData: {
+        type: "object",
+        props: {
+          include: {
+            type: "object",
+            props: {
+              type: {
+                type: "enum",
+                values: ["selected", "all", "variable"],
+              },
+              variable: {
+                type: "string",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "variable",
+                label: "Variable",
+              },
+              selected: {
+                type: "array",
+                nullable:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
+                minItems: 1,
+                messages: {
+                  required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('list'), "Trello List Selector"),
+                },
+                items: {
+                  type: "enum",
+                  values: trelloListIds
+                }
+              },
+            },
+          }
+        },
+      },
+    };
 
     const TrelloUserSelectorSchema = {
       label: "string",
@@ -459,6 +503,10 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = getValidator().compile(TrelloLabelScheme);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LIST_SELECTOR) {
+      const checker = getValidator().compile(TrelloListScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_CHECKLIST_SELECTOR) {
