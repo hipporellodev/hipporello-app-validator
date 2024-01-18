@@ -19,6 +19,7 @@ export default class AbstractHippoNode {
   static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
   static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem"
   static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color"
+  static RESOLVE_CHECKLIST_BY_HIPPO_ID = "checklist"
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
@@ -383,6 +384,11 @@ export default class AbstractHippoNode {
         type: AbstractHippoNode.RESOLVE_LABEL_BY_HIPPO_ID,
       },
       {
+        id: "checklist",
+        label: TransText.getTranslate("checklist"),
+        type: AbstractHippoNode.RESOLVE_CHECKLIST_BY_HIPPO_ID,
+      },
+      {
         id: "board",
         label: TransText.getTranslate("board"),
         type: AbstractHippoNode.RESOLVE_BOARD_BY_TRELLO_BOARD_ID,
@@ -558,6 +564,21 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
+        id: "card.tc_checklistHippoIds",
+        label: TransText.getTranslate("checklists"),
+        type: "string",
+        multiple: true,
+        sortable: false,
+      },
+      {
+        id: "card.tc_checklistHippoIds",
+        label: TransText.getTranslate("checklists"),
+        type: "string",
+        resolveBy: AbstractHippoNode.RESOLVE_CHECKLIST_BY_HIPPO_ID,
+        multiple: true,
+        sortable: false,
+      },
+      {
         id: "card.tc_labelHippoIds",
         label: TransText.getTranslate("labels"),
         type: "string",
@@ -657,6 +678,20 @@ export default class AbstractHippoNode {
         type: "string",
         multiple: false,
         sortable: false,
+      },
+      {
+        id: "checklist.name",
+        label: TransText.getTranslate("checklistName"),
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "checklist.hippoId",
+        label: "ID",
+        type: "string",
+        multiple: false,
+        sortable: false
       },
       {
         id: "list.name",
