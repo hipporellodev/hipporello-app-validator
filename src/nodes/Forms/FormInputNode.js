@@ -243,6 +243,27 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
+    const TrelloChecklistScheme = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: validationRulesScheme,
+      elementData: {
+        type: "object",
+        props: {
+          include: {
+            type: "object",
+            props: {
+              variable: {
+                type: "string",
+                label: TransText.getTranslate('variable'),
+              }
+            },
+          }
+        },
+      },
+    }
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
@@ -438,6 +459,10 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = getValidator().compile(TrelloLabelScheme);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_CHECKLIST_SELECTOR) {
+      const checker = getValidator().compile(TrelloChecklistScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {

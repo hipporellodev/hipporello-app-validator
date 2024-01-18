@@ -160,5 +160,6 @@
   "field": "Field",
   "attachmentSource": "Attachment Source",
   "checklists": "Checklists",
-  "checklistName": "Checklist Name"
+  "checklistName": "Checklist Name",
+  "variable": "Variable"
 }

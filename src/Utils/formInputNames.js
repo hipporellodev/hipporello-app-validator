@@ -1,6 +1,7 @@
 export const FORM_INPUT_NAMES = {
   ATTACHMENT_SELECTOR: "AttachmentSelector",
   TRELLO_LABEL_SELECTOR: "TrelloLabelSelector",
+  TRELLO_CHECKLIST_SELECTOR: "TrelloChecklistSelector",
   FIELD_SELECTOR: "FieldSelector",
   USER_SELECTOR: "UserSelector",
   SHORT_TEXT: "EditText",
