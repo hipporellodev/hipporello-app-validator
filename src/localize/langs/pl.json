@@ -158,5 +158,8 @@
   "dataFields" : "Pola danych",
   "option" : "Opcja",
   "field" : "Pole",
-  "attachmentSource" : "Źródło załącznika"
+  "attachmentSource" : "Źródło załącznika",
+  "checklists" : "Listy kontrolne",
+  "list" : "Lista",
+  "checklistName" : "Nazwa listy kontrolnej"
 }
