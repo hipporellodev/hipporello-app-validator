@@ -158,5 +158,8 @@
   "dataFields" : "Datenfelder",
   "option" : "Option",
   "field" : "Feld",
-  "attachmentSource" : "Quelle der Anlage"
+  "attachmentSource" : "Quelle der Anlage",
+  "checklists" : "Checklisten",
+  "list" : "Liste",
+  "checklistName" : "Checklisten-Name"
 }
