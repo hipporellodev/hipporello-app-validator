@@ -158,5 +158,8 @@
   "dataFields" : "Gegevensvelden",
   "option" : "Optie",
   "field" : "Veld",
-  "attachmentSource" : "Bijlagebron"
+  "attachmentSource" : "Bijlagebron",
+  "checklists" : "Checklists",
+  "list" : "Lijst",
+  "checklistName" : "Naam van de Checklist"
 }
