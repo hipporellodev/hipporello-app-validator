@@ -158,5 +158,8 @@
   "maximum" : "Maximum",
   "maxSize" : "Max Size",
   "field" : "Field",
-  "attachmentSource" : "Attachment Source"
+  "attachmentSource" : "Attachment Source",
+  "checklists" : "Checklists",
+  "checklistName" : "Checklist Name",
+  "list" : "List"
 }
