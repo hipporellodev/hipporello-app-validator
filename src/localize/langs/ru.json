@@ -158,5 +158,8 @@
   "dataFields" : "Поля данных",
   "option" : "Опция",
   "field" : "Поле",
-  "attachmentSource" : "Источник вложения"
+  "attachmentSource" : "Источник вложения",
+  "checklists" : "Чек-листы",
+  "list" : "Список",
+  "checklistName" : "Название чек-листа"
 }
