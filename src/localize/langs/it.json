@@ -158,5 +158,8 @@
   "dataFields" : "Campi dati",
   "option" : "Opzione",
   "field" : "Campo",
-  "attachmentSource" : "Origine dell'Allegato"
+  "attachmentSource" : "Origine dell'Allegato",
+  "checklists" : "Elenco di controllo",
+  "list" : "Lista",
+  "checklistName" : "Nome dell'elenco di controllo"
 }
