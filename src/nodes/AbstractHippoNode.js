@@ -386,6 +386,11 @@ export default class AbstractHippoNode {
         type: AbstractHippoNode.RESOLVE_SYSTEM,
       },
       {
+        id: "trigger",
+        label: TransText.getTranslate("trigger"),
+        type: AbstractHippoNode.RESOLVE_SYSTEM,
+      },
+      {
         id: "appVariables",
         label: TransText.getTranslate("appVariables"),
         type: AbstractHippoNode.RESOLVE_APP_VARS,
