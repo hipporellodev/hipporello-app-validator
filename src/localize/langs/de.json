@@ -162,5 +162,7 @@
   "checklists" : "Checklisten",
   "list" : "Liste",
   "checklistName" : "Checklisten-Name",
-  "trigger" : "Automatisierter Auslöser"
+  "trigger" : "Automatisierter Auslöser",
+  "triggerDate" : "Auslösedatum",
+  "comment" : "Kommentar"
 }
