@@ -158,6 +158,7 @@
   "maximum" : "Maximum",
   "maxSize" : "Max Size",
   "field" : "Field",
+  "trigger" : "Automation Trigger",
   "attachmentSource" : "Attachment Source",
   "checklists" : "Checklists",
   "checklistName" : "Checklist Name",
