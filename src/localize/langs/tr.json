@@ -162,5 +162,7 @@
   "checklists" : "Kontrol Listeleri",
   "list" : "Liste",
   "checklistName" : "Kontrol Listesi Adı",
-  "trigger" : "Otomasyon Tetikleyici"
+  "trigger" : "Otomasyon Tetikleyici",
+  "triggerDate" : "Tetikleme Tarihi",
+  "comment" : "Yorum"
 }
