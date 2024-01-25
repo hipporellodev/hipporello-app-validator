@@ -162,5 +162,7 @@
   "checklists" : "Listy kontrolne",
   "list" : "Lista",
   "checklistName" : "Nazwa listy kontrolnej",
-  "trigger" : "Automatyczne uruchomienie"
+  "trigger" : "Automatyczne uruchomienie",
+  "triggerDate" : "Data wyzwolenia",
+  "comment" : "Komentarz"
 }
