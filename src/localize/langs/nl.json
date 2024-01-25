@@ -161,5 +161,6 @@
   "attachmentSource" : "Bijlagebron",
   "checklists" : "Checklists",
   "list" : "Lijst",
-  "checklistName" : "Naam van de Checklist"
+  "checklistName" : "Naam van de Checklist",
+  "trigger" : "Automatisering Trigger"
 }
