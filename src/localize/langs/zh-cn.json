@@ -161,5 +161,6 @@
   "attachmentSource" : "附件来源",
   "checklists" : "检查清单",
   "list" : "列表",
-  "checklistName" : "检查清单名称"
+  "checklistName" : "检查清单名称",
+  "trigger" : "自动触发器"
 }
