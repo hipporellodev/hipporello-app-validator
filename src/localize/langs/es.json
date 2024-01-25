@@ -161,5 +161,6 @@
   "attachmentSource" : "Origen del archivo adjunto",
   "checklists" : "Listas de comprobación",
   "list" : "Lista",
-  "checklistName" : "Nombre de la lista de comprobación"
+  "checklistName" : "Nombre de la lista de comprobación",
+  "trigger" : "Disparador de Automatización"
 }
