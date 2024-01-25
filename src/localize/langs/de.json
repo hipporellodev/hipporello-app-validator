@@ -161,5 +161,6 @@
   "attachmentSource" : "Quelle der Anlage",
   "checklists" : "Checklisten",
   "list" : "Liste",
-  "checklistName" : "Checklisten-Name"
+  "checklistName" : "Checklisten-Name",
+  "trigger" : "Automatisierter Auslöser"
 }

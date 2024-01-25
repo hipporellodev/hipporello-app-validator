@@ -161,5 +161,6 @@
   "attachmentSource" : "Source de l'attachement",
   "checklists" : "Listes de contrôle",
   "list" : "Liste",
-  "checklistName" : "Nom de la liste de contrôle"
+  "checklistName" : "Nom de la liste de contrôle",
+  "trigger" : "Déclencheur d'automatisation"
 }

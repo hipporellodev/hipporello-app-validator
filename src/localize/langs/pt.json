@@ -161,5 +161,6 @@
   "attachmentSource" : "Origem do Anexo",
   "checklists" : "Listas de Verificação",
   "list" : "Lista",
-  "checklistName" : "Nome da Lista de Verificação"
+  "checklistName" : "Nome da Lista de Verificação",
+  "trigger" : "Ativação Automática"
 }
