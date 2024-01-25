@@ -161,5 +161,6 @@
   "attachmentSource" : "Origine dell'Allegato",
   "checklists" : "Elenco di controllo",
   "list" : "Lista",
-  "checklistName" : "Nome dell'elenco di controllo"
+  "checklistName" : "Nome dell'elenco di controllo",
+  "trigger" : "Trigger di automazione"
 }
