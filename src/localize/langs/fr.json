@@ -156,5 +156,10 @@
   "maxSize" : "Taille maximale",
   "minimum" : "Minimum",
   "dataFields" : "Champs de données",
-  "option" : "Option"
+  "option" : "Option",
+  "field" : "Champ",
+  "attachmentSource" : "Source de l'attachement",
+  "checklists" : "Listes de contrôle",
+  "list" : "Liste",
+  "checklistName" : "Nom de la liste de contrôle"
 }

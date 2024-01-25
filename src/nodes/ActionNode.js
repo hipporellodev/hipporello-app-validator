@@ -38,6 +38,7 @@ const checkExternal = getValidator().compile({
     values: [
       "send-conversation-message",
       "update-hipporello-card",
+      "update-custom-field",
       "update-trello-card",
       "add-comment",
       "open-form",
@@ -104,6 +105,7 @@ const schema = getValidator().compile({
       "send-conversation-message",
       "update-hipporello-card",
       "update-trello-card",
+      "update-custom-field",
       "add-comment",
       "open-form",
       "open-page",
@@ -433,7 +435,7 @@ export default class ActionNode extends AbstractHippoNode {
         props: {
           type: {
             type: "enum",
-            values: ["_self", "_blank", "_modal"],
+            values: ["_tModal", "_self", "_blank", "_modal"],
           },
         },
       },
@@ -511,7 +513,7 @@ export default class ActionNode extends AbstractHippoNode {
         props: {
           type: {
             type: "enum",
-            values: ["_modal", "_blank", "_self"],
+            values: ["_tModal","_modal", "_blank", "_self"],
           },
         },
       },
@@ -535,23 +537,40 @@ export default class ActionNode extends AbstractHippoNode {
       errors.pushArray(actionWhenSendConvMessage(this.nodeJson.props || {}));
     } else if (
       this.nodeJson.type === "update-hipporello-card" ||
-      this.nodeJson.type === "update-trello-card"
+      this.nodeJson.type === "update-trello-card"||
+      this.nodeJson.type === "update-custom-field"
     ) {
+      const staticFields = this.getAccessibleFieldTypes(true);
+      const staticFieldsKeys = Object.keys(staticFields||{});
       const firstField = Object.keys(
         this.nodeJson.props?.cardUpdateFields || {}
       )?.[0];
-      if (allHippoFields.includes(firstField)) {
-        this.validatorPath = `${this.path}.props.cardUpdateFields.${firstField}`;
-        errors.pushArray(
-          updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
-        );
-      } else {
+      const foundFieldKey = staticFieldsKeys.find(i => i.includes(firstField));
+      if (foundFieldKey) {
+        const field = staticFields[foundFieldKey]
+        const label = field?.label ||field?.name;
+        if(!field?.deleted){
+          this.validatorPath = `${this.path}.props.cardUpdateFields.${firstField}`;
+          errors.pushArray(
+            updateHippoFieldGenerateScheme(firstField)(this.nodeJson.props || {})
+          );
+        }else{
+          errors.push({
+            path: this.validatorPath,
+            type: "invalidVariable",
+            message: TransText.getTranslate('variableNamedDeletedMessage', fied),
+            args: [label],
+          })
+        }
+      }
+      else {
         this.validatorPath = `${this.path}.props.cardUpdateFields`;
-        errors.pushArray(
-          actionWhenUpdateHippoFieldsContext(this.nodeJson.props || {})
-        );
-        // this.validatorPath = `${this.path}.props.cardUpdateFields.${Object.keys(this.nodeJson.props?.cardUpdateFields||{})?.[0]}` || this.path
-        // errors.pushArray([{type: "Not Exist", message: "Hippo Field id does not exist"}])
+        errors.push({
+          path: this.validatorPath,
+          type: "invalidVariable",
+          message: TransText.getTranslate('variableUsedCannotFound'),
+          args: [""],
+        })
       }
     } else if (this.nodeJson.type === "open-page") {
       errors.pushArray(actionWhenOpenPage(this.nodeJson.props || {}));

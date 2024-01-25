@@ -156,5 +156,10 @@
   "maxSize" : "Tamanho Máximo",
   "minimum" : "Mínimo",
   "dataFields" : "Campos de Dados",
-  "option" : "Opção"
+  "option" : "Opção",
+  "field" : "Campo",
+  "attachmentSource" : "Origem do Anexo",
+  "checklists" : "Listas de Verificação",
+  "list" : "Lista",
+  "checklistName" : "Nome da Lista de Verificação"
 }

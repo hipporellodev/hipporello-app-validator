@@ -156,5 +156,10 @@
   "maxSize" : "最大尺寸",
   "minimum" : "最小值",
   "dataFields" : "数据字段",
-  "option" : "选项"
+  "option" : "选项",
+  "field" : "字段",
+  "attachmentSource" : "附件来源",
+  "checklists" : "检查清单",
+  "list" : "列表",
+  "checklistName" : "检查清单名称"
 }

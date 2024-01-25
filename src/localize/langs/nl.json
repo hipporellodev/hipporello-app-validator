@@ -156,5 +156,10 @@
   "maxSize" : "Maximale grootte",
   "minimum" : "Minimum",
   "dataFields" : "Gegevensvelden",
-  "option" : "Optie"
+  "option" : "Optie",
+  "field" : "Veld",
+  "attachmentSource" : "Bijlagebron",
+  "checklists" : "Checklists",
+  "list" : "Lijst",
+  "checklistName" : "Naam van de Checklist"
 }

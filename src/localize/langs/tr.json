@@ -156,5 +156,10 @@
   "maxSize" : "Maksimum Boyut",
   "minimum" : "Minimumum",
   "dataFields" : "Veri Alanları",
-  "option" : "Seçenek"
+  "option" : "Seçenek",
+  "field" : "Alan",
+  "attachmentSource" : "Ek Kaynağı",
+  "checklists" : "Kontrol Listeleri",
+  "list" : "Liste",
+  "checklistName" : "Kontrol Listesi Adı"
 }

@@ -156,5 +156,10 @@
   "maxSize" : "Maximale Größe",
   "minimum" : "Minimum",
   "dataFields" : "Datenfelder",
-  "option" : "Option"
+  "option" : "Option",
+  "field" : "Feld",
+  "attachmentSource" : "Quelle der Anlage",
+  "checklists" : "Checklisten",
+  "list" : "Liste",
+  "checklistName" : "Checklisten-Name"
 }

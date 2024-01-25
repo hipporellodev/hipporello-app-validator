@@ -100,7 +100,7 @@ export default class FormNode extends AbstractHippoNode {
             props: {
               targetField: {
                 type: "enum",
-                values: ["label", "name", "description", "startDate", "dueDate", "trelloList"],
+                values: ["label", "name", "description", "startDate", "dueDate", "list", "dueComplete"],
               },
               operation: {
                 type: "enum",

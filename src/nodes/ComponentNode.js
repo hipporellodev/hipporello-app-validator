@@ -26,6 +26,7 @@ const componentScheme = {
       "label",
       "button",
       "TrelloCardSharing",
+      "trelloChecklist",
       "table",
       "date",
       "dropdown",
@@ -565,6 +566,7 @@ export default class ComponentNode extends AbstractHippoNode {
         );
       });
     }
+    if(path.includes("es563z"))
     if (nodeJson?.accessRight?.dataRule?.conditions) {
       this.addChildNode(
         new VisibilityNode(appJson, `${path}.accessRight.dataRule`)

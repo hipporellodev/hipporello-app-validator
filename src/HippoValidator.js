@@ -157,16 +157,6 @@ export default class HippoValidator {
     return Object.keys(this?.data?.roles || {});
   };
 
-  getFieldDefinitions = (isValue) => {
-    const appVariables = this?.data?.fieldDefinitions?.appVariables || {};
-    const customFields = this.entities?.customFields || {};
-    const hippoFields = this?.data?.fieldDefinitions?.hippoFields;
-    const allFields = {...appVariables, ...hippoFields, ...customFields}
-    if (isValue)
-      return Object.values(allFields)?.map((i) => i?.label);
-    return Object.keys(allFields);
-  };
-
   getEnvironments = () => {
     return Object.keys(this?.data?.environments);
   };

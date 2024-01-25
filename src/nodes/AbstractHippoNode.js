@@ -19,6 +19,7 @@ export default class AbstractHippoNode {
   static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
   static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem"
   static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color"
+  static RESOLVE_CHECKLIST_BY_HIPPO_ID = "checklist"
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
@@ -216,6 +217,18 @@ export default class AbstractHippoNode {
     }
     return  members.map((member) => ({...member, label: member?.fullName}));
   }
+  getFieldDefinitions = (onlyId) => {
+    const appVariables = this?.appJson.app?.fieldDefinitions?.appVariableFields || {};
+    const customFields = this.getCustomFields(false).reduce((acc, item) => {
+      acc[item?.hippoId] = item;
+      return acc;
+    }, {})
+    const hippoFields = this.appJson.app?.fieldDefinitions?.hippoFields;
+    const allFields = {...appVariables, ...hippoFields, ...customFields}
+    if (!onlyId)
+      return Object.values(allFields)?.map((i) => i?.label);
+    return Object.keys(allFields);
+  };
   getPageNames() {
     if (!this.viewNames) {
       this.viewNames = (Object.values(this.appJson?.app?.views) || [])
@@ -369,6 +382,11 @@ export default class AbstractHippoNode {
         id: "label",
         label: TransText.getTranslate("label"),
         type: AbstractHippoNode.RESOLVE_LABEL_BY_HIPPO_ID,
+      },
+      {
+        id: "checklist",
+        label: TransText.getTranslate("checklist"),
+        type: AbstractHippoNode.RESOLVE_CHECKLIST_BY_HIPPO_ID,
       },
       {
         id: "board",
@@ -551,6 +569,21 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
+        id: "card.tc_checklistHippoIds",
+        label: TransText.getTranslate("checklists"),
+        type: "string",
+        multiple: true,
+        sortable: false,
+      },
+      {
+        id: "card.tc_checklistHippoIds",
+        label: TransText.getTranslate("checklists"),
+        type: "string",
+        resolveBy: AbstractHippoNode.RESOLVE_CHECKLIST_BY_HIPPO_ID,
+        multiple: true,
+        sortable: false,
+      },
+      {
         id: "card.tc_labelHippoIds",
         label: TransText.getTranslate("labels"),
         type: "string",
@@ -650,6 +683,20 @@ export default class AbstractHippoNode {
         type: "string",
         multiple: false,
         sortable: false,
+      },
+      {
+        id: "checklist.name",
+        label: TransText.getTranslate("checklistName"),
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "checklist.hippoId",
+        label: "ID",
+        type: "string",
+        multiple: false,
+        sortable: false
       },
       {
         id: "list.name",
@@ -913,8 +960,8 @@ export default class AbstractHippoNode {
       };
     });
     customFields.forEach((appVar) => {
-      fieldMap["card.tcf_" + appVar.id] = {
-        id: "card.tcf_" + appVar.id,
+      fieldMap["card.cf_" + appVar.id] = {
+        id: "card.cf_" + appVar.id,
         type: appVar.type,
         label: appVar.label,
         resolveBy:

@@ -156,5 +156,10 @@
   "attachmentSizeLimit" : "Attachment Size Limit",
   "minimum" : "Minimum",
   "maximum" : "Maximum",
-  "maxSize" : "Max Size"
+  "maxSize" : "Max Size",
+  "field" : "Field",
+  "attachmentSource" : "Attachment Source",
+  "checklists" : "Checklists",
+  "checklistName" : "Checklist Name",
+  "list" : "List"
 }

@@ -156,5 +156,10 @@
   "maxSize" : "Maksymalny rozmiar",
   "minimum" : "Minimalny(a/e)",
   "dataFields" : "Pola danych",
-  "option" : "Opcja"
+  "option" : "Opcja",
+  "field" : "Pole",
+  "attachmentSource" : "Źródło załącznika",
+  "checklists" : "Listy kontrolne",
+  "list" : "Lista",
+  "checklistName" : "Nazwa listy kontrolnej"
 }

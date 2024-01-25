@@ -28,7 +28,7 @@ function fieldSelectorCheck(validationRulesScheme) {
   fields = fields.concat(this.getAppParameters(true))
   fields = fields.concat(['hippoFields', "customFields", "appVariables"])
   return getValidator().compile({
-    label: "string",
+    label: "string|optional",
     name: "string",
     schema: "object",
     settings: "object",
@@ -128,7 +128,7 @@ export default class FormInputNode extends AbstractHippoNode {
       }
       if (
         fieldMap?.trelloCardField &&
-        fieldMap.trelloCardField?.targetField === "trelloList"
+        fieldMap.trelloCardField?.targetField === "list"
       ) {
         isListOptional = true;
       }
@@ -144,7 +144,7 @@ export default class FormInputNode extends AbstractHippoNode {
         },
         minLength: {
           type: "number",
-          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
+          optional: !isLengthIf,
           nullable: true,
           min: 0,
           max: isLengthIf ? this.nodeJson?.props?.validationRules?.maxLength : 999999,
@@ -152,7 +152,7 @@ export default class FormInputNode extends AbstractHippoNode {
         },
         maxLength: {
           type: "number",
-          optional: !["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true),
+          optional: true,
           nullable: true,
           min: isLengthIf ? this.nodeJson?.props?.validationRules?.minLength : 0,
           label: TransText.getTranslate('maximum')
@@ -163,7 +163,7 @@ export default class FormInputNode extends AbstractHippoNode {
           nullable: true,
           label: TransText.getTranslate('attachmentType')
         },
-        maxSize: {
+        sizeLimit: {
           type: "number",
           optional: this.nodeJson?.props?.validationRules?.fileSizeLimit !== true,
           label: TransText.getTranslate('maxSize'),
@@ -194,14 +194,15 @@ export default class FormInputNode extends AbstractHippoNode {
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minItems,
           label: TransText.getTranslate('maximum'),
-        },
-        attachmentTypes: {
-          type: "string",
-          optional: this.nodeJson?.input !== "Attachment",
-          nullable: this.nodeJson?.input !== "Attachment",
-          min: 1,
-          label: TransText.getTranslate('attachmentType')
         }
+        // ,
+        // attachmentTypes: {
+        //   type: "string",
+        //   optional: this.nodeJson?.input !== "Attachment",
+        //   nullable: this.nodeJson?.input !== "Attachment",
+        //   min: 1,
+        //   label: TransText.getTranslate('attachmentType')
+        // }
       },
     };
     const ButtonSchema = {
@@ -242,6 +243,27 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
+    const TrelloChecklistScheme = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: validationRulesScheme,
+      elementData: {
+        type: "object",
+        props: {
+          include: {
+            type: "object",
+            props: {
+              variable: {
+                type: "string",
+                label: TransText.getTranslate('variable'),
+              }
+            },
+          }
+        },
+      },
+    }
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
@@ -283,7 +305,51 @@ export default class FormInputNode extends AbstractHippoNode {
         },
       },
     };
-
+    const TrelloListScheme = {
+      label: "string",
+      name: "string",
+      schema: "object",
+      settings: "object",
+      validationRules: validationRulesScheme,
+      elementData: {
+        type: "object",
+        props: {
+          include: {
+            type: "object",
+            props: {
+              type: {
+                type: "enum",
+                values: ["selected", "all", "variable"],
+              },
+              variable: {
+                type: "string",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "variable",
+                label: "Variable",
+              },
+              selected: {
+                type: "array",
+                nullable:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
+                optional:
+                  this.nodeJson?.props?.elementData?.include?.type !==
+                  "selected",
+                minItems: 1,
+                messages: {
+                  required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('list'), "Trello List Selector"),
+                },
+                items: {
+                  type: "enum",
+                  values: trelloListIds
+                }
+              },
+            },
+          }
+        },
+      },
+    };
 
     const TrelloUserSelectorSchema = {
       label: "string",
@@ -352,7 +418,12 @@ export default class FormInputNode extends AbstractHippoNode {
       elementData: {
         type: "object",
         props: {
-          source: "string"
+          source: {
+            type: "string",
+            messages: {
+              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('attachmentSource')}),
+            },
+          }
         }
       }
     }
@@ -432,6 +503,14 @@ export default class FormInputNode extends AbstractHippoNode {
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LABEL_SELECTOR) {
       const checker = getValidator().compile(TrelloLabelScheme);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_LIST_SELECTOR) {
+      const checker = getValidator().compile(TrelloListScheme);
+      propsErrors.pushArray(checker(this.nodeJson.props));
+    }
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.TRELLO_CHECKLIST_SELECTOR) {
+      const checker = getValidator().compile(TrelloChecklistScheme);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {
