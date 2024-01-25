@@ -161,5 +161,6 @@
   "attachmentSource" : "Ek Kaynağı",
   "checklists" : "Kontrol Listeleri",
   "list" : "Liste",
-  "checklistName" : "Kontrol Listesi Adı"
+  "checklistName" : "Kontrol Listesi Adı",
+  "trigger" : "Otomasyon Tetikleyici"
 }
