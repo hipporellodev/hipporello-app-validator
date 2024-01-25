@@ -162,5 +162,7 @@
   "attachmentSource": "Attachment Source",
   "checklists": "Checklists",
   "checklistName": "Checklist Name",
-  "list": "List"
+  "list": "List",
+  "comment": "Comment",
+  "triggerDate": "Trigger Date"
 }

@@ -23,6 +23,7 @@ export default class AbstractHippoNode {
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
+  static RESOLVE_TRIGGER = "trigger";
   static RESOLVE_PORTAL = "portal";
   static RESOLVE_FORM = "form";
 
@@ -406,7 +407,7 @@ export default class AbstractHippoNode {
       {
         id: "trigger",
         label: TransText.getTranslate("trigger"),
-        type: AbstractHippoNode.RESOLVE_SYSTEM,
+        type: AbstractHippoNode.RESOLVE_TRIGGER,
       },
       {
         id: "appVariables",
@@ -808,6 +809,20 @@ export default class AbstractHippoNode {
         id: "system.environment",
         label: TransText.getTranslate("environment"),
         type: "string",
+        multiple: false,
+        sortable: false,
+      },
+      {
+        id: "trigger.comment",
+        label: TransText.getTranslate("comment"),
+        type: "string",
+        multiple: false,
+        sortable: false,
+      },
+      {
+        id: "trigger.date",
+        label: TransText.getTranslate("triggerDate"),
+        type: "datetime",
         multiple: false,
         sortable: false,
       },
