@@ -161,5 +161,6 @@
   "attachmentSource" : "Źródło załącznika",
   "checklists" : "Listy kontrolne",
   "list" : "Lista",
-  "checklistName" : "Nazwa listy kontrolnej"
+  "checklistName" : "Nazwa listy kontrolnej",
+  "trigger" : "Automatyczne uruchomienie"
 }
