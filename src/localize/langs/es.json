@@ -68,7 +68,7 @@
   "emailDomain" : "Dominio de correo electrónico",
   "cards" : "Tarjetas",
   "color" : "Color",
-  "variableUsedCannotFound" : "No se puede encontrar la variable utilizada. Por favor, elimínela o reemplácela.",
+  "variableUsedCannotFound" : "La variable utilizada en la expresión **\"{0}\"** no se puede encontrar. Por favor, remueva o reemplace.",
   "media" : "Medio de comunicación",
   "content" : "Contenido",
   "validate.urlEmpty" : "El campo '{field}' no debe estar vacío.",
