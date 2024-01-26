@@ -162,5 +162,7 @@
   "checklists" : "Listas de Verificação",
   "list" : "Lista",
   "checklistName" : "Nome da Lista de Verificação",
-  "trigger" : "Ativação Automática"
+  "trigger" : "Ativação Automática",
+  "triggerDate" : "Data do gatilho",
+  "comment" : "Comentário"
 }

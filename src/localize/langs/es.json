@@ -162,5 +162,7 @@
   "checklists" : "Listas de comprobación",
   "list" : "Lista",
   "checklistName" : "Nombre de la lista de comprobación",
-  "trigger" : "Disparador de Automatización"
+  "trigger" : "Disparador de Automatización",
+  "triggerDate" : "Fecha de Activación",
+  "comment" : "Comentario"
 }

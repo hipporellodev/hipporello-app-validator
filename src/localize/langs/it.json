@@ -162,5 +162,7 @@
   "checklists" : "Elenco di controllo",
   "list" : "Lista",
   "checklistName" : "Nome dell'elenco di controllo",
-  "trigger" : "Trigger di automazione"
+  "trigger" : "Trigger di automazione",
+  "triggerDate" : "Data di attivazione",
+  "comment" : "Commento"
 }

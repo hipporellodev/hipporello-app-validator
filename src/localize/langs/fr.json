@@ -162,5 +162,7 @@
   "checklists" : "Listes de contrôle",
   "list" : "Liste",
   "checklistName" : "Nom de la liste de contrôle",
-  "trigger" : "Déclencheur d'automatisation"
+  "trigger" : "Déclencheur d'automatisation",
+  "triggerDate" : "Date de déclenchement",
+  "comment" : "Commentaire"
 }

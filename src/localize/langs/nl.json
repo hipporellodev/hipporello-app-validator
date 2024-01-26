@@ -162,5 +162,7 @@
   "checklists" : "Checklists",
   "list" : "Lijst",
   "checklistName" : "Naam van de Checklist",
-  "trigger" : "Automatisering Trigger"
+  "trigger" : "Automatisering Trigger",
+  "triggerDate" : "Datum triggeren",
+  "comment" : "Opmerking"
 }
