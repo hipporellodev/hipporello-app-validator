@@ -72,7 +72,7 @@
   "emailDomain" : "电子邮件域名",
   "validate.tuple" : "'{field}'字段必须是一个数组。",
   "color" : "颜色",
-  "variableUsedCannotFound" : "无法找到使用的变量。请删除或替换。",
+  "variableUsedCannotFound" : "表达式中使用的变量 **\"{0}\"** 未找到。请删除或替换。",
   "validate.stringEmpty" : "'{field}'字段不能为空。",
   "media" : "媒体",
   "content" : "内容",
