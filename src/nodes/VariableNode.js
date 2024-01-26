@@ -117,7 +117,7 @@ export default class VariableNode extends AbstractHippoNode {
                 varErrors.push({
                   path: me.validatorPath,
                   type: "invalidVariable",
-                  message: TransText.getTranslate('variableUsedCannotFound'),
+                  message: TransText.getTranslate('variableUsedCannotFound', fieldId),
                   args: [label, me.expression],
                 });
               }
