@@ -883,6 +883,20 @@ export default class AbstractHippoNode {
         sortable: false,
       },
       {
+        id: "trigger.comment",
+        label: TransText.getTranslate("comment"),
+        type: "string",
+        multiple: false,
+        sortable: false
+      },
+      {
+        id: "trigger.date",
+        label: TransText.getTranslate("triggerDate"),
+        type: "datetime",
+        multiple: false,
+        sortable: false
+      },
+      {
         id: "field.id",
         label: TransText.getTranslate("ID"),
         type: "string",
