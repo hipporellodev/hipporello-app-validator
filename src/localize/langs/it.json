@@ -109,7 +109,7 @@
   "validate.tuple" : "Il campo '{field}' deve essere un array.",
   "cards" : "Schede",
   "color" : "Colore",
-  "variableUsedCannotFound" : "Impossibile trovare la variabile utilizzata. Rimuovi o sostituisci.",
+  "variableUsedCannotFound" : "La variabile utilizzata nell'espressione **\"{0}\"** non può essere trovata. Per favore, rimuovi o sostituisci.",
   "validate.stringEmpty" : "Il campo '{field}' non deve essere vuoto.",
   "media" : "Media",
   "content" : "Contenuto",
