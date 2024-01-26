@@ -109,7 +109,7 @@
   "validate.tuple" : "Het veld '{field}' moet een array zijn.",
   "cards" : "Kaarten",
   "color" : "Kleur",
-  "variableUsedCannotFound" : "De gebruikte variabele kan niet worden gevonden. Verwijder of vervang deze alstublieft.",
+  "variableUsedCannotFound" : "De variabele die in expressie **\"{0}\"** wordt gebruikt, kan niet worden gevonden. Verwijder of vervang deze a.u.b.",
   "validate.stringEmpty" : "Het veld '{field}' mag niet leeg zijn.",
   "media" : "Media",
   "content" : "Inhoud",
