@@ -109,7 +109,7 @@
   "validate.tuple" : "Le champ '{field}' doit être un tableau.",
   "cards" : "Cartes",
   "color" : "Couleur",
-  "variableUsedCannotFound" : "La variable utilisée ne peut pas être trouvée. Veuillez la supprimer ou la remplacer.",
+  "variableUsedCannotFound" : "La variable utilisée dans l'expression **\"{0}\"** est introuvable. Veuillez la supprimer ou la remplacer.",
   "validate.stringEmpty" : "Le champ '{field}' ne doit pas être vide.",
   "media" : "Média",
   "content" : "Contenu",
