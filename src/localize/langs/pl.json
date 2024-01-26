@@ -109,7 +109,7 @@
   "validate.tuple" : "Pole '{field}' musi być tablicą.",
   "cards" : "Karty",
   "color" : "Kolor",
-  "variableUsedCannotFound" : "Nie można znaleźć używanej zmiennej. Proszę usunąć lub zamienić.",
+  "variableUsedCannotFound" : "Nie znaleziono zmiennej użytej w wyrażeniu **\"{0}\"**. Proszę usunąć lub zamienić.",
   "validate.stringEmpty" : "Pole '{field}' nie może być puste.",
   "media" : "Media",
   "content" : "Zawartość",
