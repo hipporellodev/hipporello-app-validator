@@ -133,7 +133,7 @@
   "content" : "Content",
   "copy" : "Copy",
   "variableNamedDeletedMessage" : "The variable named **\"{0}\"** has been deleted and is currently unavailable.",
-  "variableUsedCannotFound" : "The variable used cannot be found. Please remove or replace.",
+  "variableUsedCannotFound" : "The variable used in expression **\"{0}\"** cannot be found. Please remove or replace.",
   "errorMessage" : "Error Message",
   "valueIsDeletedByNode" : "'{0}' value is deleted",
   "valueIsRequiredByNode" : "'{0}' value is required",
