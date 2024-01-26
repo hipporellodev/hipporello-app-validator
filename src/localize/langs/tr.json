@@ -109,7 +109,7 @@
   "validate.tuple" : "'{field}' alanı bir dizi olmalıdır.",
   "cards" : "Kartlar",
   "color" : "Renk",
-  "variableUsedCannotFound" : "Kullanılan değişken bulunamadı. Lütfen kaldırın veya değiştirin.",
+  "variableUsedCannotFound" : "Ifadede kullanılan **\"{0}\"** değişkeni bulunamadı. Lütfen kaldırın veya değiştirin.",
   "validate.stringEmpty" : "'{field}' alanı boş olmamalıdır.",
   "media" : "Medya",
   "content" : "İçerik",
