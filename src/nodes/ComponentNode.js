@@ -5,52 +5,13 @@ import ChildrenNode from "./Views/ChildrenNode";
 import VisibilityNode from "./AccessRights/VisibilityNode";
 import getValidator from "../Utils/getValidator";
 import {TransText} from "../localize/localize";
+import {COMPONENT_TYPES} from "../constants";
 
 const componentScheme = {
   id: "string|empty:false",
   type: {
     type: "enum",
-    values: [
-      "header",
-      "paragraph",
-      "list",
-      "icon",
-      "appList",
-      "formList",
-      "sidebar",
-      "hyperlink",
-      "image",
-      "video",
-      "hippoFields",
-      "appVariables",
-      "label",
-      "button",
-      "TrelloCardSharing",
-      "trelloChecklist",
-      "table",
-      "date",
-      "dropdown",
-      "row",
-      "Image",
-      "AppVariables",
-      "Header",
-      "horizontalline",
-      "html",
-      "dropdownItem",
-      "attachmentList",
-      "menuItem",
-      "cardMenuItem",
-      "tableColumn",
-      "menu",
-      "HippoFields",
-      "Conversation",
-      "column",
-      "columns",
-      "userManagement",
-      "shareButton",
-      "customFields",
-      "trelloActivities"
-    ],
+    values: COMPONENT_TYPES,
   },
   viewProps: {
     type: "object",
