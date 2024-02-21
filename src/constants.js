@@ -95,6 +95,27 @@ const COMPONENT_TYPES = [
   "accordionItemBody",
   "accordionItemHeader"
 ]
+const FILE_MIME_MAPPING = {
+  pdf: "application/pdf",
+  doc: "application/msword",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  xls: "application/vnd.ms-excel",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  csv: "text/csv",
+  txt: "text/plain",
+  rtf: "application/rtf",
+  html: "text/html",
+  zip: "application/zip",
+  mp3: "audio/mpeg",
+  wma: "audio/x-ms-wma",
+  mpg: "video/mpeg",
+  flv: "video/x-flv",
+  avi: "video/x-msvideo",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  gif: "image/gif"
+}
 
 export {
   VARIABLE_TYPES,
@@ -104,5 +125,6 @@ export {
   SUBDOMAIN_BLACKLIST,
   PAGE_SLUG_BLACKLIST,
   APP_SLUG_BLACKLIST,
-  COMPONENT_TYPES
+  COMPONENT_TYPES,
+  FILE_MIME_MAPPING
 };

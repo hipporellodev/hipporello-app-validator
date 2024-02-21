@@ -5,6 +5,10 @@ import FormInputVisibilityNode from "./FormInputVisibilityNode";
 import uniq from "lodash/uniq";
 import getValidator from "../../Utils/getValidator";
 import {TransText} from "../../localize/localize";
+import {
+  checkAttachmentTypeIsValid,
+  getValidAttachmentFileTypes
+} from "../../Utils/checkAttachmentType";
 
 const formInputSchema = {
   input: "string",
@@ -161,7 +165,7 @@ export default class FormInputNode extends AbstractHippoNode {
           type: 'boolean',
           optional: true,
           nullable: true,
-          label: TransText.getTranslate('attachmentType')
+          label: TransText.getTranslate('fileSizeLimit')
         },
         sizeLimit: {
           type: "number",
@@ -195,14 +199,26 @@ export default class FormInputNode extends AbstractHippoNode {
           min: this.nodeJson?.props?.validationRules?.minItems,
           label: TransText.getTranslate('maximum'),
         }
-        // ,
-        // attachmentTypes: {
-        //   type: "string",
-        //   optional: this.nodeJson?.input !== "Attachment",
-        //   nullable: this.nodeJson?.input !== "Attachment",
-        //   min: 1,
-        //   label: TransText.getTranslate('attachmentType')
-        // }
+        ,
+        attachmentTypes: {
+          type: "string",
+          optional: this.nodeJson?.input !== "Attachment",
+          nullable: this.nodeJson?.input !== "Attachment",
+          min: 1,
+          label: TransText.getTranslate('attachmentType'),
+          custom: (value, errors) => {
+            const isValid = checkAttachmentTypeIsValid(value)
+            const validTypes = getValidAttachmentFileTypes()
+            if(!isValid){
+              errors.push({
+                type: "enumValue",
+                actual: value,
+                expected: validTypes
+              })
+            }
+            return value
+          }
+        }
       },
     };
     const ButtonSchema = {
@@ -527,7 +543,7 @@ export default class FormInputNode extends AbstractHippoNode {
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT){
-      const checker = getValidator().compile(AttachmentSchema);
+      const checker = getValidator({useNewCustomCheckerFunction: true}).compile(AttachmentSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
