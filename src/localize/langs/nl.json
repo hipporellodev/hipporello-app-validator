@@ -164,5 +164,6 @@
   "checklistName" : "Naam van de Checklist",
   "trigger" : "Automatisering Trigger",
   "triggerDate" : "Datum triggeren",
-  "comment" : "Opmerking"
+  "comment" : "Opmerking",
+  "fileSizeLimit" : "Limiet bestandsgrootte"
 }
