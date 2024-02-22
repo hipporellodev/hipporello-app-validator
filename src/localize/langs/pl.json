@@ -164,5 +164,6 @@
   "checklistName" : "Nazwa listy kontrolnej",
   "trigger" : "Automatyczne uruchomienie",
   "triggerDate" : "Data wyzwolenia",
-  "comment" : "Komentarz"
+  "comment" : "Komentarz",
+  "fileSizeLimit" : "Limit rozmiaru pliku"
 }
