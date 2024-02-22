@@ -164,5 +164,6 @@
   "checklistName" : "Kontrol Listesi Adı",
   "trigger" : "Otomasyon Tetikleyici",
   "triggerDate" : "Tetikleme Tarihi",
-  "comment" : "Yorum"
+  "comment" : "Yorum",
+  "fileSizeLimit" : "Dosya Boyutu Sınırı"
 }
