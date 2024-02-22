@@ -164,5 +164,6 @@
   "checklistName" : "Checklist Name",
   "list" : "List",
   "comment" : "Comment",
-  "triggerDate" : "Trigger Date"
+  "triggerDate" : "Trigger Date",
+  "fileSizeLimit" : "File Size Limit"
 }
