@@ -164,5 +164,6 @@
   "checklistName" : "Nome da Lista de Verificação",
   "trigger" : "Ativação Automática",
   "triggerDate" : "Data do gatilho",
-  "comment" : "Comentário"
+  "comment" : "Comentário",
+  "fileSizeLimit" : "Limite de tamanho de arquivo"
 }
