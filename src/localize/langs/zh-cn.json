@@ -164,5 +164,6 @@
   "checklistName" : "检查清单名称",
   "trigger" : "自动触发器",
   "triggerDate" : "触发日期",
-  "comment" : "评论"
+  "comment" : "评论",
+  "fileSizeLimit" : "文件大小限制"
 }
