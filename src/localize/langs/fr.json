@@ -164,5 +164,6 @@
   "checklistName" : "Nom de la liste de contrôle",
   "trigger" : "Déclencheur d'automatisation",
   "triggerDate" : "Date de déclenchement",
-  "comment" : "Commentaire"
+  "comment" : "Commentaire",
+  "fileSizeLimit" : "Limite de taille de fichier"
 }
