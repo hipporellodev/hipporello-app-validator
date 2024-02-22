@@ -164,5 +164,6 @@
   "checklistName" : "Nombre de la lista de comprobación",
   "trigger" : "Disparador de Automatización",
   "triggerDate" : "Fecha de Activación",
-  "comment" : "Comentario"
+  "comment" : "Comentario",
+  "fileSizeLimit" : "Limite de tamaño de archivo"
 }
