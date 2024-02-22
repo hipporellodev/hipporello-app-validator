@@ -164,5 +164,6 @@
   "checklistName" : "Checklisten-Name",
   "trigger" : "Automatisierter Auslöser",
   "triggerDate" : "Auslösedatum",
-  "comment" : "Kommentar"
+  "comment" : "Kommentar",
+  "fileSizeLimit" : "Dateigrößenlimit"
 }
