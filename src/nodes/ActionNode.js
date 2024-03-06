@@ -67,6 +67,8 @@ const checkExternal = getValidator().compile({
       "user-management-add-user",
       "user-management-update-user",
       "user-management-check-user",
+      "data-import",
+      "data-export"
     ],
   },
   props: {
@@ -255,15 +257,22 @@ export default class ActionNode extends AbstractHippoNode {
     const trelloListOptions = this.getTrelloList(true, true, false);
     const trelloLabels = this.entitiesIds?.trelloLabels;
     const allListOptions = staticListOptions.concat(trelloListOptions);
-    const allHippoFields = this.getHippoFields(true);
+    const staticFields = this.getAccessibleFieldTypes(false);
     const roles = Object.values(this.appJson?.app?.roles || {}).map(
       (role) => role?.id
     );
-    const allFieldWithContext = this.getCardFieldsWithContext(
-      ["card", "parentCard"],
-      true,
-      (field) => field?.type === "string"
-    );
+    const allFieldWithContext = Object.entries(staticFields).reduce((acc, [key, value]) => {
+      if(value?.type === "string" && key.startsWith("card")){
+        acc.push(key);
+      }
+      return acc;
+    }, [])
+    const cardFields = Object.entries(staticFields).reduce((acc, [key]) => {
+      if(key.startsWith("card")){
+        acc.push(key);
+      }
+      return acc;
+    }, [])
     const actionWhenMoveTo = getValidator({
       useNewCustomCheckerFunction: true,
     }).compile({
@@ -313,6 +322,43 @@ export default class ActionNode extends AbstractHippoNode {
         },
       },
     });
+    const actionImportExport = getValidator().compile({
+      query: {
+        collections: {
+          type: "array",
+          optional: true,
+          items: {
+            type: "string",
+          },
+        },
+        includeArchived: {
+          type: "enum",
+          optional: true,
+          values: ["all", "archived", "notarchived"],
+        },
+        type: {
+          optional: true,
+          type: "enum",
+          values: ["basic"],
+        },
+      },
+      fieldsWithProps: {
+        type: "array",
+        items: {
+          type: "object",
+          props: {
+            customLabel: {
+              type: "string",
+              optional: true
+            },
+            fieldId: {
+              type: "enum",
+              values: cardFields,
+            }
+          }
+        }
+      }
+    })
     const actionWhenAssignMember = getValidator().compile({
       updateMemberActionType: {
         type: "enum",
@@ -531,6 +577,8 @@ export default class ActionNode extends AbstractHippoNode {
       errors.pushArray(findToCardValidation.call(this, this.nodeJson.props || {}));
     }  else if (this.nodeJson.type === "update-card-labels") {
       errors.pushArray(actionWhenAssignLabel(this.nodeJson.props || {}));
+    } else if (this.nodeJson.type === "data-import" || this.nodeJson.type === "data-export") {
+      errors.pushArray(actionImportExport(this.nodeJson.props || {}));
     } else if (this.nodeJson.type === "update-card-members") {
       errors.pushArray(actionWhenAssignMember(this.nodeJson.props || {}));
     } else if (this.nodeJson.type === "send-conversation-message") {
