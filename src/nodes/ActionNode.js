@@ -121,7 +121,9 @@ const schema = getValidator().compile({
       "send-card-to-board",
       "copy-to-clipboard",
       "feedback-message",
-      "confirmation-box"
+      "confirmation-box",
+      "data-import",
+      "data-export"
     ],
   },
   props: {
@@ -324,23 +326,26 @@ export default class ActionNode extends AbstractHippoNode {
     });
     const actionImportExport = getValidator().compile({
       query: {
-        collections: {
-          type: "array",
-          optional: true,
-          items: {
-            type: "string",
+        type: "object",
+        props: {
+          collections: {
+            type: "array",
+            optional: true,
+            items: {
+              type: "string",
+            },
           },
-        },
-        includeArchived: {
-          type: "enum",
-          optional: true,
-          values: ["all", "archived", "notarchived"],
-        },
-        type: {
-          optional: true,
-          type: "enum",
-          values: ["basic"],
-        },
+          includeArchived: {
+            type: "enum",
+            optional: true,
+            values: ["all", "archived", "notarchived"],
+          },
+          type: {
+            optional: true,
+            type: "enum",
+            values: ["basic"],
+          },
+        }
       },
       fieldsWithProps: {
         type: "array",
@@ -351,7 +356,7 @@ export default class ActionNode extends AbstractHippoNode {
               type: "string",
               optional: true
             },
-            fieldId: {
+            id: {
               type: "enum",
               values: cardFields,
             }
