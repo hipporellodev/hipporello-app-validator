@@ -1,5 +1,5 @@
 import AppNode from "./nodes/AppNode";
-import {TransText} from "./localize/localize";
+import { TransText } from "./localize/localize";
 
 function getDefaultCardType() {
   return {
@@ -22,14 +22,14 @@ function addDefaults(originalApp) {
 export default class HippoValidator {
   constructor(appJson, entities, lang = "en") {
     this.lang = lang;
-    try{
+    try {
       const langModule = require(`./localize/langs/${lang}.json`);
-      TransText.addContent({[lang]: langModule});
-      TransText.setLanguage(lang)
+      TransText.addContent({ [lang]: langModule });
+      TransText.setLanguage(lang);
     } catch (e) {
       const langModule = require(`./localize/langs/en.json`);
-      TransText.addContent({[lang]: langModule});
-      TransText.setLanguage(lang)
+      TransText.addContent({ [lang]: langModule });
+      TransText.setLanguage(lang);
     }
     this.data = this.jsonTraverse(appJson);
     if (this.data.appJson) {
@@ -183,9 +183,15 @@ export default class HippoValidator {
     switch (errorType) {
       case "oneOf":
       case "enumValue":
-        return TransText.getTranslate('valueIsDeletedByNode', this.camelCaseToNormal(label))
+        return TransText.getTranslate(
+          "valueIsDeletedByNode",
+          this.camelCaseToNormal(label)
+        );
       case "required":
-        return TransText.getTranslate('valueIsRequiredByNode', this.camelCaseToNormal(label))
+        return TransText.getTranslate(
+          "valueIsRequiredByNode",
+          this.camelCaseToNormal(label)
+        );
       default:
         return "";
     }
@@ -206,13 +212,15 @@ export default class HippoValidator {
         );
       }
       const isCod = TransText.isTag(error?.code);
-      const caseTitle = isCod ? TransText.getTranslate(error.code) : this.camelCaseToNormal(error?.code);
+      const caseTitle = isCod
+        ? TransText.getTranslate(error.code)
+        : this.camelCaseToNormal(error?.code);
       return {
         ...error,
         message: message,
         errorTitle: error?.fieldLabel
           ? this.getInvalidValueErrorTitle(error?.code, error?.fieldLabel)
-          : TransText.getTranslate('errorTitle', caseTitle),
+          : TransText.getTranslate("errorTitle", caseTitle),
       };
     });
   };
@@ -384,14 +392,21 @@ export default class HippoValidator {
       switch (error.type) {
         case "oneOf":
         case "enumValue":
-          const isMultiple =  this.labelOneOfMultipleSelect(fieldLabel);
-          return TransText.getTranslate(isMultiple ? "removeDeletedField" : "chooseAnotherField", fieldLabel)
+          const isMultiple = this.labelOneOfMultipleSelect(fieldLabel);
+          return TransText.getTranslate(
+            isMultiple ? "removeDeletedField" : "chooseAnotherField",
+            fieldLabel
+          );
         case "notOneOf":
-          return TransText.getTranslate("mustNotBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
+          return TransText.getTranslate(
+            "mustNotBeOneOf",
+            error?.label || error.field || "",
+            this.convertActualValues(error)
+          );
         case "notExists":
-          return TransText.getTranslate('valueUsedCannotFound', error?.path)
+          return TransText.getTranslate("valueUsedCannotFound", error?.path);
         case "required":
-          return TransText.getTranslate('selectFieldLabel', fieldLabel);
+          return TransText.getTranslate("selectFieldLabel", fieldLabel);
         default:
           return error.message;
       }
@@ -399,13 +414,24 @@ export default class HippoValidator {
       switch (error.type) {
         case "oneOf":
         case "enumValue":
-          return TransText.getTranslate("mustBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
+          return TransText.getTranslate(
+            "mustBeOneOf",
+            error?.label || error.field || "",
+            this.convertActualValues(error)
+          );
         case "notOneOf":
-          return TransText.getTranslate("mustNotBeOneOf", error?.label || error.field||"", this.convertActualValues(error))
+          return TransText.getTranslate(
+            "mustNotBeOneOf",
+            error?.label || error.field || "",
+            this.convertActualValues(error)
+          );
         case "notExists":
-          return TransText.getTranslate('valueUsedCannotFound', error?.path)
+          return TransText.getTranslate("valueUsedCannotFound", error?.path);
         case "uniqueValue":
-          return TransText.getTranslate("mustBeUniqNode", error?.label || error.field || "")
+          return TransText.getTranslate(
+            "mustBeUniqNode",
+            error?.label || error.field || ""
+          );
         default:
           return error.message;
       }

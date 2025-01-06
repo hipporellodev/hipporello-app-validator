@@ -126,44 +126,50 @@ export default class AbstractHippoNode {
     return node;
   }
   validate(errors, path) {
-    if (path) {
-      const foundNode = this.findNodeWithPath(path);
-      if (foundNode) {
-        return foundNode.validate(errors);
-      } else {
-        return false;
+    try {
+      if (path) {
+        const foundNode = this.findNodeWithPath(path);
+        if (foundNode) {
+          return foundNode.validate(errors);
+        } else {
+          return false;
+        }
       }
-    }
-    if (this.checkedPaths[this.path] || this.deleted) {
-      return;
-    }
-    this.checkedPaths[this.path] = true;
-    if (!this.exists && this.initialValidate) {
-      if (this.isMandatory()) {
-        errors.push({ path: this?.path, type: "notExists" });
+      if (this.checkedPaths[this.path] || this.deleted) {
+        return;
       }
-      return;
-    }
-    const validationErrors = this.getValidatorFunction();
-    if (validationErrors != null) {
-      AbstractHippoNode.counter += 1;
-      const validatorFuncResult = validationErrors;
-      let newerrors =
-        typeof validatorFuncResult === "function"
-          ? validatorFuncResult(this.nodeJson)
-          : validatorFuncResult;
-      if (newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
-        newerrors.forEach((err) => {
-          err.path = err.path ? err.path : `${this.validatorPath}.${err.field}`;
-          err.relativePath = err?.field;
-        });
-        errors.pushArray(newerrors);
+      this.checkedPaths[this.path] = true;
+      if (!this.exists && this.initialValidate) {
+        if (this.isMandatory()) {
+          errors.push({ path: this?.path, type: "notExists" });
+        }
+        return;
       }
+      const validationErrors = this.getValidatorFunction();
+      if (validationErrors != null) {
+        AbstractHippoNode.counter += 1;
+        const validatorFuncResult = validationErrors;
+        let newerrors =
+          typeof validatorFuncResult === "function"
+            ? validatorFuncResult(this.nodeJson)
+            : validatorFuncResult;
+        if (newerrors && Array.isArray(newerrors) && newerrors.length > 0) {
+          newerrors.forEach((err) => {
+            err.path = err.path
+              ? err.path
+              : `${this.validatorPath}.${err.field}`;
+            err.relativePath = err?.field;
+          });
+          errors.pushArray(newerrors);
+        }
+      }
+      if (!this.exists) return;
+      this.childNodes.forEach((childNode) => {
+        return childNode.validate(errors);
+      });
+    } catch (e) {
+      console.log(e);
     }
-    if (!this.exists) return;
-    this.childNodes.forEach((childNode) => {
-      return childNode.validate(errors);
-    });
   }
 
   isMandatory() {

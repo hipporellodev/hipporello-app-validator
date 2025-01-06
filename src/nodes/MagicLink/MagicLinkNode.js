@@ -17,13 +17,6 @@ export default class MagicLinkNode extends AbstractHippoNode {
       promptLabel: {
         type: "custom",
         check: (value, errors, schema, path, parentNode) => {
-          console.log("promptLabel", {
-            value,
-            errors,
-            schema,
-            path,
-            parentNode,
-          });
           if (parentNode?.requirePrompt === true) {
             if (!value) {
               errors.push({ type: "required", field: "promptLabel" });
@@ -127,7 +120,6 @@ export default class MagicLinkNode extends AbstractHippoNode {
       parameters: null,
       ...this.nodeJson,
     });
-    console.log(this.nodeJson, errors);
     return Array.isArray(errors) ? errors : [];
   }
 }

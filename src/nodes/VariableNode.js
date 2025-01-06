@@ -1,6 +1,7 @@
 import AbstractHippoNode from "./AbstractHippoNode";
 import jsonata from "jsonata";
-import {TransText} from "../localize/localize";
+import { TransText } from "../localize/localize";
+import MagicLinkExecuterNode from "./MagicLink/MagicLinkExecuterNode";
 
 export default class VariableNode extends AbstractHippoNode {
   static firstLevel = {
@@ -30,49 +31,67 @@ export default class VariableNode extends AbstractHippoNode {
     this.expression = expression;
     this.entries = expression;
   }
-
+  static escapeLinkVariable = (text) => {
+    let processedText = text;
+    try {
+      processedText = JSON.stringify(text);
+    } catch (e) {
+      processedText = String(processedText);
+    }
+    processedText = new Buffer.from(processedText).toString("base64");
+    return processedText;
+  };
+  static unescapeLinkVariable = (text) => {
+    let parsedText = new Buffer.from(String(text), "base64").toString("utf-8");
+    try {
+      parsedText = JSON.parse(parsedText);
+    } catch (e) {
+      parsedText = String(parsedText);
+    }
+    return parsedText;
+  };
   process(appJson, path, nodeJson) {}
 
-  findFieldByPath(){
+  findFieldByPath() {
     let staticFields = this.getAccessibleFieldTypes(false);
     let searchPath = this.expression.replace("[]", []);
     searchPath = searchPath.replace("Object.", ".");
-    const splitPath = searchPath.split(".").filter(Boolean)
+    const splitPath = searchPath.split(".").filter(Boolean);
     let activeContext = null;
     let foundId = splitPath?.[0] || "";
-    splitPath.forEach(fieldPart => {
+    splitPath.forEach((fieldPart) => {
       if (activeContext != null) {
         foundId = activeContext.resolveBy
-            ? activeContext.resolveBy + "." + fieldPart
-            : activeContext.id + "." + fieldPart;
+          ? activeContext.resolveBy + "." + fieldPart
+          : activeContext.id + "." + fieldPart;
       }
       const fieldConfig = staticFields?.[foundId];
-      if(fieldConfig){
+      if (fieldConfig) {
         if (activeContext == null || fieldConfig?.resolveBy != null) {
           activeContext = fieldConfig;
         }
       }
-    })
+    });
     this.activeContext = activeContext;
     return activeContext;
   }
-  getRightValueEntityName(){
+  getRightValueEntityName() {
     let staticFields = this.getAccessibleFieldTypes(false);
-    return this.activeContext?.label
+    return this.activeContext?.label;
   }
   getRightValues() {
-    const field = this.findFieldByPath()
-    if(field.resolveBy === VariableNode.RESOLVE_LABEL_BY_HIPPO_ID){
-      return this.getTrelloLabels(true)
+    const field = this.findFieldByPath();
+    if (field.resolveBy === VariableNode.RESOLVE_LABEL_BY_HIPPO_ID) {
+      return this.getTrelloLabels(true);
     }
-    if(field.resolveBy === VariableNode.RESOLVE_LIST_BY_HIPPO_ID){
-      return this.getTrelloList(true)
+    if (field.resolveBy === VariableNode.RESOLVE_LIST_BY_HIPPO_ID) {
+      return this.getTrelloList(true);
     }
-    if(field.resolveBy === VariableNode.RESOLVE_MEMBER_BY_TRELLO_ID){
-      return this.getTrelloMembers(true)
+    if (field.resolveBy === VariableNode.RESOLVE_MEMBER_BY_TRELLO_ID) {
+      return this.getTrelloMembers(true);
     }
-    if(field.resolveBy === VariableNode.RESOLVE_FIELD_DEFINITION_BY_ID){
-      return this.getFieldDefinitions(true)
+    if (field.resolveBy === VariableNode.RESOLVE_FIELD_DEFINITION_BY_ID) {
+      return this.getFieldDefinitions(true);
     }
     return null;
   }
@@ -83,10 +102,40 @@ export default class VariableNode extends AbstractHippoNode {
     let staticFields = this.getAccessibleFieldTypes(false);
     let me = this;
     let activeContext = null;
+
+    const createLinkEncRegex = /createLinkEnc\((.*?)\)/;
+    if (this.expression.includes("createLinkEnc")) {
+      const match = this.expression.match(createLinkEncRegex);
+      if (match) {
+        const params = match[1]
+          .split(",")
+          .map((p) => VariableNode.unescapeLinkVariable(p.trim()));
+        const label = params?.[1] || "";
+        const magicLinkExecuterObject = params?.[8];
+        if (magicLinkExecuterObject) {
+          const magicLinkExecuterNode = new MagicLinkExecuterNode(
+            this.appJson,
+            this.validatorPath,
+            magicLinkExecuterObject
+          );
+          const magicLinkExecuterErrors =
+            magicLinkExecuterNode.getValidatorFunction({ label });
+          if (magicLinkExecuterErrors?.length) {
+            const errors = magicLinkExecuterErrors.map((error) => ({
+              ...error,
+              args: [label, this.expression],
+            }));
+            varErrors.push(...errors);
+          }
+        }
+      }
+    }
+
     let proxy = new Proxy(
       {},
       {
-        get: function (target, propertyName) {
+        get: function (...args) {
+          const [target, propertyName] = args;
           const ignoredPropertyNames = ["createLinkEnc", "createLink", "form."];
           const hasIgnoredPath = ignoredPropertyNames.some((i) =>
             me.expression.includes(i)
@@ -110,14 +159,20 @@ export default class VariableNode extends AbstractHippoNode {
                 varErrors.push({
                   path: me.validatorPath,
                   type: "invalidVariable",
-                  message: TransText.getTranslate('variableNamedDeletedMessage', label),
+                  message: TransText.getTranslate(
+                    "variableNamedDeletedMessage",
+                    label
+                  ),
                   args: [label, me.expression],
                 });
               } else {
                 varErrors.push({
                   path: me.validatorPath,
                   type: "invalidVariable",
-                  message: TransText.getTranslate('variableUsedCannotFound', fieldId),
+                  message: TransText.getTranslate(
+                    "variableUsedCannotFound",
+                    fieldId
+                  ),
                   args: [label, me.expression],
                 });
               }

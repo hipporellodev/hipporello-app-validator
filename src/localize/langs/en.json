@@ -132,6 +132,8 @@
   "media": "Media",
   "content": "Content",
   "copy": "Copy",
+  "magicLinkDefinitionDeleted": "The magic link definition has been deleted and is currently unavailable.",
+  "magicLinkDefinitionDeletedWithLabel": "The magic link definition used in the link action named **\"{0}\"** has been deleted.",
   "variableNamedDeletedMessage": "The variable named **\"{0}\"** has been deleted and is currently unavailable.",
   "variableUsedCannotFound": "The variable used in expression **\"{0}\"** cannot be found. Please remove or replace.",
   "errorMessage": "Error Message",
@@ -165,5 +167,6 @@
   "list": "List",
   "comment": "Comment",
   "triggerDate": "Trigger Date",
-  "fileSizeLimit": "File Size Limit"
+  "fileSizeLimit": "File Size Limit",
+  "createLinkEncInvalidParams": "createLinkEnc function requires exactly 6 parameters: boardId(string), cardId(string), fieldId(string), value(any), label(string), type(string)"
 }
