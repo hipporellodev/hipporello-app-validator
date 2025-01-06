@@ -1,5 +1,5 @@
 import JSONUtils from "../JSONUtils";
-import {TransText} from "../localize/localize";
+import { TransText } from "../localize/localize";
 Array.prototype.pushArray = function (items) {
   if (!Array.isArray(items)) {
     return this;
@@ -17,9 +17,9 @@ export default class AbstractHippoNode {
   static RESOLVE_ROLE_BY_ROLE_BY_ID = "role";
   static RESOLVE_APP_BY_APP_ID = "app";
   static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
-  static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem"
-  static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color"
-  static RESOLVE_CHECKLIST_BY_HIPPO_ID = "checklist"
+  static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem";
+  static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color";
+  static RESOLVE_CHECKLIST_BY_HIPPO_ID = "checklist";
 
   static RESOLVE_APP_VARS = "appVariables";
   static RESOLVE_SYSTEM = "system";
@@ -37,9 +37,11 @@ export default class AbstractHippoNode {
     RESOLVE_CARD_BY_CARD_ID: AbstractHippoNode.RESOLVE_CARD_BY_CARD_ID,
     RESOLVE_ROLE_BY_ROLE_BY_ID: AbstractHippoNode.RESOLVE_ROLE_BY_ROLE_BY_ID,
     RESOLVE_APP_BY_APP_ID: AbstractHippoNode.RESOLVE_APP_BY_APP_ID,
-    RESOLVE_FIELD_DEFINITION_BY_ID: AbstractHippoNode.RESOLVE_FIELD_DEFINITION_BY_ID,
-    RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID: AbstractHippoNode.RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID,
-    RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR: ""
+    RESOLVE_FIELD_DEFINITION_BY_ID:
+      AbstractHippoNode.RESOLVE_FIELD_DEFINITION_BY_ID,
+    RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID:
+      AbstractHippoNode.RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID,
+    RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR: "",
   };
   static counter;
   childNodes = [];
@@ -53,8 +55,8 @@ export default class AbstractHippoNode {
   checkedPaths = {};
   lists = [];
   members = [];
-  entries = []
-  actions = []
+  entries = [];
+  actions = [];
   constructor(appJson, path) {
     if (appJson.appJson) {
       this.appJson = appJson.appJson;
@@ -79,8 +81,8 @@ export default class AbstractHippoNode {
     }
   }
   init(actions, entities) {
-    if(actions) this.actions = actions;
-    if(entities) this.entities = entities;
+    if (actions) this.actions = actions;
+    if (entities) this.entities = entities;
     this.entitiesIds = {
       trelloLists: (this.entities?.trelloLists || [])?.map((i) => i?.hippoId),
       trelloLabels: (this.entities?.trelloLabels || [])?.map((i) => i?.hippoId),
@@ -198,7 +200,7 @@ export default class AbstractHippoNode {
     }
     return lists;
   }
-  getTrelloLabels(onlyIds = false, onlyActives = true){
+  getTrelloLabels(onlyIds = false, onlyActives = true) {
     let labels = this.entities?.trelloLabels || [];
     if (onlyActives) {
       labels = (labels || [])?.filter((i) => !i?.deleted);
@@ -206,9 +208,9 @@ export default class AbstractHippoNode {
     if (onlyIds) {
       return labels?.map((i) => i?.hippoId);
     }
-    return  labels;
+    return labels;
   }
-  getTrelloMembers(onlyIds = false, onlyActives){
+  getTrelloMembers(onlyIds = false, onlyActives) {
     let members = this.entities?.members || [];
     if (onlyActives) {
       members = (members || [])?.filter((i) => !i?.deleted);
@@ -216,18 +218,18 @@ export default class AbstractHippoNode {
     if (onlyIds) {
       return members?.map((i) => i?.id);
     }
-    return  members.map((member) => ({...member, label: member?.fullName}));
+    return members.map((member) => ({ ...member, label: member?.fullName }));
   }
   getFieldDefinitions = (onlyId) => {
-    const appVariables = this?.appJson.app?.fieldDefinitions?.appVariableFields || {};
+    const appVariables =
+      this?.appJson.app?.fieldDefinitions?.appVariableFields || {};
     const customFields = this.getCustomFields(false).reduce((acc, item) => {
       acc[item?.hippoId] = item;
       return acc;
-    }, {})
+    }, {});
     const hippoFields = this.appJson.app?.fieldDefinitions?.hippoFields;
-    const allFields = {...appVariables, ...hippoFields, ...customFields}
-    if (!onlyId)
-      return Object.values(allFields)?.map((i) => i?.label);
+    const allFields = { ...appVariables, ...hippoFields, ...customFields };
+    if (!onlyId) return Object.values(allFields)?.map((i) => i?.label);
     return Object.keys(allFields);
   };
   getPageNames() {
@@ -287,6 +289,13 @@ export default class AbstractHippoNode {
     }
     return onlyId ? automations?.map((i) => i?.id) : automations;
   };
+  getMagicLinkIds = (onlyId) => {
+    let magicLinks = Object.keys(
+      this.appJson?.app?.fieldDefinitions?.magicLink || {}
+    );
+    if (onlyId) return magicLinks;
+    return magicLinks?.map((i) => i?.id);
+  };
   getOneOfMessage = (names, e) => {
     return `${e?.label || e?.path} one of ${names?.join(", ")}`;
   };
@@ -308,13 +317,16 @@ export default class AbstractHippoNode {
     return roles;
   };
   getCustomFields = (onlyId, filter, showDeleted) => {
-    let customFields = (this.entities?.customFields || []).map(item => ({...item, id: item?.hippoId}))
+    let customFields = (this.entities?.customFields || []).map((item) => ({
+      ...item,
+      id: item?.hippoId,
+    }));
     if (filter) {
       customFields = customFields.filter(filter);
     }
-    if(onlyId) return customFields.map(i => i?.hippoId);
+    if (onlyId) return customFields.map((i) => i?.hippoId);
     return customFields;
-  }
+  };
   getAppParameters = (onlyId, filter, showDeleted) => {
     let appVariables = Object.values(
       this.appJson?.app?.fieldDefinitions?.appVariableFields || {}
@@ -690,14 +702,14 @@ export default class AbstractHippoNode {
         label: TransText.getTranslate("checklistName"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "checklist.hippoId",
         label: "ID",
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "list.name",
@@ -887,28 +899,28 @@ export default class AbstractHippoNode {
         label: TransText.getTranslate("comment"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "trigger.date",
         label: TransText.getTranslate("triggerDate"),
         type: "datetime",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "field.id",
         label: TransText.getTranslate("ID"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "field.name",
         label: TransText.getTranslate("name"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "app.name",
@@ -929,14 +941,14 @@ export default class AbstractHippoNode {
         label: TransText.getTranslate("ID"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "ref_cfdditem.name",
         label: TransText.getTranslate("name"),
         type: "string",
         multiple: false,
-        sortable: false
+        sortable: false,
       },
       {
         id: "ref_cfdditem.color",
@@ -944,8 +956,8 @@ export default class AbstractHippoNode {
         type: "string",
         multiple: false,
         sortable: false,
-        resolveBy: AbstractHippoNode.RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR
-      }
+        resolveBy: AbstractHippoNode.RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR,
+      },
     ];
   };
   getObjectKey = (field) => {
