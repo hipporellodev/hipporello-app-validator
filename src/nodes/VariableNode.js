@@ -7,6 +7,7 @@ export default class VariableNode extends AbstractHippoNode {
   static firstLevel = {
     system: true,
     portal: true,
+    magicLinks: true,
     user: true,
     board: true,
     card: true,
@@ -92,6 +93,9 @@ export default class VariableNode extends AbstractHippoNode {
     }
     if (field.resolveBy === VariableNode.RESOLVE_FIELD_DEFINITION_BY_ID) {
       return this.getFieldDefinitions(true);
+    }
+    if (field.resolveBy === VariableNode.RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID) {
+      return this.getMagicLinkIds(true);
     }
     return null;
   }

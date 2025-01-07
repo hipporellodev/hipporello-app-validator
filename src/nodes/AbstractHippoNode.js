@@ -17,6 +17,7 @@ export default class AbstractHippoNode {
   static RESOLVE_ROLE_BY_ROLE_BY_ID = "role";
   static RESOLVE_APP_BY_APP_ID = "app";
   static RESOLVE_FIELD_DEFINITION_BY_ID = "field";
+  static RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID = "magicLinks";
   static RESOLVE_CUSTOM_FIELD_ITEM_BY_TRELLO_ID = "ref_cfdditem";
   static RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR = "color";
   static RESOLVE_CHECKLIST_BY_HIPPO_ID = "checklist";
@@ -26,12 +27,15 @@ export default class AbstractHippoNode {
   static RESOLVE_TRIGGER = "trigger";
   static RESOLVE_PORTAL = "portal";
   static RESOLVE_FORM = "form";
+  static RESOLVE_MAGIC_LINK = "magicLink";
 
   static FIELD_RESOLVE_BY_TO_VALIDATOR = {
     RESOLVE_LIST_BY_HIPPO_ID: AbstractHippoNode.RESOLVE_LIST_BY_HIPPO_ID,
     RESOLVE_LABEL_BY_HIPPO_ID: AbstractHippoNode.RESOLVE_LABEL_BY_HIPPO_ID,
     RESOLVE_MEMBER_BY_TRELLO_ID: AbstractHippoNode.RESOLVE_MEMBER_BY_TRELLO_ID,
     RESOLVE_USER_BY_USER_ID: AbstractHippoNode.RESOLVE_USER_BY_USER_ID,
+    RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID:
+      AbstractHippoNode.RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID,
     RESOLVE_BOARD_BY_TRELLO_BOARD_ID:
       AbstractHippoNode.RESOLVE_BOARD_BY_TRELLO_BOARD_ID,
     RESOLVE_CARD_BY_CARD_ID: AbstractHippoNode.RESOLVE_CARD_BY_CARD_ID,
@@ -333,6 +337,17 @@ export default class AbstractHippoNode {
     if (onlyId) return customFields.map((i) => i?.hippoId);
     return customFields;
   };
+  getMagicLinks = (onlyId, filter, showDeleted) => {
+    let magicLinks = Object.values(
+      this.appJson?.app?.fieldDefinitions?.magicLink || {}
+    );
+    if (!showDeleted) magicLinks = magicLinks.filter((i) => !i?.deleted);
+    if (filter) {
+      magicLinks = magicLinks.filter(filter);
+    }
+    if (onlyId) return magicLinks.map((i) => i?.id);
+    return magicLinks;
+  };
   getAppParameters = (onlyId, filter, showDeleted) => {
     let appVariables = Object.values(
       this.appJson?.app?.fieldDefinitions?.appVariableFields || {}
@@ -437,7 +452,16 @@ export default class AbstractHippoNode {
         label: TransText.getTranslate("appVariables"),
         type: AbstractHippoNode.RESOLVE_PORTAL,
       },
-
+      {
+        id: "magicLinks",
+        label: TransText.getTranslate("magicLinks"),
+        type: AbstractHippoNode.RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID,
+      },
+      {
+        id: "magicLink",
+        label: TransText.getTranslate("magicLink"),
+        type: AbstractHippoNode.RESOLVE_MAGIC_LINK,
+      },
       // {
       //   "id": "tc_pos",
       //   "label": "Trello Card Position",
@@ -964,6 +988,13 @@ export default class AbstractHippoNode {
         sortable: false,
         resolveBy: AbstractHippoNode.RESOLVE_COLOR_BY_CUSTOM_FIELD_ITEM_COLOR,
       },
+      {
+        id: "magicLink.prompt",
+        label: TransText.getTranslate("prompt"),
+        type: "string",
+        multiple: false,
+        sortable: false,
+      },
     ];
   };
   getObjectKey = (field) => {
@@ -981,9 +1012,23 @@ export default class AbstractHippoNode {
     const staticFields = this.getStaticFields();
     const appVariables = this.getAppParameters(false, null, showDeleted);
     const customFields = this.getCustomFields(false, null, showDeleted);
+    const magicLinks = this.getMagicLinks(false, null, showDeleted);
     const fieldMap = {};
     staticFields.forEach((staticField) => {
       fieldMap[staticField.id] = staticField;
+    });
+    magicLinks.forEach((magicLink) => {
+      const name = `magicLinks.${magicLink.id}`;
+      fieldMap[name] = {
+        label: magicLink.name,
+        resolveBy: AbstractHippoNode.RESOLVE_MAGIC_LINK_BY_MAGIC_LINK_ID,
+        field: name,
+        value: name,
+        multiple: false,
+        type: "string",
+        deleted: magicLink.deleted,
+        options: magicLink?.parameters || [],
+      };
     });
     hippoFields.forEach((hippoField) => {
       fieldMap["card." + hippoField.id] = {
