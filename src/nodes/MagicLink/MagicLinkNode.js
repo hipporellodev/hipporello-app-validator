@@ -73,39 +73,47 @@ export default class MagicLinkNode extends AbstractHippoNode {
               values: ["onlySpecified", "valueOnCreate"],
             },
             value: {
-              type: "object",
-              props: {
-                valueType: {
-                  type: "enum",
-                  optional: true,
-                  values: ["value", "variable"],
-                },
-                value: {
-                  type: "custom",
-                  check: (
-                    value,
-                    errors,
-                    schema,
-                    path,
-                    parentNode,
-                    rootNode
-                  ) => {
-                    if (rootNode.paramType === "onlySpecified" && !value) {
-                      errors.push({ type: "required", field: "value" });
-                    }
-                    const hasEmptyItem = Array.isArray(value)
-                      ? Object.values(value).length !== value.length
-                      : false;
-                    if (hasEmptyItem && parentNode?.valueType === "value") {
-                      errors.push({
-                        type: "required",
-                        field: "value",
-                        message: TransText.getTranslate("itemsNotBeEmpty"),
-                      });
-                    }
-                    return value;
-                  },
-                },
+              type: "custom",
+              check: (value, errors, schema, path, parent) => {
+                if (
+                  parent.paramType === "onlySpecified" &&
+                  value === "[[[nullValue]]]"
+                ) {
+                  errors.push({
+                    type: "required",
+                    field: path,
+                    message:
+                      "Value is required when paramType is onlySpecified",
+                  });
+                }
+
+                if (value && value !== "[[[nullValue]]]") {
+                  if (
+                    !value.valueType ||
+                    !["value", "variable"].includes(value.valueType)
+                  ) {
+                    errors.push({
+                      type: "enumValue",
+                      field: `${path}.valueType`,
+                      expected: ["value", "variable"],
+                    });
+                  }
+
+                  if (
+                    value.value &&
+                    Array.isArray(value.value) &&
+                    value.valueType === "value" &&
+                    Object.values(value.value).length !== value.value.length
+                  ) {
+                    errors.push({
+                      type: "required",
+                      field: `${path}.value`,
+                      message: TransText.getTranslate("itemsNotBeEmpty"),
+                    });
+                  }
+                }
+
+                return value;
               },
             },
           },
@@ -117,8 +125,13 @@ export default class MagicLinkNode extends AbstractHippoNode {
       requirePrompt: false,
       expireEnabled: false,
       expires: null,
-      parameters: null,
       ...this.nodeJson,
+      parameters: this.nodeJson?.parameters
+        ? this.nodeJson?.parameters.map((it) => ({
+            ...it,
+            value: "[[[nullValue]]]",
+          }))
+        : null,
     });
     return Array.isArray(errors) ? errors : [];
   }

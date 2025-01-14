@@ -4,17 +4,19 @@ import getValidator from "./getValidator";
 export const formConditionsWithAnd = getValidator().compile({
   conjunction: {
     type: "enum",
-    values: ['AND', 'OR', "NOR"]
+    values: ["AND", "OR", "NOR"],
   },
   rules: {
-    type: 'array',
+    type: "array",
     optional: true,
-  }
-})
-export const formConditionRule = getValidator({useNewCustomCheckerFunction: true}).compile({
-  field: 'string|empty:false',
+  },
+});
+export const formConditionRule = getValidator({
+  useNewCustomCheckerFunction: true,
+}).compile({
+  field: "string|empty:false",
   operator: {
-    type: 'enum',
+    type: "enum",
     values: [
       "equal",
       "not_equal",
@@ -34,20 +36,20 @@ export const formConditionRule = getValidator({useNewCustomCheckerFunction: true
       "is_empty",
       "is_not_empty",
       "select_any_in",
-    ]
+    ],
   },
   value: {
     type: "custom",
     default: "[[[nullValue]]]",
-    custom(v, errors, schema, path, parentNode, context) {
-      const {operator, value} = context?.data || {};
-      const isEmptyValue = HippoValidator.isEmpty(value)
-      if(!["is_empty", "is_not_empty"].includes(operator)){
-        if(value === "[[[nullValue]]]" || isEmptyValue){
-          errors.push({type: "required"})
+    check(v, errors, schema, path, parentNode, context) {
+      const { operator, value } = context?.data || {};
+      const isEmptyValue = HippoValidator.isEmpty(value);
+      if (!["is_empty", "is_not_empty"].includes(operator)) {
+        if (value === "[[[nullValue]]]" || isEmptyValue) {
+          errors.push({ type: "required" });
         }
       }
-      return value
-    }
-  }
-})
+      return value;
+    },
+  },
+});

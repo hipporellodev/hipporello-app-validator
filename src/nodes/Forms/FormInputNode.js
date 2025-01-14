@@ -4,10 +4,10 @@ import { FORM_INPUT_NAMES } from "../../Utils/formInputNames";
 import FormInputVisibilityNode from "./FormInputVisibilityNode";
 import uniq from "lodash/uniq";
 import getValidator from "../../Utils/getValidator";
-import {TransText} from "../../localize/localize";
+import { TransText } from "../../localize/localize";
 import {
   checkAttachmentTypeIsValid,
-  getValidAttachmentFileTypes
+  getValidAttachmentFileTypes,
 } from "../../Utils/checkAttachmentType";
 
 const formInputSchema = {
@@ -24,13 +24,17 @@ const formInputSchema = {
   },
 };
 function fieldSelectorCheck(validationRulesScheme) {
-  const isSelectedFields = this?.nodeJson?.props?.elementData?.include?.dataFields?.source === "direct";
-  const isVariableField = this?.nodeJson?.props?.elementData?.include?.dataFields?.source === "variable";
-  let fields = []
+  const isSelectedFields =
+    this?.nodeJson?.props?.elementData?.include?.dataFields?.source ===
+    "direct";
+  const isVariableField =
+    this?.nodeJson?.props?.elementData?.include?.dataFields?.source ===
+    "variable";
+  let fields = [];
   fields = this.getHippoFields(true);
-  fields = fields.concat(this.getCustomFields(true))
-  fields = fields.concat(this.getAppParameters(true))
-  fields = fields.concat(['hippoFields', "customFields", "appVariables"])
+  fields = fields.concat(this.getCustomFields(true));
+  fields = fields.concat(this.getAppParameters(true));
+  fields = fields.concat(["hippoFields", "customFields", "appVariables"]);
   return getValidator().compile({
     label: "string|optional",
     name: "string",
@@ -45,7 +49,7 @@ function fieldSelectorCheck(validationRulesScheme) {
           props: {
             dataFields: {
               type: "object",
-              label: TransText.getTranslate('dataFields'),
+              label: TransText.getTranslate("dataFields"),
               props: {
                 source: {
                   type: "enum",
@@ -59,24 +63,28 @@ function fieldSelectorCheck(validationRulesScheme) {
                 selected: {
                   type: "array",
                   optional: !isSelectedFields,
-                  label: TransText.getTranslate('dataFields'),
+                  label: TransText.getTranslate("dataFields"),
                   minItems: isSelectedFields ? 1 : 0,
                   items: {
                     type: "enum",
                     values: fields,
                   },
                   messages: {
-                    required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('field'), "Field Selector"),
+                    required: TransText.getTranslate(
+                      "xSelectorNoAnySelectedOption",
+                      TransText.getTranslate("field"),
+                      "Field Selector"
+                    ),
                   },
                 },
-              }
-            }
+              },
+            },
           },
         },
         fields: "array",
       },
     },
-  })
+  });
 }
 const formInputCheck = getValidator().compile(formInputSchema);
 export default class FormInputNode extends AbstractHippoNode {
@@ -137,7 +145,9 @@ export default class FormInputNode extends AbstractHippoNode {
         isListOptional = true;
       }
     });
-    const isLengthIf = ["lengthLimit", "attachmentLimit"].some(i => this.nodeJson?.props?.validationRules?.[i] === true)
+    const isLengthIf = ["lengthLimit", "attachmentLimit"].some(
+      (i) => this.nodeJson?.props?.validationRules?.[i] === true
+    );
     const validationRulesScheme = {
       type: "object",
       optional: true,
@@ -151,38 +161,43 @@ export default class FormInputNode extends AbstractHippoNode {
           optional: !isLengthIf,
           nullable: true,
           min: 0,
-          max: isLengthIf ? this.nodeJson?.props?.validationRules?.maxLength : 999999,
-          label: TransText.getTranslate('minimum'),
+          max: isLengthIf
+            ? this.nodeJson?.props?.validationRules?.maxLength
+            : 999999,
+          label: TransText.getTranslate("minimum"),
         },
         maxLength: {
           type: "number",
           optional: true,
           nullable: true,
-          min: isLengthIf ? this.nodeJson?.props?.validationRules?.minLength : 0,
-          label: TransText.getTranslate('maximum')
+          min: isLengthIf
+            ? this.nodeJson?.props?.validationRules?.minLength
+            : 0,
+          label: TransText.getTranslate("maximum"),
         },
         fileSizeLimit: {
-          type: 'boolean',
+          type: "boolean",
           optional: true,
           nullable: true,
-          label: TransText.getTranslate('fileSizeLimit')
+          label: TransText.getTranslate("fileSizeLimit"),
         },
         sizeLimit: {
           type: "number",
-          optional: this.nodeJson?.props?.validationRules?.fileSizeLimit !== true,
-          label: TransText.getTranslate('maxSize'),
+          optional:
+            this.nodeJson?.props?.validationRules?.fileSizeLimit !== true,
+          label: TransText.getTranslate("maxSize"),
           min: 1,
         },
         lengthLimit: {
-          type: 'boolean',
+          type: "boolean",
           optional: true,
           nullable: true,
         },
         attachmentLimit: {
-          type: 'boolean',
+          type: "boolean",
           optional: true,
           nullable: true,
-          label: TransText.getTranslate('attachmentSizeLimit')
+          label: TransText.getTranslate("attachmentSizeLimit"),
         },
         minItems: {
           type: "number",
@@ -190,35 +205,35 @@ export default class FormInputNode extends AbstractHippoNode {
           nullable: true,
           min: 1,
           max: this.nodeJson?.props?.validationRules?.maxItems,
-          label: TransText.getTranslate('minimum'),
+          label: TransText.getTranslate("minimum"),
         },
         maxItems: {
           type: "number",
           optional: true,
           nullable: true,
           min: this.nodeJson?.props?.validationRules?.minItems,
-          label: TransText.getTranslate('maximum'),
-        }
-        ,
+          label: TransText.getTranslate("maximum"),
+        },
         attachmentTypes: {
-          type: "string",
+          type: "custom",
           optional: this.nodeJson?.input !== "Attachment",
           nullable: this.nodeJson?.input !== "Attachment",
           min: 1,
-          label: TransText.getTranslate('attachmentType'),
-          custom: (value, errors) => {
-            const isValid = checkAttachmentTypeIsValid(value)
-            const validTypes = getValidAttachmentFileTypes()
-            if(!isValid){
+          label: TransText.getTranslate("attachmentType"),
+          check: (value, errors) => {
+            console.log({ value, errors });
+            const isValid = checkAttachmentTypeIsValid(value);
+            const validTypes = getValidAttachmentFileTypes();
+            if (!isValid) {
               errors.push({
                 type: "enumValue",
                 actual: value,
-                expected: validTypes
-              })
+                expected: validTypes,
+              });
             }
-            return value
-          }
-        }
+            return value;
+          },
+        },
       },
     };
     const ButtonSchema = {
@@ -244,7 +259,10 @@ export default class FormInputNode extends AbstractHippoNode {
                 empty: false,
                 optional: isNameOptional,
                 messages: {
-                  required: TransText.getTranslate("valueIsRequiredByNode", TransText.getTranslate('cardName'))
+                  required: TransText.getTranslate(
+                    "valueIsRequiredByNode",
+                    TransText.getTranslate("cardName")
+                  ),
                 },
               },
               listHippoId: {
@@ -273,13 +291,13 @@ export default class FormInputNode extends AbstractHippoNode {
             props: {
               variable: {
                 type: "string",
-                label: TransText.getTranslate('variable'),
-              }
+                label: TransText.getTranslate("variable"),
+              },
             },
-          }
+          },
         },
       },
-    }
+    };
     const TrelloLabelScheme = {
       label: "string",
       name: "string",
@@ -313,11 +331,15 @@ export default class FormInputNode extends AbstractHippoNode {
                   "selected",
                 minItems: 1,
                 messages: {
-                  required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('label'), "Trello Label Selector"),
+                  required: TransText.getTranslate(
+                    "xSelectorNoAnySelectedOption",
+                    TransText.getTranslate("label"),
+                    "Trello Label Selector"
+                  ),
                 },
               },
             },
-          }
+          },
         },
       },
     };
@@ -354,15 +376,19 @@ export default class FormInputNode extends AbstractHippoNode {
                   "selected",
                 minItems: 1,
                 messages: {
-                  required: TransText.getTranslate('xSelectorNoAnySelectedOption', TransText.getTranslate('list'), "Trello List Selector"),
+                  required: TransText.getTranslate(
+                    "xSelectorNoAnySelectedOption",
+                    TransText.getTranslate("list"),
+                    "Trello List Selector"
+                  ),
                 },
                 items: {
                   type: "enum",
-                  values: trelloListIds
-                }
+                  values: trelloListIds,
+                },
               },
             },
-          }
+          },
         },
       },
     };
@@ -417,10 +443,12 @@ export default class FormInputNode extends AbstractHippoNode {
               values: this.getRoles(true),
             },
             messages: {
-              required:
-                TransText.getTranslate('atLeastRoleMustSelectedUserErrorMessage'),
-              minItems:
-                TransText.getTranslate('atLeastRoleMustSelectedUserErrorMessage'),
+              required: TransText.getTranslate(
+                "atLeastRoleMustSelectedUserErrorMessage"
+              ),
+              minItems: TransText.getTranslate(
+                "atLeastRoleMustSelectedUserErrorMessage"
+              ),
             },
           },
         },
@@ -437,18 +465,20 @@ export default class FormInputNode extends AbstractHippoNode {
           source: {
             type: "string",
             messages: {
-              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('attachmentSource')}),
+              required: TransText.getTranslate("validate.required", {
+                field: TransText.getTranslate("attachmentSource"),
+              }),
             },
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    };
     const AttachmentSchema = {
       label: "string",
       name: "string",
       schema: "object",
       validationRules: validationRulesScheme,
-    }
+    };
     const BooleanSchema = {
       label: "string",
       description: "string|optional",
@@ -463,14 +493,18 @@ export default class FormInputNode extends AbstractHippoNode {
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('no')}),
+              required: TransText.getTranslate("validate.required", {
+                field: TransText.getTranslate("no"),
+              }),
             },
           },
           yesText: {
             type: "string",
             optional: this.nodeJson?.props?.settings?.inputType !== "selectBox",
             messages: {
-              required: TransText.getTranslate('validate.required', {field: TransText.getTranslate('yes')}),
+              required: TransText.getTranslate("validate.required", {
+                field: TransText.getTranslate("yes"),
+              }),
             },
           },
           placeholder: "string|optional",
@@ -492,7 +526,7 @@ export default class FormInputNode extends AbstractHippoNode {
           type: "object",
           props: {
             value: {
-              label: TransText.getTranslate('option'),
+              label: TransText.getTranslate("option"),
               type: "string",
               optional: false,
               minLength: 1,
@@ -530,7 +564,12 @@ export default class FormInputNode extends AbstractHippoNode {
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.FIELD_SELECTOR) {
-      propsErrors.pushArray(fieldSelectorCheck.call(this, validationRulesScheme)(this?.nodeJson?.props || {}));
+      propsErrors.pushArray(
+        fieldSelectorCheck.call(
+          this,
+          validationRulesScheme
+        )(this?.nodeJson?.props || {})
+      );
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.USER_SELECTOR) {
       const checker = getValidator({
@@ -538,12 +577,14 @@ export default class FormInputNode extends AbstractHippoNode {
       }).compile(TrelloUserSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
-    if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT_SELECTOR){
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT_SELECTOR) {
       const checker = getValidator().compile(AttachmentSelectorSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
-    if(this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT){
-      const checker = getValidator({useNewCustomCheckerFunction: true}).compile(AttachmentSchema);
+    if (this.nodeJson?.input === FORM_INPUT_NAMES.ATTACHMENT) {
+      const checker = getValidator({
+        useNewCustomCheckerFunction: true,
+      }).compile(AttachmentSchema);
       propsErrors.pushArray(checker(this.nodeJson.props));
     }
     if (this.nodeJson?.input === FORM_INPUT_NAMES.BOOLEAN) {
