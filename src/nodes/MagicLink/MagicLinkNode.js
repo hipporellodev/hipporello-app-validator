@@ -67,7 +67,14 @@ export default class MagicLinkNode extends AbstractHippoNode {
           props: {
             id: "string|empty:false",
             name: "string|empty:false|trim",
-            fieldType: "string|empty:false",
+            field: {
+              type: "object",
+              properties: {
+                type: "string",
+                resolveBy: "string|optional",
+                markAsLoggedInUser: "boolean|optional",
+              },
+            },
             paramType: {
               type: "enum",
               values: ["onlySpecified", "valueOnCreate"],
@@ -75,6 +82,7 @@ export default class MagicLinkNode extends AbstractHippoNode {
             value: {
               type: "custom",
               check: (value, errors, schema, path, parent) => {
+                console.log(value);
                 if (
                   parent.paramType === "onlySpecified" &&
                   value === "[[[nullValue]]]"
@@ -129,7 +137,7 @@ export default class MagicLinkNode extends AbstractHippoNode {
       parameters: this.nodeJson?.parameters
         ? this.nodeJson?.parameters.map((it) => ({
             ...it,
-            value: "[[[nullValue]]]",
+            value: it?.value || "[[[nullValue]]]",
           }))
         : null,
     });
