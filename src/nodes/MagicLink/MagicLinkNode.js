@@ -82,7 +82,6 @@ export default class MagicLinkNode extends AbstractHippoNode {
             value: {
               type: "custom",
               check: (value, errors, schema, path, parent) => {
-                console.log(value);
                 if (
                   parent.paramType === "onlySpecified" &&
                   value === "[[[nullValue]]]"
