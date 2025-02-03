@@ -118,7 +118,7 @@ export default class AppNode extends AbstractHippoNode {
           );
         } else if (form.type === "email") {
           this.addChildNode(
-            new EmaiAlNode(appJson, "app.integrations.incoming." + form.id)
+            new EmailNode(appJson, "app.integrations.incoming." + form.id)
           );
         }
       });
